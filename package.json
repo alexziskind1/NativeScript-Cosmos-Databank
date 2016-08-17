@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "nativescript-background-http": "0.0.3",
+    "nativescript-cardview": "^1.1.10",
     "nativescript-fresco": "^1.0.6",
     "nativescript-slides": "^2.0.1",
     "tns-core-modules": "2.2.0"

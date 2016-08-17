@@ -8,17 +8,20 @@ let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 var requestUrl = API_URL + sampleDate + API_KEY;
 
 export class ListViewModel extends Observable {
+
     private _dataItems: ObservableArray<DataItem>;
     
-    private _year: number = 2013;
-    private _month: number = 8;
-    private _day: number = 6;
+    private _year: number;
+    private _month: number;
+    private _day: number;
 
     private _url: string;
 
-    constructor() {
+    constructor(year: number, month: number, day: number) {
         super();
-
+        this._year = year;
+        this._month = month;
+        this._day = day;
         this.initDataItems();
     }    
 
@@ -59,30 +62,36 @@ export class ListViewModel extends Observable {
         return this._dataItems;
     }
 
+    public set dataItems(value: ObservableArray<DataItem>) {
+        if (this._dataItems !== value) {
+            this._dataItems = value;
+            this.notifyPropertyChange("dataItems", value);
+        }
+    }
+
     public getUpdatedUrl() {
         return this._url = API_URL + this._year + '-' + this._month + '-' + this._day + API_KEY;
     }
 
     public initDataItems() {
-        if (!this._dataItems) {
-            this._dataItems = new ObservableArray<DataItem>();
-            var that = this;
-            http.getJSON(this.getUpdatedUrl()).then(function (result) {
+        this._dataItems = new ObservableArray<DataItem>();
+        var that = this;
+        
+        http.getJSON(this.getUpdatedUrl()).then(function (result) {
 
-                for (var index = 0; index < result["photos"].length; index++) {
-                    var element = result["photos"][index];
-                            
-                    console.log(element["camera"]["full_name"]);
-                    console.log(element["img_src"]);
-                    console.log(element["earth_date"]);
+            for (var index = 0; index < result["photos"].length; index++) {
+                var element = result["photos"][index];
+                        
+                // console.log(element["camera"]["full_name"]);
+                // console.log(element["img_src"]);
+                // console.log(element["earth_date"]);
 
-                    that._dataItems.push(new DataItem(element["camera"]["full_name"], element["img_src"], element["earth_date"]));
-                }
+                that._dataItems.push(new DataItem(element["camera"]["full_name"], element["img_src"], element["earth_date"]));
+            }
 
-            }, function (e) {
-                console.log(e);
-            })
-        }
+        }, function (e) {
+            console.log(e);
+        })
     }
 }
 

@@ -20,10 +20,7 @@ let page;
 let list;
 let datePicker;
 
-let vm = new ListViewModel();
-// vm.set("year", 2014);
-// vm.set("month", 5);
-// vm.set("day", 20);
+let vm = new ListViewModel(2013, 9, 6);
 
 export function onLoaded(args: EventData) {
     page = <Page>args.object;
@@ -39,24 +36,15 @@ export function onLoaded(args: EventData) {
 
 export function onListLoaded(args: EventData) {
     list = <ListView>args.object;
-    console.log(list);
-    // list.bindingContext = vm;
 }
 
 export function getDate(args:EventData) {
     let button = <Button>args.object;
-   
-    console.log("DATE PICKER");
-    console.log(datePicker.year);
-    console.log(datePicker.month);
-    console.log(datePicker.day);
-
-    console.log("VIEW MODEL");
-    console.log(vm.get("year"));
-    console.log(vm.get("month"));
-    console.log(vm.get("day"));
 
     vm.initDataItems();
+    list.items = vm.dataItems;
+    
+    // console.log(vm.get("dataItems").length); // check if lenght is 0 return message that there are no photos taken on that day
 
-    // list.refresh();
+    list.refresh();
 }
