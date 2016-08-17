@@ -6,23 +6,29 @@
     <GridLayout rows="44, 88, *" columns="2*, *">
         <TextView row="0" col="0" colSpan="2" text="Choose a date to show photos taken from Curiosity rover" class="textview" editable="false" />
         
-        <DatePicker id="date-picker" row="1" col="0" day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
-        <Button  row="1" col="1" text="Get Photos" tap="getDate" />
+        <DatePicker id="date-picker" class="datepicker" row="1" col="0" day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
+        <Button  row="1" col="1" text="Get Photos" tap="getPhotosForDate" />
         
 
         <ListView row="2" col="0" colSpan="2" items="{{ dataItems }}" class="listview" loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
           <ListView.itemTemplate>
-            <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+            <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
                 <android>
                     <GridLayout rows="44, *" columns="2*, *">
                         <Label row="0" col="0" text="{{ cameraName }}" class="camera" textWrap="true" />
                         <Label row="0" col="1" text="{{ earthDate }}" class="date" textWrap="true" />
                         <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
-                                                        verticalAlignment="top"
-                                                        showProgressBar="true"
-                                                        aspectRatio="2"
-                                                        placeholderImageUri="res://icon"
-                                                        imageUri="{{ imageUri }}"/>
+                                                            imageUri="{{ imageUri }}"
+                                                            backgroundUri="res://logo"
+                                                            actualImageScaleType="centerCrop"                                                           
+                                                            verticalAlignment="top"
+                                                            aspectRatio="1.5"
+                                                            roundedCornerRadius="50"
+                                                            roundBottomRight="true"
+                                                            roundBottomLeft="true"
+                                                            showProgressBar="true"
+                                                            tapToRetryEnabled="true"
+                                                            finalImageSet="onFinalImageSet"/>
                     </GridLayout>
                 </android>
                 <ios>

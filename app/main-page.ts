@@ -38,7 +38,7 @@ export function onListLoaded(args: EventData) {
     list = <ListView>args.object;
 }
 
-export function getDate(args:EventData) {
+export function getPhotosForDate(args:EventData) {
     let button = <Button>args.object;
 
     vm.initDataItems();
@@ -47,4 +47,15 @@ export function getDate(args:EventData) {
     // console.log(vm.get("dataItems").length); // check if lenght is 0 return message that there are no photos taken on that day
 
     list.refresh();
+}
+import {FrescoDrawee, FinalEventData } from "nativescript-fresco";
+
+export function onFinalImageSet(args: FinalEventData) {
+    var drawee = args.object as FrescoDrawee;
+
+    // use this to crete zoom-i and zoom-out on pinch
+    // drawee.animate({
+    //     scale: { x: 1.5, y: 1.5},    
+    //     duration: 1000
+    // });
 }

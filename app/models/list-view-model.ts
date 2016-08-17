@@ -77,6 +77,7 @@ export class ListViewModel extends Observable {
         this._dataItems = new ObservableArray<DataItem>();
         var that = this;
         
+        console.log(this.getUpdatedUrl());
         http.getJSON(this.getUpdatedUrl()).then(function (result) {
 
             for (var index = 0; index < result["photos"].length; index++) {

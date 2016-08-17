@@ -1,18 +1,28 @@
-﻿.cardStyle {
+﻿Page {
+    background-color: slategray
+}
+
+.datepicker {
+    background-color: transparent;  
+}
+
+.cardStyle {
     background-color: #3489db;
     color: #fff;
+    font-family: "nasalization-rg";
 }
 
 .textview {
-    font-size:14;
-    background-color: darkslateblue;
-    color:#fff;
+    background-color: #3489db;
+    color:#fff;      
+    font-size:12;
+    font-family: "nasalization-rg";
     text-align: center;
 }
 
 .listview {
-    padding: 10;
     font-size:16;
+    padding: 10;
 }
 
 .camera {
@@ -22,6 +32,6 @@
 
 .date {
     font-size:14;
-    text-align: right;
     margin: 10;
+    text-align: right;
 }
