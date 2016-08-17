@@ -1,0 +1,30 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      xmlns:nativescript-fresco="nativescript-fresco" 
+      xmlns:nativescript-slides="nativescript-slides" 
+      loaded="onLoaded">
+  <!--<GridLayout rows="50, 150, 50, 500" columns="*">
+    <Label row="0" text="Choose a date to show all Curiosity photos" class="title"/>
+    <DatePicker row="1"  day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
+    <Button row="2" text="Show me" tap="addNewSlides" />-->
+
+    <GridLayout rows="*" columns="*">
+        <ListView items="{{ dataItems }}"  loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
+          <ListView.itemTemplate>
+            <!--<nativescript-slides:SlideContainer id="slides" 
+                                                pageIndicators="true" 
+                                                loaded="onSlideContainerLoaded"
+							                                  start="onStart" 
+                                                cancelled="onCancelled" 
+                                                changed="onChanged" 
+                                                finished="onFinished">>
+            </nativescript-slides:SlideContainer>-->
+              <nativescript-fresco:FrescoDrawee verticalAlignment="top"
+                                                aspectRatio="2"
+                                                backgroundUri="res://icon"
+                                                imageUri="{{ imageUri }}"/>
+          </ListView.itemTemplate>
+      </ListView>
+    </GridLayout>
+
+  <!--</GridLayout>-->
+</Page>
