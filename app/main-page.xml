@@ -13,16 +13,25 @@
         <ListView row="2" col="0" colSpan="2" items="{{ dataItems }}" class="listview" loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
           <ListView.itemTemplate>
             <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
-                <GridLayout rows="44, *" columns="2*, *">
-                    <Label row="0" col="0" text="{{ cameraName }}" class="camera" textWrap="true" />
-                    <Label row="0" col="1" text="{{ earthDate }}" class="date" textWrap="true" />
-                    <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
-                                                      verticalAlignment="top"
-                                                      showProgressBar="true"
-                                                      aspectRatio="2"
-                                                      placeholderImageUri="res://icon"
-                                                      imageUri="{{ imageUri }}"/>
-                </GridLayout>
+                <android>
+                    <GridLayout rows="44, *" columns="2*, *">
+                        <Label row="0" col="0" text="{{ cameraName }}" class="camera" textWrap="true" />
+                        <Label row="0" col="1" text="{{ earthDate }}" class="date" textWrap="true" />
+                        <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
+                                                        verticalAlignment="top"
+                                                        showProgressBar="true"
+                                                        aspectRatio="2"
+                                                        placeholderImageUri="res://icon"
+                                                        imageUri="{{ imageUri }}"/>
+                    </GridLayout>
+                </android>
+                <ios>
+                    <GridLayout rows="44, *" columns="2*, *">
+                        <Label row="0" col="0" text="{{ cameraName }}" class="camera" textWrap="true" />
+                        <Label row="0" col="1" text="{{ earthDate }}" class="date" textWrap="true" />
+                        <Image row="1" col="0" colSpan="2"  src="{{ imageUri }}" verticalAlignment="top"/>
+                    </GridLayout>
+                </ios>
             </Card:CardView>                                      
           </ListView.itemTemplate>
       </ListView>
