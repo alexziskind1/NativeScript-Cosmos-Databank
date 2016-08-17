@@ -16,10 +16,12 @@
 }
 
 .camera {
-    font-size:16
+    font-size:16;
+    margin: 10;
 }
 
 .date {
     font-size:14;
     text-align: right;
+    margin: 10;
 }
