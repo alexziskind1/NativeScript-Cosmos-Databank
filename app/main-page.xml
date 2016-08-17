@@ -1,30 +1,28 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:nativescript-fresco="nativescript-fresco" 
-      xmlns:nativescript-slides="nativescript-slides" 
+      xmlns:Card="nativescript-cardview"
       loaded="onLoaded">
-  <!--<GridLayout rows="50, 150, 50, 500" columns="*">
-    <Label row="0" text="Choose a date to show all Curiosity photos" class="title"/>
-    <DatePicker row="1"  day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
-    <Button row="2" text="Show me" tap="addNewSlides" />-->
 
-    <GridLayout rows="*" columns="*">
-        <ListView items="{{ dataItems }}"  loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
+    <GridLayout rows="44, 88, *" columns="*">
+        <TextView row="0" text="Choose a date to show photos taken from Curiosity rover" class="textview" editable="false" />
+        
+        <DatePicker row="1" day="06" month="08" year="2012"></DatePicker>
+        
+        <ListView row="2" items="{{ dataItems }}" class="listview" loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
           <ListView.itemTemplate>
-            <!--<nativescript-slides:SlideContainer id="slides" 
-                                                pageIndicators="true" 
-                                                loaded="onSlideContainerLoaded"
-							                                  start="onStart" 
-                                                cancelled="onCancelled" 
-                                                changed="onChanged" 
-                                                finished="onFinished">>
-            </nativescript-slides:SlideContainer>-->
-              <nativescript-fresco:FrescoDrawee verticalAlignment="top"
-                                                aspectRatio="2"
-                                                backgroundUri="res://icon"
-                                                imageUri="{{ imageUri }}"/>
+            <Card:CardView class="cardStyle" margin="10" elevation="40" radius="5">
+                <GridLayout rows="44, *" columns="2*, *">
+                    <Label row="0" col="0" text="{{ cameraName }}" class="camera" textWrap="true" />
+                    <Label row="0" col="1" text="{{ 'taken on:' + earthDate }}" class="date" textWrap="true" />
+                    <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
+                                                      verticalAlignment="top"
+                                                      showProgressBar="true"
+                                                      aspectRatio="2"
+                                                      placeholderImageUri="res://icon"
+                                                      imageUri="{{ imageUri }}"/>
+                </GridLayout>
+            </Card:CardView>                                      
           </ListView.itemTemplate>
       </ListView>
     </GridLayout>
-
-  <!--</GridLayout>-->
 </Page>

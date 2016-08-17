@@ -1,6 +1,25 @@
-﻿.slide {
-    background-color: darkolivegreen;
-    color: whitesmoke;
-    font-size: 24;
+﻿.cardStyle {
+    background-color: #3489db;
+    color: #fff;
+}
+
+.textview {
+    font-size:14;
+    background-color: darkslateblue;
+    color:#fff;
+    text-align: center;
+}
+
+.listview {
     padding: 10;
+    font-size:16;
+}
+
+.camera {
+    font-size:16
+}
+
+.date {
+    font-size:14;
+    text-align: right;
 }

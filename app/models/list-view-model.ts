@@ -3,7 +3,7 @@ import { ObservableArray } from "data/observable-array";
 import http = require("http");
 
 let API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=";
-var sampleDate = "2015-6-3";
+var sampleDate = "2015-4-3";
 let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 var requestUrl = API_URL + sampleDate + API_KEY;
 
@@ -28,8 +28,12 @@ export class ListViewModel extends Observable {
 
                 for (var index = 0; index < result["photos"].length; index++) {
                     var element = result["photos"][index];
+                            
+                    console.log(element["camera"]["full_name"]);
                     console.log(element["img_src"]);
-                    that._dataItems.push(new DataItem(element["img_src"]));
+                    console.log(element["earth_date"]);
+
+                    that._dataItems.push(new DataItem(element["camera"]["full_name"], element["img_src"], element["earth_date"]));
                 }
 
             }, function (e) {
@@ -42,8 +46,12 @@ export class ListViewModel extends Observable {
 export class DataItem {
 
     public imageUri;
+    public cameraName;
+    public earthDate;
 
-    constructor(uri: string) {
-        this.imageUri = uri;
+    constructor(cameraName: string, imageUri: string, earthDate: string) {
+        this.cameraName = cameraName;
+        this.imageUri = imageUri;
+        this.earthDate = earthDate;
     }
 }
