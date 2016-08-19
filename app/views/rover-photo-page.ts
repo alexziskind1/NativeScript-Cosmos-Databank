@@ -20,7 +20,7 @@ let page;
 let list;
 let datePicker;
 
-let vm = new ListViewModel(2013, 9, 6);
+let vm = new ListViewModel("curiosity", 2013, 9, 6);
 vm.initDataItems();
 
 export function onLoaded(args: EventData) {

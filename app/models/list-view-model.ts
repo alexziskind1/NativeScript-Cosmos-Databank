@@ -2,7 +2,8 @@ import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");
 
-let API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=";
+let API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
+let API_URL_END = "/photos?earth_date=";
 var sampleDate = "2015-4-3";
 let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 let DEMO_KEY = "&api_key=DEMO_KEY";
@@ -15,16 +16,30 @@ export class ListViewModel extends Observable {
     private _year: number;
     private _month: number;
     private _day: number;
+    private _rover: string;
 
     private _url: string;
 
-    constructor(year: number, month: number, day: number) {
+    constructor(rover: string, year: number, month: number, day: number) {
         super();
 
+        this._rover = rover;
         this._year = year;
         this._month = month;
         this._day = day;
     }    
+
+    public get rover() {
+        return this._rover;
+    }
+
+    public set rover(value: string) {
+        if (this._rover !== value) {
+            this._rover = value;
+            this.notifyPropertyChange("rover", value);
+        }
+    }
+
 
     public get year() {
         return this._year;
@@ -67,7 +82,9 @@ export class ListViewModel extends Observable {
     }
 
     public getUpdatedUrl() {
-        return this._url = API_URL + this._year + '-' + this._month + '-' + this._day + DEMO_KEY;
+        return this._url = API_URL + this._rover + API_URL_END 
+                           + this._year + '-' + this._month + '-' + this._day 
+                           + DEMO_KEY;
     }
 
     public initDataItems() {
