@@ -10,7 +10,7 @@ import { Button } from "ui/button";
 import { DatePicker } from "ui/date-picker";
 import { Color } from "color";
 
-import { ListViewModel } from "./models/list-view-model";
+import { ListViewModel, DataItem } from "../models/list-view-model";
 
 import http = require("http");
 
@@ -21,6 +21,7 @@ let list;
 let datePicker;
 
 let vm = new ListViewModel(2013, 9, 6);
+vm.initDataItems();
 
 export function onLoaded(args: EventData) {
     page = <Page>args.object;
@@ -40,11 +41,10 @@ export function onListLoaded(args: EventData) {
 
 export function getPhotosForDate(args:EventData) {
     let button = <Button>args.object;
-
-    vm.initDataItems();
-    list.items = vm.dataItems;
     
-    // console.log(vm.get("dataItems").length); // check if lenght is 0 return message that there are no photos taken on that day
+    vm.initDataItems();
+
+    list.items = vm.dataItems;
 
     list.refresh();
 }

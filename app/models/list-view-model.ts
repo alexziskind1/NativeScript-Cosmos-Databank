@@ -5,12 +5,13 @@ import http = require("http");
 let API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=";
 var sampleDate = "2015-4-3";
 let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
+let DEMO_KEY = "&api_key=DEMO_KEY";
 var requestUrl = API_URL + sampleDate + API_KEY;
 
 export class ListViewModel extends Observable {
 
     private _dataItems: ObservableArray<DataItem>;
-    
+
     private _year: number;
     private _month: number;
     private _day: number;
@@ -19,10 +20,10 @@ export class ListViewModel extends Observable {
 
     constructor(year: number, month: number, day: number) {
         super();
+
         this._year = year;
         this._month = month;
         this._day = day;
-        this.initDataItems();
     }    
 
     public get year() {
@@ -58,27 +59,29 @@ export class ListViewModel extends Observable {
         }
     }
 
-    public get dataItems() {
+    public get dataItems() {   
+        if (!this._dataItems) {
+            this.initDataItems();
+        }
         return this._dataItems;
     }
 
-    public set dataItems(value: ObservableArray<DataItem>) {
-        if (this._dataItems !== value) {
-            this._dataItems = value;
-            this.notifyPropertyChange("dataItems", value);
-        }
-    }
-
     public getUpdatedUrl() {
-        return this._url = API_URL + this._year + '-' + this._month + '-' + this._day + API_KEY;
+        return this._url = API_URL + this._year + '-' + this._month + '-' + this._day + DEMO_KEY;
     }
 
     public initDataItems() {
-        this._dataItems = new ObservableArray<DataItem>();
+        this._dataItems = new ObservableArray<DataItem>(); 
+
+        var pageIndex = 1;
+
+        this._dataItems = this.requestPhotosByPage(this._dataItems ,this.getUpdatedUrl(), pageIndex);
+    }
+
+    public requestPhotosByPage(arr: ObservableArray<DataItem>, url: string, pageIndex: number) {
         var that = this;
-        
-        console.log(this.getUpdatedUrl());
-        http.getJSON(this.getUpdatedUrl()).then(function (result) {
+
+        http.getJSON(this.getUpdatedUrl() + "&page=" + pageIndex).then(function (result) {
 
             for (var index = 0; index < result["photos"].length; index++) {
                 var element = result["photos"][index];
@@ -87,13 +90,29 @@ export class ListViewModel extends Observable {
                 // console.log(element["img_src"]);
                 // console.log(element["earth_date"]);
 
-                that._dataItems.push(new DataItem(element["camera"]["full_name"], element["img_src"], element["earth_date"]));
+                arr.push(new DataItem(element["camera"]["full_name"], 
+                                                 element["img_src"], 
+                                                 element["earth_date"]));
+                console.log(element["id"]);
             }
 
         }, function (e) {
             console.log(e);
+        }).then(function() {
+            // recusrsive call to go to all the pages for the selected day query of photos
+            // reason: the API is passing 25 photos per page
+            console.log("arr length: " + arr.length);
+            if (arr.length % 25 == 0 && arr.length / pageIndex == 25) {
+                pageIndex++;
+                console.log("page:" + pageIndex);
+                that.requestPhotosByPage(arr, url, pageIndex);
+            } else {
+                return arr;
+            }
         })
+        return arr;
     }
+
 }
 
 export class DataItem {

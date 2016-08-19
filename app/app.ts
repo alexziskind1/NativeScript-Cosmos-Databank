@@ -7,4 +7,4 @@ if (application.android) {
     };
 }
 
-application.start({ moduleName: "main-page" });
+application.start({ moduleName: "views/rover-photo-page" });
