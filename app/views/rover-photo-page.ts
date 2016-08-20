@@ -1,4 +1,4 @@
-import { EventData } from "data/observable";
+import { EventData, Observable, PropertyChangeData } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import { Page } from "ui/page";
 import { topmost } from "ui/frame";
@@ -8,6 +8,7 @@ import { Label } from "ui/label";
 import { ListView } from "ui/list-view";
 import { Button } from "ui/button";
 import { DatePicker } from "ui/date-picker";
+import { ListPicker } from "ui/list-picker";
 import { Color } from "color";
 
 import { ListViewModel, DataItem } from "../models/list-view-model";
@@ -19,18 +20,30 @@ import * as fresco from "nativescript-fresco";
 let page;
 let list;
 let datePicker;
-
+let listpicker;
+// ROvers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
 let vm = new ListViewModel("curiosity", 2013, 9, 6);
+// let vm = new ListViewModel("opportunity", 2005, 9, 6);
+// let vmSpirit = new ListViewModel("spirit", 2005, 9, 6);
+
 vm.initDataItems();
 
 export function onLoaded(args: EventData) {
     page = <Page>args.object;
 
-    datePicker = <DatePicker>page.getViewById("date-picker");
+    datePicker = <DatePicker>page.getViewById("rovers-datepicker");
+    listpicker = <ListPicker>page.getViewById("rovers-listpicker");
 
     // Curiocity rover has landed on Mars on 06 August 2012 (+ first photos taken on that date)
     datePicker.minDate = new Date(2012, (8 - 1), 6); // month on JS Date is minus one (January is 0)
-    datePicker.maxDate = new Date(); // today  
+    datePicker.maxDate = new Date(2016, (8 - 1), 6); // today  
+
+    listpicker.on(Observable.propertyChangeEvent, function(args: PropertyChangeData) {
+        console.log("HERE");
+        console.log(args.eventName.toString() + " " + args.propertyName.toString() + " " + args.value.toString());
+        
+    });
+
 
     page.bindingContext = vm;
 }

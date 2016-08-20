@@ -12,7 +12,7 @@ var requestUrl = API_URL + sampleDate + API_KEY;
 export class ListViewModel extends Observable {
 
     private _dataItems: ObservableArray<DataItem>;
-
+    private _rovers: Array<string>  = ["curiosity", "opportunity", "spirit"];;
     private _year: number;
     private _month: number;
     private _day: number;
@@ -28,6 +28,11 @@ export class ListViewModel extends Observable {
         this._month = month;
         this._day = day;
     }    
+
+    public get rovers() {
+        return this._rovers;
+    }
+
 
     public get rover() {
         return this._rover;
@@ -84,7 +89,7 @@ export class ListViewModel extends Observable {
     public getUpdatedUrl() {
         return this._url = API_URL + this._rover + API_URL_END 
                            + this._year + '-' + this._month + '-' + this._day 
-                           + DEMO_KEY;
+                           + API_KEY;
     }
 
     public initDataItems() {
@@ -98,8 +103,14 @@ export class ListViewModel extends Observable {
     public requestPhotosByPage(arr: ObservableArray<DataItem>, url: string, pageIndex: number) {
         var that = this;
 
-        http.getJSON(this.getUpdatedUrl() + "&page=" + pageIndex).then(function (result) {
+        http.request({ url: this.getUpdatedUrl() + "&page=" + pageIndex, method: "GET" }).then(function (response) {
+            // Argument (response) is HttpResponse!
+            for (var header in response.headers) {
+               console.log(header + ":" + response.headers[header]);
+            }
 
+            var result = response.content.toJSON();
+            
             for (var index = 0; index < result["photos"].length; index++) {
                 var element = result["photos"][index];
                         
@@ -110,11 +121,11 @@ export class ListViewModel extends Observable {
                 arr.push(new DataItem(element["camera"]["full_name"], 
                                                  element["img_src"], 
                                                  element["earth_date"]));
-                console.log(element["id"]);
+                console.log(element["id"]);   
             }
 
         }, function (e) {
-            console.log(e);
+            //// Argument (e) is Error!
         }).then(function() {
             // recusrsive call to go to all the pages for the selected day query of photos
             // reason: the API is passing 25 photos per page
@@ -126,7 +137,7 @@ export class ListViewModel extends Observable {
             } else {
                 return arr;
             }
-        })
+        });
         return arr;
     }
 

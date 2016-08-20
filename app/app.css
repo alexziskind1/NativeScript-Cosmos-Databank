@@ -1,32 +1,43 @@
-﻿Page {
-    background-color: slategray
+﻿/*
+http://www.colourlovers.com/palette/482774/dream_magnet
+#343838
+#005F6B
+#008C9E
+#00B4CC
+#00DFFC
+*/
+
+Page {
+    background-color: #BCBCBC;
+    color: #E8EAEB;
+    font-family: "nasalization-rg";
+    font-size:16;
 }
 
-.datepicker {
-    background-color: transparent;  
+ActionBar {
+    background-color: #008C9E;
+}
+
+Button {
+    background-color: #008C9E;
+    border-radius: 10;
+    margin: 10;
+}
+
+.gridmenu {
+    border-radius: 10
 }
 
 .cardStyle {
-    background-color: #3489db;
-    color: #fff;
-    font-family: "nasalization-rg";
-}
-
-.textview {
-    background-color: #3489db;
-    color:#fff;      
-    font-size:12;
-    font-family: "nasalization-rg";
-    text-align: center;
+    background-color: #008C9E;
 }
 
 .listview {
-    font-size:16;
+    background-color: #343838;
     padding: 10;
 }
 
-.camera {
-    font-size:16;
+.camera {     
     margin: 10;
 }
 
@@ -34,4 +45,9 @@
     font-size:14;
     margin: 10;
     text-align: right;
+}
+
+ListPicker {
+    font-size:18;
+    text-align: center;
 }
