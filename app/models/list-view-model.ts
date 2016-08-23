@@ -87,7 +87,17 @@ export class ListViewModel extends Observable {
     }
 
     public getUpdatedUrl() {
-        return this._url = API_URL + this._rover + API_URL_END 
+
+        var urlto =API_URL 
+                           + this._rover 
+                           + API_URL_END 
+                           + this._year + '-' + this._month + '-' + this._day 
+                           + API_KEY;
+        console.log("getUpdatedUrl: " + urlto);
+                                   
+        return this._url = API_URL 
+                           + this._rover 
+                           + API_URL_END 
                            + this._year + '-' + this._month + '-' + this._day 
                            + API_KEY;
     }
