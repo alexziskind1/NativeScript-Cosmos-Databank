@@ -1,0 +1,7 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+    <StackLayout>
+        <Button text="Curiosity" tap="{{ goToRoversPhotosPage }}" />
+        <Button text="Opportunity" tap="{{ goToRoversPhotosPage }}"  />
+        <Button text="Spirit" tap="{{ goToRoversPhotosPage }}"  />
+    </StackLayout>
+</Page>

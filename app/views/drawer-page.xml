@@ -25,7 +25,7 @@
           <ScrollView>
             <StackLayout cssClass="drawerMenuContent">
               <Button text="Main Page" tap="{{ goToMainPage }}" cssClass="drawerSectionHeader" />
-              <Button text="Mars Rovers Photos" tap="{{ goToRoversPage }}" cssClass="drawerSectionItem" />
+              <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" cssClass="drawerSectionItem" />
               <Button text="Astronomy Pic of the Day" cssClass="drawerSectionItem" />
               <Button text="Asteroids" cssClass="drawerSectionHeader" />
               <Button text="EONET" cssClass="drawerSectionItem" />
