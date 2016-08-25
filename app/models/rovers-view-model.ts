@@ -11,7 +11,7 @@ var requestUrl = API_URL_START + sampleDate + API_KEY;
 
 export class RoversViewModel extends Observable {
 
-    private _dataItems: ObservableArray<DataItem>;
+    private _dataItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
     private _rovers: Array<string> = ["curiosity", "opportunity", "spirit"];;
 
     private _year: number;
@@ -29,6 +29,8 @@ export class RoversViewModel extends Observable {
         this._year = year;
         this._month = month;
         this._day = day;
+
+        this._totalCount = -1;
     }    
 
     public get rovers() {
@@ -123,10 +125,18 @@ export class RoversViewModel extends Observable {
     }
 
     public requestPhotosByPage(arr: ObservableArray<DataItem>, url: string, pageIndex: number) {
+        this.totalCount = -1;
+
         var that = this;
 
         http.request({ url: this.getUpdatedUrl() + "&page=" + pageIndex, method: "GET" }).then(function (response) {
             // Argument (response) is HttpResponse!
+            if (response.statusCode === 400) {
+                console.log("NO PHOTOS - err 400");
+                that.totalCount = 0;
+                return;
+            }
+
             for (var header in response.headers) {
                // console.log(header + ":" + response.headers[header]);
             }
@@ -152,7 +162,7 @@ export class RoversViewModel extends Observable {
             // recusrsive call to go to all the pages for the selected day query of photos
             // reason: the API is passing 25 photos per page
             // console.log("arr length: " + arr.length);
-            if (arr.length % 25 == 0 && arr.length / pageIndex == 25) {
+            if (arr.length % 25 === 0 && arr.length / pageIndex === 25 && arr.length !== 0) {
                 pageIndex++;
                 console.log("page:" + pageIndex);
                 that.requestPhotosByPage(arr, url, pageIndex);

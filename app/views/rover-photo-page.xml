@@ -46,7 +46,7 @@
             <Button  row="1" col="1" text="Get Photos" tap="getPhotosForDate" />
         </GridLayout>
 
-        <Label row="1" col="0"  text="{{ totalCount || 'counting...' }}" textWrap="true" />  
+        <Label row="1" col="0"  text="{{ totalCount == -1 ? 'counting...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" textWrap="true" />  
 
         <ListView row="2" col="0" items="{{ dataItems }}" class="listview" loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
             <ListView.itemTemplate>
