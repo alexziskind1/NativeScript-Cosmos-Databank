@@ -1,0 +1,45 @@
+<dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd" 
+    xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
+    xmlns:drawer="nativescript-telerik-ui/sidedrawer"
+    class="drawer-page"
+    loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+   <dpg.actionBar>
+      <ActionBar title="Drawer Over Navigation">
+        <android>
+            <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
+        </android>
+        <ios>
+            <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
+        </ios>
+      </ActionBar>
+  </dpg.actionBar>
+
+<!-- >> sidedrawer-over-navigation-drawer -->
+  <dpg:DrawerPage.sideDrawer>
+    <drawer:RadSideDrawer id="sideDrawer">
+      <drawer:RadSideDrawer.drawerContent>
+        <StackLayout cssClass="drawerContent">
+          <StackLayout cssClass="headerContent">
+            <Label text="Navigation Menu"/>
+          </StackLayout>
+          <ScrollView>
+            <StackLayout cssClass="drawerMenuContent">
+              <Button text="Main Page" tap="{{ goToMainPage }}" cssClass="drawerSectionHeader" />
+              <Button text="Mars Rovers Photos" tap="{{ goToRoversPage }}" cssClass="drawerSectionItem" />
+              <Button text="Astronomy Pic of the Day" cssClass="drawerSectionItem" />
+              <Button text="Asteroids" cssClass="drawerSectionHeader" />
+              <Button text="EONET" cssClass="drawerSectionItem" />
+              <Button text="Earth" cssClass="drawerSectionHeader" />
+              <Button text="Space Sounds" cssClass="drawerSectionHeader" />
+            </StackLayout>
+          </ScrollView>
+        </StackLayout>
+      </drawer:RadSideDrawer.drawerContent>
+    </drawer:RadSideDrawer> 
+  </dpg:DrawerPage.sideDrawer>
+<!-- << sidedrawer-over-navigation-drawer -->
+
+    <StackLayout cssClass="mainContent">
+        <Label text="{{ exampleText }}" textWrap="true" cssClass="drawerContentText"/>
+    </StackLayout>   
+</dpg:DrawerPage>

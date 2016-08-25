@@ -9,7 +9,7 @@ let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 let DEMO_KEY = "&api_key=DEMO_KEY";
 var requestUrl = API_URL + sampleDate + API_KEY;
 
-export class ListViewModel extends Observable {
+export class RoversViewModel extends Observable {
 
     private _dataItems: ObservableArray<DataItem>;
     private _rovers: Array<string>  = ["curiosity", "opportunity", "spirit"];;
