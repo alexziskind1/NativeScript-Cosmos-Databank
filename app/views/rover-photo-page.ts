@@ -3,6 +3,7 @@ import { ObservableArray } from "data/observable-array";
 import { Page } from "ui/page";
 import { topmost } from "ui/frame";
 
+import { GridLayout } from "ui/layouts/grid-layout";
 import { StackLayout } from "ui/layouts/stack-layout";
 import { Label } from "ui/label";
 import { ListView } from "ui/list-view";
@@ -10,8 +11,10 @@ import { Button } from "ui/button";
 import { DatePicker } from "ui/date-picker";
 import { ListPicker } from "ui/list-picker";
 import { Color } from "color";
+import { ActionBar } from "ui/action-bar";
 
-import { ListViewModel, DataItem } from "../models/list-view-model";
+import { RoversViewModel, DataItem } from "../models/rovers-view-model";
+import { DrawerOverNavigationModel } from  "../models/drawer-over-navigation-model";
 
 import http = require("http");
 
@@ -19,53 +22,84 @@ import * as fresco from "nativescript-fresco";
 
 let page;
 let list;
+let pageContainer;
 let datePicker;
-let listpicker;
+let listPicker;
+let actionBar;
+
+var selectedRover;
+
+let roversViewModel;
+let drawerViewModel = new DrawerOverNavigationModel();
+
 // ROvers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
-let vm = new ListViewModel("curiosity", 2013, 9, 6);
-// let vm = new ListViewModel("opportunity", 2005, 9, 6);
-// let vmSpirit = new ListViewModel("spirit", 2005, 9, 6);
+export function onPageLoaded(args: EventData) {
+    page = <Page>args.object;
+    page.bindingContext = drawerViewModel;
+}
 
-vm.initDataItems();
-
-export function onLoaded(args: EventData) {
+export function onNavigatedTo(args: EventData) {
     page = <Page>args.object;
 
+    var navgationContext = page.navigationContext;
+    selectedRover = navgationContext["rover"];
+
     datePicker = <DatePicker>page.getViewById("rovers-datepicker");
-    listpicker = <ListPicker>page.getViewById("rovers-listpicker");
+    listPicker = <ListPicker>page.getViewById("rovers-listpicker");
+    pageContainer = <GridLayout>page.getViewById("pageContainer");
 
-    // Curiocity rover has landed on Mars on 06 August 2012 (+ first photos taken on that date)
-    // ROvers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
-    datePicker.minDate = new Date(2012, (8 - 1), 6); // month on JS Date is minus one (January is 0)
-    datePicker.maxDate = new Date(2016, (8 - 1), 6); // today  
+    switch (selectedRover) {
+        case "curiosity":
+            roversViewModel = new RoversViewModel(selectedRover, 2013, 9, 6);          
+            // ROvers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
+            datePicker.minDate = new Date(2012, (8 - 1), 6); // month on JS Date is minus one (January is 0)
+            datePicker.maxDate = new Date(2016, (8 - 1), 6); // today minus two days
+            roversViewModel.set("selectedIndex", 0);
+            break;
+        case "opportunity":
+            roversViewModel = new RoversViewModel(selectedRover, 2008, 9, 6);
+            datePicker.minDate = new Date(2004, (8 - 1), 6); // landing date
+            datePicker.maxDate = new Date(2009, (8 - 1), 6); // last transmision day     
+            roversViewModel.set("selectedIndex", 1);
+            break;  
+        case "spirit":
+            roversViewModel = new RoversViewModel(selectedRover, 2007, 9, 6);
+            datePicker.minDate = new Date(2004, (4 - 1), 22); // landing day January 04th
+            datePicker.maxDate = new Date(2010, (8 - 1), 6); // last transmision day   
+            roversViewModel.set("selectedIndex", 2);
+            break;            
+        default:
+            break;
+    }
+    
+    roversViewModel.initDataItems();
 
-    listpicker.on(Observable.propertyChangeEvent, function(args: PropertyChangeData) {
+    listPicker.on(Observable.propertyChangeEvent, function(args: PropertyChangeData) {
         
-        console.log("HERE");
-        console.log(args.eventName.toString() + " " + args.propertyName.toString() + " " + args.value.toString());
+        // console.log(args.eventName.toString() + " " + args.propertyName.toString() + " " + args.value.toString());
         if (args.value == 0) {
             console.log("args.value = 0");
-            vm.set("rover", "curiosity");
+            roversViewModel.set("rover", "curiosity");
 
             datePicker.minDate = new Date(2012, (8 - 1), 6); // month on JS Date is minus one (January is 0)
             datePicker.maxDate = new Date(2016, (8 - 1), 6); // last day
         } else if (args.value == 1) {
             console.log("args.value = 1");
-            vm.set("rover", "opportunity");
+            roversViewModel.set("rover", "opportunity");
 
             datePicker.minDate = new Date(2004, (8 - 1), 6); // check date
             datePicker.maxDate = new Date(2009, (8 - 1), 6); // last day            
         } else if (args.value == 2) {
             console.log("args.value = 2");
-            vm.set("rover", "spirit");
+            roversViewModel.set("rover", "spirit");
 
             datePicker.minDate = new Date(2004, (4 - 1), 22); // January 04th
             datePicker.maxDate = new Date(2010, (8 - 1), 6); //last day            
         }
     });
 
-
-    page.bindingContext = vm;
+    //page.bindingContext = viewModel;
+    pageContainer.bindingContext = roversViewModel;
 }
 
 export function onListLoaded(args: EventData) {
@@ -75,10 +109,10 @@ export function onListLoaded(args: EventData) {
 export function getPhotosForDate(args:EventData) {
     let button = <Button>args.object;
     
-    vm.initDataItems();
+    roversViewModel.initDataItems();
 
-    list.items = vm.dataItems;
-    console.log("cm.dataitems: " + vm.get("dataItems").length);
+    list.items = roversViewModel.dataItems;
+
     list.refresh();
 }
 import {FrescoDrawee, FinalEventData } from "nativescript-fresco";

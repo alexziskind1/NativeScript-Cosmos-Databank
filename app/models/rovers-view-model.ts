@@ -2,22 +2,24 @@ import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");
 
-let API_URL = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
+let API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
 let API_URL_END = "/photos?earth_date=";
 var sampleDate = "2015-4-3";
 let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 let DEMO_KEY = "&api_key=DEMO_KEY";
-var requestUrl = API_URL + sampleDate + API_KEY;
+var requestUrl = API_URL_START + sampleDate + API_KEY;
 
-export class ListViewModel extends Observable {
+export class RoversViewModel extends Observable {
 
-    private _dataItems: ObservableArray<DataItem>;
-    private _rovers: Array<string>  = ["curiosity", "opportunity", "spirit"];;
+    private _dataItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
+    private _rovers: Array<string> = ["curiosity", "opportunity", "spirit"];;
+
     private _year: number;
     private _month: number;
     private _day: number;
     private _rover: string;
 
+    private _totalCount: number;
     private _url: string;
 
     constructor(rover: string, year: number, month: number, day: number) {
@@ -27,12 +29,24 @@ export class ListViewModel extends Observable {
         this._year = year;
         this._month = month;
         this._day = day;
+
+        this._totalCount = -1;
     }    
 
     public get rovers() {
         return this._rovers;
     }
+    
+    public get totalCount() {
+        return this._totalCount;
+    }
 
+    public set totalCount(value: number) {
+        if (this._totalCount !== value) {
+            this._totalCount = value;
+            this.notifyPropertyChange("totalCount", value);
+        }
+    }    
 
     public get rover() {
         return this._rover;
@@ -88,14 +102,14 @@ export class ListViewModel extends Observable {
 
     public getUpdatedUrl() {
 
-        var urlto =API_URL 
-                           + this._rover 
-                           + API_URL_END 
-                           + this._year + '-' + this._month + '-' + this._day 
-                           + API_KEY;
-        console.log("getUpdatedUrl: " + urlto);
+        var urlto = API_URL_START 
+                    + this._rover 
+                    + API_URL_END 
+                    + this._year + '-' + this._month + '-' + this._day 
+                    + API_KEY;
+        // console.log("getUpdatedUrl: " + urlto);
                                    
-        return this._url = API_URL 
+        return this._url = API_URL_START 
                            + this._rover 
                            + API_URL_END 
                            + this._year + '-' + this._month + '-' + this._day 
@@ -111,12 +125,20 @@ export class ListViewModel extends Observable {
     }
 
     public requestPhotosByPage(arr: ObservableArray<DataItem>, url: string, pageIndex: number) {
+        this.totalCount = -1;
+
         var that = this;
 
         http.request({ url: this.getUpdatedUrl() + "&page=" + pageIndex, method: "GET" }).then(function (response) {
             // Argument (response) is HttpResponse!
+            if (response.statusCode === 400) {
+                console.log("NO PHOTOS - err 400");
+                that.totalCount = 0;
+                return;
+            }
+
             for (var header in response.headers) {
-               console.log(header + ":" + response.headers[header]);
+               // console.log(header + ":" + response.headers[header]);
             }
 
             var result = response.content.toJSON();
@@ -131,7 +153,7 @@ export class ListViewModel extends Observable {
                 arr.push(new DataItem(element["camera"]["full_name"], 
                                                  element["img_src"], 
                                                  element["earth_date"]));
-                console.log(element["id"]);   
+                // console.log(element["id"]);   
             }
 
         }, function (e) {
@@ -139,12 +161,15 @@ export class ListViewModel extends Observable {
         }).then(function() {
             // recusrsive call to go to all the pages for the selected day query of photos
             // reason: the API is passing 25 photos per page
-            console.log("arr length: " + arr.length);
-            if (arr.length % 25 == 0 && arr.length / pageIndex == 25) {
+            // console.log("arr length: " + arr.length);
+            if (arr.length % 25 === 0 && arr.length / pageIndex === 25 && arr.length !== 0) {
                 pageIndex++;
                 console.log("page:" + pageIndex);
                 that.requestPhotosByPage(arr, url, pageIndex);
             } else {
+                console.log("arr.leng: " + arr.length)
+                that.totalCount = arr.length;
+                console.log("this.totalCount: " + that.totalCount);
                 return arr;
             }
         });

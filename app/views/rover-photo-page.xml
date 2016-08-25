@@ -1,25 +1,55 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd"
+<dpg:DrawerPage xmlns="http://schemas.nativescript.org/tns.xsd"
       xmlns:nativescript-fresco="nativescript-fresco" 
       xmlns:Card="nativescript-cardview"
-      loaded="onLoaded">
-    <Page.actionBar>
-        <ActionBar title="Mars rovers" icon="res://opportuity">
-            <!--<ActionBar.actionItems>
-                <ActionItem icon="" text="Left" tap="" ios.position="left" />
-                <ActionItem icon="" text="Right" tap="" ios.position="right" />
-            </ActionBar.actionItems>-->
+      xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
+      xmlns:drawer="nativescript-telerik-ui/sidedrawer"
+      loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+    <dpg:DrawerPage.actionBar>
+        <ActionBar id="actionBar" title="Drawer Over Navigation" >
+            <android>
+                <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
+            </android>
+            <ios>
+                <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
+            </ios>
         </ActionBar>
-    </Page.actionBar>
-    <GridLayout rows="132, *" columns="*">
+    </dpg:DrawerPage.actionBar>
+
+    <dpg:DrawerPage.sideDrawer>
+        <drawer:RadSideDrawer id="sideDrawer">
+            <drawer:RadSideDrawer.drawerContent>
+            <StackLayout cssClass="drawerContent">
+                <StackLayout cssClass="headerContent">
+                    <Label text="Navigation Menu"/>
+                </StackLayout>
+                <ScrollView>
+                    <StackLayout cssClass="drawerMenuContent">
+                        <Button text="Main Page" tap="{{ goToMainPage }}" cssClass="drawerSectionHeader" />
+                        <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" cssClass="drawerSectionItem" />
+                        <Button text="Astronomy Pic of the Day" cssClass="drawerSectionItem" />
+                        <Button text="Asteroids" cssClass="drawerSectionHeader" />
+                        <Button text="EONET" cssClass="drawerSectionItem" />
+                        <Button text="Earth" cssClass="drawerSectionHeader" />
+                        <Button text="Space Sounds" cssClass="drawerSectionHeader" />
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            </drawer:RadSideDrawer.drawerContent>
+        </drawer:RadSideDrawer> 
+    </dpg:DrawerPage.sideDrawer>
+
+    <GridLayout id="pageContainer" rows="132, 44, *" columns="*">
 
         <GridLayout class="gridmenu" row="0" col="0" rows="44, 88" columns="2*, *">
-            <ListPicker id="rovers-listpicker" row="0" col="0" colSpan="2" items="{{ rovers }}" selectedIndex="0"></ListPicker>       
+            <ListPicker id="rovers-listpicker" row="0" col="0" colSpan="2" items="{{ rovers }}" selectedIndex="{{ selectedIndex }}"></ListPicker>       
             <DatePicker id="rovers-datepicker" row="1" col="0" day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
             <Button  row="1" col="1" text="Get Photos" tap="getPhotosForDate" />
         </GridLayout>
 
-        <ListView row="1" col="0" items="{{ dataItems }}" class="listview" loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
-          <ListView.itemTemplate>
+        <Label row="1" col="0"  text="{{ totalCount == -1 ? 'counting...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" textWrap="true" />  
+
+        <ListView row="2" col="0" items="{{ dataItems }}" class="listview" loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
+            <ListView.itemTemplate>
             <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
                 <android>
                     <GridLayout rows="44, *" columns="2*, *">
@@ -47,7 +77,8 @@
                     </GridLayout>
                 </ios>
             </Card:CardView>                                      
-          </ListView.itemTemplate>
-        </ListView>
+            </ListView.itemTemplate>
+        </ListView>           
+
     </GridLayout>
-</Page>
+</dpg:DrawerPage>
