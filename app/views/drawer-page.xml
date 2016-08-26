@@ -3,8 +3,14 @@
     xmlns:drawer="nativescript-telerik-ui/sidedrawer"
     class="drawer-page"
     loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+
    <dpg.actionBar>
-      <ActionBar title="Drawer Over Navigation">
+      <ActionBar  class="action-title" >
+        <ActionBar.titleView>
+            <StackLayout orientation="horizontal">
+                <Label text="Explore NASA DataBank" />
+            </StackLayout>
+        </ActionBar.titleView>
         <android>
             <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
         </android>
@@ -14,7 +20,6 @@
       </ActionBar>
   </dpg.actionBar>
 
-<!-- >> sidedrawer-over-navigation-drawer -->
   <dpg:DrawerPage.sideDrawer>
     <drawer:RadSideDrawer id="sideDrawer">
       <drawer:RadSideDrawer.drawerContent>
@@ -37,9 +42,8 @@
       </drawer:RadSideDrawer.drawerContent>
     </drawer:RadSideDrawer> 
   </dpg:DrawerPage.sideDrawer>
-<!-- << sidedrawer-over-navigation-drawer -->
 
-    <StackLayout cssClass="mainContent">
-        <Label text="{{ exampleText }}" textWrap="true" cssClass="drawerContentText"/>
-    </StackLayout>   
+  <StackLayout cssClass="mainContent">
+      <Label text="{{ exampleText }}" textWrap="true" cssClass="drawerContentText"/>
+  </StackLayout>   
 </dpg:DrawerPage>

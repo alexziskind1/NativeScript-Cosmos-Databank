@@ -29,12 +29,30 @@ export class DrawerOverNavigationModel extends Observable {
         });
     }
 
-    public goToRoversPhotosPage(args: EventData) {
+    public goToCuriosityPage(args: EventData) {
         var button = <Button>args.object;
         console.log("goToRoversPhotosPage clicked!");
         frameModule.topmost().navigate({
-            moduleName: "./views/rover-photo-page",
-            context: { "rover": button.text.toLowerCase() }
+            moduleName: "./views/rovers/rover-photo-page",
+            context: { "rover": button.text.toLowerCase(), "year": 2013, "month": 8, "day": 6 }
+        });
+    }
+
+    public goToOpportunityPage(args: EventData) {
+        var button = <Button>args.object;
+        console.log("goToRoversPhotosPage clicked!");
+        frameModule.topmost().navigate({
+            moduleName: "./views/rovers/rover-photo-page",
+            context: { "rover": button.text.toLowerCase(), "year": 2005, "month": 8, "day": 6 }
+        });
+    }
+
+    public goToSpiritPage(args: EventData) {
+        var button = <Button>args.object;
+        console.log("goToRoversPhotosPage clicked!");
+        frameModule.topmost().navigate({
+            moduleName: "./views/rovers/rover-photo-page",
+            context: { "rover": button.text.toLowerCase(), "year": 2006, "month": 8, "day": 6 }
         });
     }
 }

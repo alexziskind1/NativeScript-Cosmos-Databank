@@ -145,15 +145,15 @@ export class RoversViewModel extends Observable {
             
             for (var index = 0; index < result["photos"].length; index++) {
                 var element = result["photos"][index];
-                        
-                // console.log(element["camera"]["full_name"]);
-                // console.log(element["img_src"]);
-                // console.log(element["earth_date"]);
 
-                arr.push(new DataItem(element["camera"]["full_name"], 
-                                                 element["img_src"], 
-                                                 element["earth_date"]));
-                // console.log(element["id"]);   
+                arr.push(new DataItem(element["id"],
+                                      element["sol"],
+                                      element["camera"]["id"], 
+                                      element["camera"]["name"], 
+                                      element["camera"]["rover_id"], 
+                                      element["camera"]["full_name"], 
+                                      element["img_src"], 
+                                      element["earth_date"]));
             }
 
         }, function (e) {
@@ -180,12 +180,31 @@ export class RoversViewModel extends Observable {
 
 export class DataItem {
 
-    public imageUri;
-    public cameraName;
-    public earthDate;
+    public id: number;
+    public sol: number;
 
-    constructor(cameraName: string, imageUri: string, earthDate: string) {
+    public cameraId: number;
+    public cameraName: string;
+    public cameraRoverId: number;
+    public cameraFullName: string;
+
+    public imageUri: string;
+    public earthDate: string;
+    
+    constructor(id: number, 
+                sol: number, 
+                cameraId: number, 
+                cameraName: string, 
+                cameraRoverId: number, 
+                cameraFullName: string, 
+                imageUri: string, 
+                earthDate: string) {
+        this.id = id;
+        this.sol = sol;
+        this.cameraId = cameraId;
         this.cameraName = cameraName;
+        this.cameraRoverId = cameraRoverId;
+        this.cameraFullName = cameraFullName;      
         this.imageUri = imageUri;
         this.earthDate = earthDate;
     }

@@ -1,7 +1,51 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+<dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd"
+        xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
+        xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
+        class="drawer-page"
+        loaded="onPageLoaded" 
+        navigatedTo="onNavigatedTo">
+    <dpg:DrawerPage.actionBar>
+      <ActionBar class="action-title" >
+        <ActionBar.titleView>
+            <StackLayout orientation="horizontal">
+                <Label text="Explore NASA DataBank" />
+            </StackLayout>
+        </ActionBar.titleView>
+        <android>
+            <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
+        </android>
+        <ios>
+            <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
+        </ios>
+      </ActionBar>
+    </dpg:DrawerPage.actionBar>
+
+    <dpg:DrawerPage.sideDrawer>
+        <drawer:RadSideDrawer id="sideDrawer">
+        <drawer:RadSideDrawer.drawerContent>
+            <StackLayout cssClass="drawerContent">
+            <StackLayout cssClass="headerContent">
+                <Label text="Navigation Menu"/>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout>
+                <Button text="Main Page" tap="{{ goToMainPage }}"  />
+                <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
+                <Button text="Astronomy Pic of the Day" cssClass="drawerSectionItem" />
+                <Button text="Asteroids" cssClass="drawerSectionHeader" />
+                <Button text="EONET" cssClass="drawerSectionItem" />
+                <Button text="Earth" cssClass="drawerSectionHeader" />
+                <Button text="Space Sounds" cssClass="drawerSectionHeader" />
+                </StackLayout>
+            </ScrollView>
+            </StackLayout>
+        </drawer:RadSideDrawer.drawerContent>
+        </drawer:RadSideDrawer> 
+    </dpg:DrawerPage.sideDrawer>
+
     <StackLayout>
-        <Button text="Curiosity" tap="{{ goToRoversPhotosPage }}" />
-        <Button text="Opportunity" tap="{{ goToRoversPhotosPage }}"  />
-        <Button text="Spirit" tap="{{ goToRoversPhotosPage }}"  />
+        <Button text="Curiosity" tap="{{ goToCuriosityPage }}" />
+        <Button text="Opportunity" tap="{{ goToOpportunityPage }}"  />
+        <Button text="Spirit" tap="{{ goToSpiritPage }}"  />
     </StackLayout>
-</Page>
+</dpg:DrawerPage>

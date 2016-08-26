@@ -7,15 +7,16 @@ http://www.colourlovers.com/palette/482774/dream_magnet
 #00DFFC
 */
 
-Page, .drawer-page {
+.drawer-page {
     background-color: #BCBCBC;
     color: #E8EAEB;
     font-family: "nasalization-rg";
     font-size:16;
 }
 
-ActionBar {
+.action-title {
     background-color: #008C9E;
+    font-family: "nasalization-rg";    
 }
 
 Button {
