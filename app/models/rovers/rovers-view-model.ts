@@ -102,13 +102,6 @@ export class RoversViewModel extends Observable {
 
     public getUpdatedUrl() {
 
-        var urlto = API_URL_START 
-                    + this._rover 
-                    + API_URL_END 
-                    + this._year + '-' + this._month + '-' + this._day 
-                    + API_KEY;
-        // console.log("getUpdatedUrl: " + urlto);
-                                   
         return this._url = API_URL_START 
                            + this._rover 
                            + API_URL_END 
@@ -118,9 +111,7 @@ export class RoversViewModel extends Observable {
 
     public initDataItems() {
         this._dataItems = new ObservableArray<DataItem>(); 
-
         var pageIndex = 1;
-
         this._dataItems = this.requestPhotosByPage(this._dataItems ,this.getUpdatedUrl(), pageIndex);
     }
 
@@ -164,12 +155,9 @@ export class RoversViewModel extends Observable {
             // console.log("arr length: " + arr.length);
             if (arr.length % 25 === 0 && arr.length / pageIndex === 25 && arr.length !== 0) {
                 pageIndex++;
-                console.log("page:" + pageIndex);
                 that.requestPhotosByPage(arr, url, pageIndex);
             } else {
-                console.log("arr.leng: " + arr.length)
                 that.totalCount = arr.length;
-                console.log("this.totalCount: " + that.totalCount);
                 return arr;
             }
         });

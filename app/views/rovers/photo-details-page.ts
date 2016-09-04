@@ -4,13 +4,12 @@ import { Page } from "ui/page";
 import { topmost } from "ui/frame";
 
 export function onPageLoaded(args: EventData) {
-    // Get the event sender
     var page = <Page>args.object;
 
-    console.log(page.navigationContext);
-    var contextItem = page.navigationContext;
+    var navContext = page.navigationContext;
     let viewModel = new DrawerOverNavigationModel();
-    viewModel.set("contextItem", contextItem);
+    viewModel.set("contextItem", navContext["tappedItem"]);
+
     page.bindingContext = viewModel;
 }
 

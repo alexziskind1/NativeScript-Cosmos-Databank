@@ -33,7 +33,7 @@ Button {
     background-color: #008C9E;
 }
 
-.listview {
+.listview-rovers {
     background-color: #343838;
     padding: 10;
 }
@@ -46,9 +46,4 @@ Button {
     font-size:14;
     margin: 10;
     text-align: right;
-}
-
-ListPicker {
-    font-size:24;
-    text-align: center;
 }

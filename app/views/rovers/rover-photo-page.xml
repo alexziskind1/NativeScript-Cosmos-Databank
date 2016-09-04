@@ -3,11 +3,13 @@
       xmlns:Card="nativescript-cardview"
       xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
       xmlns:drawer="nativescript-telerik-ui/sidedrawer"
+      xmlns:lv="nativescript-telerik-ui/listview" 
       class="drawer-page"
-      loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+      loaded="onPageLoaded" 
+      navigatedTo="onPageNavigatedTo">
 
     <dpg:DrawerPage.actionBar>
-      <ActionBar  class="action-title" >
+      <ActionBar class="action-title" >
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
                 <Label text="Explore NASA DataBank" />
@@ -25,19 +27,19 @@
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
             <drawer:RadSideDrawer.drawerContent>
-                <StackLayout cssClass="drawerContent">
-                    <StackLayout cssClass="headerContent">
+                <StackLayout>
+                    <StackLayout>
                         <Label text="Navigation Menu"/>
                     </StackLayout>
                     <ScrollView>
-                        <StackLayout cssClass="drawerMenuContent">
-                            <Button text="Main Page" tap="{{ goToMainPage }}" cssClass="drawerSectionHeader" />
-                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" cssClass="drawerSectionItem" />
-                            <Button text="Astronomy Pic of the Day" cssClass="drawerSectionItem" />
-                            <Button text="Asteroids" cssClass="drawerSectionHeader" />
-                            <Button text="EONET" cssClass="drawerSectionItem" />
-                            <Button text="Earth" cssClass="drawerSectionHeader" />
-                            <Button text="Space Sounds" cssClass="drawerSectionHeader" />
+                        <StackLayout>
+                            <Button text="Main Page" tap="{{ goToMainPage }}"  />
+                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
+                            <Button text="Astronomy Pic of the Day" />
+                            <Button text="Asteroids" />
+                            <Button text="EONET" />
+                            <Button text="Earth" />
+                            <Button text="Space Sounds" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
@@ -45,18 +47,22 @@
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
 
-    <GridLayout id="pageContainer" rows="auto, auto, 3*" columns="*">
+    <GridLayout id="pageContainer" rows="auto, 3*" columns="*">
 
-        <GridLayout class="gridmenu" row="0" col="0" rows="44, 88" columns="2*, *">
-            <ListPicker id="rovers-listpicker" row="0" col="0" colSpan="2" items="{{ rovers }}" selectedIndex="{{ selectedIndex }}"></ListPicker>       
-            <DatePicker id="rovers-datepicker" row="1" col="0" day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
-            <Button  row="1" col="1" text="Get Photos" tap="getPhotosForDate" />
-        </GridLayout>
+        <Label row="0" col="0"  
+               text="{{ totalCount == -1 ? 'counting...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" 
+               textWrap="true" margin="10"
+               color="{{ totalCount == -1 ? 'blue' : totalCount == 0 && totalCount != -1 ? 'red' : 'green' }}"/>  
 
-        <Label row="1" col="0"  text="{{ totalCount == -1 ? 'counting...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" textWrap="true" />  
-
-        <ListView row="2" col="0" items="{{ dataItems }}" class="listview" loaded="onListLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
-            <ListView.itemTemplate>
+        <lv:RadListView row="1" col="0" id="rad-list"
+                        items="{{ dataItems }}" 
+                        class="listview-rovers" 
+                        loaded="onListLoaded" 
+                        itemTap="onItemTap">
+            <lv:RadListView.listViewLayout>
+                <lv:ListViewLinearLayout scrollDirection="Vertical"/>
+            </lv:RadListView.listViewLayout>
+            <lv:RadListView.itemTemplate>
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
                     <android>
                         <GridLayout rows="auto, *" columns="2*, *">
@@ -84,8 +90,8 @@
                         </GridLayout>
                     </ios>
                 </Card:CardView>                                      
-            </ListView.itemTemplate>
-        </ListView>           
+            </lv:RadListView.itemTemplate>
+        </lv:RadListView>           
 
     </GridLayout>
     

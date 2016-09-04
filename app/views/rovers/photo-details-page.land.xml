@@ -6,44 +6,44 @@
       loaded="onPageLoaded" 
       navigatedTo="pageNavigatedTo">
     <dpg:DrawerPage.actionBar>
-        <ActionBar  class="action-title" >
-            <ActionBar.titleView>
-                <StackLayout orientation="horizontal">
-                    <Label text="Explore NASA DataBank"  textAlign="center"/>
-                </StackLayout>
-            </ActionBar.titleView>
-            <android>
-                <NavigationButton android.systemIcon="ic_menu_back" text="Go Back" tap="goBack"/>
-                <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
-            </android>
-            <ios>
-                <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
-            </ios>
-        </ActionBar>
-    </dpg:DrawerPage.actionBar>  
-    
+      <ActionBar class="action-title" >
+        <ActionBar.titleView>
+            <StackLayout orientation="horizontal">
+                <Label text="Explore NASA DataBank" />
+            </StackLayout>
+        </ActionBar.titleView>
+        <android>
+            <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
+        </android>
+        <ios>
+            <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
+        </ios>
+      </ActionBar>
+    </dpg:DrawerPage.actionBar>
+
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
             <drawer:RadSideDrawer.drawerContent>
-                <StackLayout cssClass="drawerContent">
-                    <StackLayout cssClass="headerContent">
+                <StackLayout>
+                    <StackLayout>
                         <Label text="Navigation Menu"/>
                     </StackLayout>
                     <ScrollView>
-                        <StackLayout cssClass="drawerMenuContent">
-                            <Button text="Main Page" tap="{{ goToMainPage }}" cssClass="drawerSectionHeader" />
-                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" cssClass="drawerSectionItem" />
-                            <Button text="Astronomy Pic of the Day" cssClass="drawerSectionItem" />
-                            <Button text="Asteroids" cssClass="drawerSectionHeader" />
-                            <Button text="EONET" cssClass="drawerSectionItem" />
-                            <Button text="Earth" cssClass="drawerSectionHeader" />
-                            <Button text="Space Sounds" cssClass="drawerSectionHeader" />
+                        <StackLayout>
+                            <Button text="Main Page" tap="{{ goToMainPage }}"  />
+                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
+                            <Button text="Astronomy Pic of the Day" />
+                            <Button text="Asteroids" />
+                            <Button text="EONET" />
+                            <Button text="Earth" />
+                            <Button text="Space Sounds" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
-    </dpg:DrawerPage.sideDrawer> 
+    </dpg:DrawerPage.sideDrawer>
+
 
     <GridLayout rows="*" columns="*, 2*">
         <StackLayout col="0">

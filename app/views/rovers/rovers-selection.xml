@@ -22,30 +22,39 @@
 
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
-        <drawer:RadSideDrawer.drawerContent>
-            <StackLayout cssClass="drawerContent">
-            <StackLayout cssClass="headerContent">
-                <Label text="Navigation Menu"/>
-            </StackLayout>
-            <ScrollView>
+            <drawer:RadSideDrawer.drawerContent>
                 <StackLayout>
-                <Button text="Main Page" tap="{{ goToMainPage }}"  />
-                <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                <Button text="Astronomy Pic of the Day" cssClass="drawerSectionItem" />
-                <Button text="Asteroids" cssClass="drawerSectionHeader" />
-                <Button text="EONET" cssClass="drawerSectionItem" />
-                <Button text="Earth" cssClass="drawerSectionHeader" />
-                <Button text="Space Sounds" cssClass="drawerSectionHeader" />
+                    <StackLayout>
+                        <Label text="Navigation Menu"/>
+                    </StackLayout>
+                    <ScrollView>
+                        <StackLayout>
+                            <Button text="Main Page" tap="{{ goToMainPage }}"  />
+                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
+                            <Button text="Astronomy Pic of the Day" />
+                            <Button text="Asteroids" />
+                            <Button text="EONET" />
+                            <Button text="Earth" />
+                            <Button text="Space Sounds" />
+                        </StackLayout>
+                    </ScrollView>
                 </StackLayout>
-            </ScrollView>
-            </StackLayout>
-        </drawer:RadSideDrawer.drawerContent>
+            </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
 
     <StackLayout>
-        <Button text="Curiosity" tap="{{ goToCuriosityPage }}" />
-        <Button text="Opportunity" tap="{{ goToOpportunityPage }}"  />
-        <Button text="Spirit" tap="{{ goToSpiritPage }}"  />
+        <StackLayout tap="toggleCur">
+            <Label text="Curiosity" textWrap="true" />
+            <Button text="Curiosity" tap="{{ goToCuriosityPage }}" visibility="{{ showCur ? 'visible' : 'collapsed' }}" />
+        </StackLayout>
+        <StackLayout tap="toggleOpp">
+            <Label text="Opportunity" textWrap="true" />
+            <Button text="Opportunity" tap="{{ goToOpportunityPage }}" visibility="{{ showOpp ? 'visible' : 'collapsed' }}" />
+        </StackLayout>
+        <StackLayout tap="toggleSpi">
+            <Label text="Spirit" textWrap="true" />
+            <Button text="Spirit" tap="{{ goToSpiritPage }}" visibility="{{ showSpi ? 'visible' : 'collapsed' }}" />
+        </StackLayout>
     </StackLayout>
 </dpg:DrawerPage>
