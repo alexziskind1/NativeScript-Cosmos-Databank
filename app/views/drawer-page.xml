@@ -31,11 +31,11 @@
                         <StackLayout>
                             <Button text="Main Page" tap="{{ goToMainPage }}"  />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" />
-                            <Button text="Asteroids" />
+                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
+                            <!--<Button text="Asteroids" />
                             <Button text="EONET" />
                             <Button text="Earth" />
-                            <Button text="Space Sounds" />
+                            <Button text="Space Sounds" />-->
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
@@ -43,8 +43,7 @@
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
 
-
-  <StackLayout cssClass="mainContent">
-      <Label text="{{ exampleText }}" textWrap="true" cssClass="drawerContentText"/>
-  </StackLayout>   
+    <StackLayout cssClass="mainContent">
+        <Label text="{{ exampleText }}" textWrap="true" cssClass="drawerContentText"/>
+    </StackLayout>   
 </dpg:DrawerPage>

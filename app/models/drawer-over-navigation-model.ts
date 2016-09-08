@@ -1,5 +1,6 @@
 import { EventData, Observable } from "data/observable"
 import { Button } from "ui/button";
+import { DatePicker } from "ui/date-picker";
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import frameModule = require("ui/frame");
 
@@ -11,8 +12,10 @@ export class DrawerOverNavigationModel extends Observable {
     private _showSpi: boolean = true;
 
     get exampleText() {
-        return "RadSideDrawer can be shown over the navigation bar/action bar by using DrawerPage instead of Page." +
-            " DrawerPage has a sideDrawer property which accepts RadSideDrawer with just drawerContent set. The main content is the child of the page.";
+        return "This is POC app created with NativeScript and NASA API service" +
+            " This app uses fresco plugin to load simuntaniously hundres of photos under Android." +
+            "The NASA APIs used so far are APOD (Astronomy picture of the day) and Mars Rovers Photos API (500 000+ photos)" +
+            "Please use the side-drawer to navigate.";
     }
 
 
@@ -77,27 +80,43 @@ export class DrawerOverNavigationModel extends Observable {
         });
     }
 
+    public goToApod() {
+        frameModule.topmost().navigate({
+            moduleName: "./views/apod/apod"
+        });
+    }
+
     public goToCuriosityPage(args: EventData) {
         var button = <Button>args.object;
+        var dt = <DatePicker>button.parent.getViewById("dt-cur");
+
+        console.log("goToCuriosityPage");
+        console.log("dt: " + dt);
+        console.log(dt.year + " " + dt.month + " " + dt.day);
+
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rover-photo-page",
-            context: { "rover": button.text.toLowerCase(), "year": 2015, "month": 2, "day": 12 }
+            context: { "rover": button.text.toLowerCase(), "year": dt.year, "month": dt.month, "day": dt.day }
         });
     }
 
     public goToOpportunityPage(args: EventData) {
         var button = <Button>args.object;
+        var dt = <DatePicker>button.parent.getViewById("dt-opp");
+
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rover-photo-page",
-            context: { "rover": button.text.toLowerCase(), "year": 2008, "month": 5, "day": 15 }
+            context: { "rover": button.text.toLowerCase(), "year": dt.year, "month": dt.month, "day": dt.day }
         });
     }
 
     public goToSpiritPage(args: EventData) {
         var button = <Button>args.object;
+        var dt = <DatePicker>button.parent.getViewById("dt-spi");
+
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rover-photo-page",
-            context: { "rover": button.text.toLowerCase(), "year": 2007, "month": 11, "day": 21 }
+            context: { "rover": button.text.toLowerCase(), "year": dt.year, "month": dt.month, "day": dt.day }
         });
     }
 }

@@ -1,6 +1,7 @@
 <dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd"
         xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
         xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
+        xmlns:Card="nativescript-cardview"
         class="drawer-page"
         loaded="onPageLoaded" 
         navigatedTo="onNavigatedTo">
@@ -31,7 +32,7 @@
                         <StackLayout>
                             <Button text="Main Page" tap="{{ goToMainPage }}"  />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" />
+                            <Button text="Astronomy Pic of the Day"  tap="{{ goToApod }}"/>
                             <Button text="Asteroids" />
                             <Button text="EONET" />
                             <Button text="Earth" />
@@ -42,19 +43,36 @@
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
-
-    <StackLayout>
-        <StackLayout tap="toggleCur">
-            <Label text="Curiosity" textWrap="true" />
-            <Button text="Curiosity" tap="{{ goToCuriosityPage }}" visibility="{{ showCur ? 'visible' : 'collapsed' }}" />
-        </StackLayout>
-        <StackLayout tap="toggleOpp">
-            <Label text="Opportunity" textWrap="true" />
-            <Button text="Opportunity" tap="{{ goToOpportunityPage }}" visibility="{{ showOpp ? 'visible' : 'collapsed' }}" />
-        </StackLayout>
-        <StackLayout tap="toggleSpi">
-            <Label text="Spirit" textWrap="true" />
-            <Button text="Spirit" tap="{{ goToSpiritPage }}" visibility="{{ showSpi ? 'visible' : 'collapsed' }}" />
-        </StackLayout>
-    </StackLayout>
+    
+    <ScrollView>
+        <StackLayout>
+            <StackLayout tap="toggleCur">
+                <Label text="Curiosity" class="title" textWrap="true" margin="8" />
+                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showCur ? 'visible' : 'collapsed' }}" >
+                    <StackLayout>
+                        <DatePicker id="dt-cur" day="15" month="6" year="2014"></DatePicker>
+                        <Button text="Curiosity" tap="{{ goToCuriosityPage }}" />                  
+                    </StackLayout>
+                </Card:CardView>  
+            </StackLayout>
+            <StackLayout tap="toggleOpp">
+                <Label text="Opportunity" class="title" textWrap="true" margin="8" />
+                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showOpp ? 'visible' : 'collapsed' }}" >  
+                    <StackLayout>
+                        <DatePicker id="dt-opp" day="15" month="6" year="2007"></DatePicker>
+                        <Button text="Opportunity" tap="{{ goToOpportunityPage }}" />
+                    </StackLayout>
+                </Card:CardView>    
+            </StackLayout>
+            <StackLayout tap="toggleSpi">
+                <Label text="Spirit" class="title" textWrap="true" margin="8" />
+                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showSpi? 'visible' : 'collapsed' }}" >
+                    <StackLayout>
+                        <DatePicker id="dt-spi" day="15" month="6" year="2008"></DatePicker>
+                        <Button text="Spirit" tap="{{ goToSpiritPage }}" />
+                    </StackLayout>
+                </Card:CardView>  
+            </StackLayout>
+        </StackLayout>  
+    </ScrollView>    
 </dpg:DrawerPage>

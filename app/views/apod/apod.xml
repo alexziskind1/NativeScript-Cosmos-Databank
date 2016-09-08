@@ -1,10 +1,11 @@
 <dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd"
-      xmlns:nativescript-fresco="nativescript-fresco"
-      xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
-      xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
-      class="drawer-page"
-      loaded="onPageLoaded">
-    <dpg:DrawerPage.actionBar>
+        xmlns:nativescript-fresco="nativescript-fresco" 
+        xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
+        xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
+        class="drawer-page"
+        loaded="onPageLoaded" 
+        navigatedTo="onPageNavigatedTo">
+    <!--<dpg:DrawerPage.actionBar>
       <ActionBar class="action-title" >
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
@@ -18,7 +19,7 @@
             <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
         </ios>
       </ActionBar>
-    </dpg:DrawerPage.actionBar>
+    </dpg:DrawerPage.actionBar>-->
 
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
@@ -31,7 +32,7 @@
                         <StackLayout>
                             <Button text="Main Page" tap="{{ goToMainPage }}"  />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}"/>
+                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
                             <Button text="Asteroids" />
                             <Button text="EONET" />
                             <Button text="Earth" />
@@ -42,9 +43,15 @@
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
- <ScrollView>
-    <StackLayout class="pageContainer">
-        <nativescript-fresco:FrescoDrawee imageUri="{{ contextItem.imageUri }}"
+
+    <GridLayout id="pageContainer" class="pageContainer" rows="*" columns="*">
+        <ListView items="{{ dataItems }}">
+            <ListView.itemTemplate>
+                <StackLayout>
+                    <Label text="{{ title }}" textWrap="true" />
+                    <Label text="{{ date }}" textWrap="true" />
+                    <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
+                                        imageUri="{{ url }}"
                                         backgroundUri="res://logo"
                                         actualImageScaleType="centerCrop"                                                           
                                         verticalAlignment="top"
@@ -55,13 +62,11 @@
                                         showProgressBar="true"
                                         tapToRetryEnabled="true"
                                         finalImageSet="onFinalImageSet"/>
-        <Label text="{{ 'id: ' + contextItem.id }}" color="gray" textWrap="true" />
-        <Label text="{{ 'sol: ' + contextItem.sol }}" textWrap="true" />
-        <Label text="{{ 'camera id: ' + contextItem.cameraId }}" textWrap="true" />
-        <Label text="{{ 'camera name: ' + contextItem.cameraName }}" textWrap="true" />
-        <Label text="{{ 'rover id: ' + contextItem.cameraRoverId }}" textWrap="true" />
-        <Label text="{{ 'cam full name: ' + contextItem.cameraFullName }}" textWrap="true" />
-        <Label text="{{ 'earth day: ' + contextItem.earthDate }}" textWrap="true" />
-    </StackLayout>
- </ScrollView>
+                    <TextView text="{{ explanation }}" editable="false" />
+                </StackLayout>
+                                    
+                <!--<Image src="{{ url }}" stretch="none" />-->
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
 </dpg:DrawerPage>

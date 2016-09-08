@@ -38,12 +38,18 @@ Button {
     padding: 10;
 }
 
-.camera {     
-    margin: 10;
-}
-
 .date {
     font-size:14;
     margin: 10;
     text-align: right;
+}
+
+.pageContainer {
+    color: darkslategray;
+    margin: 8;
+}
+
+.title {
+    color: darkslategray;
+    margin: 8;
 }

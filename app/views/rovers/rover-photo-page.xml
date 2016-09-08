@@ -35,7 +35,7 @@
                         <StackLayout>
                             <Button text="Main Page" tap="{{ goToMainPage }}"  />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" />
+                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}"/>
                             <Button text="Asteroids" />
                             <Button text="EONET" />
                             <Button text="Earth" />
