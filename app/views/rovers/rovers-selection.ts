@@ -12,14 +12,14 @@ export function onPageLoaded(args) {
 	var dtCur = <DatePicker>page.getViewById("dt-cur");
 	var dtOpp = <DatePicker>page.getViewById("dt-opp");
 	var dtSpi = <DatePicker>page.getViewById("dt-spi");
-	dtCur.minDate = new Date(2012, 7 + 1, 16);
-	dtCur.maxDate = new Date();
+	dtCur.minDate = new Date(2012, 6 + 1, 6); // 6th August 
+	dtCur.maxDate = new Date(); // still active
 
-	dtOpp.minDate = new Date(2004, 7 + 1, 16);
-	dtOpp.maxDate = new Date(2009, 7 + 1, 16);
+	dtOpp.minDate = new Date(2004, 0 , 26); // 25th January - first pics on 26th
+	dtOpp.maxDate = new Date(); // still active ?
 
-	dtSpi.minDate = new Date(2004, 7 + 1, 16);
-	dtSpi.maxDate = new Date(2010, 7 + 1, 16);
+	dtSpi.minDate = new Date(2004, 0 , 5); // 4th January - first pics on 5th
+	dtSpi.maxDate = new Date(2010, 2 + 1, 22); // last communication
 }
 
 export function toggleCur() {

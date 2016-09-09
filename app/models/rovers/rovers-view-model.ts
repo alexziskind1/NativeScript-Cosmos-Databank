@@ -128,9 +128,9 @@ export class RoversViewModel extends Observable {
                 return;
             }
 
-            for (var header in response.headers) {
-               // console.log(header + ":" + response.headers[header]);
-            }
+            // for (var header in response.headers) {
+            //    console.log(header + ":" + response.headers[header]);
+            // }
 
             var result = response.content.toJSON();
             

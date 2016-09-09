@@ -13,57 +13,84 @@ var sample_date = "&date=1980-04-20";
 
 export class ApodViewModel extends Observable {
 
-    private _dataItems: ObservableArray<ApodItem> = new ObservableArray<ApodItem>();
+    private _dataItem: ApodItem;
     private _url: string;
+    private _selectedDate: Date;
 
     constructor() {
         super();
+
+        this._selectedDate = new Date();
     }    
 
-    public get dataItems() {   
-        if (!this._dataItems) {
-            this.initDataItems();
-        }
-        return this._dataItems;
+    public get dataItem() {   
+        return this._dataItem;
     }
-    
+
+    public set dataItem(value: ApodItem) {
+        if (this._dataItem !== value) {
+            this._dataItem = value;
+        }
+    }
+
+    public get selectedDate() {   
+        return this._selectedDate;
+    }
+
+    public set selectedDate(value: Date) {
+        if (this._selectedDate !== value) {
+            this._selectedDate = value;
+            this.notifyPropertyChange("selectedDate", value);
+        }
+    }
+
     public getUpdatedUrl() {
         return this._url = API_URL + API_KEY + HD_PIC;
     }
 
-    public initDataItems() {
-        this._dataItems = new ObservableArray<ApodItem>(); 
-
-        this._dataItems = this.requestApod(this._dataItems, this.getUpdatedUrl());
+    public initDataItems(date?: string) {
+        if (date) {
+            this.requestApod(this.dataItem, this.getUpdatedUrl(), date);           
+        } else {
+            this.requestApod(this.dataItem, this.getUpdatedUrl());
+        }
     }
     
-    public requestApod(arr: ObservableArray<ApodItem>, apiUrl: string) {
+    public requestApod(apodDataItem: ApodItem, apiUrl: string, date?: string) {
+        var that = this;
+
+        if (date) {
+            date = "&date=" + date;
+            apiUrl = apiUrl + date;
+        }
 
         http.request({ url: apiUrl, method: "GET" }).then(function (response) {
             // Argument (response) is HttpResponse!
             if (response.statusCode === 400) {
-                console.log("NO PHOTOS - err 400");
+                console.log("NO Picture of the Dat - err 400");
                 return;
             }
 
             var result = response.content.toJSON();
 
-            arr.push(new ApodItem(result["copyright"], 
+            apodDataItem = new ApodItem(result["copyright"], 
                                   result["date"], 
                                   result["explanation"], 
                                   result["hdurl"], 
                                   result["media_type"], 
                                   result["service_version"], 
                                   result["title"], 
-                                  result["url"] ));
+                                  result["url"] );
 
 
         }, function (e) {
             //// Argument (e) is Error!
-        });
+        }).then(function() {
+            that.notifyPropertyChange("dataItem", apodDataItem);
+        })
 
-        return arr;
     }
+
 }
 
 export class ApodItem {

@@ -5,7 +5,7 @@
         class="drawer-page"
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
-    <!--<dpg:DrawerPage.actionBar>
+    <dpg:DrawerPage.actionBar>
       <ActionBar class="action-title" >
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
@@ -19,7 +19,7 @@
             <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
         </ios>
       </ActionBar>
-    </dpg:DrawerPage.actionBar>-->
+    </dpg:DrawerPage.actionBar>
 
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
@@ -44,29 +44,33 @@
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
 
-    <GridLayout id="pageContainer" class="pageContainer" rows="*" columns="*">
-        <ListView items="{{ dataItems }}">
-            <ListView.itemTemplate>
-                <StackLayout>
-                    <Label text="{{ title }}" textWrap="true" />
-                    <Label text="{{ date }}" textWrap="true" />
-                    <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
-                                        imageUri="{{ url }}"
-                                        backgroundUri="res://logo"
-                                        actualImageScaleType="centerCrop"                                                           
-                                        verticalAlignment="top"
-                                        aspectRatio="1.5"
-                                        roundedCornerRadius="50"
-                                        roundBottomRight="true"
-                                        roundBottomLeft="true"
-                                        showProgressBar="true"
-                                        tapToRetryEnabled="true"
-                                        finalImageSet="onFinalImageSet"/>
-                    <TextView text="{{ explanation }}" editable="false" />
-                </StackLayout>
-                                    
-                <!--<Image src="{{ url }}" stretch="none" />-->
-            </ListView.itemTemplate>
-        </ListView>
-    </GridLayout>
+    <ScrollView>
+        <StackLayout id="pageContainer" class="pageContainer" >
+            <GridLayout rows="60" columns="*, *">
+                <Button col="0" text="previous" tap="previousDate" />
+                <Button col="1" text="next" tap="nextDate" />
+            </GridLayout>
+            <Label text="{{ dataItem.title }}" textWrap="true" />
+            <Label text="{{ dataItem.date }}" textWrap="true" />
+            <android>
+                <nativescript-fresco:FrescoDrawee
+                        imageUri="{{ dataItem.url }}"
+                        backgroundUri="res://logo"
+                        actualImageScaleType="centerCrop"                                                           
+                        verticalAlignment="top"
+                        aspectRatio="1.2"
+                        roundedCornerRadius="50"
+                        roundBottomRight="true"
+                        roundBottomLeft="true"
+                        showProgressBar="true"
+                        tapToRetryEnabled="true"
+                        finalImageSet="onFinalImageSet"/>
+            </android>
+            <ios>
+                <Image src="{{ dataItem.url }}" stretch="none" />
+            </ios>
+            <TextView text="{{ dataItem.explanation }}" editable="false" />
+        </StackLayout>               
+        
+    </ScrollView>    
 </dpg:DrawerPage>
