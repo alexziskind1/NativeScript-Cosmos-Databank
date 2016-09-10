@@ -15,31 +15,22 @@
                 <Label text="Explore NASA DataBank" />
             </StackLayout>
         </ActionBar.titleView>
-        <android>
-            <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
-        </android>
-        <ios>
-            <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
-        </ios>
+        <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>
     </dpg:DrawerPage.actionBar>
 
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
             <drawer:RadSideDrawer.drawerContent>
-                <StackLayout>
-                    <StackLayout>
+                <StackLayout cssClass="drawerContent">
+                    <StackLayout cssClass="headerContent">
                         <Label text="Navigation Menu"/>
                     </StackLayout>
                     <ScrollView>
                         <StackLayout>
                             <Button text="Main Page" tap="{{ goToMainPage }}"  />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}"/>
-                            <Button text="Asteroids" />
-                            <Button text="EONET" />
-                            <Button text="Earth" />
-                            <Button text="Space Sounds" />
+                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>

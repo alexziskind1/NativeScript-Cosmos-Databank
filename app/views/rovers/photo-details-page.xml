@@ -1,0 +1,65 @@
+<dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd"
+      xmlns:nativescript-fresco="nativescript-fresco"
+      xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
+      xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
+      class="drawer-page"
+      loaded="onPageLoaded">
+
+    <dpg:DrawerPage.actionBar>
+      <ActionBar class="action-title" >
+        <ActionBar.titleView>
+            <StackLayout orientation="horizontal">
+                <Label text="Explore NASA DataBank" />
+            </StackLayout>
+        </ActionBar.titleView>
+        <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
+      </ActionBar>
+    </dpg:DrawerPage.actionBar>
+
+    <dpg:DrawerPage.sideDrawer>
+        <drawer:RadSideDrawer id="sideDrawer">
+            <drawer:RadSideDrawer.drawerContent>
+                <StackLayout cssClass="drawerContent">
+                    <StackLayout cssClass="headerContent">
+                        <Label text="Navigation Menu"/>
+                    </StackLayout>
+                    <ScrollView>
+                        <StackLayout>
+                            <Button text="Main Page" tap="{{ goToMainPage }}"  />
+                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
+                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </drawer:RadSideDrawer.drawerContent>
+        </drawer:RadSideDrawer> 
+    </dpg:DrawerPage.sideDrawer>
+
+    <ScrollView>
+        <StackLayout class="pageContainer">
+            <android>
+                <nativescript-fresco:FrescoDrawee imageUri="{{ contextItem.imageUri }}"
+                                                backgroundUri="res://logo"
+                                                actualImageScaleType="centerCrop"                                                           
+                                                verticalAlignment="top"
+                                                aspectRatio="1.5"
+                                                roundedCornerRadius="50"
+                                                roundBottomRight="true"
+                                                roundBottomLeft="true"
+                                                showProgressBar="true"
+                                                tapToRetryEnabled="true"
+                                                finalImageSet="onFinalImageSet"/>
+            </android>
+            <ios>
+                <Image src="{{ contextItem.imageUri }}" stretch ="none" /> 
+            </ios>
+            <Label text="{{ 'id: ' + contextItem.id }}" color="gray" textWrap="true" />
+            <Label text="{{ 'sol: ' + contextItem.sol }}" textWrap="true" />
+            <Label text="{{ 'camera id: ' + contextItem.cameraId }}" textWrap="true" />
+            <Label text="{{ 'camera name: ' + contextItem.cameraName }}" textWrap="true" />
+            <Label text="{{ 'rover id: ' + contextItem.cameraRoverId }}" textWrap="true" />
+            <Label text="{{ 'cam full name: ' + contextItem.cameraFullName }}" textWrap="true" />
+            <Label text="{{ 'earth day: ' + contextItem.earthDate }}" textWrap="true" />
+        </StackLayout>
+    </ScrollView>
+</dpg:DrawerPage>

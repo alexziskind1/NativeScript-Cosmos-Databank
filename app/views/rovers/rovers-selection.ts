@@ -34,13 +34,16 @@ export function onStackLoaded(args: EventData) {
 }
 
 export function toggleCur() {
+	console.log("toggleCur");
 	uiViewModel.set("showCur", !uiViewModel.get("showCur"));
 }
 
 export function toggleOpp() {
+	console.log("toggleOpp");
 	uiViewModel.set("showOpp", !uiViewModel.get("showOpp"));
 }
 
 export function toggleSpi() {
+	console.log("toggleSpi");
 	uiViewModel.set("showSpi", !uiViewModel.get("showSpi"));
 }

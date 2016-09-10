@@ -26,6 +26,8 @@ export class RoversViewModel extends Observable {
     private _showOpp: boolean = true;
     private _showSpi: boolean = true;
 
+    private _cachedIndex: number = 0;
+
     constructor(rover: string, year: number, month: number, day: number) {
         super();
 
@@ -103,6 +105,17 @@ export class RoversViewModel extends Observable {
         }
         return this._dataItems;
     }
+
+    public get cachedIndex() {
+        return this._cachedIndex;
+    }      
+
+    public set cachedIndex(value: number) {
+        if (this._cachedIndex !== value) {
+            this._cachedIndex = value;
+            this.notifyPropertyChange("cachedIndex", value);
+        }
+    }    
 
     public getUpdatedUrl() {
 

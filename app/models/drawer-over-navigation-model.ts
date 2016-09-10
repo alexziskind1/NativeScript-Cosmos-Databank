@@ -31,21 +31,36 @@ export class DrawerOverNavigationModel extends Observable {
         sideDrawer.toggleDrawerState();
     }
 
-    public goToMainPage() {
+    public goToMainPage() {        
+        var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));
+        sideDrawer.closeDrawer();
+
         frameModule.topmost().navigate({
-            moduleName: "./views/drawer-page"
+            moduleName: "./views/drawer-page",
+            animated: false,
+            backstackVisible: false
         });    
     }
 
     public goToRoversSelectionPage() {
+        var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));
+        sideDrawer.closeDrawer();
+
         frameModule.topmost().navigate({
-            moduleName: "./views/rovers/rovers-selection"
+            moduleName: "./views/rovers/rovers-selection",
+            animated: false,
+            backstackVisible: false
         });
     }
 
     public goToApod() {
+        var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));
+        sideDrawer.closeDrawer();
+
         frameModule.topmost().navigate({
-            moduleName: "./views/apod/apod"
+            moduleName: "./views/apod/apod",
+            animated: false,
+            backstackVisible: false
         });
     }
 }

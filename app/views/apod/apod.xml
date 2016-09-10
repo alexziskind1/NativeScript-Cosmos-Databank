@@ -5,6 +5,7 @@
         class="drawer-page"
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
+
     <dpg:DrawerPage.actionBar>
       <ActionBar class="action-title" >
         <ActionBar.titleView>
@@ -12,20 +13,15 @@
                 <Label text="Explore NASA DataBank" />
             </StackLayout>
         </ActionBar.titleView>
-        <android>
-            <ActionItem icon="res://ic_menu" tap="{{ toggleDrawer }}" />
-        </android>
-        <ios>
-            <ActionItem icon="res://ic_menu" ios.position="left" tap="{{ toggleDrawer }}" />
-        </ios>
+        <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>
     </dpg:DrawerPage.actionBar>
 
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
             <drawer:RadSideDrawer.drawerContent>
-                <StackLayout>
-                    <StackLayout>
+                <StackLayout cssClass="drawerContent">
+                    <StackLayout cssClass="headerContent">
                         <Label text="Navigation Menu"/>
                     </StackLayout>
                     <ScrollView>
@@ -33,17 +29,13 @@
                             <Button text="Main Page" tap="{{ goToMainPage }}"  />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
                             <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
-                            <Button text="Asteroids" />
-                            <Button text="EONET" />
-                            <Button text="Earth" />
-                            <Button text="Space Sounds" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
-
+    
     <ScrollView>
         <StackLayout id="pageContainer" class="pageContainer" >
             <GridLayout rows="60" columns="*, *">
