@@ -12,6 +12,11 @@ import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 
+import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
+
+import * as SocialShare from "nativescript-social-share";
+import imageSource = require("image-source");
+ 
 let apodViewModel = new ApodViewModel();
 let drawerViewModel = new DrawerOverNavigationModel();
 let page;
@@ -22,6 +27,7 @@ export function onPageLoaded(args: EventData) {
 
 	var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
     sideDrawer.closeDrawer();
+
 }
 
 export function onPageNavigatedTo(args: EventData) {
@@ -48,7 +54,7 @@ export function nextDate(args: EventData) {
     if (currentDate > new Date()) {
         var options = {
             title: "Error!",
-            message: "Showing the future is avaiable in the paid version!",
+            message: "Showing the future is avaiable in the paid version! ;)",
             okButtonText: "OK"
         };
         dialogs.alert(options).then(() => {
@@ -72,4 +78,19 @@ function formatDate(date) {
     if (day.length < 2) day = '0' + day;
 
     return [year, month, day].join('-');
+}
+
+export function onFinalImageSet(args: FinalEventData) {
+    var drawee = args.object as FrescoDrawee;
+
+    
+    imageSource.fromUrl(drawee.imageUri)
+        .then(function (res: imageSource.ImageSource) {
+        //console.log("Image successfully loaded");
+        SocialShare.shareImage(res, "NASA APOD");
+    }, function (error) {
+            //console.log("Error loading image: " + error);
+    });
+
+    
 }
