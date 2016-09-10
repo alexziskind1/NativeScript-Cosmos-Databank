@@ -23,7 +23,7 @@
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer">
             <drawer:RadSideDrawer.drawerContent>
-                <StackLayout>
+                <StackLayout>z
                     <StackLayout>
                         <Label text="Navigation Menu"/>
                     </StackLayout>

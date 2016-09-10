@@ -45,8 +45,8 @@
     </dpg:DrawerPage.sideDrawer>
     
     <ScrollView>
-        <StackLayout>
-            <StackLayout tap="toggleCur">
+        <StackLayout loaded="onStackLoaded" id="pageContainer">
+            <StackLayout tap="{{ toggleCur }}">
                 <Label text="Curiosity" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showCur ? 'visible' : 'collapsed' }}" >
                     <StackLayout>
@@ -55,7 +55,7 @@
                     </StackLayout>
                 </Card:CardView>  
             </StackLayout>
-            <StackLayout tap="toggleOpp">
+            <StackLayout tap="{{ toggleOpp }}">
                 <Label text="Opportunity" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showOpp ? 'visible' : 'collapsed' }}" >  
                     <StackLayout>
@@ -64,7 +64,7 @@
                     </StackLayout>
                 </Card:CardView>    
             </StackLayout>
-            <StackLayout tap="toggleSpi">
+            <StackLayout tap="{{ toggleSpi }}">
                 <Label text="Spirit" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showSpi? 'visible' : 'collapsed' }}" >
                     <StackLayout>

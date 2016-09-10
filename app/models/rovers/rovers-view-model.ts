@@ -22,6 +22,10 @@ export class RoversViewModel extends Observable {
     private _totalCount: number;
     private _url: string;
 
+    private _showCur: boolean = true;
+    private _showOpp: boolean = true;
+    private _showSpi: boolean = true;
+
     constructor(rover: string, year: number, month: number, day: number) {
         super();
 

@@ -1,11 +1,17 @@
 import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-model";
+import { UiViewModel } from "../../models/rovers/rovers-ui-view-model";
+import { EventData } from "data/observable";
+
 import { topmost } from "ui/frame";
+import { Page } from "ui/page";
 import { DatePicker } from "ui/date-picker";
+import { StackLayout } from "ui/layouts/stack-layout";
 
 let drawerViewModel = new DrawerOverNavigationModel();
+let uiViewModel = new UiViewModel();
 
-export function onPageLoaded(args) {
-    var page = args.object;
+export function onPageLoaded(args: EventData) {
+    var page = <Page>args.object;
 
     page.bindingContext = drawerViewModel;
 	// Rovers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
@@ -22,14 +28,19 @@ export function onPageLoaded(args) {
 	dtSpi.maxDate = new Date(2010, 2 + 1, 22); // last communication
 }
 
+export function onStackLoaded(args: EventData) {
+	var stack = <StackLayout>args.object;
+	stack.bindingContext = uiViewModel;
+}
+
 export function toggleCur() {
-	drawerViewModel.set("showCur", !drawerViewModel.get("showCur"));
+	uiViewModel.set("showCur", !uiViewModel.get("showCur"));
 }
 
 export function toggleOpp() {
-	drawerViewModel.set("showOpp", !drawerViewModel.get("showOpp"));
+	uiViewModel.set("showOpp", !uiViewModel.get("showOpp"));
 }
 
 export function toggleSpi() {
-	drawerViewModel.set("showSpi", !drawerViewModel.get("showSpi"));
+	uiViewModel.set("showSpi", !uiViewModel.get("showSpi"));
 }
