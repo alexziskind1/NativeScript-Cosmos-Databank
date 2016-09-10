@@ -8,7 +8,6 @@ import { RoversViewModel, DataItem } from "../../models/rovers/rovers-view-model
 import { DrawerOverNavigationModel } from  "../../models/drawer-over-navigation-model";
 
 import http = require("http");
-
 import * as RadListwModule from "nativescript-telerik-ui/listview";
 import {FrescoDrawee, FinalEventData } from "nativescript-fresco";
 

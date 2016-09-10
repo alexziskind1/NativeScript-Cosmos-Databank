@@ -7,6 +7,8 @@ import { Page } from "ui/page";
 import { DatePicker } from "ui/date-picker";
 import { StackLayout } from "ui/layouts/stack-layout";
 
+import drawerModule = require("nativescript-telerik-ui/sidedrawer");
+
 let drawerViewModel = new DrawerOverNavigationModel();
 let uiViewModel = new UiViewModel();
 
@@ -26,6 +28,9 @@ export function onPageLoaded(args: EventData) {
 
 	dtSpi.minDate = new Date(2004, 0 , 5); // 4th January - first pics on 5th
 	dtSpi.maxDate = new Date(2010, 2 + 1, 22); // last communication
+
+	var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
+	sideDrawer.closeDrawer();
 }
 
 export function onStackLoaded(args: EventData) {

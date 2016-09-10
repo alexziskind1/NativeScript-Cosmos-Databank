@@ -1,4 +1,4 @@
-import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-model";
+
 import { topmost } from "ui/frame";
 import { ListView } from "ui/list-view";
 import { Page } from "ui/page";
@@ -7,7 +7,10 @@ import dialogs = require("ui/dialogs");
 
 import { EventData } from "data/observable";
 
+import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-model";
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
+
+import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 
 let apodViewModel = new ApodViewModel();
 let drawerViewModel = new DrawerOverNavigationModel();
@@ -16,6 +19,9 @@ let page;
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
     page.bindingContext = drawerViewModel;   
+
+	var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
+    sideDrawer.closeDrawer();
 }
 
 export function onPageNavigatedTo(args: EventData) {
