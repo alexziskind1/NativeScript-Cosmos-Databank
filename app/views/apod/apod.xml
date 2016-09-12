@@ -45,21 +45,25 @@
             <Label text="{{ dataItem.title }}" textWrap="true" />
             <Label text="{{ dataItem.date }}" textWrap="true" />
             <android>
-                <nativescript-fresco:FrescoDrawee
-                        imageUri="{{ dataItem.url }}"
-                        backgroundUri="res://logo"
-                        actualImageScaleType="centerCrop"                                                           
-                        verticalAlignment="top"
-                        aspectRatio="1.2"
-                        roundedCornerRadius="50"
-                        roundBottomRight="true"
-                        roundBottomLeft="true"
-                        showProgressBar="true"
-                        tapToRetryEnabled="true"
-                        finalImageSet="onFinalImageSet"/>
+                <StackLayout id="st-parent">
+                    <nativescript-fresco:FrescoDrawee
+                                        imageUri="{{ dataItem.url }}"
+                                        backgroundUri="res://logo"
+                                        actualImageScaleType="centerCrop"                                                           
+                                        verticalAlignment="top"
+                                        aspectRatio="1.2"
+                                        roundedCornerRadius="50"
+                                        roundBottomRight="true"
+                                        roundBottomLeft="true"
+                                        showProgressBar="true"
+                                        tapToRetryEnabled="true"
+                                        finalImageSet="onFinalImageSet"/>
+                     <Button id="btn-share" text="&#xf1e0;" class="font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>                     
+                </StackLayout>
             </android>
             <ios>
-                <Image src="{{ dataItem.url }}" stretch="none" />
+                <Image src="{{ dataItem.url }}" loaded="onIosImageLoaded" width="400" height="400" id="ios-image" stretch="none" />
+                <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="font-awesome-ios" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
             </ios>
             <TextView text="{{ dataItem.explanation }}" editable="false" />
         </StackLayout>               

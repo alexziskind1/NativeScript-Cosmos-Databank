@@ -1,9 +1,14 @@
-
 import { topmost } from "ui/frame";
 import { ListView } from "ui/list-view";
 import { Page } from "ui/page";
 import { GridLayout } from "ui/layouts/grid-layout";
+import { StackLayout } from "ui/layouts/stack-layout";
+import { Button } from "ui/button";
+import { Image } from "ui/image";
+import { GestureTypes, GestureEventData } from "ui/gestures";
 import dialogs = require("ui/dialogs");
+import application = require("application");
+import imageSource = require("image-source");
 
 import { EventData } from "data/observable";
 
@@ -11,15 +16,18 @@ import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-m
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
-
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
-
 import * as SocialShare from "nativescript-social-share";
-import imageSource = require("image-source");
+
  
 let apodViewModel = new ApodViewModel();
+apodViewModel.set("isItemVisible", false);
+
 let drawerViewModel = new DrawerOverNavigationModel();
 let page;
+let shareButtonAndroid;
+let shareButtonIOS;
+let iosImage;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -28,6 +36,12 @@ export function onPageLoaded(args: EventData) {
 	var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
     sideDrawer.closeDrawer();
 
+    shareButtonAndroid = <Button>page.getViewById("btn-share");
+
+    if (application.ios) {
+        shareButtonIOS = <Button>page.getViewById("btn-share-ios");
+        iosImage = <Image>page.getViewById("ios-image");
+    }
 }
 
 export function onPageNavigatedTo(args: EventData) {
@@ -35,7 +49,6 @@ export function onPageNavigatedTo(args: EventData) {
     var pageContainer = <GridLayout>page.getViewById("pageContainer");
 
     apodViewModel.initDataItems();
-
     pageContainer.bindingContext = apodViewModel;
 }
 
@@ -44,6 +57,7 @@ export function previousDate(args: EventData) {
     var currentDate = apodViewModel.get("selectedDate");
     currentDate.setDate(currentDate.getDate()-1);
     apodViewModel.set("selectedDate", currentDate);
+    apodViewModel.set("isItemVisible", false);
     apodViewModel.initDataItems(formatDate(currentDate)); 
 }
 
@@ -63,6 +77,7 @@ export function nextDate(args: EventData) {
     } else {
         currentDate.setDate(currentDate.getDate()+1);
         apodViewModel.set("selectedDate", currentDate);
+        apodViewModel.set("isItemVisible", false);
         apodViewModel.initDataItems(formatDate(currentDate)); 
     }
 
@@ -82,13 +97,35 @@ function formatDate(date) {
 
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
-
     
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res: imageSource.ImageSource) {
         //console.log("Image successfully loaded");
-        SocialShare.shareImage(res, "NASA APOD");
+
+        apodViewModel.set("isItemVisible", true);
+        
+        shareButtonAndroid.on("tap", function (args: GestureEventData)  {
+            console.log("Android share tapped!");
+            SocialShare.shareImage(res, "NASA APOD");
+        })
+
     }, function (error) {
+        //console.log("Error loading image: " + error);
+    });    
+}
+
+export function onIosShare() {
+    
+    imageSource.fromUrl(iosImage.src)
+        .then(function (res: imageSource.ImageSource) {           
+            SocialShare.shareImage(res);
+        }, function (error) {
             //console.log("Error loading image: " + error);
     });    
+}
+
+export function onIosImageLoaded() {
+    console.log("onIosImageLoaded");
+    // check this
+    apodViewModel.set("isItemVisible", true); 
 }

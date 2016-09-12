@@ -7,6 +7,32 @@ http://www.colourlovers.com/palette/482774/dream_magnet
 #00DFFC
 */
 
+.font-awesome {
+    font-family: "fontawesome-webfont";
+    color: white;
+    font-size: 24;
+    font-weight: normal;
+    width: 50;
+    height: 50;
+    border-radius: 25;
+    margin-top: -60;
+    horizontal-align: right;
+    opacity: 0.7;
+}
+
+.font-awesome-ios {
+    font-family: "FontAwesome";
+    color: white;
+    font-size: 24;
+    font-weight: normal;
+    width: 50;
+    height: 50;
+    border-radius: 25;
+    margin-top: -60;
+    horizontal-align: left;
+    opacity: 0.7;
+}
+
 .drawer-page {
     background-color: #BCBCBC;
     color: #E8EAEB;
