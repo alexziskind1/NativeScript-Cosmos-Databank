@@ -90,7 +90,5 @@ export function onFinalImageSet(args: FinalEventData) {
         SocialShare.shareImage(res, "NASA APOD");
     }, function (error) {
             //console.log("Error loading image: " + error);
-    });
-
-    
+    });    
 }
