@@ -10,7 +10,7 @@ import dialogs = require("ui/dialogs");
 import application = require("application");
 import imageSource = require("image-source");
 
-import { EventData } from "data/observable";
+import { EventData, PropertyChangeData } from "data/observable";
 
 import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-model";
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
@@ -18,7 +18,6 @@ import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
-
  
 let apodViewModel = new ApodViewModel();
 apodViewModel.set("isItemVisible", false);
@@ -28,6 +27,7 @@ let page;
 let shareButtonAndroid;
 let shareButtonIOS;
 let iosImage;
+let stackParentIOS;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -41,6 +41,7 @@ export function onPageLoaded(args: EventData) {
     if (application.ios) {
         shareButtonIOS = <Button>page.getViewById("btn-share-ios");
         iosImage = <Image>page.getViewById("ios-image");
+        stackParentIOS = <StackLayout>page.getViewById("st-parent-ios");
     }
 }
 
@@ -52,7 +53,7 @@ export function onPageNavigatedTo(args: EventData) {
     pageContainer.bindingContext = apodViewModel;
 }
 
-export function previousDate(args: EventData) {
+export function previousDate() {
     // add check if the date is not too far in the past (check first APOD date)
     var currentDate = apodViewModel.get("selectedDate");
     currentDate.setDate(currentDate.getDate()-1);
@@ -61,7 +62,7 @@ export function previousDate(args: EventData) {
     apodViewModel.initDataItems(formatDate(currentDate)); 
 }
 
-export function nextDate(args: EventData) {
+export function nextDate() {
 
     // add check if the date is not in the future - CHECK THIS BELOW - works one tap later
     var currentDate = apodViewModel.get("selectedDate");
@@ -124,8 +125,9 @@ export function onIosShare() {
     });    
 }
 
-export function onIosImageLoaded() {
+export function onIosStackLoaded() {
     console.log("onIosImageLoaded");
     // check this
-    apodViewModel.set("isItemVisible", true); 
+
+    apodViewModel.set("isItemVisible", true);
 }

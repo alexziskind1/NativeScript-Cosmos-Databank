@@ -62,8 +62,10 @@
                 </StackLayout>
             </android>
             <ios>
-                <Image src="{{ dataItem.url }}" loaded="onIosImageLoaded" width="400" height="400" id="ios-image" stretch="none" />
-                <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="font-awesome-ios" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
+                <StackLayout id="st-parent-ios" loaded="onIosStackLoaded" >
+                    <Image src="{{ dataItem.url }}" id="ios-image" stretch="fill" />
+                    <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="font-awesome-ios" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
+                </StackLayout>
             </ios>
             <TextView text="{{ dataItem.explanation }}" editable="false" />
         </StackLayout>               
