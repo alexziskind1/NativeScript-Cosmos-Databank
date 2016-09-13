@@ -15,7 +15,6 @@ let uiViewModel = new UiViewModel();
 export function onPageLoaded(args: EventData) {
     var page = <Page>args.object;
 
-    page.bindingContext = drawerViewModel;
 	// Rovers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
 	var dtCur = <DatePicker>page.getViewById("dt-cur");
 	var dtOpp = <DatePicker>page.getViewById("dt-opp");
@@ -28,9 +27,6 @@ export function onPageLoaded(args: EventData) {
 
 	dtSpi.minDate = new Date(2004, 0 , 5); // 4th January - first pics on 5th
 	dtSpi.maxDate = new Date(2010, 2 + 1, 22); // last communication
-
-	var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
-	sideDrawer.closeDrawer();
 }
 
 export function onStackLoaded(args: EventData) {

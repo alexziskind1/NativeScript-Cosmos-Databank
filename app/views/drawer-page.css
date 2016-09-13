@@ -1,0 +1,44 @@
+
+.dp-all {
+    background-color: #BCBCBC;
+    color: #E8EAEB;
+    font-family: "Nasalization";
+    font-size:16;
+}
+
+.dp-action-bar {
+    font-family: "Nasalization";
+    background-color: #343838;   
+    color: #E8EAEB;
+    font-size: 20;
+}
+
+.dp-action-button {
+    background-color: #008C9E;
+    border-radius: 10;
+    margin: 10;
+}
+
+.dp-content-button {
+    background-color: #008C9E;
+    border-radius: 10;
+    margin: 10; 
+}
+
+.dp-drawer-content {
+    background-color: #343838;
+}
+
+.dp-header-content {
+    font-size: 12;
+}
+
+.dp-main-content {
+    font-family: "Nasalization";
+}
+
+.dp-textview {
+    background-color: #BCBCBC;
+    color: #E8EAEB;
+    font-size:14;
+}

@@ -1,40 +1,68 @@
 <dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd" 
     xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
     xmlns:drawer="nativescript-telerik-ui/sidedrawer"
-    class="drawer-page"
-    loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+    xmlns:Card="nativescript-cardview"
+    loaded="onPageLoaded" navigatedTo="onNavigatedTo"
+    class="dp-all">
 
     <dpg:DrawerPage.actionBar>
-      <ActionBar class="action-title" >
+      <ActionBar class="dp-action-bar" >
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
-                <Label text="Explore NASA DataBank" />
+                <Label text="COSMOS Data Bank" />
             </StackLayout>
         </ActionBar.titleView>
-            <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
+        <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>
     </dpg:DrawerPage.actionBar>
 
     <dpg:DrawerPage.sideDrawer>
-        <drawer:RadSideDrawer id="sideDrawer">
+        <drawer:RadSideDrawer id="sideDrawer" showOverNavigation="true">
             <drawer:RadSideDrawer.drawerContent>
-                <StackLayout cssClass="drawerContent">
-                    <StackLayout cssClass="headerContent">
-                        <Label text="Navigation Menu"/>
+                <StackLayout class="dp-drawer-content">
+                    <StackLayout class="dp-header-content">
+                        <Label text="Navigation Menu" horizontalAlignment="center" />
                     </StackLayout>
                     <ScrollView>
                         <StackLayout>
-                            <Button text="Main Page" tap="{{ goToMainPage }}"  />
-                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
+                            <Button text="Home" tap="{{ goToHome }}" class="dp-action-button" />
+                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" class="dp-action-button" />
+                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" class="dp-action-button" />
+                            <Button text="About" tap="{{ goToAbout }}" class="dp-action-button" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
     </dpg:DrawerPage.sideDrawer>
+    
+    <ScrollView>
+        <StackLayout cssClass="dp-main-content">
+            <Label text="{{ exampleText }}" textWrap="true" class="dp-drawer-content-text"/>
 
-    <StackLayout cssClass="mainContent">
-        <Label text="{{ exampleText }}" textWrap="true" cssClass="drawerContentText"/>
-    </StackLayout>   
+            <Card:CardView margin="4" elevation="20" radius="10"> 
+                <GridLayout rows="120" columns="*, *" horizontalAlignment="stretch" tap="{{ goToRoversSelectionPage }}" >
+                    <TextView col="0" text="{{ roversDescription }}" editable="false" textWrap="true" class="dp-textview" />
+                    <Image col="1" src="~/images/NASA_Mars_Rover.jpg" stretch="aspectFill" />    
+                    <!--<Button col="1" text="Mars Rovers"  class="dp-content-button" /> -->
+                </GridLayout>
+            </Card:CardView>
+
+            <Card:CardView margin="4" elevation="20" radius="10">  
+                <GridLayout rows="120" columns="*, *" horizontalAlignment="stretch" tap="{{ goToApod }}" >
+                    <TextView col="0" text="{{ apodDescription }}" editable="false" textWrap="false" class="dp-textview" />
+                    <Image col="1" src="~/images/cosmos.jpg" stretch="aspectFill" />    
+                    <!--<Button col="1" text="APOD" tap="{{ goToApod }}" class="dp-content-button" /> -->
+                </GridLayout>
+            </Card:CardView>
+
+            <Card:CardView margin="4" elevation="20" radius="10" >  
+                <GridLayout rows="40" columns="*" horizontalAlignment="stretch"  >
+                    <Label text="Credits" tap="{{ goToAbout }}" row="0" col="0" textWrap="true" class="dp-textview" />
+                </GridLayout>
+            </Card:CardView>
+
+        </StackLayout>          
+    </ScrollView>
+
 </dpg:DrawerPage>

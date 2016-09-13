@@ -4,7 +4,7 @@
     xmlns:Card="nativescript-cardview"
     class="drawer-page"
     loaded="onPageLoaded" navigatedTo="onNavigatedTo">
-
+<!--
     <dpg:DrawerPage.actionBar>
       <ActionBar class="action-title" >
         <ActionBar.titleView>
@@ -33,7 +33,7 @@
                 </StackLayout>
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
-    </dpg:DrawerPage.sideDrawer>
+    </dpg:DrawerPage.sideDrawer>-->
 
     <ScrollView>
         <StackLayout loaded="onStackLoaded" id="pageContainer">

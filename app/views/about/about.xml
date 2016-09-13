@@ -1,0 +1,13 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatedTo="onNavigatedTo">
+    <StackLayout id="pageContainer">
+        <StackLayout id="st-credits">
+            <Label text="Credits" textWrap="true" />
+            <Button text="NativeScript" tap="" />
+            <Button text="NASA" tap="" />
+        </StackLayout>
+        <StackLayout id="st-contacts">
+            <Label text="Native Nick" textWrap="true" />
+            <Label text="(contact info)" textWrap="true" />
+        </StackLayout>
+    </StackLayout>
+</Page>

@@ -5,7 +5,7 @@
       class="drawer-page"
       loaded="onPageLoaded">
 
-    <dpg:DrawerPage.actionBar>
+    <!--<dpg:DrawerPage.actionBar>
       <ActionBar class="action-title" >
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
@@ -33,7 +33,7 @@
                 </StackLayout>
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
-    </dpg:DrawerPage.sideDrawer>
+    </dpg:DrawerPage.sideDrawer>-->
 
     <ScrollView>
         <StackLayout class="pageContainer">

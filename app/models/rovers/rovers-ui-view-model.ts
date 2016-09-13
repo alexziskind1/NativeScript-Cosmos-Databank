@@ -1,6 +1,8 @@
 import { Observable, EventData } from "data/observable";
 import { Button } from "ui/button";
 import { DatePicker } from "ui/date-picker";
+
+import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import * as frameModule from "ui/frame"; 
 
 export class UiViewModel extends Observable {
@@ -45,10 +47,6 @@ export class UiViewModel extends Observable {
     public goToCuriosityPage(args: EventData) {
         var button = <Button>args.object;
         var dt = <DatePicker>button.parent.getViewById("dt-cur");
-
-        console.log("goToCuriosityPage");
-        console.log("dt: " + dt);
-        console.log(dt.year + " " + dt.month + " " + dt.day);
 
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rover-photo-page",

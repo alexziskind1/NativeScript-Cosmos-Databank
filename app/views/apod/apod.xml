@@ -1,12 +1,10 @@
-<dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd"
+<Page xmlns="http://www.nativescript.org/tns.xsd"
         xmlns:nativescript-fresco="nativescript-fresco" 
-        xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
-        xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
         class="drawer-page"
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
 
-    <dpg:DrawerPage.actionBar>
+    <!--<dpg:DrawerPage.actionBar>
       <ActionBar class="action-title" >
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
@@ -34,8 +32,8 @@
                 </StackLayout>
             </drawer:RadSideDrawer.drawerContent>
         </drawer:RadSideDrawer> 
-    </dpg:DrawerPage.sideDrawer>
-    
+    </dpg:DrawerPage.sideDrawer>-->
+
     <ScrollView>
         <StackLayout id="pageContainer" class="pageContainer" >
             <GridLayout rows="60" columns="*, *">
@@ -64,11 +62,12 @@
             <ios>
                 <StackLayout id="st-parent-ios" loaded="onIosStackLoaded" >
                     <Image src="{{ dataItem.url }}" id="ios-image" stretch="fill" />
-                    <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="font-awesome-ios" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
+                    <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
                 </StackLayout>
             </ios>
             <TextView text="{{ dataItem.explanation }}" editable="false" />
         </StackLayout>               
         
-    </ScrollView>    
-</dpg:DrawerPage>
+    </ScrollView>
+
+</Page>

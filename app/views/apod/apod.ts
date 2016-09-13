@@ -31,10 +31,10 @@ let stackParentIOS;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
-    page.bindingContext = drawerViewModel;   
+    // page.bindingContext = drawerViewModel;   
 
-	var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
-    sideDrawer.closeDrawer();
+	// var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
+    // sideDrawer.closeDrawer();
 
     shareButtonAndroid = <Button>page.getViewById("btn-share");
 

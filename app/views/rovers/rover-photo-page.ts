@@ -21,12 +21,10 @@ var month;
 var day;
 
 let roversViewModel;
-let drawerViewModel = new DrawerOverNavigationModel();
 
 // Rovers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
-    page.bindingContext = drawerViewModel;
 }
 
 export function onPageNavigatedTo(args: EventData) {
