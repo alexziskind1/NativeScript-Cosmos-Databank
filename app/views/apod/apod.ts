@@ -5,7 +5,7 @@ import { GridLayout } from "ui/layouts/grid-layout";
 import { StackLayout } from "ui/layouts/stack-layout";
 import { Button } from "ui/button";
 import { Image } from "ui/image";
-import { GestureTypes, GestureEventData } from "ui/gestures";
+import { GestureTypes, GestureEventData, SwipeGestureEventData } from "ui/gestures";
 import dialogs = require("ui/dialogs");
 import application = require("application");
 import imageSource = require("image-source");
@@ -51,6 +51,15 @@ export function onPageNavigatedTo(args: EventData) {
 
     apodViewModel.initDataItems();
     pageContainer.bindingContext = apodViewModel;
+
+    pageContainer.on(GestureTypes.swipe, function (args: SwipeGestureEventData) {
+        console.log("Swipe Direction: " + args.direction);
+        if (args.direction === 1) {
+            previousDate();
+        } else if (args.direction === 2) {
+            nextDate();
+        }
+    })
 }
 
 export function previousDate() {
