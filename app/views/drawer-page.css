@@ -35,10 +35,11 @@
 
 .dp-main-content {
     font-family: "Nasalization";
+    color: #343838;
 }
 
 .dp-textview {
     background-color: #BCBCBC;
-    color: #E8EAEB;
-    font-size:14;
+    font-size: 14;
+    padding: 4;
 }

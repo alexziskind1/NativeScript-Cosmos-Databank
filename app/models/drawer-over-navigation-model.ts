@@ -8,7 +8,8 @@ export class DrawerOverNavigationModel extends Observable {
 
     get exampleText() {
         return "This app will be your mobile space portal!" +
-            " Over 500 000 photos from Mars, Moon and the Deep Space.";
+            " Over hundreds of thousands of photos from Mars the Deep Space." + 
+            " + Asteroids to Earth proximity checker";
     }
 
     get apodDescription() {
@@ -17,6 +18,10 @@ export class DrawerOverNavigationModel extends Observable {
 
     get roversDescription() {
         return "image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars";
+    }
+
+    get asteroidsDescription() {
+        return "search for Asteroids based on their closest approach date to Earth";
     }
 
     public toggleDrawer() {
@@ -55,6 +60,18 @@ export class DrawerOverNavigationModel extends Observable {
             animated: true
         });
     }
+
+    public goToAsteroids() {
+        var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));
+        if (sideDrawer.getIsOpen()) {
+            sideDrawer.closeDrawer();
+        }
+
+        frameModule.topmost().navigate({
+            moduleName: "./views/asteroid/asteroid",
+            animated: true
+        });
+    }    
 
     public goToAbout() {
         var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));

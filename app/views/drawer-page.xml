@@ -40,25 +40,30 @@
         <StackLayout cssClass="dp-main-content">
             <Label text="{{ exampleText }}" textWrap="true" class="dp-drawer-content-text"/>
 
-            <Card:CardView margin="4" elevation="20" radius="10"> 
-                <GridLayout rows="120" columns="*, *" horizontalAlignment="stretch" tap="{{ goToRoversSelectionPage }}" >
-                    <TextView col="0" text="{{ roversDescription }}" editable="false" textWrap="true" class="dp-textview" />
+            <Card:CardView margin="8" elevation="40" radius="20"> 
+                <GridLayout rows="160" columns="2*, 3*" horizontalAlignment="stretch" tap="{{ goToRoversSelectionPage }}" >
+                    <Label col="0" text="{{ roversDescription }}" textWrap="true" class="dp-textview" />
                     <Image col="1" src="~/images/NASA_Mars_Rover.jpg" stretch="aspectFill" />    
-                    <!--<Button col="1" text="Mars Rovers"  class="dp-content-button" /> -->
                 </GridLayout>
             </Card:CardView>
 
-            <Card:CardView margin="4" elevation="20" radius="10">  
-                <GridLayout rows="120" columns="*, *" horizontalAlignment="stretch" tap="{{ goToApod }}" >
-                    <TextView col="0" text="{{ apodDescription }}" editable="false" textWrap="false" class="dp-textview" />
-                    <Image col="1" src="~/images/cosmos.jpg" stretch="aspectFill" />    
-                    <!--<Button col="1" text="APOD" tap="{{ goToApod }}" class="dp-content-button" /> -->
+            <Card:CardView margin="8" elevation="40" radius="20">  
+                <GridLayout rows="160" columns="3*, 2*" horizontalAlignment="stretch" textAlignment="right" tap="{{ goToApod }}" >
+                    <Label col="1" text="{{ apodDescription }}" textWrap="true" class="dp-textview" />
+                    <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />    
                 </GridLayout>
             </Card:CardView>
 
-            <Card:CardView margin="4" elevation="20" radius="10" >  
-                <GridLayout rows="40" columns="*" horizontalAlignment="stretch"  >
-                    <Label text="Credits" tap="{{ goToAbout }}" row="0" col="0" textWrap="true" class="dp-textview" />
+            <Card:CardView margin="8" elevation="40" radius="20">  
+                <GridLayout rows="160" columns="2*, 3*" horizontalAlignment="stretch" textAlignment="right" tap="{{ goToAsteroids }}" >
+                    <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="dp-textview" />
+                    <Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />    
+                </GridLayout>
+            </Card:CardView>
+
+            <Card:CardView margin="8" elevation="40" radius="20" >  
+                <GridLayout rows="40" columns="*" horizontalAlignment="stretch"  tap="{{ goToAbout }}">
+                    <Label text="Credits" textWrap="true" class="dp-textview" />
                 </GridLayout>
             </Card:CardView>
 
