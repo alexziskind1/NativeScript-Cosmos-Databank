@@ -1,39 +1,17 @@
-<dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd"
+<Page xmlns="http://www.nativescript.org/tns.xsd"
       xmlns:nativescript-fresco="nativescript-fresco"
-      xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
-      xmlns:drawer="nativescript-telerik-ui/sidedrawer" 
       class="drawer-page"
       loaded="onPageLoaded">
 
-    <!--<dpg:DrawerPage.actionBar>
-      <ActionBar class="action-title" >
+    <Page.actionBar>
+      <ActionBar>
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
-                <Label text="Explore NASA DataBank" />
+                <Label text="COSMOS Data Bank" />
             </StackLayout>
         </ActionBar.titleView>
-        <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>
-    </dpg:DrawerPage.actionBar>
-
-    <dpg:DrawerPage.sideDrawer>
-        <drawer:RadSideDrawer id="sideDrawer">
-            <drawer:RadSideDrawer.drawerContent>
-                <StackLayout cssClass="drawerContent">
-                    <StackLayout cssClass="headerContent">
-                        <Label text="Navigation Menu"/>
-                    </StackLayout>
-                    <ScrollView>
-                        <StackLayout>
-                            <Button text="Main Page" tap="{{ goToMainPage }}"  />
-                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
-                        </StackLayout>
-                    </ScrollView>
-                </StackLayout>
-            </drawer:RadSideDrawer.drawerContent>
-        </drawer:RadSideDrawer> 
-    </dpg:DrawerPage.sideDrawer>-->
+    </Page.actionBar>
 
     <ScrollView>
         <StackLayout class="pageContainer">
@@ -62,4 +40,4 @@
             <Label text="{{ 'earth day: ' + contextItem.earthDate }}" textWrap="true" />
         </StackLayout>
     </ScrollView>
-</dpg:DrawerPage>
+</Page>

@@ -4,35 +4,15 @@
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
 
-    <!--<dpg:DrawerPage.actionBar>
-      <ActionBar class="action-title" >
+    <Page.actionBar>
+      <ActionBar>
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
-                <Label text="Explore NASA DataBank" />
+                <Label text="COSMOS Data Bank" />
             </StackLayout>
         </ActionBar.titleView>
-        <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>
-    </dpg:DrawerPage.actionBar>
-
-    <dpg:DrawerPage.sideDrawer>
-        <drawer:RadSideDrawer id="sideDrawer">
-            <drawer:RadSideDrawer.drawerContent>
-                <StackLayout cssClass="drawerContent">
-                    <StackLayout cssClass="headerContent">
-                        <Label text="Navigation Menu"/>
-                    </StackLayout>
-                    <ScrollView>
-                        <StackLayout>
-                            <Button text="Main Page" tap="{{ goToMainPage }}"  />
-                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" />
-                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" />
-                        </StackLayout>
-                    </ScrollView>
-                </StackLayout>
-            </drawer:RadSideDrawer.drawerContent>
-        </drawer:RadSideDrawer> 
-    </dpg:DrawerPage.sideDrawer>-->
+    </Page.actionBar>
 
     <ScrollView>
         <StackLayout id="pageContainer" class="pageContainer" >

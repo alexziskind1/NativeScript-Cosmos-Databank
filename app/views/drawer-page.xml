@@ -6,7 +6,7 @@
     class="dp-all">
 
     <dpg:DrawerPage.actionBar>
-      <ActionBar class="dp-action-bar" >
+      <ActionBar>
         <ActionBar.titleView>
             <StackLayout orientation="horizontal">
                 <Label text="COSMOS Data Bank" />
@@ -28,6 +28,7 @@
                             <Button text="Home" tap="{{ goToHome }}" class="dp-action-button" />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" class="dp-action-button" />
                             <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" class="dp-action-button" />
+                            <Button text="Astreroids Proximity Checker" tap="{{ goToAsteroids }}" class="dp-action-button" />
                             <Button text="About" tap="{{ goToAbout }}" class="dp-action-button" />
                         </StackLayout>
                     </ScrollView>

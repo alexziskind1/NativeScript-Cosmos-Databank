@@ -7,6 +7,13 @@ http://www.colourlovers.com/palette/482774/dream_magnet
 #00DFFC
 */
 
+ActionBar {
+    font-family: "Nasalization";
+    background-color: #343838;   
+    color: #E8EAEB;
+    font-size: 20;
+}
+
 .font-awesome {
     font-family: "FontAwesome";
     color: white;
