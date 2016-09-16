@@ -128,8 +128,10 @@ export class AsteroidDataItem extends Observable {
                 this.set(property, this._source[property]);             
 
                 if (property === "close_approach_data") {
-                    console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property]);
+                    // console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property]);
                     // here you should take care of this ARRAY received for close_approach_data ...
+                    // working for arr[0] !!!
+                    this.set(property, this._source[property][0]);
                 }
             }
         }
@@ -158,7 +160,7 @@ export interface AsteroidItem {
     absolute_magnitude_h: number;
     estimated_diameter: EstimatedDiameter;
     is_potentially_hazardous_asteroid: boolean;
-    close_approach_data: CloseApproachData;
+    close_approach_data: ApproachDate; // working for arr[0]
     orbital_data: OrbitalData;
 }
 
@@ -181,9 +183,9 @@ export interface Meters {
     estimated_diameter_max: number;
 }
 
-export interface CloseApproachData {
-    data: Array<ApproachDate>
-}
+// export interface CloseApproachData {
+//     data: Array<ApproachDate>
+// }
 
 export interface ApproachDate {
     close_approach_date: string;

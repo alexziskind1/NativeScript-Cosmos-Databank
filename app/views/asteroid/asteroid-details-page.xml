@@ -13,10 +13,10 @@
 
         <Label text="{{ contextItem.is_potentially_hazardous_asteroid }}" textWrap="true" />
         
-        <!--fix the model for close_approach_data-->
-        <Label text="{{ contextItem.close_approach_data.data.close_approach_date }}" textWrap="true" />
-        <Label text="{{ contextItem.close_approach_data.data.miss_distance.astronomical }}" textWrap="true" />
-        <Label text="{{ contextItem.close_approach_data.data.miss_distance.kilometers }}" textWrap="true" />
-        <Label text="{{ contextItem.close_approach_data.data.orbiting_body }}" textWrap="true" />      
+        <!--fix the model for close_approach_data - currently working for arr[0]-->
+        <Label text="{{ contextItem.close_approach_data.close_approach_date }}" textWrap="true" />
+        <Label text="{{ contextItem.close_approach_data.miss_distance.astronomical }}" textWrap="true" />
+        <Label text="{{ contextItem.close_approach_data.miss_distance.kilometers }}" textWrap="true" />
+        <Label text="{{ contextItem.close_approach_data.orbiting_body }}" textWrap="true" />      
     </StackLayout>
 </Page>
