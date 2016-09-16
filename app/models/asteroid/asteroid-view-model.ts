@@ -126,7 +126,11 @@ export class AsteroidDataItem extends Observable {
             var property: string;
             for (property in this._source) {
                 this.set(property, this._source[property]);             
-                // console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property])
+
+                if (property === "close_approach_data") {
+                    console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property]);
+                    // here you should take care of this ARRAY received for close_approach_data ...
+                }
             }
         }
     }
