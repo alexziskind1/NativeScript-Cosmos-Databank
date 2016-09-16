@@ -6,5 +6,7 @@ export function onPageLoaded(args) {
 
     vm.initDataItems();
 
+    
+
     page.bindingContext = vm;
 }

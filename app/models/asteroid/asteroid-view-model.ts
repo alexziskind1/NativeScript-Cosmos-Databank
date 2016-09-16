@@ -9,7 +9,8 @@ let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 
 export class AsteroidViewModel extends Observable {
 
-    private _dataItem: AsteroidDataItem;
+    private _dataItems: ObservableArray<AsteroidDataItem> = new ObservableArray<AsteroidDataItem>();
+    private _asteroidCount: number = 0;
     private _url: string;
 
     constructor() {
@@ -17,16 +18,27 @@ export class AsteroidViewModel extends Observable {
 
     }    
 
-    public get dataItem() {   
-        return this._dataItem;
+    public get dataItems() {   
+        return this._dataItems;
     }
 
-    public set dataItem(value: AsteroidDataItem) {
-        if (this._dataItem !== value) {
-            this._dataItem = value;
+    public set dataItems(value: ObservableArray<AsteroidDataItem>) {
+        if (this._dataItems !== value) {
+            this._dataItems = value;
+            this.notifyPropertyChange("dataItems", value);
         }
     }
 
+    public get asteroidCount() {
+        return this._asteroidCount;
+    }
+
+    public set asteroidCount(value: number) {
+         if (this._asteroidCount !== value) {
+            this._asteroidCount = value;
+            this.notifyPropertyChange("asteroidCount", value);
+        }       
+    }
 
     public getUpdatedUrl() {
         return this._url = API_URL + sample_date + API_KEY; // change sample_date
@@ -34,17 +46,17 @@ export class AsteroidViewModel extends Observable {
 
     public initDataItems(date?: string) {
         if (date) {
-            this.requestApod(this.dataItem, this.getUpdatedUrl());           
+            this.dataItems = this.requestAsteroids(this.dataItems, this.getUpdatedUrl());           
         } else {
-            this.requestApod(this.dataItem, this.getUpdatedUrl());
+            this.dataItems = this.requestAsteroids(this.dataItems, this.getUpdatedUrl());
         }
     }
     
-    public requestApod(asteroidDataItem: AsteroidDataItem, apiUrl: string) {
+    public requestAsteroids(asteroidDataItems: ObservableArray<AsteroidDataItem>, apiUrl: string) {
         var that = this;
 
         http.request({ url: apiUrl, method: "GET" }).then(function (response) {
-            // Argument (response) is HttpResponse!
+
             if (response.statusCode === 400) {
                 console.log("Error 400");
                 return;
@@ -52,48 +64,60 @@ export class AsteroidViewModel extends Observable {
 
             var result = response.content.toJSON();
 
+            var dates = new Array();
             // OK !!!
-            // for (var key in result) {
-            //     if (result.hasOwnProperty(key)) {
-            //         var element = result[key];
-            //         console.log("key: " + key + " element:" + element);
-            //         console.log("---------------");
-                    
-            //         for (var subkey in element) {
-            //             if (element.hasOwnProperty(subkey)) {
-            //                 var subElement = element[subkey];
-            //                 console.log("subkey: " + subkey + " subElement:" + subElement);
-            //                 console.log("=====================");
+            for (var key in result) {
+                if (result.hasOwnProperty(key)) {
+                    var element = result[key];
 
-            //                 if(subkey === "near_earth_objects") {
+                    if (key === "element_count") {
+                        console.log("element_count: " + element);
+                        that.asteroidCount = element;
+                        that.notifyPropertyChange("asteroidCount", element);
+                    }
 
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
+                    if (key === "near_earth_objects") {
+                        for (var subkey in element) {
+                            if (element.hasOwnProperty(subkey)) {
+                                var date = element[subkey];
+                                dates.push(date);
+                            }
+                        }       
+                    }
+                }
+            }
 
-            // ???
-            var newItem = result.map(i => {
-                return new AsteroidDataItem(i.data);
+            console.log("dates.length: " + dates.length);
+            console.log("dates[0]: "  + dates[0])
+
+            //var allAsteroids = new Array();
+            dates.forEach(date => {
+                date.forEach(asteroid => {
+                    var tmpAste = new AsteroidDataItem(asteroid);
+                    asteroidDataItems.push(tmpAste);
+                });
             });
 
+            // console.log("asteroidDataItems.len: " + allAsteroids.length);
+            // console.log(allAsteroids[0].links.self);
+            // OK!!!!!
 
 
         }, function (e) {
             //// Argument (e) is Error!
         }).then(function() {
-            that.notifyPropertyChange("dataItem", asteroidDataItem);
+            return asteroidDataItems;
         })
 
+        return asteroidDataItems;
     }
 
 }
 
 export class AsteroidDataItem extends Observable {
 
-    private _source: ApiDataItem;
-    constructor(source: ApiDataItem) {
+    private _source: AsteroidItem;
+    constructor(source: AsteroidItem) {
         super();
 
         this._source = source;
@@ -101,29 +125,28 @@ export class AsteroidDataItem extends Observable {
         if (this._source) {
             var property: string;
             for (property in this._source) {
-                this.set(property, this._source[property]);
-                
-                console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property])
+                this.set(property, this._source[property]);             
+                // console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property])
             }
         }
     }
 
-    get source(): ApiDataItem {
+    get source(): AsteroidItem {
         return this._source;
     }
 }
 
-interface ApiDataItem {
+export interface ApiDataItem {
     links: Link;
     element_count: number;
-    near_earth_objects: Array<AsteroidDate>;
+    near_earth_objects: AsteroidsOnDate;
 }
 
-interface AsteroidDate {
-    data: Array<AsteroidItem>;
+export interface AsteroidsOnDate {
+    date: Array<AsteroidItem>;
 }
 
-interface AsteroidItem {
+export interface AsteroidItem {
     links: Link;
     neo_reference_id: string;
     name: string;
@@ -135,41 +158,41 @@ interface AsteroidItem {
     orbital_data: OrbitalData;
 }
 
-interface Link {
+export interface Link {
     self: string;
 }
 
-interface EstimatedDiameter {
+export interface EstimatedDiameter {
     kilometers: Kilometers;
     meters: Meters
 }
 
-interface Kilometers {
+export interface Kilometers {
     estimated_diameter_min: number;
     estimated_diameter_max: number;
 }
 
-interface Meters {
+export interface Meters {
     estimated_diameter_min: number;
     estimated_diameter_max: number;
 }
 
-interface CloseApproachData {
+export interface CloseApproachData {
     data: Array<ApproachDate>
 }
 
-interface ApproachDate {
+export interface ApproachDate {
     close_approach_date: string;
     miss_distance: MissDistance;
     orbiting_body: string;
 }
 
-interface MissDistance {
+export interface MissDistance {
     astronomical: string;
     kilometers: string;
 }
 
-interface OrbitalData {
+export interface OrbitalData {
     OrbitalData: string;
     orbit_determination_date: string;
     orbit_uncertainty: string;

@@ -55,8 +55,10 @@ export function onPageNavigatedTo(args: EventData) {
     pageContainer.on(GestureTypes.swipe, function (args: SwipeGestureEventData) {
         console.log("Swipe Direction: " + args.direction);
         if (args.direction === 1) {
+            console.log(args.direction);
             previousDate();
         } else if (args.direction === 2) {
+            console.log(args.direction);
             nextDate();
         }
     })

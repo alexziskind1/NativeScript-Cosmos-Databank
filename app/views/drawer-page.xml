@@ -50,8 +50,8 @@
 
             <Card:CardView margin="8" elevation="40" radius="20">  
                 <GridLayout rows="160" columns="3*, 2*" horizontalAlignment="stretch" textAlignment="right" tap="{{ goToApod }}" >
+                    <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />   
                     <Label col="1" text="{{ apodDescription }}" textWrap="true" class="dp-textview" />
-                    <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />    
                 </GridLayout>
             </Card:CardView>
 

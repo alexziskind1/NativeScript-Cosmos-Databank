@@ -1,0 +1,241 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'i',
+1 verbose cli   'nativescript',
+1 verbose cli   '-g' ]
+2 info using npm@2.15.9
+3 info using node@v4.5.0
+4 verbose install initial load of /usr/local/lib/package.json
+5 verbose readDependencies loading dependencies from /usr/local/lib/package.json
+6 silly cache add args [ 'nativescript', null ]
+7 verbose cache add spec nativescript
+8 silly cache add parsed spec Result {
+8 silly cache add   raw: 'nativescript',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'nativescript',
+8 silly cache add   rawSpec: '',
+8 silly cache add   spec: 'latest',
+8 silly cache add   type: 'tag' }
+9 silly addNamed nativescript@latest
+10 verbose addNamed "latest" is being treated as a dist-tag for nativescript
+11 info addNameTag [ 'nativescript', 'latest' ]
+12 silly mapToRegistry name nativescript
+13 silly mapToRegistry using default registry
+14 silly mapToRegistry registry https://registry.npmjs.org/
+15 silly mapToRegistry data Result {
+15 silly mapToRegistry   raw: 'nativescript',
+15 silly mapToRegistry   scope: null,
+15 silly mapToRegistry   name: 'nativescript',
+15 silly mapToRegistry   rawSpec: '',
+15 silly mapToRegistry   spec: 'latest',
+15 silly mapToRegistry   type: 'tag' }
+16 silly mapToRegistry uri https://registry.npmjs.org/nativescript
+17 verbose addNameTag registry:https://registry.npmjs.org/nativescript not in flight; fetching
+18 verbose get https://registry.npmjs.org/nativescript not expired, no request
+19 silly addNameTag next cb for nativescript with tag latest
+20 silly addNamed nativescript@2.3.0
+21 verbose addNamed "2.3.0" is a plain semver version for nativescript
+22 silly cache afterAdd nativescript@2.3.0
+23 verbose afterAdd /Users/niliev/.npm/nativescript/2.3.0/package/package.json not in flight; writing
+24 verbose correctMkdir /Users/niliev/.npm correctMkdir not in flight; initializing
+25 verbose afterAdd /Users/niliev/.npm/nativescript/2.3.0/package/package.json written
+26 silly install resolved [ { name: 'nativescript',
+26 silly install resolved     preferGlobal: true,
+26 silly install resolved     version: '2.3.0',
+26 silly install resolved     author: { name: 'Telerik', email: 'support@telerik.com' },
+26 silly install resolved     description: 'Command-line interface for building NativeScript projects',
+26 silly install resolved     bin:
+26 silly install resolved      { tns: './bin/nativescript.js',
+26 silly install resolved        nativescript: './bin/nativescript.js' },
+26 silly install resolved     main: './lib/nativescript-cli.js',
+26 silly install resolved     repository:
+26 silly install resolved      { type: 'git',
+26 silly install resolved        url: 'git+https://github.com/NativeScript/nativescript-cli.git' },
+26 silly install resolved     keywords: [ 'nativescript', 'telerik', 'mobile' ],
+26 silly install resolved     dependencies:
+26 silly install resolved      { bluebird: '2.9.34',
+26 silly install resolved        'bplist-parser': '0.1.0',
+26 silly install resolved        broccoli: '0.16.9',
+26 silly install resolved        'broccoli-funnel': '1.0.3',
+26 silly install resolved        bufferpack: '0.0.6',
+26 silly install resolved        bufferutil: 'https://github.com/telerik/bufferutil/tarball/v1.0.1.3',
+26 silly install resolved        byline: '4.2.1',
+26 silly install resolved        chalk: '1.1.0',
+26 silly install resolved        'cli-table': 'https://github.com/telerik/cli-table/tarball/v0.3.1.2',
+26 silly install resolved        clui: '0.3.1',
+26 silly install resolved        colors: '1.1.2',
+26 silly install resolved        esprima: '2.7.0',
+26 silly install resolved        ffi: 'https://github.com/icenium/node-ffi/tarball/v2.0.0.3',
+26 silly install resolved        fibers: 'https://github.com/icenium/node-fibers/tarball/v1.0.13.1',
+26 silly install resolved        filesize: '3.1.2',
+26 silly install resolved        gaze: '1.1.0',
+26 silly install resolved        glob: '^7.0.3',
+26 silly install resolved        'iconv-lite': '0.4.11',
+26 silly install resolved        inquirer: '0.9.0',
+26 silly install resolved        'ios-sim-portable': '~1.3.0',
+26 silly install resolved        lockfile: '1.0.1',
+26 silly install resolved        lodash: '4.13.1',
+26 silly install resolved        log4js: '0.6.26',
+26 silly install resolved        marked: '0.3.3',
+26 silly install resolved        'marked-terminal': '1.5.0',
+26 silly install resolved        minimatch: '3.0.2',
+26 silly install resolved        mkdirp: '0.5.1',
+26 silly install resolved        moment: '2.10.6',
+26 silly install resolved        'mute-stream': '0.0.5',
+26 silly install resolved        'node-inspector': 'https://github.com/NativeScript/node-inspector/tarball/v0.7.4.1',
+26 silly install resolved        'node-uuid': '1.4.3',
+26 silly install resolved        npm: '2.15.9',
+26 silly install resolved        open: '0.0.5',
+26 silly install resolved        osenv: '0.1.3',
+26 silly install resolved        plist: '1.1.0',
+26 silly install resolved        'plist-merge-patch': '0.0.9',
+26 silly install resolved        plistlib: '0.2.1',
+26 silly install resolved        'progress-stream': '1.1.1',
+26 silly install resolved        'properties-parser': '0.2.3',
+26 silly install resolved        ref: 'https://github.com/icenium/ref/tarball/v1.3.2.1',
+26 silly install resolved        'ref-struct': 'https://github.com/telerik/ref-struct/tarball/v1.0.2.3',
+26 silly install resolved        semver: '5.0.1',
+26 silly install resolved        shelljs: '0.5.3',
+26 silly install resolved        tabtab: 'https://github.com/Icenium/node-tabtab/tarball/master',
+26 silly install resolved        temp: '0.8.3',
+26 silly install resolved        'utf-8-validate': 'https://github.com/telerik/utf-8-validate/tarball/v1.0.1.3',
+26 silly install resolved        winreg: '0.0.17',
+26 silly install resolved        ws: '0.7.1',
+26 silly install resolved        xcode: 'https://github.com/NativeScript/node-xcode/archive/1.4.0.tar.gz',
+26 silly install resolved        xmldom: '0.1.21',
+26 silly install resolved        xmlhttprequest: 'https://github.com/telerik/node-XMLHttpRequest/tarball/master',
+26 silly install resolved        yargs: '3.15.0' },
+26 silly install resolved     analyze: true,
+26 silly install resolved     devDependencies:
+26 silly install resolved      { chai: '1.8.x',
+26 silly install resolved        grunt: '1.0.1',
+26 silly install resolved        'grunt-contrib-clean': '1.0.0',
+26 silly install resolved        'grunt-contrib-copy': '1.0.0',
+26 silly install resolved        'grunt-contrib-watch': '1.0.0',
+26 silly install resolved        'grunt-shell': '1.3.0',
+26 silly install resolved        'grunt-ts': '5.5.1',
+26 silly install resolved        'grunt-tslint': '3.1.0',
+26 silly install resolved        istanbul: '0.3.19',
+26 silly install resolved        mocha: '2.5.3',
+26 silly install resolved        'mocha-fibers': 'git+https://github.com/NativeScript/mocha-fibers.git',
+26 silly install resolved        'mocha-typescript': '^1.0.4',
+26 silly install resolved        should: '7.0.2',
+26 silly install resolved        tslint: '3.11.0',
+26 silly install resolved        typescript: '^1.8.10' },
+26 silly install resolved     license: 'Apache-2.0',
+26 silly install resolved     engines: { node: '>=0.10.40 <0.11.0 || >=0.12.7 <0.13.0 || >=4.2.1 <5.0.0 || >=5.1.0 <7.0.0' },
+26 silly install resolved     scripts:
+26 silly install resolved      { test: 'istanbul cover node_modules/mocha/bin/_mocha',
+26 silly install resolved        postinstall: 'node postinstall.js',
+26 silly install resolved        preuninstall: 'node preuninstall.js',
+26 silly install resolved        mocha: 'mocha',
+26 silly install resolved        tsc: 'tsc',
+26 silly install resolved        'test-watch': 'node ./dev/tsc-to-mocha-watch.js' },
+26 silly install resolved     bugs: { url: 'https://github.com/NativeScript/nativescript-cli/issues' },
+26 silly install resolved     homepage: 'https://github.com/NativeScript/nativescript-cli#readme',
+26 silly install resolved     _id: 'nativescript@2.3.0',
+26 silly install resolved     _shasum: 'a1509aa84f257b7011055c12a427124818576064',
+26 silly install resolved     _resolved: 'https://registry.npmjs.org/nativescript/-/nativescript-2.3.0.tgz',
+26 silly install resolved     _from: 'nativescript@latest',
+26 silly install resolved     _npmVersion: '3.10.3',
+26 silly install resolved     _nodeVersion: '6.4.0',
+26 silly install resolved     _npmUser: { name: 'hdeshev', email: 'hristo@deshev.com' },
+26 silly install resolved     dist:
+26 silly install resolved      { shasum: 'a1509aa84f257b7011055c12a427124818576064',
+26 silly install resolved        tarball: 'https://registry.npmjs.org/nativescript/-/nativescript-2.3.0.tgz' },
+26 silly install resolved     maintainers:
+26 silly install resolved      [ [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object],
+26 silly install resolved        [Object] ],
+26 silly install resolved     _npmOperationalInternal:
+26 silly install resolved      { host: 'packages-16-east.internal.npmjs.com',
+26 silly install resolved        tmp: 'tmp/nativescript-2.3.0.tgz_1473938958924_0.8388604728970677' },
+26 silly install resolved     directories: {},
+26 silly install resolved     readme: 'ERROR: No README data found!' } ]
+27 info install nativescript@2.3.0 into /usr/local/lib
+28 info installOne nativescript@2.3.0
+29 verbose installOne of nativescript to /usr/local/lib not in flight; installing
+30 verbose correctMkdir /Users/niliev/.npm/_locks correctMkdir not in flight; initializing
+31 verbose lock using /Users/niliev/.npm/_locks/nativescript-f7f5e04badfb238f.lock for /usr/local/lib/node_modules/nativescript
+32 silly install write writing nativescript 2.3.0 to /usr/local/lib/node_modules/nativescript
+33 verbose unbuild lib/node_modules/nativescript
+34 info preuninstall nativescript@2.2.1
+35 verbose unsafe-perm in lifecycle true
+36 info uninstall nativescript@2.2.1
+37 verbose unbuild rmStuff nativescript@2.2.1 from /usr/local/lib/node_modules
+38 silly gentlyRm /usr/local/bin/tns is being gently removed
+39 silly gentlyRm verifying /usr/local is an npm working directory
+40 silly gentlyRm /usr/local/bin/nativescript is being gently removed
+41 silly gentlyRm verifying /usr/local is an npm working directory
+42 silly gentlyRm containing path /usr/local is under npm's control, in /usr/local
+43 silly gentlyRm deletion target /usr/local/bin/tns is under /usr/local
+44 verbose gentlyRm vacuuming from /usr/local/bin/tns up to /usr/local
+45 silly gentlyRm containing path /usr/local is under npm's control, in /usr/local
+46 silly gentlyRm deletion target /usr/local/bin/nativescript is under /usr/local
+47 verbose gentlyRm vacuuming from /usr/local/bin/nativescript up to /usr/local
+48 silly vacuum-fs removing /usr/local/bin/tns
+49 silly vacuum-fs removing /usr/local/bin/nativescript
+50 silly vacuum-fs quitting because other entries in /usr/local/bin
+51 silly vacuum-fs quitting because other entries in /usr/local/bin
+52 info postuninstall nativescript@2.2.1
+53 silly gentlyRm /usr/local/lib/node_modules/nativescript is being purged from base /usr/local
+54 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/nativescript
+55 silly vacuum-fs purging /usr/local/lib/node_modules/nativescript
+56 verbose unlock done using /Users/niliev/.npm/_locks/nativescript-f7f5e04badfb238f.lock for /usr/local/lib/node_modules/nativescript
+57 verbose stack Error: EACCES: permission denied, rmdir '/usr/local/lib/node_modules/nativescript'
+57 verbose stack     at Error (native)
+58 verbose cwd /Users/niliev/Desktop/git-nick/NativeScript-NASA-Curiosity
+59 error Darwin 15.6.0
+60 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "i" "nativescript" "-g"
+61 error node v4.5.0
+62 error npm  v2.15.9
+63 error path /usr/local/lib/node_modules/nativescript
+64 error code EACCES
+65 error errno -13
+66 error syscall rmdir
+67 error Error: EACCES: permission denied, rmdir '/usr/local/lib/node_modules/nativescript'
+67 error     at Error (native)
+67 error  { [Error: EACCES: permission denied, rmdir '/usr/local/lib/node_modules/nativescript']
+67 error   errno: -13,
+67 error   code: 'EACCES',
+67 error   syscall: 'rmdir',
+67 error   path: '/usr/local/lib/node_modules/nativescript' }
+68 error Please try running this command again as root/Administrator.
+69 verbose exit [ -13, true ]
+70 verbose unbuild lib/node_modules/nativescript
+71 info preuninstall nativescript@2.2.1
+72 verbose unsafe-perm in lifecycle true
+73 info uninstall nativescript@2.2.1
+74 verbose unbuild rmStuff nativescript@2.2.1 from /usr/local/lib/node_modules
+75 silly gentlyRm /usr/local/bin/tns is being gently removed
+76 silly gentlyRm verifying /usr/local is an npm working directory
+77 silly gentlyRm /usr/local/bin/nativescript is being gently removed
+78 silly gentlyRm verifying /usr/local is an npm working directory
+79 silly gentlyRm containing path /usr/local is under npm's control, in /usr/local
+80 silly gentlyRm deletion target /usr/local/bin/tns is under /usr/local
+81 verbose gentlyRm vacuuming from /usr/local/bin/tns up to /usr/local
+82 silly gentlyRm containing path /usr/local is under npm's control, in /usr/local
+83 silly gentlyRm deletion target /usr/local/bin/nativescript is under /usr/local
+84 verbose gentlyRm vacuuming from /usr/local/bin/nativescript up to /usr/local
+85 info postuninstall nativescript@2.2.1
+86 silly gentlyRm /usr/local/lib/node_modules/nativescript is being purged from base /usr/local
+87 verbose gentlyRm don't care about contents; nuking /usr/local/lib/node_modules/nativescript
+88 silly vacuum-fs purging /usr/local/lib/node_modules/nativescript
+89 error error rolling back Error: EACCES: permission denied, rmdir '/usr/local/lib/node_modules/nativescript'
+89 error error rolling back     at Error (native)
+89 error error rolling back  { [Error: EACCES: permission denied, rmdir '/usr/local/lib/node_modules/nativescript']
+89 error error rolling back   errno: -13,
+89 error error rolling back   code: 'EACCES',
+89 error error rolling back   syscall: 'rmdir',
+89 error error rolling back   path: '/usr/local/lib/node_modules/nativescript' }
