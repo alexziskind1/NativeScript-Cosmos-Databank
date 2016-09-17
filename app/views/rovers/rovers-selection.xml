@@ -14,7 +14,7 @@
     </Page.actionBar>
 
     <ScrollView>
-        <StackLayout loaded="onStackLoaded" id="pageContainer">
+        <StackLayout loaded="onStackLoaded" id="pageContainer" class="page-container">
             <StackLayout tap="toggleCur">
                 <Label text="Curiosity" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showCur ? 'visible' : 'collapsed' }}" >

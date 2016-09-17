@@ -1,0 +1,38 @@
+.page-container {
+    background-color: #343838; 
+}
+
+.page-container Label {
+    font-family: "Nasalization";    
+    color: whitesmoke;
+    font-size: 12;
+    margin: 8;
+}
+
+.cardview {
+    background-color: #008C9E;
+    margin: 8;
+}
+
+.date-android {
+    font-size:14;
+    margin: 10;
+    text-align: right;
+}
+
+.date-ios {
+    font-size:14;
+    margin: 10;
+}
+
+.camera-android {
+    font-size:14;
+    margin: 10;
+    text-align: left;
+}
+
+.camera-ios {
+    font-size: 14;
+    margin: 10;
+}
+

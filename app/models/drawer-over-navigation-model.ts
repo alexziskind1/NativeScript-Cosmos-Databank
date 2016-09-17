@@ -13,15 +13,15 @@ export class DrawerOverNavigationModel extends Observable {
     }
 
     get apodDescription() {
-        return "One of the most popular websites at NASA is the Astronomy Picture of the Day.";
+        return "Astronomical \nPhoto \nof the Day.";
     }
 
     get roversDescription() {
-        return "image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars";
+        return "Mars \nRovers \nPhotos";
     }
 
     get asteroidsDescription() {
-        return "search for Asteroids based on their closest approach date to Earth";
+        return "Asteroids \nProximity \nChecker";
     }
 
     public toggleDrawer() {

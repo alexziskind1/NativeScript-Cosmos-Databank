@@ -16,27 +16,26 @@
       </ActionBar>
     </Page.actionBar>
 
-    <GridLayout id="pageContainer" rows="auto, 3*" columns="*">
-
+    <GridLayout id="pageContainer" class="page-container" rows="auto, 3*" columns="*">
+        
         <Label row="0" col="0"  
-               text="{{ totalCount == -1 ? 'counting...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" 
+               text="{{ totalCount == -1 ? 'Counting photos...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" 
                textWrap="true" margin="10"
-               color="{{ totalCount == -1 ? 'blue' : totalCount == 0 && totalCount != -1 ? 'red' : 'green' }}"/>  
+               color="{{ totalCount == -1 ? 'whitesmoke' : totalCount == 0 && totalCount != -1 ? 'orange' : '#008C9E' }}"/>  
 
         <lv:RadListView row="1" col="0" id="rad-list"
                         items="{{ dataItems }}" 
-                        class="listview-rovers" 
                         loaded="onListLoaded" 
                         itemTap="onItemTap">
             <lv:RadListView.listViewLayout>
                 <lv:ListViewLinearLayout scrollDirection="Vertical"/>
             </lv:RadListView.listViewLayout>
             <lv:RadListView.itemTemplate>
-                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
+                <Card:CardView class="cardview" elevation="40" radius="50">
                     <android>
                         <GridLayout rows="auto, *" columns="2*, *">
-                            <Label row="0" col="0" text="{{ cameraName }}" class="camera" textWrap="true" />
-                            <Label row="0" col="1" text="{{ earthDate }}" class="date" textWrap="true" />
+                            <Label row="0" col="0" text="{{ cameraName }}" class="camera-android" textWrap="true" />
+                            <Label row="0" col="1" text="{{ earthDate }}" class="date-android" textWrap="true" />
                             <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
                                                                 imageUri="{{ imageUri }}"
                                                                 placeholderImageUri="res://logo"
@@ -53,9 +52,9 @@
                         </GridLayout>
                     </android>
                     <ios>
-                        <GridLayout rows="44, *" columns="2*, *">
-                            <Label row="0" col="0" text="{{ cameraName }}" class="camera" textWrap="true" />
-                            <Label row="0" col="1" text="{{ earthDate }}" class="date" textWrap="true" />
+                        <GridLayout rows="auto, *" columns="2*, *">
+                            <Label row="0" col="0" text="{{ cameraName }}" class="camera-ios" textWrap="true" />
+                            <Label row="0" col="1" text="{{ earthDate }}" class="date-ios" textWrap="true" />
                             <Image row="1" col="0" colSpan="2"  src="{{ imageUri }}" verticalAlignment="top"/>
                         </GridLayout>
                     </ios>

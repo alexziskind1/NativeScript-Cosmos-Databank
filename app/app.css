@@ -26,22 +26,3 @@ ActionBar {
     horizontal-align: right;
     opacity: 0.7;
 }
-
-.gridmenu {
-    border-radius: 10
-}
-
-.cardStyle {
-    background-color: #008C9E;
-}
-
-.listview-rovers {
-    background-color: #343838;
-    padding: 10;
-}
-
-.date {
-    font-size:14;
-    margin: 10;
-    text-align: right;
-}
