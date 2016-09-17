@@ -1,0 +1,10 @@
+.item-container {
+    font-family: "Nasalization";    
+    color: #E8EAEB;
+    background-color: #343838; 
+    font-size: 14;
+}
+
+.item-container Label {
+    margin: 8;
+}

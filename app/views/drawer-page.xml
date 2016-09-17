@@ -44,21 +44,36 @@
             <Card:CardView margin="8" elevation="40" radius="20"> 
                 <GridLayout rows="160" columns="2*, 3*" horizontalAlignment="stretch" tap="{{ goToRoversSelectionPage }}" >
                     <Label col="0" text="{{ roversDescription }}" textWrap="true" class="dp-textview" />
-                    <Image col="1" src="~/images/NASA_Mars_Rover.jpg" stretch="aspectFill" />    
+                    <ios>
+                        <Image col="1" src="~/images/NASA_Mars_Rover.jpg" stretch="aspectFill" />   
+                    </ios>
+                    <android>
+                        <Image col="1" src="~/images/NASA_Mars_Rover.jpg" stretch="aspectFill" />   
+                    </android> 
                 </GridLayout>
             </Card:CardView>
 
             <Card:CardView margin="8" elevation="40" radius="20">  
                 <GridLayout rows="160" columns="3*, 2*" horizontalAlignment="stretch" textAlignment="right" tap="{{ goToApod }}" >
-                    <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />   
+                    <ios>
+                        <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  
+                    </ios>
+                    <android>
+                        <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />    
+                    </android>       
                     <Label col="1" text="{{ apodDescription }}" textWrap="true" class="dp-textview" />
                 </GridLayout>
             </Card:CardView>
 
             <Card:CardView margin="8" elevation="40" radius="20">  
                 <GridLayout rows="160" columns="2*, 3*" horizontalAlignment="stretch" textAlignment="right" tap="{{ goToAsteroids }}" >
-                    <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="dp-textview" />
-                    <Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />    
+                    <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="dp-textview" />   
+                    <ios>
+                        <Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />  
+                    </ios>
+                    <android>
+                        <Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />   
+                    </android>     
                 </GridLayout>
             </Card:CardView>
 

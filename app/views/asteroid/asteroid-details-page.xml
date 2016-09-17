@@ -1,22 +1,38 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onPageLoaded" navigatedTo="onPageNavigatedTo">
-    <StackLayout>
-        <Label text="{{ contextItem.neo_reference_id }}" textWrap="true" />
-        <Label text="{{ contextItem.name }}" textWrap="true" />
-        <Label text="{{ contextItem.nasa_jpl_url }}" textWrap="true" />    
-        <Label text="{{ contextItem.absolute_magnitude_h }}" textWrap="true" />
+    <Page.actionBar>
+      <ActionBar>
+        <NavigationButton text="Back" icon="" tap="goBack" />
+        <ActionBar.titleView>
+            <StackLayout orientation="horizontal">
+                <Label text="COSMOS Data Bank" />           
+            </StackLayout>
+        </ActionBar.titleView>
+        <!--<ActionBar.items>
+            <ActionItem icon="<" text="Left" tap="goBack" ios.position="left" />
+        </ActionBar.items>-->
+      </ActionBar>
+    </Page.actionBar> 
 
-        <Label text="{{ contextItem.estimated_diameter.kilometers.estimated_diameter_min }}" textWrap="true" />
-        <Label text="{{ contextItem.estimated_diameter.kilometers.estimated_diameter_max }}" textWrap="true" />
 
-        <Label text="{{ contextItem.estimated_diameter.meters.estimated_diameter_min }}" textWrap="true" />
-        <Label text="{{ contextItem.estimated_diameter.meters.estimated_diameter_max }}" textWrap="true" />
+    <StackLayout class="item-container">
+        <Label text="{{ 'Reference ID: ' + contextItem.neo_reference_id }}" textWrap="true" />
+        <Label text="{{ 'Asteroid Name: ' + contextItem.name }}" textWrap="true" />
+        <Label text="{{ 'NASA JPL url: ' + contextItem.nasa_jpl_url }}" textWrap="true" />    
+        <Label text="{{ 'Absolute Magnitude: ' + contextItem.absolute_magnitude_h }}" textWrap="true" />
 
-        <Label text="{{ contextItem.is_potentially_hazardous_asteroid }}" textWrap="true" />
+        <Label text="{{ 'Min Diameter(km) : ' + contextItem.estimated_diameter.kilometers.estimated_diameter_min }}" textWrap="true" />
+        <Label text="{{ 'Max Diameter(km) : ' + contextItem.estimated_diameter.kilometers.estimated_diameter_max }}" textWrap="true" />
+
+        <Label text="{{ 'Min Diameter(meters) : ' + contextItem.estimated_diameter.meters.estimated_diameter_min }}" textWrap="true" />
+        <Label text="{{ 'Max Diameter(meters) : ' + contextItem.estimated_diameter.meters.estimated_diameter_max }}" textWrap="true" />
+
+        <Label text="{{ 'Danger!? : ' + contextItem.is_potentially_hazardous_asteroid }}" 
+               color="{{contextItem.is_potentially_hazardous_asteroid ? 'red' : 'green' }}" textWrap="true" />
         
         <!--fix the model for close_approach_data - currently working for arr[0]-->
-        <Label text="{{ contextItem.close_approach_data.close_approach_date }}" textWrap="true" />
-        <Label text="{{ contextItem.close_approach_data.miss_distance.astronomical }}" textWrap="true" />
-        <Label text="{{ contextItem.close_approach_data.miss_distance.kilometers }}" textWrap="true" />
-        <Label text="{{ contextItem.close_approach_data.orbiting_body }}" textWrap="true" />      
+        <Label text="{{ 'Close Approach Date : ' + contextItem.close_approach_data.close_approach_date }}" textWrap="true" />
+        <Label text="{{ 'Distance(astronomical) : ' + contextItem.close_approach_data.miss_distance.astronomical }}" textWrap="true" />
+        <Label text="{{ 'Distance(kilometers) : ' + contextItem.close_approach_data.miss_distance.kilometers }}" textWrap="true" />
+        <Label text="{{ 'Orbiting Body : ' + contextItem.close_approach_data.orbiting_body }}" textWrap="true" />      
     </StackLayout>
 </Page>

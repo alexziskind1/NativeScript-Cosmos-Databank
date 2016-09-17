@@ -11,10 +11,12 @@
     </Page.actionBar>
 
     <StackLayout>
-        <Label text="{{ asteroidCount == 0 ? 'counting near by asteroids' : asteroidCount + ' asteroids will fly near in the next 5 days'}}" fontSize="14" textWrap="true" />
+        <Label text="{{ asteroidCount == 0 ? 'counting near by asteroids' : asteroidCount + ' asteroids will fly near in the next 5 days'}}" textWrap="true" />
         <ListView items="{{ dataItems }}"  loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
             <ListView.itemTemplate>
-                <Label text="{{ name }}" textWrap="true" />     
+                <StackLayout class="item-container">
+                    <Label text="{{ name }}" textWrap="true" class="lbl-asteroid-name" /> 
+                </StackLayout>
             </ListView.itemTemplate>
         </ListView>
     </StackLayout>
