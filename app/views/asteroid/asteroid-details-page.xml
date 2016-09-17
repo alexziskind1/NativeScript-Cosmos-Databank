@@ -7,9 +7,6 @@
                 <Label text="COSMOS Data Bank" />           
             </StackLayout>
         </ActionBar.titleView>
-        <!--<ActionBar.items>
-            <ActionItem icon="<" text="Left" tap="goBack" ios.position="left" />
-        </ActionBar.items>-->
       </ActionBar>
     </Page.actionBar> 
 

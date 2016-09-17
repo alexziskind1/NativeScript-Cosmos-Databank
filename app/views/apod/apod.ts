@@ -36,7 +36,9 @@ export function onPageLoaded(args: EventData) {
 	// var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
     // sideDrawer.closeDrawer();
 
-    shareButtonAndroid = <Button>page.getViewById("btn-share");
+    if (application.android) {
+        shareButtonAndroid = <Button>page.getViewById("btn-share");
+    }
 
     if (application.ios) {
         shareButtonIOS = <Button>page.getViewById("btn-share-ios");

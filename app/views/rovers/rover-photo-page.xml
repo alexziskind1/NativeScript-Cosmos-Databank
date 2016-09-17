@@ -39,14 +39,15 @@
                             <Label row="0" col="1" text="{{ earthDate }}" class="date" textWrap="true" />
                             <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
                                                                 imageUri="{{ imageUri }}"
-                                                                backgroundUri="res://logo"
+                                                                placeholderImageUri="res://logo"
                                                                 actualImageScaleType="centerCrop"                                                           
                                                                 verticalAlignment="top"
-                                                                aspectRatio="1.5"
+                                                                aspectRatio="1.6"
+                                                                showProgressBar="true"
+                                                                progressBarColor="#AB5400"
                                                                 roundedCornerRadius="50"
                                                                 roundBottomRight="true"
                                                                 roundBottomLeft="true"
-                                                                showProgressBar="true"
                                                                 tapToRetryEnabled="true"
                                                                 finalImageSet="onFinalImageSet"/>
                         </GridLayout>

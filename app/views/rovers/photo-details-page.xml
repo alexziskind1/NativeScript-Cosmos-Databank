@@ -1,6 +1,5 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
       xmlns:nativescript-fresco="nativescript-fresco"
-      class="drawer-page"
       loaded="onPageLoaded">
 
     <Page.actionBar>
@@ -14,24 +13,25 @@
     </Page.actionBar>
 
     <ScrollView>
-        <StackLayout class="pageContainer">
+        <StackLayout class="page-container">
             <android>
                 <nativescript-fresco:FrescoDrawee imageUri="{{ contextItem.imageUri }}"
-                                                backgroundUri="res://logo"
+                                                placeholderImageUri="res://logo"
                                                 actualImageScaleType="centerCrop"                                                           
                                                 verticalAlignment="top"
-                                                aspectRatio="1.5"
-                                                roundedCornerRadius="50"
-                                                roundBottomRight="true"
-                                                roundBottomLeft="true"
+                                                aspectRatio="1.2"
                                                 showProgressBar="true"
+                                                progressBarColor="#AB5400"
+                                                roundedCornerRadius="50"
                                                 tapToRetryEnabled="true"
                                                 finalImageSet="onFinalImageSet"/>
+                <Button id="btn-share" text="&#xf1e0;" class="font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>  
             </android>
             <ios>
                 <Image src="{{ contextItem.imageUri }}" stretch ="none" /> 
             </ios>
-            <Label text="{{ 'id: ' + contextItem.id }}" color="gray" textWrap="true" />
+
+            <Label text="{{ 'id: ' + contextItem.id }}" textWrap="true" />
             <Label text="{{ 'sol: ' + contextItem.sol }}" textWrap="true" />
             <Label text="{{ 'camera id: ' + contextItem.cameraId }}" textWrap="true" />
             <Label text="{{ 'camera name: ' + contextItem.cameraName }}" textWrap="true" />
