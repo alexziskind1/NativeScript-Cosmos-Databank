@@ -14,15 +14,7 @@ ActionBar {
     font-size: 20;
 }
 
-.font-awesome {
-    font-family: "FontAwesome";
-    color: white;
-    font-size: 24;
-    font-weight: normal;
-    width: 50;
-    height: 50;
-    border-radius: 25;
-    margin-top: -60;
-    horizontal-align: right;
-    opacity: 0.7;
+.action-title {
+    horizontal-align: center;
+    text-align: cemter;
 }

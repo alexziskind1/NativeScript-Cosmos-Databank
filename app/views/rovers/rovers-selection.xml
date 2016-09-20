@@ -6,9 +6,9 @@
     <Page.actionBar>
       <ActionBar>
         <ActionBar.titleView>
-            <StackLayout orientation="horizontal">
-                <Label text="COSMOS Data Bank" />
-            </StackLayout>
+            <GridLayout >
+                <Label text="COSMOS Data Bank" class="action-title"/>
+            </GridLayout>
         </ActionBar.titleView>
       </ActionBar>
     </Page.actionBar>
@@ -19,8 +19,8 @@
                 <Label text="Curiosity" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showCur ? 'visible' : 'collapsed' }}" >
                     <StackLayout>
-                        <DatePicker id="dt-cur" day="15" month="6" year="2014"></DatePicker>
-                        <Button text="Curiosity" tap="{{ goToCuriosityPage }}" />                  
+                        <DatePicker id="dt-cur" class="date-picker" day="15" month="6" year="2014"></DatePicker>
+                        <Button text="Curiosity" class="btn-picker" tap="{{ goToCuriosityPage }}" />                  
                     </StackLayout>
                 </Card:CardView>  
             </StackLayout>
@@ -28,8 +28,8 @@
                 <Label text="Opportunity" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showOpp ? 'visible' : 'collapsed' }}" >  
                     <StackLayout>
-                        <DatePicker id="dt-opp" day="15" month="6" year="2007"></DatePicker>
-                        <Button text="Opportunity" tap="{{ goToOpportunityPage }}" />
+                        <DatePicker id="dt-opp" class="date-picker" day="15" month="6" year="2007"></DatePicker>
+                        <Button text="Opportunity" class="btn-picker" tap="{{ goToOpportunityPage }}" />
                     </StackLayout>
                 </Card:CardView>    
             </StackLayout>
@@ -37,8 +37,8 @@
                 <Label text="Spirit" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showSpi? 'visible' : 'collapsed' }}" >
                     <StackLayout>
-                        <DatePicker id="dt-spi" day="15" month="6" year="2008"></DatePicker>
-                        <Button text="Spirit" tap="{{ goToSpiritPage }}" />
+                        <DatePicker id="dt-spi" class="date-picker" day="15" month="6" year="2008"></DatePicker>
+                        <Button text="Spirit" class="btn-picker" tap="{{ goToSpiritPage }}" />
                     </StackLayout>
                 </Card:CardView>  
             </StackLayout>

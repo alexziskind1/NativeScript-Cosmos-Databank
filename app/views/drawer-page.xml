@@ -8,9 +8,9 @@
     <dpg:DrawerPage.actionBar>
       <ActionBar>
         <ActionBar.titleView>
-            <StackLayout orientation="horizontal">
-                <Label text="COSMOS Data Bank" />
-            </StackLayout>
+            <GridLayout >
+                <Label text="COSMOS Data Bank" class="action-title"/>
+            </GridLayout>
         </ActionBar.titleView>
         <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>

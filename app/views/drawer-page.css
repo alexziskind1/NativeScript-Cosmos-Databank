@@ -1,3 +1,10 @@
+.action-title {
+    horizontal-align: center;
+    text-align: cemter;
+    margin-left:30;
+}
+
+
 .dp-all {
     background-color: #BCBCBC;
     color: #E8EAEB;

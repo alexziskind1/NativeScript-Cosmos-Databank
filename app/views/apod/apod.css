@@ -1,0 +1,50 @@
+.pageContainer {
+    font-family: "Nasalization";    
+    background-color: #343838;   
+    color: #E8EAEB;
+    font-size: 14;
+}
+
+.title {
+    font-size: 18;
+    horizontal-align: center;
+}
+
+.date {
+    font-size: 10;
+}
+
+.description {
+    font-family: "Nasalization";    
+    background-color: #343838;   
+    color: #E8EAEB;
+    font-size: 14;
+}
+
+.font-awesome {
+    font-family: "FontAwesome";
+    background-color: #343838;
+    font-size: 14;
+    font-weight: normal;
+    width: 80;
+    height: 40;
+}
+
+.share {
+    color: #E8EAEB;
+    horizontal-align: center;
+}
+
+.prev {
+    color: #E8EAEB;
+    horizontal-align: left;
+}
+
+.next {
+    color: #E8EAEB;
+    horizontal-align: right;
+}
+
+.controls {
+    background-color: #BCBCBC;
+}

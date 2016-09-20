@@ -1,51 +1,52 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
         xmlns:nativescript-fresco="nativescript-fresco" 
-        class="drawer-page"
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
 
     <Page.actionBar>
       <ActionBar>
         <ActionBar.titleView>
-            <StackLayout orientation="horizontal">
-                <Label text="COSMOS Data Bank" />
-            </StackLayout>
+            <GridLayout >
+                <Label text="COSMOS Data Bank" class="action-title"/>
+            </GridLayout>
         </ActionBar.titleView>
       </ActionBar>
     </Page.actionBar>
 
     <ScrollView>
         <StackLayout id="pageContainer" class="pageContainer" >
-            <GridLayout rows="60" columns="*, *">
-                <Button col="0" text="previous" tap="previousDate" />
-                <Button col="1" text="next" tap="nextDate" />
-            </GridLayout>
-            <Label text="{{ dataItem.title }}" textWrap="true" />
-            <Label text="{{ dataItem.date }}" textWrap="true" />
+            <Label text="{{ dataItem.title }}" class="title" textWrap="true" />
             <android>
-                <StackLayout id="st-parent">
-                    <nativescript-fresco:FrescoDrawee
-                                        imageUri="{{ dataItem.url }}"
-                                        backgroundUri="res://logo"
-                                        actualImageScaleType="centerCrop"                                                           
-                                        verticalAlignment="top"
-                                        aspectRatio="1.2"
-                                        roundedCornerRadius="50"
-                                        roundBottomRight="true"
-                                        roundBottomLeft="true"
-                                        showProgressBar="true"
-                                        tapToRetryEnabled="true"
-                                        finalImageSet="onFinalImageSet"/>
-                     <Button id="btn-share" text="&#xf1e0;" class="font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>                     
+                <!--<StackLayout>-->
+                <nativescript-fresco:FrescoDrawee
+                                    imageUri="{{ dataItem.url }}"
+                                    backgroundUri="res://logo"
+                                    actualImageScaleType="centerCrop"                                                           
+                                    verticalAlignment="top"
+                                    aspectRatio="1.2"
+                                    showProgressBar="true"
+                                    tapToRetryEnabled="true"
+                                    finalImageSet="onFinalImageSet"/>
+     
+                <StackLayout orientation="horizontal">
+                        <Button text="&#xf053;" class="prev font-awesome" tap="previousDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />
+                        <Button id="btn-share" text="&#xf1e0;" class="share font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />     
+                        <Button text="&#xf054;" class="next font-awesome" tap="nextDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />   
                 </StackLayout>
+
+                <!--</StackLayout>-->
             </android>
+
             <ios>
-                <StackLayout id="st-parent-ios" loaded="onIosStackLoaded" >
+                <StackLayout loaded="onIosStackLoaded" >
                     <Image src="{{ dataItem.url }}" id="ios-image" stretch="fill" />
-                    <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
+                    <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="share font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
+
                 </StackLayout>
             </ios>
-            <TextView text="{{ dataItem.explanation }}" editable="false" />
+            
+            <TextView text="{{ dataItem.explanation }}" class="description" editable="false" />
+            <Label text="{{ dataItem.date }}" class="date" textWrap="true" />     
         </StackLayout>               
         
     </ScrollView>

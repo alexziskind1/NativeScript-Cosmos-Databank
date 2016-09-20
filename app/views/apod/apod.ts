@@ -6,6 +6,7 @@ import { StackLayout } from "ui/layouts/stack-layout";
 import { Button } from "ui/button";
 import { Image } from "ui/image";
 import { GestureTypes, GestureEventData, SwipeGestureEventData } from "ui/gestures";
+import { ScrollView } from "ui/scroll-view";
 import dialogs = require("ui/dialogs");
 import application = require("application");
 import imageSource = require("image-source");
@@ -27,14 +28,10 @@ let page;
 let shareButtonAndroid;
 let shareButtonIOS;
 let iosImage;
-let stackParentIOS;
+;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
-    // page.bindingContext = drawerViewModel;   
-
-	// var sideDrawer = <drawerModule.RadSideDrawer>page.getViewById("sideDrawer");
-    // sideDrawer.closeDrawer();
 
     if (application.android) {
         shareButtonAndroid = <Button>page.getViewById("btn-share");
@@ -43,13 +40,13 @@ export function onPageLoaded(args: EventData) {
     if (application.ios) {
         shareButtonIOS = <Button>page.getViewById("btn-share-ios");
         iosImage = <Image>page.getViewById("ios-image");
-        stackParentIOS = <StackLayout>page.getViewById("st-parent-ios");
     }
 }
 
 export function onPageNavigatedTo(args: EventData) {
     page = <Page>args.object;
-    var pageContainer = <GridLayout>page.getViewById("pageContainer");
+
+    var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
     apodViewModel.initDataItems();
     pageContainer.bindingContext = apodViewModel;
@@ -57,9 +54,12 @@ export function onPageNavigatedTo(args: EventData) {
     pageContainer.on(GestureTypes.swipe, function (args: SwipeGestureEventData) {
         console.log("Swipe Direction: " + args.direction);
         if (args.direction === 1) {
+
             console.log(args.direction);
             previousDate();
+
         } else if (args.direction === 2) {
+
             console.log(args.direction);
             nextDate();
         }
