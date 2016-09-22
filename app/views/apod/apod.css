@@ -5,16 +5,18 @@
     font-size: 14;
 }
 
-.title {
+.apod-title {
     font-size: 18;
+    font-weight: bold;
     horizontal-align: center;
 }
 
-.date {
+.apod-date {
     font-size: 10;
+    horizontal-align: center;
 }
 
-.description {
+.apod-description {
     font-family: "Nasalization";    
     background-color: #343838;   
     color: #E8EAEB;
@@ -46,7 +48,3 @@
     color: #E8EAEB;
     horizontal-align: right;
 }*/
-
-.controls {
-    background-color: #BCBCBC;
-}

@@ -5,7 +5,6 @@ import http = require("http");
 let API_URL = "https://api.nasa.gov/planetary/apod";
 let API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 let HD_PIC = "&hd=true";
-var sample_date = "&date=1980-04-20";
 // Parameter	Type	    Default	    Description
 // date	        YYYY-MM-DD	today	    The date of the APOD image to retrieve
 // hd	        bool	    False	    Retrieve the URL for the high resolution image

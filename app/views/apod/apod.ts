@@ -120,7 +120,8 @@ export function onPageNavigatedTo(args: EventData) {
     var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
     apodViewModel.initDataItems();
-
+    apodViewModel.set("isVideoVisible", false);
+    apodViewModel.set("isPhotoVisible", true);
     pageContainer.bindingContext = apodViewModel;
 }
 
@@ -167,8 +168,12 @@ function formatDate(date) {
 }
 
 export function onSubmit(args: EventData) {
-    console.log(apodViewModel.get("dataItem").url);
     console.log(apodViewModel.get("dataItem").media_type);
+
+    var mediaType = apodViewModel.get("dataItem").media_type;
+    if (mediaType === "video") {
+        // player for youtube?
+    }
 }
 
 export function onFinalImageSet(args: FinalEventData) {
@@ -184,7 +189,14 @@ export function onFinalImageSet(args: FinalEventData) {
 
 export function onSaveFile(res: imageSource.ImageSource) {
 
-    var fileName = "CosmosDB" + new Date().getDate().toString() + "-" + new Date().getTime().toString() + ".jpeg";
+    // try-catch HERE to endsure you have res!!!
+    var url = apodViewModel.get("dataItem").url;
+
+    var fileName = url.substring(url.lastIndexOf("/") + 1);
+    var n = fileName.indexOf('.');
+    fileName = fileName.substring(0, n != -1 ? n : fileName.length);
+
+    // var fileName = "CosmosDB" + new Date().getDate().toString() + "-" + new Date().getTime().toString() + ".jpeg";
     var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
     var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);

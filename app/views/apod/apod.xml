@@ -4,16 +4,6 @@
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
 
-    <!--<Page.actionBar>
-      <ActionBar>
-        <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="action-title"/>
-            </GridLayout>
-        </ActionBar.titleView>
-      </ActionBar>
-    </Page.actionBar>-->
-
     <ScrollView swipe="onPageSwipe">
         <StackLayout id="pageContainer" class="pageContainer">
             <android>
@@ -26,16 +16,14 @@
                                     showProgressBar="true"
                                     tapToRetryEnabled="true"
                                     submit="onSubmit"
-                                    finalImageSet="onFinalImageSet"/>
-     
+                                    finalImageSet="onFinalImageSet" />            
                 <GridLayout rows="*" columns="*, *, *, *, *">
-                        <Button col="0" text="&#xf053;" id="btn-prev" class="font-awesome" tap="previousDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />
-                        <Button col="1" text="&#xf019;" id="btn-save" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
-                        <Button col="2" text="&#xf108;" id="btn-desktop" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
-                        <Button col="3" text="&#xf1e0;" id="btn-share" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />     
-                        <Button col="4" text="&#xf054;" id="btn-next" class="font-awesome" tap="nextDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />   
+                    <Button col="0" text="&#xf053;" id="btn-prev" class="font-awesome" tap="previousDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />
+                    <Button col="1" text="&#xf019;" id="btn-save" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
+                    <Button col="2" text="&#xf108;" id="btn-desktop" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
+                    <Button col="3" text="&#xf1e0;" id="btn-share" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />     
+                    <Button col="4" text="&#xf054;" id="btn-next" class="font-awesome" tap="nextDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />   
                 </GridLayout>
-
             </android>
 
             <ios>
@@ -44,12 +32,10 @@
                     <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="share font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
                 </StackLayout>
             </ios>
-            
-            <Label text="{{ dataItem.title }}" class="title" textWrap="true" />
-            <TextView text="{{ dataItem.explanation }}" class="description" editable="false" />
-            <Label text="{{ dataItem.date }}" class="date" textWrap="true" />     
-        </StackLayout>               
-        
-    </ScrollView>
 
+            <Label text="{{ dataItem.title }}" class="apod-title" textWrap="true" />
+            <TextView text="{{ dataItem.explanation }}" class="apod-description" editable="false" />
+            <Label text="{{ 'Astronomical photo of ' + dataItem.date }}" class="apod-date" textWrap="true" />     
+        </StackLayout>                  
+    </ScrollView>
 </Page>
