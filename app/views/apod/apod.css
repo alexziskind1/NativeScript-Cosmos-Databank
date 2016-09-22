@@ -26,11 +26,13 @@
     background-color: #343838;
     font-size: 14;
     font-weight: normal;
+    color: #E8EAEB;
+    text-align: center;
     width: 80;
     height: 40;
 }
 
-.share {
+/*.share {
     color: #E8EAEB;
     horizontal-align: center;
 }
@@ -43,7 +45,7 @@
 .next {
     color: #E8EAEB;
     horizontal-align: right;
-}
+}*/
 
 .controls {
     background-color: #BCBCBC;

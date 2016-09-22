@@ -30,6 +30,7 @@ export class ApodViewModel extends Observable {
     public set dataItem(value: ApodItem) {
         if (this._dataItem !== value) {
             this._dataItem = value;
+            this.notifyPropertyChange("dataItem", value);
         }
     }
 

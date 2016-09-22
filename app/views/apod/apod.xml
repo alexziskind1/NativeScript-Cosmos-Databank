@@ -1,9 +1,10 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
+        actionBarHidden="true"
         xmlns:nativescript-fresco="nativescript-fresco" 
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
 
-    <Page.actionBar>
+    <!--<Page.actionBar>
       <ActionBar>
         <ActionBar.titleView>
             <GridLayout >
@@ -11,37 +12,36 @@
             </GridLayout>
         </ActionBar.titleView>
       </ActionBar>
-    </Page.actionBar>
+    </Page.actionBar>-->
 
     <ScrollView>
         <StackLayout id="pageContainer" class="pageContainer" >
             <Label text="{{ dataItem.title }}" class="title" textWrap="true" />
             <android>
-                <!--<StackLayout>-->
                 <nativescript-fresco:FrescoDrawee
                                     imageUri="{{ dataItem.url }}"
-                                    backgroundUri="res://logo"
+                                    placeholderImageUri="res://logo"
                                     actualImageScaleType="centerCrop"                                                           
                                     verticalAlignment="top"
-                                    aspectRatio="1.2"
+                                    aspectRatio="1.33"
                                     showProgressBar="true"
                                     tapToRetryEnabled="true"
                                     finalImageSet="onFinalImageSet"/>
      
-                <StackLayout orientation="horizontal">
-                        <Button text="&#xf053;" class="prev font-awesome" tap="previousDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />
-                        <Button id="btn-share" text="&#xf1e0;" class="share font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />     
-                        <Button text="&#xf054;" class="next font-awesome" tap="nextDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />   
-                </StackLayout>
+                <GridLayout rows="*" columns="*, *, *, *, *">
+                        <Button col="0" text="&#xf053;" id="btn-prev" class="font-awesome" tap="previousDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />
+                        <Button col="1" text="&#xf019;" id="btn-save" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
+                        <Button col="2" text="&#xf108;" id="btn-desktop" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
+                        <Button col="3" text="&#xf1e0;" id="btn-share" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />     
+                        <Button col="4" text="&#xf054;" id="btn-next" class="font-awesome" tap="nextDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />   
+                </GridLayout>
 
-                <!--</StackLayout>-->
             </android>
 
             <ios>
                 <StackLayout loaded="onIosStackLoaded" >
                     <Image src="{{ dataItem.url }}" id="ios-image" stretch="fill" />
                     <Button id="tn-share-ios" text="&#xf1e0;" tap="onIosShare" class="share font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>
-
                 </StackLayout>
             </ios>
             
