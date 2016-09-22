@@ -14,9 +14,8 @@
       </ActionBar>
     </Page.actionBar>-->
 
-    <ScrollView>
-        <StackLayout id="pageContainer" class="pageContainer" >
-            <Label text="{{ dataItem.title }}" class="title" textWrap="true" />
+    <ScrollView swipe="onPageSwipe">
+        <StackLayout id="pageContainer" class="pageContainer">
             <android>
                 <nativescript-fresco:FrescoDrawee
                                     imageUri="{{ dataItem.url }}"
@@ -26,6 +25,7 @@
                                     aspectRatio="1.33"
                                     showProgressBar="true"
                                     tapToRetryEnabled="true"
+                                    submit="onSubmit"
                                     finalImageSet="onFinalImageSet"/>
      
                 <GridLayout rows="*" columns="*, *, *, *, *">
@@ -45,6 +45,7 @@
                 </StackLayout>
             </ios>
             
+            <Label text="{{ dataItem.title }}" class="title" textWrap="true" />
             <TextView text="{{ dataItem.explanation }}" class="description" editable="false" />
             <Label text="{{ dataItem.date }}" class="date" textWrap="true" />     
         </StackLayout>               

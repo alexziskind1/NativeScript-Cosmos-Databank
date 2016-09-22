@@ -14,7 +14,7 @@ var sample_date = "&date=1980-04-20";
 export class ApodViewModel extends Observable {
 
     private _dataItem: ApodItem;
-    private _url: string;
+    private _urlApod: string;
     private _selectedDate: Date;
 
     constructor() {
@@ -46,7 +46,7 @@ export class ApodViewModel extends Observable {
     }
 
     public getUpdatedUrl() {
-        return this._url = API_URL + API_KEY + HD_PIC;
+        return this._urlApod = API_URL + API_KEY + HD_PIC;
     }
 
     public initDataItems(date?: string) {
@@ -85,13 +85,11 @@ export class ApodViewModel extends Observable {
 
 
         }, function (e) {
-            //// Argument (e) is Error!
+            // console.log(e.stack);
         }).then(function() {
-            that.notifyPropertyChange("dataItem", apodDataItem);
+            that.dataItem = apodDataItem;
         })
-
     }
-
 }
 
 export class ApodItem {

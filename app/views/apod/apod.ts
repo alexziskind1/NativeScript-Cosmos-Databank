@@ -105,28 +105,22 @@ export function onPageLoaded(args: EventData) {
             SocialShare.shareImage(currentImage, "NASA APOD");
         })
     }
+}
 
-    page.on(GestureTypes.swipe, function (args: SwipeGestureEventData) {
-        console.log("Swipe Direction: " + args.direction);
-        if (args.direction === 1) {
-
-            console.log(args.direction);
-            previousDate();
-
-        } else if (args.direction === 2) {
-
-            console.log(args.direction);
-            nextDate();
-        }
-    })
+export function onPageSwipe(args: SwipeGestureEventData) {
+    if (args.direction === 1) {
+        previousDate();
+    } else if (args.direction === 2) {
+        nextDate();
+    }   
 }
 
 export function onPageNavigatedTo(args: EventData) {
     page = <Page>args.object;
-
     var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
     apodViewModel.initDataItems();
+
     pageContainer.bindingContext = apodViewModel;
 }
 
@@ -141,12 +135,11 @@ export function previousDate() {
 
 export function nextDate() {
 
-    // add check if the date is not in the future - CHECK THIS BELOW - works one tap later
     var currentDate = apodViewModel.get("selectedDate");
-    if (currentDate > new Date()) {
+    if (currentDate >= new Date()) {
         var options = {
             title: "Error!",
-            message: "Showing the future is avaiable in the paid version! ;)",
+            message: "We cab not show photos from the future! ;)",
             okButtonText: "OK"
         };
         dialogs.alert(options).then(() => {
@@ -173,30 +166,32 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
+export function onSubmit(args: EventData) {
+    console.log(apodViewModel.get("dataItem").url);
+    console.log(apodViewModel.get("dataItem").media_type);
+}
+
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
-    
+
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res: imageSource.ImageSource) {
-        //console.log("Image successfully loaded");
-        currentImage = res;
-        // apodViewModel.set("isItemVisible", true);
-    }, function (error) {
-        //console.log("Error loading image: " + error);
+            currentImage = res;
+        }, function (error) {
+            // console.log("Error loading image: " + error);
     });    
 }
 
 export function onSaveFile(res: imageSource.ImageSource) {
 
-    var fileName = "CosmosDB" + new Date().getDate().toString() + "-" + new Date().getTime().toString() + ".jpeg";  
-    var tempFilePath = fileSystem.path.join(android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString());
-    var cosmosFOlderPath = fileSystem.path.join(tempFilePath, "CosmosDataBank");
-    var folder = fileSystem.Folder.fromPath(cosmosFOlderPath);
+    var fileName = "CosmosDB" + new Date().getDate().toString() + "-" + new Date().getTime().toString() + ".jpeg";
+    var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
+    var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
+    var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
 
-    var path = fileSystem.path.join(cosmosFOlderPath, fileName);
+    var path = fileSystem.path.join(cosmosFolderPath, fileName);
     var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
 
-    console.log(saved);
     currentSaved = path;
 }
 
@@ -206,7 +201,7 @@ export function onIosShare() {
         .then(function (res: imageSource.ImageSource) {           
             SocialShare.shareImage(res);
         }, function (error) {
-            //console.log("Error loading image: " + error);
+            // console.log("Error loading image: " + error);
     });    
 }
 
