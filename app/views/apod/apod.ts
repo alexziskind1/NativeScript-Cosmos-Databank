@@ -190,13 +190,14 @@ export function onFinalImageSet(args: FinalEventData) {
 export function onSaveFile(res: imageSource.ImageSource) {
 
     // try-catch HERE to endsure you have res!!!
-    var url = apodViewModel.get("dataItem").url;
+    // var url = apodViewModel.get("dataItem").url;
 
-    var fileName = url.substring(url.lastIndexOf("/") + 1);
-    var n = fileName.indexOf('.');
-    fileName = fileName.substring(0, n != -1 ? n : fileName.length);
+    // var fileName = url.substring(url.lastIndexOf("/") + 1);
+    // var n = fileName.indexOf('.');
+    // fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg"; // test this
 
-    // var fileName = "CosmosDB" + new Date().getDate().toString() + "-" + new Date().getTime().toString() + ".jpeg";
+    //  THIS SHOULD BE ON FINAL IMAGE SET - OTHERWISE APP CRASHES if user try to save to early!!!!s
+    var fileName = "CosmosDB" + new Date().getDate().toString() + "-" + new Date().getTime().toString() + ".jpeg";
     var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
     var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
