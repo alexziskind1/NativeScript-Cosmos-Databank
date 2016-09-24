@@ -5,6 +5,15 @@ export class PickersViewModel extends Observable {
     private _year: number;
     private _month: number;
     private _day: number;
+
+    private _yearOpp: number;
+    private _monthOpp: number;
+    private _dayOpp: number;
+
+    private _yearSpi: number;
+    private _monthSpi: number;
+    private _daySpi: number;
+
     private _rover: string;
 
     constructor() {
@@ -21,6 +30,73 @@ export class PickersViewModel extends Observable {
             this.notifyPropertyChange("rover", value);
         }
     }
+
+    public get yearOpp() {
+        return this._yearOpp;
+    }
+
+    public set yearOpp(value: number) {
+        if (this._yearOpp !== value) {
+            this._yearOpp = value;
+            this.notifyPropertyChange("yearOpp", value);
+        }
+    }
+
+    public get monthOpp() {
+        return this._monthOpp;
+    }
+
+    public set monthOpp(value: number) {
+        if (this._monthOpp !== value) {
+            this._monthOpp = value;
+            this.notifyPropertyChange("monthOpp", value); 
+        }
+    }
+
+    public get dayOpp() {
+        return this._dayOpp;
+    }
+
+    public set dayOpp(value: number) {
+        if (this._dayOpp !== value) {
+            this._dayOpp = value;
+            this.notifyPropertyChange("dayOpp", value);
+        }
+    }
+
+    public get yearSpi() {
+        return this._yearSpi;
+    }
+
+    public set yearSpi(value: number) {
+        if (this._yearSpi !== value) {
+            this._yearSpi = value;
+            this.notifyPropertyChange("yearSpi", value);
+        }
+    }
+
+    public get monthSpi() {
+        return this._monthSpi;
+    }
+
+    public set monthSpi(value: number) {
+        if (this._monthSpi !== value) {
+            this._monthSpi = value;
+            this.notifyPropertyChange("monthSpi", value); 
+        }
+    }
+
+    public get daySpi() {
+        return this._daySpi;
+    }
+
+    public set daySpi(value: number) {
+        if (this._daySpi !== value) {
+            this._daySpi = value;
+            this.notifyPropertyChange("daySpi", value);
+        }
+    }
+
 
     public get year() {
         return this._year;

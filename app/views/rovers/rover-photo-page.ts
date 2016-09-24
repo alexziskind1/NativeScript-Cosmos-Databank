@@ -46,20 +46,27 @@ export function onPageNavigatedTo(args: EventData) {
         day = navgationContext["day"];
         selectedRover = navgationContext["rover"];
 
-        pickersViewModel.set("day", day);
-        pickersViewModel.set("month", month);
-        pickersViewModel.set("year", year);
-        pickersViewModel.set("rover", selectedRover);
-
         switch (selectedRover) {
             case "curiosity":
-                roversViewModel = new RoversViewModel(selectedRover, year, month, day);          
+                roversViewModel = new RoversViewModel(selectedRover, year, month, day); 
+                pickersViewModel.set("day", day);
+                pickersViewModel.set("month", month);
+                pickersViewModel.set("year", year);
+                pickersViewModel.set("rover", selectedRover);         
                 break;
             case "opportunity":
                 roversViewModel = new RoversViewModel(selectedRover, year, month, day);
+                pickersViewModel.set("dayOpp", day);
+                pickersViewModel.set("monthOpp", month);
+                pickersViewModel.set("yearOpp", year);
+                pickersViewModel.set("rover", selectedRover); 
                 break;  
             case "spirit":
                 roversViewModel = new RoversViewModel(selectedRover, year, month, day);
+                pickersViewModel.set("daySpi", day);
+                pickersViewModel.set("monthSpi", month);
+                pickersViewModel.set("yearSpi", year);
+                pickersViewModel.set("rover", selectedRover); 
                 break;            
             default:
                 break;

@@ -6,27 +6,27 @@
 
     <ScrollView>
         <StackLayout loaded="onStackLoaded" id="pageContainer" class="page-container">
-            <StackLayout tap="toggleCur">
+            <StackLayout>
                 <Label text="Curiosity" class="title" textWrap="true" margin="8" />
-                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showCur ? 'visible' : 'collapsed' }}" >
+                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
                     <StackLayout>
                         <DatePicker id="dt-cur" class="date-picker" day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
                         <Button text="Curiosity" class="btn-picker" tap="{{ goToCuriosityPage }}" />                  
                     </StackLayout>
                 </Card:CardView>  
             </StackLayout>
-            <StackLayout tap="toggleOpp">
+            <StackLayout>
                 <Label text="Opportunity" class="title" textWrap="true" margin="8" />
-                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showOpp ? 'visible' : 'collapsed' }}" >  
+                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">  
                     <StackLayout>
                         <DatePicker id="dt-opp" class="date-picker" day="15" month="6" year="2007"></DatePicker>
                         <Button text="Opportunity" class="btn-picker" tap="{{ goToOpportunityPage }}" />
                     </StackLayout>
                 </Card:CardView>    
             </StackLayout>
-            <StackLayout tap="toggleSpi">
+            <StackLayout>
                 <Label text="Spirit" class="title" textWrap="true" margin="8" />
-                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showSpi? 'visible' : 'collapsed' }}" >
+                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
                     <StackLayout>
                         <DatePicker id="dt-spi" class="date-picker" day="15" month="6" year="2008"></DatePicker>
                         <Button text="Spirit" class="btn-picker" tap="{{ goToSpiritPage }}" />

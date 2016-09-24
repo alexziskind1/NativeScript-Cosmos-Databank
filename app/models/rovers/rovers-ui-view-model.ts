@@ -6,43 +6,6 @@ import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import * as frameModule from "ui/frame"; 
 
 export class UiViewModel extends Observable {
-
-    private _showCur: boolean = true;
-    private _showOpp: boolean = true;
-    private _showSpi: boolean = true;
-
-    public get showCur() {
-        return this._showCur;
-    }   
-   
-    public set showCur(value: boolean) {
-        if (this._showCur !== value) {
-            this._showCur = value;
-            this.notifyPropertyChange("showCur", value);
-        }
-    } 
-
-    public get showOpp() {
-        return this._showOpp;
-    }   
-
-    public set showOpp(value: boolean) {
-        if (this._showOpp !== value) {
-            this._showOpp = value;
-            this.notifyPropertyChange("showOpp", value);
-        }
-    } 
-
-    public get showSpi() {
-        return this._showSpi;
-    }   
-
-    public set showSpi(value: boolean) {
-        if (this._showSpi !== value) {
-            this._showSpi = value;
-            this.notifyPropertyChange("showSpi", value);
-        }
-    } 
     
     public goToCuriosityPage(args: EventData) {
         var button = <Button>args.object;
