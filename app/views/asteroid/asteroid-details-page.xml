@@ -1,15 +1,7 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onPageLoaded" navigatedTo="onPageNavigatedTo">
-    <Page.actionBar>
-      <ActionBar>
-        <NavigationButton text="Back" icon="" tap="goBack" />
-        <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="action-title"/>
-            </GridLayout>
-        </ActionBar.titleView>
-      </ActionBar>
-    </Page.actionBar> 
-
+<Page xmlns="http://www.nativescript.org/tns.xsd" 
+        actionBarHidden="true"
+        loaded="onPageLoaded" 
+        navigatedTo="onPageNavigatedTo">
 
     <StackLayout class="item-container">
         <Label text="{{ 'Reference ID: ' + contextItem.neo_reference_id }}" textWrap="true" />

@@ -4,7 +4,7 @@
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
 
-    <ScrollView swipe="onPageSwipe">
+    <ScrollView swipe="onScrollSwipe">
         <StackLayout id="pageContainer" class="pageContainer">
             <android>
                 <nativescript-fresco:FrescoDrawee

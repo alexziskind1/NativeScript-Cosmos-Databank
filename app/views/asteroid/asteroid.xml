@@ -1,15 +1,7 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onPageLoaded">
-    
-    <Page.actionBar>
-      <ActionBar>
-        <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="action-title"/>
-            </GridLayout>
-        </ActionBar.titleView>
-      </ActionBar>
-    </Page.actionBar>
-
+<Page xmlns="http://www.nativescript.org/tns.xsd" 
+        actionBarHidden="true"
+        loaded="onPageLoaded">
+        
     <StackLayout>
         <Label text="{{ asteroidCount == 0 ? 'counting near by asteroids' : asteroidCount + ' asteroids will fly near in the next 5 days'}}" textWrap="true" />
         <ListView items="{{ dataItems }}"  loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">

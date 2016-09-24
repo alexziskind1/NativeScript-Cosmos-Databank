@@ -6,6 +6,7 @@ import * as frame from "ui/frame";
 
 import { RoversViewModel, DataItem } from "../../models/rovers/rovers-view-model";
 import { DrawerOverNavigationModel } from  "../../models/drawer-over-navigation-model";
+import { pickersViewModel } from "./rovers-selection";
 
 import http = require("http");
 import * as RadListwModule from "nativescript-telerik-ui/listview";
@@ -44,6 +45,11 @@ export function onPageNavigatedTo(args: EventData) {
         month = navgationContext["month"];
         day = navgationContext["day"];
         selectedRover = navgationContext["rover"];
+
+        pickersViewModel.set("day", day);
+        pickersViewModel.set("month", month);
+        pickersViewModel.set("year", year);
+        pickersViewModel.set("rover", selectedRover);
 
         switch (selectedRover) {
             case "curiosity":

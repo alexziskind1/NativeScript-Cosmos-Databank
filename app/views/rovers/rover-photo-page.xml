@@ -1,20 +1,11 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"
+      actionBarHidden="true"
       xmlns:nativescript-fresco="nativescript-fresco" 
       xmlns:Card="nativescript-cardview"
       xmlns:lv="nativescript-telerik-ui/listview" 
       class="drawer-page"
       loaded="onPageLoaded" 
       navigatedTo="onPageNavigatedTo">
-
-    <Page.actionBar>
-      <ActionBar>
-        <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="action-title"/>
-            </GridLayout>
-        </ActionBar.titleView>
-      </ActionBar>
-    </Page.actionBar>
 
     <GridLayout id="pageContainer" class="page-container" rows="auto, 3*" columns="*">
         

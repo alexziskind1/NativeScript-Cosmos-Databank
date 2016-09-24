@@ -1,17 +1,8 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" 
+    actionBarHidden="true"
     xmlns:Card="nativescript-cardview"
     class="drawer-page"
     loaded="onPageLoaded" navigatedTo="onNavigatedTo">
-    
-    <Page.actionBar>
-      <ActionBar>
-        <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="action-title"/>
-            </GridLayout>
-        </ActionBar.titleView>
-      </ActionBar>
-    </Page.actionBar>
 
     <ScrollView>
         <StackLayout loaded="onStackLoaded" id="pageContainer" class="page-container">
@@ -19,7 +10,7 @@
                 <Label text="Curiosity" class="title" textWrap="true" margin="8" />
                 <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50" visibility="{{ showCur ? 'visible' : 'collapsed' }}" >
                     <StackLayout>
-                        <DatePicker id="dt-cur" class="date-picker" day="15" month="6" year="2014"></DatePicker>
+                        <DatePicker id="dt-cur" class="date-picker" day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
                         <Button text="Curiosity" class="btn-picker" tap="{{ goToCuriosityPage }}" />                  
                     </StackLayout>
                 </Card:CardView>  

@@ -1,16 +1,8 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
+      actionBarHidden="true"
       xmlns:nativescript-fresco="nativescript-fresco"
       loaded="onPageLoaded">
 
-    <Page.actionBar>
-      <ActionBar>
-        <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="action-title"/>
-            </GridLayout>
-        </ActionBar.titleView>
-      </ActionBar>
-    </Page.actionBar>
 
     <ScrollView>
         <StackLayout class="page-container">

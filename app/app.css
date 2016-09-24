@@ -14,7 +14,10 @@ ActionBar {
     font-size: 20;
 }
 
-.action-title {
-    horizontal-align: center;
-    text-align: cemter;
-}
+/*DatePicker {
+    font-family: "Nasalization";
+    background-color: #343838;   
+    color: #E8EAEB;
+    font-size: 20;
+    font-weight: bold;
+}*/

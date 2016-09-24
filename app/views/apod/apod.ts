@@ -1,22 +1,22 @@
-import { topmost } from "ui/frame";
-import { ListView } from "ui/list-view";
-import { Page } from "ui/page";
-import { GridLayout } from "ui/layouts/grid-layout";
-import { StackLayout } from "ui/layouts/stack-layout";
+import { EventData, PropertyChangeData } from "data/observable";
 import { Button } from "ui/button";
 import { Image } from "ui/image";
 import { GestureTypes, GestureEventData, SwipeGestureEventData } from "ui/gestures";
+import { GridLayout } from "ui/layouts/grid-layout";
+import { ListView } from "ui/list-view";
+import { Page } from "ui/page";
 import { ScrollView } from "ui/scroll-view";
-import dialogs = require("ui/dialogs");
-import application = require("application");
-import platformModule = require("platform");
-import fileSystem = require("file-system");
-import enums = require("ui/enums");
-import imageSource = require("image-source");
-import color = require("color");
-import * as utils from 'utils/utils';
+import { StackLayout } from "ui/layouts/stack-layout";
+import { topmost } from "ui/frame";
 
-import { EventData, PropertyChangeData } from "data/observable";
+import application = require("application");
+import color = require("color");
+import dialogs = require("ui/dialogs");
+import enums = require("ui/enums");
+import fileSystem = require("file-system");
+import imageSource = require("image-source");
+import platformModule = require("platform");
+import * as utils from 'utils/utils';
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 
@@ -57,33 +57,27 @@ export function onPageLoaded(args: EventData) {
         });
 
         shareButtonAndroid.on("tap", function (args: GestureEventData)  {
-            console.log("Android share tapped!");
             SocialShare.shareImage(currentImage, "NASA APOD");
         })
 
         saveButtonAndroid.on("tap", function (args: GestureEventData)  {
-            console.log("Android save tapped!");
-
             saveFile(currentImage);
 
             var options = {
                 title: "Photo Downloaded!",
-                message: "APOD successfully saved in Downloads!",
+                message: "APOD Image successfully saved in /Downloads/CosmosDataBank!",
                 okButtonText: "OK"
             };
             dialogs.alert(options).then(() => {
-                console.log("APOD successfully saved in /Downloads/CosmosDB");
+                console.log("APOD Image successfully saved in /Downloads/CosmosDataBank");
             });
         })
 
         desktopButtonAndroid.on("tap", function (args: GestureEventData) {
-            console.log("Set Wallpepaer Tapped!");
-
             saveFile(currentImage);
 
             var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
             try {
-                console.log(currentSavedPath);
                 var imageToSet = imageSource.fromFile(currentSavedPath);
                 wallpaperManager.setBitmap(imageToSet.android);
             } catch (error) {
@@ -92,9 +86,9 @@ export function onPageLoaded(args: EventData) {
 
         })
 
-        saveButtonAndroid.opacity = 0.1;
-        desktopButtonAndroid.opacity = 0.1;
-        shareButtonAndroid.opacity = 0.1;
+        saveButtonAndroid.opacity = 0.2;
+        desktopButtonAndroid.opacity = 0.2;
+        shareButtonAndroid.opacity = 0.2
     }
 
     if (application.ios) {
@@ -108,7 +102,7 @@ export function onPageLoaded(args: EventData) {
     }
 }
 
-export function onPageSwipe(args: SwipeGestureEventData) {
+export function onScrollSwipe(args: SwipeGestureEventData) {
     if (args.direction === 1) {
         previousDate();
     } else if (args.direction === 2) {
@@ -128,29 +122,27 @@ export function onPageNavigatedTo(args: EventData) {
 }
 
 export function previousDate() {
-    saveButtonAndroid.opacity = 0.1;
-    desktopButtonAndroid.opacity = 0.1;
-    shareButtonAndroid.opacity = 0.1;
+    saveButtonAndroid.opacity = 0.2;
+    desktopButtonAndroid.opacity = 0.2;
+    shareButtonAndroid.opacity = 0.2;
 
     // add check if the date is not too far in the past (check first APOD date)
     var currentDate = apodViewModel.get("selectedDate");
-
     currentDate.setDate(currentDate.getDate()-1);
     apodViewModel.set("selectedDate", currentDate);
-    // apodViewModel.set("isItemVisible", true);
     apodViewModel.initDataItems(formatDate(currentDate)); 
 }
 
 export function nextDate() {
-    saveButtonAndroid.opacity = 0.1;
-    desktopButtonAndroid.opacity = 0.1;
-    shareButtonAndroid.opacity = 0.1;
+    saveButtonAndroid.opacity = 0.2;
+    desktopButtonAndroid.opacity = 0.2;
+    shareButtonAndroid.opacity = 0.2
 
     var currentDate = apodViewModel.get("selectedDate");
     if (currentDate >= new Date()) {
         var options = {
             title: "Error!",
-            message: "We cab not show photos from the future! ;)",
+            message: "We can't show photos from the future! ;)",
             okButtonText: "OK"
         };
         dialogs.alert(options).then(() => {
@@ -159,7 +151,6 @@ export function nextDate() {
     } else {
         currentDate.setDate(currentDate.getDate()+1);
         apodViewModel.set("selectedDate", currentDate);
-        // apodViewModel.set("isItemVisible", true);
         apodViewModel.initDataItems(formatDate(currentDate)); 
     }
 
@@ -192,30 +183,28 @@ export function onFinalImageSet(args: FinalEventData) {
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res: imageSource.ImageSource) {
             currentImage = res;
-            return currentImage;
+            
+            saveButtonAndroid.animate({opacity: 0.2,rotate: 360})
+            .then( function () { return saveButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( function () { return saveButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+
+            desktopButtonAndroid.animate({opacity: 0.2,rotate: 360})
+            .then( function () { return desktopButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( function () { return desktopButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+
+            shareButtonAndroid.animate({opacity: 0.2,rotate: 360})
+            .then( function () { return shareButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( function () { return shareButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
         }, function (error) {
             // console.log("Error loading image: " + error);
-    }).then(function(res: imageSource.ImageSource) {
-
-        // apodViewModel.set("isItemVisible", true);
-
-        saveButtonAndroid.animate({opacity: 0.2,rotate: 360, duration: 20})
-        .then( function () { return saveButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-        .then( function () { return saveButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); })
-        .then( function () { return desktopButtonAndroid.animate({opacity: 0.2,rotate: 360, duration: 200}); })
-        .then( function () { return desktopButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-        .then( function () { return desktopButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); })
-        .then( function () { return shareButtonAndroid.animate({opacity: 0.2,rotate: 360, duration: 200}); })
-        .then( function () { return shareButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-        .then( function () { return shareButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); })
-
-    });    
+    })   
 }
 
 export function saveFile(res: imageSource.ImageSource) {
 
     // try-catch HERE to endsure you have res!!!
-    // var url = apodViewModel.get("dataItem").url;
+    var url = apodViewModel.get("dataItem").url;
+    console.log(url);
 
     // var fileName = url.substring(url.lastIndexOf("/") + 1);
     // var n = fileName.indexOf('.');
