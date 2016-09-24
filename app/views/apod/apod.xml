@@ -18,11 +18,11 @@
                                     submit="onSubmit"
                                     finalImageSet="onFinalImageSet" />            
                 <GridLayout rows="*" columns="*, *, *, *, *">
-                    <Button col="0" text="&#xf053;" id="btn-prev" class="font-awesome" tap="previousDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />
+                    <Button col="0" text="&#xf053;" id="btn-prev" class="font-awesome" tap="previousDate"  />
                     <Button col="1" text="&#xf019;" id="btn-save" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
                     <Button col="2" text="&#xf108;" id="btn-desktop" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" /> 
                     <Button col="3" text="&#xf1e0;" id="btn-share" class="font-awesome"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />     
-                    <Button col="4" text="&#xf054;" id="btn-next" class="font-awesome" tap="nextDate"  visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}" />   
+                    <Button col="4" text="&#xf054;" id="btn-next" class="font-awesome" tap="nextDate"   />   
                 </GridLayout>
             </android>
 

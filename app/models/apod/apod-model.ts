@@ -59,6 +59,7 @@ export class ApodViewModel extends Observable {
     public requestApod(apodDataItem: ApodItem, apiUrl: string, date?: string) {
         var that = this;
 
+        // default: no date === today
         if (date) {
             date = "&date=" + date;
             apiUrl = apiUrl + date;

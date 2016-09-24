@@ -13,11 +13,11 @@ import platformModule = require("platform");
 import fileSystem = require("file-system");
 import enums = require("ui/enums");
 import imageSource = require("image-source");
+import color = require("color");
 import * as utils from 'utils/utils';
 
 import { EventData, PropertyChangeData } from "data/observable";
 
-import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-model";
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 
 var permissions = require( "nativescript-permissions");
@@ -28,7 +28,6 @@ import * as SocialShare from "nativescript-social-share";
 let apodViewModel = new ApodViewModel();
 apodViewModel.set("isItemVisible", true);
 
-let drawerViewModel = new DrawerOverNavigationModel();
 let page;
 
 let shareButtonAndroid;
@@ -37,9 +36,9 @@ let desktopButtonAndroid;
 
 let shareButtonIOS;
 let iosImage;
-let currentImage: imageSource.ImageSource;
 
-var currentSaved;
+let currentImage: imageSource.ImageSource;
+var currentSavedPath;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -64,7 +63,8 @@ export function onPageLoaded(args: EventData) {
 
         saveButtonAndroid.on("tap", function (args: GestureEventData)  {
             console.log("Android save tapped!");
-            onSaveFile(currentImage);
+
+            saveFile(currentImage);
 
             var options = {
                 title: "Photo Downloaded!",
@@ -79,21 +79,22 @@ export function onPageLoaded(args: EventData) {
         desktopButtonAndroid.on("tap", function (args: GestureEventData) {
             console.log("Set Wallpepaer Tapped!");
 
-            onSaveFile(currentImage);
+            saveFile(currentImage);
 
-                var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
-                try {
-                    console.log(currentSaved);
-                    var imageToSet = imageSource.fromFile(currentSaved);
-                    console.log(imageToSet);
-                    console.log(imageToSet.android);
-                    wallpaperManager.setBitmap(imageToSet.android);
-                } catch (error) {
-                    console.log(error);
-                }
+            var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
+            try {
+                console.log(currentSavedPath);
+                var imageToSet = imageSource.fromFile(currentSavedPath);
+                wallpaperManager.setBitmap(imageToSet.android);
+            } catch (error) {
+                console.log(error);
+            }
 
         })
 
+        saveButtonAndroid.opacity = 0.1;
+        desktopButtonAndroid.opacity = 0.1;
+        shareButtonAndroid.opacity = 0.1;
     }
 
     if (application.ios) {
@@ -119,22 +120,31 @@ export function onPageNavigatedTo(args: EventData) {
     page = <Page>args.object;
     var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
-    apodViewModel.initDataItems();
-    apodViewModel.set("isVideoVisible", false);
-    apodViewModel.set("isPhotoVisible", true);
+    if (!apodViewModel.get("dataItem")) {
+        apodViewModel.initDataItems();
+    }
+
     pageContainer.bindingContext = apodViewModel;
 }
 
 export function previousDate() {
+    saveButtonAndroid.opacity = 0.1;
+    desktopButtonAndroid.opacity = 0.1;
+    shareButtonAndroid.opacity = 0.1;
+
     // add check if the date is not too far in the past (check first APOD date)
     var currentDate = apodViewModel.get("selectedDate");
+
     currentDate.setDate(currentDate.getDate()-1);
     apodViewModel.set("selectedDate", currentDate);
-    apodViewModel.set("isItemVisible", true);
+    // apodViewModel.set("isItemVisible", true);
     apodViewModel.initDataItems(formatDate(currentDate)); 
 }
 
 export function nextDate() {
+    saveButtonAndroid.opacity = 0.1;
+    desktopButtonAndroid.opacity = 0.1;
+    shareButtonAndroid.opacity = 0.1;
 
     var currentDate = apodViewModel.get("selectedDate");
     if (currentDate >= new Date()) {
@@ -149,7 +159,7 @@ export function nextDate() {
     } else {
         currentDate.setDate(currentDate.getDate()+1);
         apodViewModel.set("selectedDate", currentDate);
-        apodViewModel.set("isItemVisible", true);
+        // apodViewModel.set("isItemVisible", true);
         apodViewModel.initDataItems(formatDate(currentDate)); 
     }
 
@@ -168,7 +178,7 @@ function formatDate(date) {
 }
 
 export function onSubmit(args: EventData) {
-    console.log(apodViewModel.get("dataItem").media_type);
+    console.log("media_type: " + apodViewModel.get("dataItem").media_type);
 
     var mediaType = apodViewModel.get("dataItem").media_type;
     if (mediaType === "video") {
@@ -182,12 +192,27 @@ export function onFinalImageSet(args: FinalEventData) {
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res: imageSource.ImageSource) {
             currentImage = res;
+            return currentImage;
         }, function (error) {
             // console.log("Error loading image: " + error);
+    }).then(function(res: imageSource.ImageSource) {
+
+        // apodViewModel.set("isItemVisible", true);
+
+        saveButtonAndroid.animate({opacity: 0.2,rotate: 360, duration: 20})
+        .then( function () { return saveButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+        .then( function () { return saveButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); })
+        .then( function () { return desktopButtonAndroid.animate({opacity: 0.2,rotate: 360, duration: 200}); })
+        .then( function () { return desktopButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+        .then( function () { return desktopButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); })
+        .then( function () { return shareButtonAndroid.animate({opacity: 0.2,rotate: 360, duration: 200}); })
+        .then( function () { return shareButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+        .then( function () { return shareButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); })
+
     });    
 }
 
-export function onSaveFile(res: imageSource.ImageSource) {
+export function saveFile(res: imageSource.ImageSource) {
 
     // try-catch HERE to endsure you have res!!!
     // var url = apodViewModel.get("dataItem").url;
@@ -205,7 +230,7 @@ export function onSaveFile(res: imageSource.ImageSource) {
     var path = fileSystem.path.join(cosmosFolderPath, fileName);
     var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
 
-    currentSaved = path;
+    currentSavedPath = path;
 }
 
 export function onIosShare() {
@@ -220,7 +245,4 @@ export function onIosShare() {
 
 export function onIosStackLoaded() {
     console.log("onIosImageLoaded");
-    // check this
-
-    // apodViewModel.set("isItemVisible", true);
 }
