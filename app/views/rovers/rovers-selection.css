@@ -1,25 +1,18 @@
-.page-container {
-    background-color: #343838;
-}
-
-.cardStyle {
-    font-family: "Nasalization";    
-    background-color: #BCBCBC;   
-    color: #343838;
-    font-size: 14; 
-}
-/*
-.date-picker {
+.stackStyle {
     font-family: "Nasalization";    
     background-color: #343838;   
     color: #E8EAEB;
     font-size: 14; 
-}*/
+}
+
+.dt {
+    background-color: white;
+    horizontal-align: center;
+}
 
 .btn-picker {
     font-family: "Nasalization";    
     background-color: #343838;   
     color: #E8EAEB;
     font-size: 14; 
-    width: 200;
 }

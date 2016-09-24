@@ -2,15 +2,12 @@ import { EventData } from "data/observable";
 import { topmost } from "ui/frame";
 import { Page } from "ui/page";
 import { DatePicker } from "ui/date-picker";
-import { StackLayout } from "ui/layouts/stack-layout";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 
 import { PickersViewModel } from "../../models/rovers/pickers-view-model";
-import { UiViewModel } from "../../models/rovers/rovers-ui-view-model";
 
 export let pickersViewModel = new PickersViewModel();
-let uiViewModel = new UiViewModel();
 
 export function onPageLoaded(args: EventData) {
     var page = <Page>args.object;
@@ -69,9 +66,4 @@ export function onPageLoaded(args: EventData) {
 	}
 
 	page.bindingContext = pickersViewModel;
-}
-
-export function onStackLoaded(args: EventData) {
-	var stack = <StackLayout>args.object;
-	stack.bindingContext = uiViewModel;
 }

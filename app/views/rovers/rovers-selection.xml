@@ -1,38 +1,67 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" 
     actionBarHidden="true"
     xmlns:Card="nativescript-cardview"
-    class="drawer-page"
     loaded="onPageLoaded" navigatedTo="onNavigatedTo">
 
-    <ScrollView>
-        <StackLayout loaded="onStackLoaded" id="pageContainer" class="page-container">
-            <StackLayout>
-                <Label text="Curiosity" class="title" textWrap="true" margin="8" />
-                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
-                    <StackLayout>
-                        <DatePicker id="dt-cur" class="date-picker" day="{{ day }}" month="{{ month }}" year="{{ year }}"></DatePicker>
-                        <Button text="Curiosity" class="btn-picker" tap="{{ goToCuriosityPage }}" />                  
+<TabView id="tabViewContainer">
+    <TabView.items>
+        <TabViewItem title="Curiosity">
+            <TabViewItem.view>
+
+                <ScrollView>
+                    <StackLayout class="stackStyle" >
+                        <SegmentedBar selectedIndex="{{ selectedIndexCur }}">
+                            <SegmentedBar.items>
+                                <SegmentedBarItem title="Info" />
+                                <SegmentedBarItem title="Photos" />
+                            </SegmentedBar.items>
+                        </SegmentedBar>
+                        <GridLayout rows="auto, auto" columns="*" margin="10">
+                            <DatePicker row="0" id="dt-cur" class="dt"></DatePicker>
+                            <Button row="1" text="Explore Curiosity Photos" class="btn-picker" tap="{{ goToCuriosityPage }}" />
+                        </GridLayout>
                     </StackLayout>
-                </Card:CardView>  
-            </StackLayout>
-            <StackLayout>
-                <Label text="Opportunity" class="title" textWrap="true" margin="8" />
-                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">  
-                    <StackLayout>
-                        <DatePicker id="dt-opp" class="date-picker" day="15" month="6" year="2007"></DatePicker>
-                        <Button text="Opportunity" class="btn-picker" tap="{{ goToOpportunityPage }}" />
-                    </StackLayout>
-                </Card:CardView>    
-            </StackLayout>
-            <StackLayout>
-                <Label text="Spirit" class="title" textWrap="true" margin="8" />
-                <Card:CardView class="cardStyle" margin="8" elevation="40" radius="50">
-                    <StackLayout>
-                        <DatePicker id="dt-spi" class="date-picker" day="15" month="6" year="2008"></DatePicker>
-                        <Button text="Spirit" class="btn-picker" tap="{{ goToSpiritPage }}" />
-                    </StackLayout>
-                </Card:CardView>  
-            </StackLayout>
-        </StackLayout>  
-    </ScrollView>
+                </ScrollView>
+
+            </TabViewItem.view>
+        </TabViewItem>
+        <TabViewItem title="Opportunity">
+            <TabViewItem.view>
+
+                    <StackLayout class="stackStyle" >
+                        <SegmentedBar selectedIndex="{{ selectedIndexOpp }}">
+                            <SegmentedBar.items>
+                                <SegmentedBarItem title="Info" />
+                                <SegmentedBarItem title="Photos" />
+                            </SegmentedBar.items>
+                        </SegmentedBar>
+                        <GridLayout rows="auto, auto" columns="*" margin="10">
+                            <DatePicker row="0" id="dt-opp" class="dt"></DatePicker>
+                            <Button row="1" text="Explore Opportunity Photos" class="btn-picker" tap="{{ goToOpportunityPage }}" />
+                        </GridLayout>
+                    </StackLayout>  
+
+            </TabViewItem.view>
+        </TabViewItem>
+        <TabViewItem title="Spirit">
+            <TabViewItem.view>
+
+                    <StackLayout class="stackStyle" >
+                        <SegmentedBar selectedIndex="{{ selectedIndexSpi }}">
+                            <SegmentedBar.items>
+                                <SegmentedBarItem title="Info" />
+                                <SegmentedBarItem title="Photos" />
+                            </SegmentedBar.items>
+                        </SegmentedBar>
+                        <GridLayout rows="auto, auto" columns="*" margin="10">
+                            <DatePicker row="0" id="dt-spi" class="dt"></DatePicker>
+                            <Button row="1" text="Explore Spirit Photos" class="btn-picker" tap="{{ goToSpiritPage }}" />
+                        </GridLayout>
+                    </StackLayout>  
+
+            </TabViewItem.view>
+        </TabViewItem>        
+    </TabView.items>
+</TabView>
+
 </Page>

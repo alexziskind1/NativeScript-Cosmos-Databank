@@ -5,7 +5,6 @@ import { GridLayout } from "ui/layouts/grid-layout";
 import * as frame from "ui/frame";
 
 import { RoversViewModel, DataItem } from "../../models/rovers/rovers-view-model";
-import { DrawerOverNavigationModel } from  "../../models/drawer-over-navigation-model";
 import { pickersViewModel } from "./rovers-selection";
 
 import http = require("http");

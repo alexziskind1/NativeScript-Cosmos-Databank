@@ -1,4 +1,9 @@
-import { Observable } from "data/observable";
+import { Observable, EventData } from "data/observable";
+import { Button } from "ui/button";
+import { DatePicker } from "ui/date-picker";
+
+import drawerModule = require("nativescript-telerik-ui/sidedrawer");
+import * as frameModule from "ui/frame"; 
 
 export class PickersViewModel extends Observable {
 
@@ -131,6 +136,34 @@ export class PickersViewModel extends Observable {
         }
     }
 
+    public goToCuriosityPage(args: EventData) {
+        var button = <Button>args.object;
+        var dt = <DatePicker>button.parent.getViewById("dt-cur");
 
+        frameModule.topmost().navigate({
+            moduleName: "./views/rovers/rover-photo-page",
+            context: { "rover": "curiosity", "year": dt.year, "month": dt.month, "day": dt.day }
+        });
+    }
+
+    public goToOpportunityPage(args: EventData) {
+        var button = <Button>args.object;
+        var dt = <DatePicker>button.parent.getViewById("dt-opp");
+
+        frameModule.topmost().navigate({
+            moduleName: "./views/rovers/rover-photo-page",
+            context: { "rover": "opportunity", "year": dt.year, "month": dt.month, "day": dt.day }
+        });
+    }
+
+    public goToSpiritPage(args: EventData) {
+        var button = <Button>args.object;
+        var dt = <DatePicker>button.parent.getViewById("dt-spi");
+
+        frameModule.topmost().navigate({
+            moduleName: "./views/rovers/rover-photo-page",
+            context: { "rover": "spirit", "year": dt.year, "month": dt.month, "day": dt.day }
+        });
+    }
 
 }
