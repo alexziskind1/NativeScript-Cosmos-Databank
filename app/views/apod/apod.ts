@@ -20,7 +20,6 @@ import * as utils from 'utils/utils';
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 
-var permissions = require( "nativescript-permissions");
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
@@ -47,14 +46,6 @@ export function onPageLoaded(args: EventData) {
         shareButtonAndroid = <Button>page.getViewById("btn-share");
         saveButtonAndroid = <Button>page.getViewById("btn-save");
         desktopButtonAndroid = <Button>page.getViewById("btn-desktop");
-
-        permissions.requestPermission("android.permission.WRITE_EXTERNAL_STORAGE", "I need these permissions")
-            .then(function() {
-                console.log("Permissions granted!");
-            })
-            .catch(function() {
-                console.log("Uh oh, no permissions - plan B time!");
-        });
 
         shareButtonAndroid.on("tap", function (args: GestureEventData)  {
             SocialShare.shareImage(currentImage, "NASA APOD");

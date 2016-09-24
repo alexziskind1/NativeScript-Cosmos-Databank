@@ -6,7 +6,7 @@
 }
 
 .dt {
-    background-color: white;
+    background-color: #E8EAEB;
     horizontal-align: center;
 }
 
@@ -16,3 +16,6 @@
     color: #E8EAEB;
     font-size: 14; 
 }
+
+    /* light gray: #BCBCBC;  */
+    /* accent blue: #00B4CC;  */

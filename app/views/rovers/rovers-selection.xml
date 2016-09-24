@@ -27,7 +27,7 @@
         </TabViewItem>
         <TabViewItem title="Opportunity">
             <TabViewItem.view>
-
+                <ScrollView>
                     <StackLayout class="stackStyle" >
                         <SegmentedBar selectedIndex="{{ selectedIndexOpp }}">
                             <SegmentedBar.items>
@@ -40,12 +40,12 @@
                             <Button row="1" text="Explore Opportunity Photos" class="btn-picker" tap="{{ goToOpportunityPage }}" />
                         </GridLayout>
                     </StackLayout>  
-
+                </ScrollView>
             </TabViewItem.view>
         </TabViewItem>
         <TabViewItem title="Spirit">
             <TabViewItem.view>
-
+                <ScrollView>
                     <StackLayout class="stackStyle" >
                         <SegmentedBar selectedIndex="{{ selectedIndexSpi }}">
                             <SegmentedBar.items>
@@ -58,7 +58,7 @@
                             <Button row="1" text="Explore Spirit Photos" class="btn-picker" tap="{{ goToSpiritPage }}" />
                         </GridLayout>
                     </StackLayout>  
-
+                </ScrollView>
             </TabViewItem.view>
         </TabViewItem>        
     </TabView.items>
