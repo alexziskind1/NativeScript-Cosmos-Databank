@@ -18,14 +18,12 @@ import imageSource = require("image-source");
 import platformModule = require("platform");
 import * as utils from 'utils/utils';
 
-import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
-
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
- 
+
+import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 let apodViewModel = new ApodViewModel();
-apodViewModel.set("isItemVisible", true);
 
 let page;
 
@@ -47,24 +45,17 @@ export function onPageLoaded(args: EventData) {
         saveButtonAndroid = <Button>page.getViewById("btn-save");
         desktopButtonAndroid = <Button>page.getViewById("btn-desktop");
 
-        shareButtonAndroid.on("tap", function (args: GestureEventData)  {
+        shareButtonAndroid.on(Button.tapEvent, function (args: EventData)  {
             SocialShare.shareImage(currentImage, "NASA APOD");
+            console.log("Share tapped! {android}");
         })
 
-        saveButtonAndroid.on("tap", function (args: GestureEventData)  {
+        saveButtonAndroid.on(Button.tapEvent, function (args: EventData)  {
             saveFile(currentImage);
-
-            var options = {
-                title: "Photo Downloaded!",
-                message: "APOD Image successfully saved in /Downloads/CosmosDataBank!",
-                okButtonText: "OK"
-            };
-            dialogs.alert(options).then(() => {
-                console.log("APOD Image successfully saved in /Downloads/CosmosDataBank");
-            });
+            console.log("Save File tapped! (android)");
         })
 
-        desktopButtonAndroid.on("tap", function (args: GestureEventData) {
+        desktopButtonAndroid.on(Button.tapEvent, function (args: EventData) {
             saveFile(currentImage);
 
             var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
@@ -75,11 +66,11 @@ export function onPageLoaded(args: EventData) {
                 console.log(error);
             }
 
+            console.log("Set wallpaper tapped! (android)");
         })
 
-        saveButtonAndroid.opacity = 0.2;
-        desktopButtonAndroid.opacity = 0.2;
-        shareButtonAndroid.opacity = 0.2
+        setButtonsOpacity(0.2);
+        setUserInteraction(false);
     }
 
     if (application.ios) {
@@ -113,9 +104,8 @@ export function onPageNavigatedTo(args: EventData) {
 }
 
 export function previousDate() {
-    saveButtonAndroid.opacity = 0.2;
-    desktopButtonAndroid.opacity = 0.2;
-    shareButtonAndroid.opacity = 0.2;
+    setButtonsOpacity(0.2);
+    setUserInteraction(false);
 
     // add check if the date is not too far in the past (check first APOD date)
     var currentDate = apodViewModel.get("selectedDate");
@@ -125,9 +115,8 @@ export function previousDate() {
 }
 
 export function nextDate() {
-    saveButtonAndroid.opacity = 0.2;
-    desktopButtonAndroid.opacity = 0.2;
-    shareButtonAndroid.opacity = 0.2
+    setButtonsOpacity(0.2);
+    setUserInteraction(false);
 
     var currentDate = apodViewModel.get("selectedDate");
     if (currentDate >= new Date()) {
@@ -145,18 +134,6 @@ export function nextDate() {
         apodViewModel.initDataItems(formatDate(currentDate)); 
     }
 
-}
-
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
 }
 
 export function onSubmit(args: EventData) {
@@ -186,35 +163,33 @@ export function onFinalImageSet(args: FinalEventData) {
             shareButtonAndroid.animate({opacity: 0.2,rotate: 360})
             .then( function () { return shareButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
             .then( function () { return shareButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            
+            setUserInteraction(true);
         }, function (error) {
             // console.log("Error loading image: " + error);
     })   
 }
 
 export function saveFile(res: imageSource.ImageSource) {
-
-    // try-catch HERE to endsure you have res!!!
     var url = apodViewModel.get("dataItem").url;
-    console.log(url);
+    var fileName = url.substring(url.lastIndexOf("/") + 1);
+    var n = fileName.indexOf('.');
+    fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
 
-    // var fileName = url.substring(url.lastIndexOf("/") + 1);
-    // var n = fileName.indexOf('.');
-    // fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg"; // test this
-
-    //  THIS SHOULD BE ON FINAL IMAGE SET - OTHERWISE APP CRASHES if user try to save to early!!!!s
-    var fileName = "CosmosDB" + new Date().getDate().toString() + "-" + new Date().getTime().toString() + ".jpeg";
     var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
     var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
-
     var path = fileSystem.path.join(cosmosFolderPath, fileName);
-    var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
+    var exists = fileSystem.File.exists(path);
+
+    if (!exists) {
+        var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
+    }
 
     currentSavedPath = path;
 }
 
 export function onIosShare() {
-    
     imageSource.fromUrl(iosImage.src)
         .then(function (res: imageSource.ImageSource) {           
             SocialShare.shareImage(res);
@@ -225,4 +200,28 @@ export function onIosShare() {
 
 export function onIosStackLoaded() {
     console.log("onIosImageLoaded");
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+function setUserInteraction(state: boolean) {
+    shareButtonAndroid.isUserInteractionEnabled = state;
+    saveButtonAndroid.isUserInteractionEnabled = state;
+    desktopButtonAndroid.isUserInteractionEnabled = state;
+}
+
+function setButtonsOpacity(value: number) {
+    saveButtonAndroid.opacity = value;
+    desktopButtonAndroid.opacity = value;
+    shareButtonAndroid.opacity = value;
 }
