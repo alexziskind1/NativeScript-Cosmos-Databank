@@ -19,6 +19,7 @@
     "nativescript-permissions": "^1.2.0",
     "nativescript-social-share": "^1.3.0",
     "nativescript-telerik-ui": "^1.4.0",
+    "nativescript-toast": "^1.3.0",
     "nativescript-videoplayer": "^1.0.5",
     "tns-core-modules": "next",
     "tns-platform-declarations": "2.2.0"
@@ -29,6 +30,6 @@
     "babylon": "6.8.4",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "^0.3.0",
-    "typescript": "^1.8.10"
+    "typescript": "^2.0.3"
   }
 }

@@ -21,6 +21,7 @@ import * as utils from 'utils/utils';
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
+var Toast = require("nativescript-toast");
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 let apodViewModel = new ApodViewModel();
@@ -37,6 +38,28 @@ let iosImage;
 let currentImage: imageSource.ImageSource;
 var currentSavedPath;
 
+export function saveImage(args: EventData)  {
+    saveFile(currentImage);
+    console.log("save image TAP!");
+    Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+}
+
+export function setWallpaper(args: EventData) {
+    saveFile(currentImage);
+
+    var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
+    try {
+        var imageToSet = imageSource.fromFile(currentSavedPath);
+        wallpaperManager.setBitmap(imageToSet.android);
+    } catch (error) {
+        console.log(error);
+    }
+
+    Toast.makeText("Wallpaper Set!").show();
+    console.log("Wallpaper Set!");
+}
+
+
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
 
@@ -48,25 +71,6 @@ export function onPageLoaded(args: EventData) {
         shareButtonAndroid.on(Button.tapEvent, function (args: EventData)  {
             SocialShare.shareImage(currentImage, "NASA APOD");
             console.log("Share tapped! {android}");
-        })
-
-        saveButtonAndroid.on(Button.tapEvent, function (args: EventData)  {
-            saveFile(currentImage);
-            console.log("Save File tapped! (android)");
-        })
-
-        desktopButtonAndroid.on(Button.tapEvent, function (args: EventData) {
-            saveFile(currentImage);
-
-            var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
-            try {
-                var imageToSet = imageSource.fromFile(currentSavedPath);
-                wallpaperManager.setBitmap(imageToSet.android);
-            } catch (error) {
-                console.log(error);
-            }
-
-            console.log("Set wallpaper tapped! (android)");
         })
 
         setButtonsOpacity(0.2);
