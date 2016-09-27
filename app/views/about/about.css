@@ -1,0 +1,10 @@
+.pageContainer {
+    font-family: "Nasalization";    
+    background-color: #343838;   
+    color: #E8EAEB;
+    font-size: 14;
+}
+
+.pageContainer Label {
+    font-size: 18;
+}

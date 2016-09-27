@@ -1,7 +1,8 @@
-import { EventData } from "data/observable";
+import { EventData, Observable, PropertyChangeData } from "data/observable";
 import { topmost } from "ui/frame";
 import { Page } from "ui/page";
 import { DatePicker } from "ui/date-picker";
+import { SegmentedBar } from "ui/segmented-bar";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 
@@ -65,5 +66,68 @@ export function onPageLoaded(args: EventData) {
 		dtSpi.year = pickersViewModel.get("yearSpi");	
 	}
 
+	initSegmentedBars();
+
 	page.bindingContext = pickersViewModel;
+}
+
+function initSegmentedBars() {
+
+	pickersViewModel.set("selectedIndexCur", 1);
+	pickersViewModel.set("selectedIndexOpp", 1);
+	pickersViewModel.set("selectedIndexSpi", 1);
+
+	pickersViewModel.set("isCurInfoVisible", false);
+	pickersViewModel.set("isOppInfoVisible", false);
+	pickersViewModel.set("isSpiInfoVisible", false);
+
+	pickersViewModel.set("curiosityDescription", "Curiosity is a car-sized robotic rover exploring Gale Crater on Mars as part of NASA's Mars Science Laboratory mission (MSL)");
+	pickersViewModel.set("opporunityDescription", "Curiosity is a car-sized robotic rover exploring Gale Crater on Mars as part of NASA's Mars Science Laboratory mission (MSL)");
+	pickersViewModel.set("spiritDescription", "Curiosity is a car-sized robotic rover exploring Gale Crater on Mars as part of NASA's Mars Science Laboratory mission (MSL)");
+
+	pickersViewModel.addEventListener(Observable.propertyChangeEvent, function (args: PropertyChangeData) {
+		if (args.propertyName.toString() === "selectedIndexCur") {
+            switch (args.value) {
+                case 0:
+                    pickersViewModel.set("isCurInfoVisible", true);
+                    break;
+                case 1:
+                    pickersViewModel.set("isCurInfoVisible", false);
+                    break;     
+                default:
+                    break;
+            }
+		}
+	})
+
+	pickersViewModel.addEventListener(Observable.propertyChangeEvent, function (args: PropertyChangeData) {
+		if (args.propertyName.toString() === "selectedIndexOpp") {
+            switch (args.value) {
+                case 0:
+                    pickersViewModel.set("isOppInfoVisible", true);
+                    break;
+                case 1:
+                    pickersViewModel.set("isOppInfoVisible", false);
+                    break;     
+                default:
+                    break;
+            }
+		}
+	})
+
+	pickersViewModel.addEventListener(Observable.propertyChangeEvent, function (args: PropertyChangeData) {
+		if (args.propertyName.toString() === "selectedIndexSpi") {
+            switch (args.value) {
+                case 0:
+                    pickersViewModel.set("isSpiInfoVisible", true);
+                    break;
+                case 1:
+                    pickersViewModel.set("isSpiInfoVisible", false);
+                    break;     
+                default:
+                    break;
+            }
+		}
+	})
+
 }

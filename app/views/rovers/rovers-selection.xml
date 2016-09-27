@@ -16,7 +16,10 @@
                                 <SegmentedBarItem title="Photos" />
                             </SegmentedBar.items>
                         </SegmentedBar>
-                        <GridLayout rows="auto, auto" columns="*" margin="10">
+                        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isCurInfoVisible ? 'visible' : 'collapsed' }}" >
+                            <TextView text="{{ curiosityDescription }}" editable="false" />
+                        </GridLayout>
+                        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isCurInfoVisible ? 'visible' : 'collapsed' }}" >
                             <DatePicker row="0" id="dt-cur" class="dt"></DatePicker>
                             <Button row="1" text="Explore Curiosity Photos" class="btn-picker" tap="{{ goToCuriosityPage }}" />
                         </GridLayout>
@@ -35,7 +38,10 @@
                                 <SegmentedBarItem title="Photos" />
                             </SegmentedBar.items>
                         </SegmentedBar>
-                        <GridLayout rows="auto, auto" columns="*" margin="10">
+                        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isOppInfoVisible ? 'visible' : 'collapsed' }}" >
+                            <TextView text="{{ opporunityDescription }}" editable="false" />
+                        </GridLayout>
+                        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isOppInfoVisible ? 'visible' : 'collapsed' }}" >
                             <DatePicker row="0" id="dt-opp" class="dt"></DatePicker>
                             <Button row="1" text="Explore Opportunity Photos" class="btn-picker" tap="{{ goToOpportunityPage }}" />
                         </GridLayout>
@@ -53,7 +59,10 @@
                                 <SegmentedBarItem title="Photos" />
                             </SegmentedBar.items>
                         </SegmentedBar>
-                        <GridLayout rows="auto, auto" columns="*" margin="10">
+                        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isSpiInfoVisible ? 'visible' : 'collapsed' }}" >
+                            <TextView text="{{ spiritDescription }}" editable="false" />
+                        </GridLayout>
+                        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isSpiInfoVisible ? 'visible' : 'collapsed' }}" >
                             <DatePicker row="0" id="dt-spi" class="dt"></DatePicker>
                             <Button row="1" text="Explore Spirit Photos" class="btn-picker" tap="{{ goToSpiritPage }}" />
                         </GridLayout>

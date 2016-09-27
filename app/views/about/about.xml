@@ -10,15 +10,11 @@
       </ActionBar>
     </Page.actionBar>
 
-    <StackLayout id="pageContainer">
-        <StackLayout id="st-credits">
-            <Label text="Credits" textWrap="true" />
-            <Button text="NativeScript" tap="" />
-            <Button text="NASA" tap="" />
-        </StackLayout>
-        <StackLayout id="st-contacts">
-            <Label text="Native Nick" textWrap="true" />
-            <Label text="(contact info)" textWrap="true" />
-        </StackLayout>
+    <StackLayout id="pageContainer" class="pageContainer">
+        <GridLayout rows="*, *, *" columns="*">
+            <Label text="Powered by NativeScript" horizontalAlign="center" verticalAlign="center" textWrap="true" />
+            <Label text="NASA Open APIs" horizontalAlign="center" verticalAlign="center" textWrap="true" />
+            <Label text="NativeNick" horizontalAlign="center" verticalAlign="center" textWrap="true" />
+        </GridLayout>
     </StackLayout>
 </Page>
