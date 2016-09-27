@@ -21,7 +21,10 @@ import * as utils from 'utils/utils';
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
-var Toast = require("nativescript-toast");
+
+if (application.android) {
+    var Toast = require("nativescript-toast");
+}
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 let apodViewModel = new ApodViewModel();
@@ -37,28 +40,6 @@ let iosImage;
 
 let currentImage: imageSource.ImageSource;
 var currentSavedPath;
-
-export function saveImage(args: EventData)  {
-    saveFile(currentImage);
-    console.log("save image TAP!");
-    Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
-}
-
-export function setWallpaper(args: EventData) {
-    saveFile(currentImage);
-
-    var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
-    try {
-        var imageToSet = imageSource.fromFile(currentSavedPath);
-        wallpaperManager.setBitmap(imageToSet.android);
-    } catch (error) {
-        console.log(error);
-    }
-
-    Toast.makeText("Wallpaper Set!").show();
-    console.log("Wallpaper Set!");
-}
-
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -81,10 +62,10 @@ export function onPageLoaded(args: EventData) {
         shareButtonIOS = <Button>page.getViewById("btn-share-ios");
         iosImage = <Image>page.getViewById("ios-image");
 
-        shareButtonIOS.on("tap", function (args: GestureEventData)  {
-            console.log("Android share tapped!");
-            SocialShare.shareImage(currentImage, "NASA APOD");
-        })
+        // shareButtonIOS.on("tap", function (args: GestureEventData)  {
+        //     console.log("Android share tapped!");
+        //     SocialShare.shareImage(currentImage, "NASA APOD");
+        // })
     }
 }
 
@@ -107,9 +88,56 @@ export function onPageNavigatedTo(args: EventData) {
     pageContainer.bindingContext = apodViewModel;
 }
 
+export function onSaveImage(args: EventData)  {
+
+    if (application.ios) {
+        imageSource.fromUrl(iosImage.src)
+            .then(function (res: imageSource.ImageSource) {           
+                saveFile(res);
+                console.log("IOS save image TAP!");
+            }, function (error) {
+                // console.log("Error loading image: " + error);
+        }); 
+    } else if (application.android) {
+        console.log("ANDROID save image TAP!");
+        saveFile(currentImage);
+        Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+    }
+
+}
+
+export function onSetWallpaper(args: EventData) {
+    
+    if (application.ios) {
+        imageSource.fromUrl(iosImage.src)
+            .then(function (res: imageSource.ImageSource) {           
+                currentImage = res;
+            }, function (error) {
+                // console.log("Error loading image: " + error);
+        }); 
+    } else if (application.android) {
+
+        saveFile(currentImage);
+
+        var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
+        try {
+            var imageToSet = imageSource.fromFile(currentSavedPath);
+            wallpaperManager.setBitmap(imageToSet.android);
+        } catch (error) {
+            console.log(error);
+        }
+
+        Toast.makeText("Wallpaper Set!").show();
+    }
+
+    console.log("Wallpaper Set!");
+}
+
 export function previousDate() {
-    setButtonsOpacity(0.2);
-    setUserInteraction(false);
+    if (application.android) {
+        setButtonsOpacity(0.2);
+        setUserInteraction(false);
+    }
 
     // add check if the date is not too far in the past (check first APOD date)
     var currentDate = apodViewModel.get("selectedDate");
@@ -119,8 +147,10 @@ export function previousDate() {
 }
 
 export function nextDate() {
-    setButtonsOpacity(0.2);
-    setUserInteraction(false);
+    if (application.android) {
+        setButtonsOpacity(0.2);
+        setUserInteraction(false);
+    }
 
     var currentDate = apodViewModel.get("selectedDate");
     if (currentDate >= new Date()) {
@@ -142,10 +172,13 @@ export function nextDate() {
 
 export function onSubmit(args: EventData) {
     console.log("media_type: " + apodViewModel.get("dataItem").media_type);
+    console.log("url: " + apodViewModel.get("dataItem").url);
 
     var mediaType = apodViewModel.get("dataItem").media_type;
     if (mediaType === "video") {
-        // player for youtube?
+        // Needed player for youtube clips! 
+        // Hide the fresco for images and show the video player instead
+        // create a flag to know if video-player is active to change it on next() previous()
     }
 }
 
@@ -154,8 +187,8 @@ export function onFinalImageSet(args: FinalEventData) {
 
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res: imageSource.ImageSource) {
-            currentImage = res;
-            
+            currentImage = res;         
+
             saveButtonAndroid.animate({opacity: 0.2,rotate: 360})
             .then( function () { return saveButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
             .then( function () { return saveButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
@@ -169,6 +202,7 @@ export function onFinalImageSet(args: FinalEventData) {
             .then( function () { return shareButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
             
             setUserInteraction(true);
+
         }, function (error) {
             // console.log("Error loading image: " + error);
     })   
@@ -180,8 +214,14 @@ export function saveFile(res: imageSource.ImageSource) {
     var n = fileName.indexOf('.');
     fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
 
-    var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
-    var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
+    if (application.android) {
+        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
+        var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
+    } else if (application.ios) {
+        var iosDownloadPath = fileSystem.knownFolders.documents();
+        var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");  
+    }
+
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
     var path = fileSystem.path.join(cosmosFolderPath, fileName);
     var exists = fileSystem.File.exists(path);
@@ -194,16 +234,19 @@ export function saveFile(res: imageSource.ImageSource) {
 }
 
 export function onIosShare() {
-    imageSource.fromUrl(iosImage.src)
-        .then(function (res: imageSource.ImageSource) {           
-            SocialShare.shareImage(res);
-        }, function (error) {
-            // console.log("Error loading image: " + error);
-    });    
-}
+    console.log("iOS share tapped! 1");
+    console.log(iosImage.src);
 
-export function onIosStackLoaded() {
-    console.log("onIosImageLoaded");
+    imageSource.fromUrl(iosImage.src)
+        .then(function (res: imageSource.ImageSource) {      
+
+            console.log(res);
+            console.log("iOS share tapped! 2");     
+            SocialShare.shareImage(res);
+
+        }, function (error) {
+            console.log("Error loading image: " + error);
+    });    
 }
 
 function formatDate(date) {
