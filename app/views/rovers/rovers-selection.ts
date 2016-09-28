@@ -3,6 +3,7 @@ import { topmost } from "ui/frame";
 import { Page } from "ui/page";
 import { DatePicker } from "ui/date-picker";
 import { SegmentedBar } from "ui/segmented-bar";
+import { TabView, SelectedIndexChangedEventData } from "ui/tab-view";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 
@@ -11,10 +12,12 @@ import { PickersViewModel } from "../../models/rovers/pickers-view-model";
 export let pickersViewModel = new PickersViewModel();
 
 let page;
+let tabView;
 
 let dtCur;
 let dtOpp;
 let dtSpi;
+
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -27,10 +30,21 @@ export function onPageNavigatedTo(args: EventData) {
 	dtOpp = <DatePicker>page.getViewById("dt-opp");
 	dtSpi = <DatePicker>page.getViewById("dt-spi");
 
+	tabView = <TabView>page.getViewById("tabViewContainer");
+
 	initDatePickers();
 	initSegmentedBars();
+	initTabs();
 	
 	page.bindingContext = pickersViewModel;
+}
+
+function initTabs() {
+	pickersViewModel.addEventListener(Observable.propertyChangeEvent, function (args: PropertyChangeData) {
+		if (args.propertyName.toString() === "tabIndex") {
+            initDatePickers();
+		}
+	})
 }
 
 function initDatePickers() {
@@ -47,6 +61,8 @@ function initDatePickers() {
 	dtSpi.maxDate = new Date(2010, 1 + 1 , 21); // last communication March
 
 	if (!pickersViewModel.get("rover")) {
+		console.log("IF");
+
 		dtCur.day = today.getDate() - 2;
 		dtCur.month = today.getMonth() + 1;
 		dtCur.year = today.getFullYear();
@@ -71,6 +87,9 @@ function initDatePickers() {
 		pickersViewModel.set("monthSpi", dtSpi.month);
 		pickersViewModel.set("yearSpi", dtSpi.year);	
 	} else {
+
+		console.log("ELSE'");
+
 		dtCur.day = pickersViewModel.get("day");
 		dtCur.month = pickersViewModel.get("month");
 		dtCur.year = pickersViewModel.get("year");
@@ -143,5 +162,4 @@ function initSegmentedBars() {
             }
 		}
 	})
-
 }

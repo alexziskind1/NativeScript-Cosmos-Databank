@@ -5,7 +5,7 @@
     loaded="onPageLoaded" 
     navigatedTo="onPageNavigatedTo">
 
-    <TabView id="tabViewContainer">
+    <TabView id="tabViewContainer" selectedIndex="{{ tabIndex }}">
         <TabView.items>
             <TabViewItem title="Curiosity">
                 <TabViewItem.view>
