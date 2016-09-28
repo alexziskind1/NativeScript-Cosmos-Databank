@@ -135,8 +135,6 @@ export class PickersViewModel extends Observable {
         }
     }
 
-    
-
     public goToCuriosityPage(args: EventData) {
         var button = <Button>args.object;
         var dt = <DatePicker>button.parent.getViewById("dt-cur");

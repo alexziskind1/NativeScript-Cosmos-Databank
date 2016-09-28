@@ -23,6 +23,7 @@
             </lv:RadListView.listViewLayout>
             <lv:RadListView.itemTemplate>
                 <Card:CardView class="cardview" elevation="40" radius="50">
+
                     <android>
                         <GridLayout rows="auto, *" columns="2*, *">
                             <Label row="0" col="0" text="{{ cameraName }}" class="camera-android" textWrap="true" />
@@ -42,6 +43,7 @@
                                                                 finalImageSet="onFinalImageSet"/>
                         </GridLayout>
                     </android>
+
                     <ios>
                         <GridLayout rows="auto, *" columns="2*, *">
                             <Label row="0" col="0" text="{{ cameraName }}" class="camera-ios" textWrap="true" />
@@ -49,6 +51,7 @@
                             <Image row="1" col="0" colSpan="2"  src="{{ imageUri }}" verticalAlignment="top"/>
                         </GridLayout>
                     </ios>
+                    
                 </Card:CardView>                                      
             </lv:RadListView.itemTemplate>
         </lv:RadListView>           

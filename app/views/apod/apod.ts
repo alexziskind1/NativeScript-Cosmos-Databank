@@ -29,17 +29,14 @@ if (application.android) {
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 let apodViewModel = new ApodViewModel();
 
-let page;
-
-let shareButtonAndroid;
-let saveButtonAndroid;
-let desktopButtonAndroid;
-
-let shareButtonIOS;
-let iosImage;
-
+let page : Page;
+let shareButton : Button;
+let saveButton : Button;
+let desktopButton : Button;
+let iosImage : Image;
 let currentImage: imageSource.ImageSource;
-var currentSavedPath;
+
+var currentSavedPath : string;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -57,22 +54,16 @@ export function onPageNavigatedTo(args: EventData) {
     page = <Page>args.object;
     var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
+    shareButton = <Button>page.getViewById("btn-share");
+    saveButton = <Button>page.getViewById("btn-save");
+    desktopButton = <Button>page.getViewById("btn-desk");
+
     if (application.android) {
-        shareButtonAndroid = <Button>page.getViewById("btn-share");
-        saveButtonAndroid = <Button>page.getViewById("btn-save");
-        desktopButtonAndroid = <Button>page.getViewById("btn-desktop");
-
-        shareButtonAndroid.on(Button.tapEvent, function (args: EventData)  {
-            SocialShare.shareImage(currentImage, "NASA APOD");
-            console.log("Share tapped! {android}");
-        })
-
         setButtonsOpacity(0.2);
         setUserInteraction(false);
     }
 
     if (application.ios) {
-        shareButtonIOS = <Button>page.getViewById("btn-share-ios");
         iosImage = <Image>page.getViewById("ios-image");
     }
 
@@ -89,12 +80,10 @@ export function onSaveImage(args: EventData)  {
         imageSource.fromUrl(iosImage.src)
             .then(function (res: imageSource.ImageSource) {           
                 saveFile(res);
-                console.log("IOS save image TAP!");
             }, function (error) {
                 // console.log("Error loading image: " + error);
         }); 
     } else if (application.android) {
-        console.log("ANDROID save image TAP!");
         saveFile(currentImage);
         Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
@@ -126,6 +115,27 @@ export function onSetWallpaper(args: EventData) {
     }
 
     console.log("Wallpaper Set!");
+}
+
+export function onShare(args: EventData) {
+    if (application.android) {
+        SocialShare.shareImage(currentImage, "NASA APOD");
+        console.log("Share tapped! {android}");    
+    } else if (application.ios) {
+        console.log("iOS share tapped! 1");
+        console.log(iosImage.src);
+
+        imageSource.fromUrl(iosImage.src)
+            .then(function (res: imageSource.ImageSource) {      
+
+                console.log(res);
+                console.log("iOS share tapped! 2");     
+                SocialShare.shareImage(res);
+
+            }, function (error) {
+                console.log("Error loading image: " + error);
+        }); 
+    }
 }
 
 export function previousDate() {
@@ -179,17 +189,17 @@ export function onFinalImageSet(args: FinalEventData) {
         .then(function (res: imageSource.ImageSource) {
             currentImage = res;         
 
-            saveButtonAndroid.animate({opacity: 0.2,rotate: 360})
-            .then( function () { return saveButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( function () { return saveButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            saveButton.animate({opacity: 0.2,rotate: 360})
+            .then( function () { return saveButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( function () { return saveButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
 
-            desktopButtonAndroid.animate({opacity: 0.2,rotate: 360})
-            .then( function () { return desktopButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( function () { return desktopButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            desktopButton.animate({opacity: 0.2,rotate: 360})
+            .then( function () { return desktopButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( function () { return desktopButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
 
-            shareButtonAndroid.animate({opacity: 0.2,rotate: 360})
-            .then( function () { return shareButtonAndroid.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( function () { return shareButtonAndroid.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            shareButton.animate({opacity: 0.2,rotate: 360})
+            .then( function () { return shareButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( function () { return shareButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
             
             setUserInteraction(true);
 
@@ -208,6 +218,7 @@ export function saveFile(res: imageSource.ImageSource) {
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
+        // this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
         var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");  
     }
@@ -215,6 +226,7 @@ export function saveFile(res: imageSource.ImageSource) {
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
     var path = fileSystem.path.join(cosmosFolderPath, fileName);
     var exists = fileSystem.File.exists(path);
+    console.log(exists);
 
     if (!exists) {
         var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
@@ -252,13 +264,13 @@ function formatDate(date) {
 }
 
 function setUserInteraction(state: boolean) {
-    shareButtonAndroid.isUserInteractionEnabled = state;
-    saveButtonAndroid.isUserInteractionEnabled = state;
-    desktopButtonAndroid.isUserInteractionEnabled = state;
+    shareButton.isUserInteractionEnabled = state;
+    saveButton.isUserInteractionEnabled = state;
+    desktopButton.isUserInteractionEnabled = state;
 }
 
 function setButtonsOpacity(value: number) {
-    saveButtonAndroid.opacity = value;
-    desktopButtonAndroid.opacity = value;
-    shareButtonAndroid.opacity = value;
+    saveButton.opacity = value;
+    desktopButton.opacity = value;
+    shareButton.opacity = value;
 }

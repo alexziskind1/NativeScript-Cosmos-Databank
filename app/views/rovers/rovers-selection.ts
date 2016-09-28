@@ -10,23 +10,30 @@ import { PickersViewModel } from "../../models/rovers/pickers-view-model";
 
 export let pickersViewModel = new PickersViewModel();
 
-var dtCur;
-var dtOpp;
-var dtSpi;
+let page;
+
+let dtCur;
+let dtOpp;
+let dtSpi;
 
 export function onPageLoaded(args: EventData) {
-    var page = <Page>args.object;
+    page = <Page>args.object;
 }
 
 export function onPageNavigatedTo(args: EventData) {
-	var page = <Page>args.object;
+	page = <Page>args.object;
 
-	initSegmentedBars();
-
-	// Rovers: opportunity (2004- present), spirit (2004 - stuck in 2010), curiosity (2012 - present)
 	dtCur = <DatePicker>page.getViewById("dt-cur");
 	dtOpp = <DatePicker>page.getViewById("dt-opp");
 	dtSpi = <DatePicker>page.getViewById("dt-spi");
+
+	initDatePickers();
+	initSegmentedBars();
+	
+	page.bindingContext = pickersViewModel;
+}
+
+function initDatePickers() {
 
 	var today = new Date();
 
@@ -37,7 +44,7 @@ export function onPageNavigatedTo(args: EventData) {
 	dtOpp.maxDate = today; // still active 
 
 	dtSpi.minDate = new Date(2004, 0 , 5); // Landing date: 4th January 2004 - first pics on 5th
-	dtSpi.maxDate = new Date(2010, 2 + 1, 22); // last communication
+	dtSpi.maxDate = new Date(2010, 1 + 1 , 21); // last communication March
 
 	if (!pickersViewModel.get("rover")) {
 		dtCur.day = today.getDate() - 2;
@@ -45,7 +52,7 @@ export function onPageNavigatedTo(args: EventData) {
 		dtCur.year = today.getFullYear();
 
 		dtOpp.day = today.getDate() - 2;
-		dtOpp.month = today.getMonth() +1;
+		dtOpp.month = today.getMonth() + 1;
 		dtOpp.year = today.getFullYear();
 	
 		dtSpi.day = today.getDate() - 2;
@@ -76,8 +83,6 @@ export function onPageNavigatedTo(args: EventData) {
 		dtSpi.month = pickersViewModel.get("monthSpi");
 		dtSpi.year = pickersViewModel.get("yearSpi");	
 	}
-
-	page.bindingContext = pickersViewModel;
 }
 
 function initSegmentedBars() {

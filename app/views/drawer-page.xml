@@ -2,7 +2,7 @@
     xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
     xmlns:drawer="nativescript-telerik-ui/sidedrawer"
     xmlns:Card="nativescript-cardview"
-    loaded="onPageLoaded" navigatedTo="onNavigatedTo"
+    loaded="onPageLoaded" navigatedTo="onPageNavigatedTo"
     class="dp-all">
 
     <dpg:DrawerPage.actionBar>
