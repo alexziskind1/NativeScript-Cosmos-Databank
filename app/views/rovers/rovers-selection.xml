@@ -1,76 +1,33 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" 
     actionBarHidden="true"
     xmlns:Card="nativescript-cardview"
-    loaded="onPageLoaded" navigatedTo="onNavigatedTo">
+    xmlns:widgets="views/rovers/widgets"
+    loaded="onPageLoaded" 
+    navigatedTo="onPageNavigatedTo">
 
-<TabView id="tabViewContainer">
-    <TabView.items>
-        <TabViewItem title="Curiosity">
-            <TabViewItem.view>
+    <TabView id="tabViewContainer">
+        <TabView.items>
+            <TabViewItem title="Curiosity">
+                <TabViewItem.view>
 
-                <ScrollView>
-                    <StackLayout class="stackStyle" >
-                        <SegmentedBar selectedIndex="{{ selectedIndexCur }}">
-                            <SegmentedBar.items>
-                                <SegmentedBarItem title="Info" />
-                                <SegmentedBarItem title="Photos" />
-                            </SegmentedBar.items>
-                        </SegmentedBar>
-                        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isCurInfoVisible ? 'visible' : 'collapsed' }}" >
-                            <TextView text="{{ curiosityDescription }}" editable="false" />
-                        </GridLayout>
-                        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isCurInfoVisible ? 'visible' : 'collapsed' }}" >
-                            <DatePicker row="0" id="dt-cur" class="dt"></DatePicker>
-                            <Button row="1" text="Explore Curiosity Photos" class="btn-picker" tap="{{ goToCuriosityPage }}" />
-                        </GridLayout>
-                    </StackLayout>
-                </ScrollView>
+                    <widgets:curiosity />
+                    
+                </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Opportunity">
+                <TabViewItem.view>
 
-            </TabViewItem.view>
-        </TabViewItem>
-        <TabViewItem title="Opportunity">
-            <TabViewItem.view>
-                <ScrollView>
-                    <StackLayout class="stackStyle" >
-                        <SegmentedBar selectedIndex="{{ selectedIndexOpp }}">
-                            <SegmentedBar.items>
-                                <SegmentedBarItem title="Info" />
-                                <SegmentedBarItem title="Photos" />
-                            </SegmentedBar.items>
-                        </SegmentedBar>
-                        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isOppInfoVisible ? 'visible' : 'collapsed' }}" >
-                            <TextView text="{{ opporunityDescription }}" editable="false" />
-                        </GridLayout>
-                        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isOppInfoVisible ? 'visible' : 'collapsed' }}" >
-                            <DatePicker row="0" id="dt-opp" class="dt"></DatePicker>
-                            <Button row="1" text="Explore Opportunity Photos" class="btn-picker" tap="{{ goToOpportunityPage }}" />
-                        </GridLayout>
-                    </StackLayout>  
-                </ScrollView>
-            </TabViewItem.view>
-        </TabViewItem>
-        <TabViewItem title="Spirit">
-            <TabViewItem.view>
-                <ScrollView>
-                    <StackLayout class="stackStyle" >
-                        <SegmentedBar selectedIndex="{{ selectedIndexSpi }}">
-                            <SegmentedBar.items>
-                                <SegmentedBarItem title="Info" />
-                                <SegmentedBarItem title="Photos" />
-                            </SegmentedBar.items>
-                        </SegmentedBar>
-                        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isSpiInfoVisible ? 'visible' : 'collapsed' }}" >
-                            <TextView text="{{ spiritDescription }}" editable="false" />
-                        </GridLayout>
-                        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isSpiInfoVisible ? 'visible' : 'collapsed' }}" >
-                            <DatePicker row="0" id="dt-spi" class="dt"></DatePicker>
-                            <Button row="1" text="Explore Spirit Photos" class="btn-picker" tap="{{ goToSpiritPage }}" />
-                        </GridLayout>
-                    </StackLayout>  
-                </ScrollView>
-            </TabViewItem.view>
-        </TabViewItem>        
-    </TabView.items>
-</TabView>
+                    <widgets:opportunity />
 
+                </TabViewItem.view>
+            </TabViewItem>
+            <TabViewItem title="Spirit">
+                <TabViewItem.view>
+
+                    <widgets:spirit />
+
+                </TabViewItem.view>
+            </TabViewItem>        
+        </TabView.items>
+    </TabView>
 </Page>

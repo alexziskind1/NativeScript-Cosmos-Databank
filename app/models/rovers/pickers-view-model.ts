@@ -102,7 +102,6 @@ export class PickersViewModel extends Observable {
         }
     }
 
-
     public get year() {
         return this._year;
     }
@@ -135,6 +134,8 @@ export class PickersViewModel extends Observable {
             this.notifyPropertyChange("day", value);
         }
     }
+
+    
 
     public goToCuriosityPage(args: EventData) {
         var button = <Button>args.object;

@@ -43,6 +43,19 @@ var currentSavedPath;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
+}
+
+export function onScrollSwipe(args: SwipeGestureEventData) {
+    if (args.direction === 1) {
+        previousDate();
+    } else if (args.direction === 2) {
+        nextDate();
+    }   
+}
+
+export function onPageNavigatedTo(args: EventData) {
+    page = <Page>args.object;
+    var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
     if (application.android) {
         shareButtonAndroid = <Button>page.getViewById("btn-share");
@@ -61,25 +74,7 @@ export function onPageLoaded(args: EventData) {
     if (application.ios) {
         shareButtonIOS = <Button>page.getViewById("btn-share-ios");
         iosImage = <Image>page.getViewById("ios-image");
-
-        // shareButtonIOS.on("tap", function (args: GestureEventData)  {
-        //     console.log("Android share tapped!");
-        //     SocialShare.shareImage(currentImage, "NASA APOD");
-        // })
     }
-}
-
-export function onScrollSwipe(args: SwipeGestureEventData) {
-    if (args.direction === 1) {
-        previousDate();
-    } else if (args.direction === 2) {
-        nextDate();
-    }   
-}
-
-export function onPageNavigatedTo(args: EventData) {
-    page = <Page>args.object;
-    var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
     if (!apodViewModel.get("dataItem")) {
         apodViewModel.initDataItems();
@@ -139,7 +134,7 @@ export function previousDate() {
         setUserInteraction(false);
     }
 
-    // add check if the date is not too far in the past (check first APOD date)
+    // TODO: add check if the date is not too far in the past (check first APOD date)
     var currentDate = apodViewModel.get("selectedDate");
     currentDate.setDate(currentDate.getDate()-1);
     apodViewModel.set("selectedDate", currentDate);
@@ -154,14 +149,9 @@ export function nextDate() {
 
     var currentDate = apodViewModel.get("selectedDate");
     if (currentDate >= new Date()) {
-        var options = {
-            title: "Error!",
-            message: "We can't show photos from the future! ;)",
-            okButtonText: "OK"
-        };
-        dialogs.alert(options).then(() => {
-            console.log("Future alert dismissed!");
-        });
+        if (application.android) {
+            Toast.makeText("Can not load photos from future!").show();
+        }
     } else {
         currentDate.setDate(currentDate.getDate()+1);
         apodViewModel.set("selectedDate", currentDate);

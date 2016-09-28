@@ -15,7 +15,6 @@ export class AsteroidViewModel extends Observable {
 
     constructor() {
         super();
-
     }    
 
     public get dataItems() {   
@@ -41,8 +40,22 @@ export class AsteroidViewModel extends Observable {
     }
 
     public getUpdatedUrl() {
+
         return this._url = API_URL + sample_date + API_KEY; // change sample_date
     }
+
+    private formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
 
     public initDataItems(date?: string) {
         if (date) {
@@ -101,7 +114,6 @@ export class AsteroidViewModel extends Observable {
             // console.log("asteroidDataItems.len: " + allAsteroids.length);
             // console.log(allAsteroids[0].links.self);
             // OK!!!!!
-
 
         }, function (e) {
             //// Argument (e) is Error!
