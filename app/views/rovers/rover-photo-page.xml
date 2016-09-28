@@ -7,27 +7,28 @@
       loaded="onPageLoaded" 
       navigatedTo="onPageNavigatedTo">
 
-    <GridLayout id="pageContainer" class="page-container" rows="auto, 3*" columns="*">
+    <GridLayout id="pageContainer" class="page-container" rows="auto, *" columns="*">
         
-        <Label row="0" col="0"  
+        <Label row="0"
                text="{{ totalCount == -1 ? 'Counting photos...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" 
-               textWrap="true" margin="10"
-               color="{{ totalCount == -1 ? 'whitesmoke' : totalCount == 0 && totalCount != -1 ? 'orange' : '#008C9E' }}"/>  
+               textWrap="true" color="{{ totalCount == -1 ? 'whitesmoke' : totalCount == 0 && totalCount != -1 ? 'orange' : '#008C9E' }}" class="lbl-loader" />  
 
-        <lv:RadListView row="1" col="0" id="rad-list"
+        <lv:RadListView row="1" id="rad-list"
                         items="{{ dataItems }}" 
                         loaded="onListLoaded" 
                         itemTap="onItemTap">
+
             <lv:RadListView.listViewLayout>
-                <lv:ListViewLinearLayout scrollDirection="Vertical"/>
+                <lv:ListViewStaggeredLayout scrollDirection="Vertical" spanCount="2"/>
             </lv:RadListView.listViewLayout>
+
             <lv:RadListView.itemTemplate>
                 <Card:CardView class="cardview" elevation="40" radius="50">
 
                     <android>
-                        <GridLayout rows="auto, *" columns="2*, *">
-                            <Label row="0" col="0" text="{{ cameraName }}" class="camera-android" textWrap="true" />
-                            <Label row="0" col="1" text="{{ earthDate }}" class="date-android" textWrap="true" />
+                        <GridLayout rows="auto, *" columns="*, *">
+                            <Label row="0" col="0" text="{{ cameraName }}" class="lbl-item" textWrap="true" />
+                            <Label row="0" col="1" text="{{ earthDate }}" class="lbl-item" textWrap="true" />
                             <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
                                                                 imageUri="{{ imageUri }}"
                                                                 placeholderImageUri="res://logo"
@@ -38,17 +39,19 @@
                                                                 progressBarColor="#AB5400"
                                                                 roundedCornerRadius="50"
                                                                 roundBottomRight="true"
-                                                                roundBottomLeft="true"
-                                                                tapToRetryEnabled="true"
-                                                                finalImageSet="onFinalImageSet"/>
+                                                                roundBottomLeft="true"/>
                         </GridLayout>
                     </android>
 
                     <ios>
-                        <GridLayout rows="auto, *" columns="2*, *">
-                            <Label row="0" col="0" text="{{ cameraName }}" class="camera-ios" textWrap="true" />
-                            <Label row="0" col="1" text="{{ earthDate }}" class="date-ios" textWrap="true" />
-                            <Image row="1" col="0" colSpan="2"  src="{{ imageUri }}" verticalAlignment="top"/>
+                        <GridLayout rows="auto, *" columns="*, *">
+                            <Label row="0" col="0" text="{{ cameraName }}" class="lbl-item" textWrap="true" />
+                            <Label row="0" col="1" text="{{ earthDate }}" class="lbl-item" textWrap="true" />
+                            <Image row="1" col="0" colSpan="2" 
+                                    width="200"
+                                    src="{{ imageUri }}" 
+                                    stretch="aspectFill" 
+                                    verticalAlignment="top"/>
                         </GridLayout>
                     </ios>
                     

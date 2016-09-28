@@ -5,30 +5,29 @@
 .page-container Label {
     font-family: "Nasalization";    
     color: whitesmoke;
-    font-size: 12;
     margin: 8;
+}
+
+.lbl-loader {
+    text-align: center;
+    horizontal-align: center;
+    vertical-align: center;
+    font-size: 16;
 }
 
 .cardview {
     background-color: #008C9E;
-    margin: 8;
+    margin: 6;
 }
 
-.date-android {
-    font-size:14;
-    margin: 10;
-    text-align: right;
+.lbl-item {
+    font-size:10;
+    text-align: left;
 }
 
 .date-ios {
     font-size:14;
     margin: 10;
-}
-
-.camera-android {
-    font-size:14;
-    margin: 10;
-    text-align: left;
 }
 
 .camera-ios {

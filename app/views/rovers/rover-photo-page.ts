@@ -2,12 +2,13 @@ import { EventData, Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import { Page } from "ui/page";
 import { GridLayout } from "ui/layouts/grid-layout";
+import * as application from "application";
+import * as http from "http";
 import * as frame from "ui/frame";
 
 import { RoversViewModel, DataItem } from "../../models/rovers/rovers-view-model";
 import { pickersViewModel } from "./rovers-selection";
 
-import http = require("http");
 import * as RadListwModule from "nativescript-telerik-ui/listview";
 import {FrescoDrawee, FinalEventData } from "nativescript-fresco";
 
@@ -22,7 +23,6 @@ var day;
 
 let roversViewModel;
 
-// Rovers: opportunity (2004- 2009), spirit (2004 - 2010), curiosity (2012 - present)
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
 }
@@ -47,25 +47,25 @@ export function onPageNavigatedTo(args: EventData) {
 
         switch (selectedRover) {
             case "curiosity":
-                roversViewModel = new RoversViewModel(selectedRover, year, month, day); 
-                pickersViewModel.set("day", day);
-                pickersViewModel.set("month", month);
-                pickersViewModel.set("year", year);
-                pickersViewModel.set("rover", selectedRover);         
+                    roversViewModel = new RoversViewModel(selectedRover, year, month, day); 
+                    pickersViewModel.set("day", day);
+                    pickersViewModel.set("month", month);
+                    pickersViewModel.set("year", year);
+                    pickersViewModel.set("rover", selectedRover);         
                 break;
             case "opportunity":
-                roversViewModel = new RoversViewModel(selectedRover, year, month, day);
-                pickersViewModel.set("dayOpp", day);
-                pickersViewModel.set("monthOpp", month);
-                pickersViewModel.set("yearOpp", year);
-                pickersViewModel.set("rover", selectedRover); 
+                    roversViewModel = new RoversViewModel(selectedRover, year, month, day);
+                    pickersViewModel.set("dayOpp", day);
+                    pickersViewModel.set("monthOpp", month);
+                    pickersViewModel.set("yearOpp", year);
+                    pickersViewModel.set("rover", selectedRover); 
                 break;  
             case "spirit":
-                roversViewModel = new RoversViewModel(selectedRover, year, month, day);
-                pickersViewModel.set("daySpi", day);
-                pickersViewModel.set("monthSpi", month);
-                pickersViewModel.set("yearSpi", year);
-                pickersViewModel.set("rover", selectedRover); 
+                    roversViewModel = new RoversViewModel(selectedRover, year, month, day);
+                    pickersViewModel.set("daySpi", day);
+                    pickersViewModel.set("monthSpi", month);
+                    pickersViewModel.set("yearSpi", year);
+                    pickersViewModel.set("rover", selectedRover); 
                 break;            
             default:
                 break;
@@ -91,13 +91,27 @@ export function onItemTap(args:RadListwModule.ListViewEventData) {
 
     var tappedItem = roversViewModel.get("dataItems").getItem(tappedItemIndex);
 
-    frame.topmost().navigate({
+    var androidNavEntry = {
         moduleName: "views/rovers/photo-details-page",
         context: {"tappedItem": tappedItem },
-        animated: true
-    });
-}
+        animated: true,
+        transition: {
+            name: "explode"
+        }
+    };
 
-export function onFinalImageSet(args: FinalEventData) {
-    var drawee = args.object as FrescoDrawee;
+    var iosNavEntry = {
+        moduleName: "views/rovers/photo-details-page",
+        context: {"tappedItem": tappedItem },
+        animated: true,
+        transition: {
+            name: "curl"
+        }
+    }
+
+    if (application.android) {
+        frame.topmost().navigate(androidNavEntry);
+    } else if (application.ios) {
+        frame.topmost().navigate(iosNavEntry);       
+    }
 }
