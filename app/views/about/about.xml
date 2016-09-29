@@ -12,9 +12,9 @@
 
     <StackLayout id="pageContainer" class="pageContainer">
         <GridLayout rows="*, *, *" columns="*">
-            <Label text="Powered by NativeScript" horizontalAlign="center" verticalAlign="center" textWrap="true" />
-            <Label text="NASA Open APIs" horizontalAlign="center" verticalAlign="center" textWrap="true" />
-            <Label text="NativeNick" horizontalAlign="center" verticalAlign="center" textWrap="true" />
+            <Label row="0" text="Powered by NativeScript" textWrap="true" />
+            <Label row="1" text="NASA Open APIs" textWrap="true" />
+            <Label row="2" text="NativeNick" textWrap="true" />
         </GridLayout>
     </StackLayout>
 </Page>

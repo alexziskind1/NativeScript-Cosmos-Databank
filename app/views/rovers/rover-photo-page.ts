@@ -91,27 +91,14 @@ export function onItemTap(args:RadListwModule.ListViewEventData) {
 
     var tappedItem = roversViewModel.get("dataItems").getItem(tappedItemIndex);
 
-    var androidNavEntry = {
+    var navEntry = {
         moduleName: "views/rovers/photo-details-page",
         context: {"tappedItem": tappedItem },
         animated: true,
         transition: {
-            name: "explode"
+            name: application.android ? "explode" : "curl"
         }
     };
 
-    var iosNavEntry = {
-        moduleName: "views/rovers/photo-details-page",
-        context: {"tappedItem": tappedItem },
-        animated: true,
-        transition: {
-            name: "curl"
-        }
-    }
-
-    if (application.android) {
-        frame.topmost().navigate(androidNavEntry);
-    } else if (application.ios) {
-        frame.topmost().navigate(iosNavEntry);       
-    }
+    frame.topmost().navigate(navEntry);
 }

@@ -4,6 +4,8 @@ import { DatePicker } from "ui/date-picker";
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import frameModule = require("ui/frame");
 
+import * as application from "application";
+
 export class DrawerOverNavigationModel extends Observable {
 
     get exampleText() {
@@ -45,7 +47,10 @@ export class DrawerOverNavigationModel extends Observable {
 
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rovers-selection",
-            animated: true
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
         });
     }
 
@@ -57,7 +62,10 @@ export class DrawerOverNavigationModel extends Observable {
 
         frameModule.topmost().navigate({
             moduleName: "./views/apod/apod",
-            animated: true
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
         });
     }
 
@@ -69,7 +77,10 @@ export class DrawerOverNavigationModel extends Observable {
 
         frameModule.topmost().navigate({
             moduleName: "./views/asteroid/asteroid",
-            animated: true
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
         });
     }    
 
@@ -81,7 +92,10 @@ export class DrawerOverNavigationModel extends Observable {
 
         frameModule.topmost().navigate({
             moduleName: "./views/about/about",
-            animated: true
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
         });
     }
     

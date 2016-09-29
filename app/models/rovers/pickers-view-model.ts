@@ -4,6 +4,7 @@ import { DatePicker } from "ui/date-picker";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import * as frameModule from "ui/frame"; 
+import * as application from "application";
 
 export class PickersViewModel extends Observable {
 
@@ -141,7 +142,11 @@ export class PickersViewModel extends Observable {
 
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rover-photo-page",
-            context: { "rover": "curiosity", "year": dt.year, "month": dt.month, "day": dt.day }
+            context: { "rover": "curiosity", "year": dt.year, "month": dt.month, "day": dt.day },
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
         });
     }
 
@@ -151,7 +156,11 @@ export class PickersViewModel extends Observable {
 
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rover-photo-page",
-            context: { "rover": "opportunity", "year": dt.year, "month": dt.month, "day": dt.day }
+            context: { "rover": "opportunity", "year": dt.year, "month": dt.month, "day": dt.day },
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
         });
     }
 
@@ -161,7 +170,11 @@ export class PickersViewModel extends Observable {
 
         frameModule.topmost().navigate({
             moduleName: "./views/rovers/rover-photo-page",
-            context: { "rover": "spirit", "year": dt.year, "month": dt.month, "day": dt.day }
+            context: { "rover": "spirit", "year": dt.year, "month": dt.month, "day": dt.day },
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
         });
     }
 
