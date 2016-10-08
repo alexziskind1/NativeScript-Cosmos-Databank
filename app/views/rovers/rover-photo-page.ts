@@ -35,9 +35,9 @@ export function onPageNavigatedTo(args: EventData) {
     var navgationContext = page.navigationContext;
 
     if (!roversViewModel || !(selectedRover === navgationContext["rover"] 
-                                && year === navgationContext["year"] 
-                                && month === navgationContext["month"] 
-                                && day === navgationContext["day"])) {
+                        && year === navgationContext["year"] 
+                        && month === navgationContext["month"] 
+                        && day === navgationContext["day"])) {
 
         selectedRover = navgationContext["rover"];
         year = navgationContext["year"];

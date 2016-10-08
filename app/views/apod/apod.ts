@@ -78,27 +78,26 @@ export function onSaveImage(args: EventData)  {
 
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
-            .then(function (res: imageSource.ImageSource) {           
+            .then(res => {           
                 saveFile(res);
-            }, function (error) {
-                // console.log("Error loading image: " + error);
-        }); 
+            }).catch(err => {
+                // console.log(err.stack);
+            }); 
     } else if (application.android) {
         saveFile(currentImage);
         Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
-
 }
 
 export function onSetWallpaper(args: EventData) {
     
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
-            .then(function (res: imageSource.ImageSource) {           
-                currentImage = res;
-            }, function (error) {
-                // console.log("Error loading image: " + error);
-        }); 
+            .then(res => {           
+                currentImage = res; // TODO : set wallpaper for iOS
+            }).catch(err => {
+                // console.log(err.stack);
+            });; 
     } else if (application.android) {
 
         saveFile(currentImage);
@@ -108,33 +107,23 @@ export function onSetWallpaper(args: EventData) {
             var imageToSet = imageSource.fromFile(currentSavedPath);
             wallpaperManager.setBitmap(imageToSet.android);
         } catch (error) {
-            console.log(error);
+            // console.log(error.stack);
         }
 
         Toast.makeText("Wallpaper Set!").show();
     }
-
-    console.log("Wallpaper Set!");
 }
 
 export function onShare(args: EventData) {
     if (application.android) {
         SocialShare.shareImage(currentImage, "NASA APOD");
-        console.log("Share tapped! {android}");    
     } else if (application.ios) {
-        console.log("iOS share tapped! 1");
-        console.log(iosImage.src);
-
         imageSource.fromUrl(iosImage.src)
-            .then(function (res: imageSource.ImageSource) {      
-
-                console.log(res);
-                console.log("iOS share tapped! 2");     
+            .then(res => {       
                 SocialShare.shareImage(res);
-
-            }, function (error) {
-                console.log("Error loading image: " + error);
-        }); 
+            }).catch(err => {
+                // console.log(err.stack);
+            }); 
     }
 }
 
@@ -167,7 +156,6 @@ export function nextDate() {
         apodViewModel.set("selectedDate", currentDate);
         apodViewModel.initDataItems(formatDate(currentDate)); 
     }
-
 }
 
 export function onSubmit(args: EventData) {
@@ -186,26 +174,26 @@ export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
 
     imageSource.fromUrl(drawee.imageUri)
-        .then(function (res: imageSource.ImageSource) {
+        .then(res => {
             currentImage = res;         
 
             saveButton.animate({opacity: 0.2,rotate: 360})
-            .then( function () { return saveButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( function () { return saveButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then( res => { return saveButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( res => { return saveButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
 
             desktopButton.animate({opacity: 0.2,rotate: 360})
-            .then( function () { return desktopButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( function () { return desktopButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then( res => { return desktopButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( res => { return desktopButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
 
             shareButton.animate({opacity: 0.2,rotate: 360})
-            .then( function () { return shareButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( function () { return shareButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then( res => { return shareButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
+            .then( res => { return shareButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
             
             setUserInteraction(true);
 
-        }, function (error) {
-            // console.log("Error loading image: " + error);
-    })   
+        }).catch(err => {
+            // console.log(err.stack);
+        }); 
 }
 
 export function saveFile(res: imageSource.ImageSource) {
@@ -218,7 +206,7 @@ export function saveFile(res: imageSource.ImageSource) {
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
-        // this works - but where are the images ?
+        // TODO :  this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
         var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");  
     }
@@ -226,7 +214,6 @@ export function saveFile(res: imageSource.ImageSource) {
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
     var path = fileSystem.path.join(cosmosFolderPath, fileName);
     var exists = fileSystem.File.exists(path);
-    console.log(exists);
 
     if (!exists) {
         var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
@@ -240,15 +227,11 @@ export function onIosShare() {
     console.log(iosImage.src);
 
     imageSource.fromUrl(iosImage.src)
-        .then(function (res: imageSource.ImageSource) {      
-
-            console.log(res);
-            console.log("iOS share tapped! 2");     
+        .then(res => {          
             SocialShare.shareImage(res);
-
-        }, function (error) {
-            console.log("Error loading image: " + error);
-    });    
+        }).catch(err => {
+            // console.log(err.sstack);
+        });    
 }
 
 function formatDate(date) {

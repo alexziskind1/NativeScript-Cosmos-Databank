@@ -14,6 +14,6 @@ export function onPageNavigatedTo(args) {
             console.log("Permissions granted!");
         })
         .catch(function() {
-            console.log("Uh oh, no permissions - plan B time!");
+            console.log("No permissions - plan B time!");
     });
 }
