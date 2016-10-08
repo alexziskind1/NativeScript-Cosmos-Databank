@@ -1,8 +1,8 @@
 {
-  "description": "NativeScript Application",
+  "description": "Cosmos Databank for astrological photos and data",
   "license": "SEE LICENSE IN <your-license-filename>",
   "readme": "NativeScript Application",
-  "repository": "<fill-your-repository-here>",
+  "repository": "https://github.com/NickIliev/NativeScript-Cosmos-Databank",
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-ios": {
@@ -13,16 +13,16 @@
     }
   },
   "dependencies": {
-    "nativescript-background-http": "0.0.3",
-    "nativescript-cardview": "^1.1.10",
-    "nativescript-fresco": "^1.0.6",
+    "nativescript-background-http": "2.3.0",
+    "nativescript-cardview": "^1.2.0",
+    "nativescript-fresco": "^1.0.11",
     "nativescript-permissions": "^1.2.0",
-    "nativescript-social-share": "^1.3.0",
-    "nativescript-telerik-ui": "^1.4.0",
+    "nativescript-social-share": "^1.3.1",
+    "nativescript-telerik-ui": "^1.4.1",
     "nativescript-toast": "^1.3.0",
-    "nativescript-videoplayer": "^1.0.5",
+    "nativescript-videoplayer": "^1.0.9",
     "tns-core-modules": "^2.4.0-2016-09-21-4189",
-    "tns-platform-declarations": "2.2.0"
+    "tns-platform-declarations": "next"
   },
   "devDependencies": {
     "babel-traverse": "6.13.0",

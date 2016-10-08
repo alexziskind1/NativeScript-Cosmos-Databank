@@ -84,6 +84,21 @@ export class DrawerOverNavigationModel extends Observable {
         });
     }    
 
+    public goToEpic() {
+        var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));
+        if (sideDrawer.getIsOpen()) {
+            sideDrawer.closeDrawer();
+        }
+
+        frameModule.topmost().navigate({
+            moduleName: "./views/epic/epic",
+            animated: true,
+            transition: {
+                name: application.android ? "explode" : "curl"
+            }
+        });
+    }
+
     public goToAbout() {
         var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));
         if (sideDrawer.getIsOpen()) {
@@ -97,6 +112,5 @@ export class DrawerOverNavigationModel extends Observable {
                 name: application.android ? "explode" : "curl"
             }
         });
-    }
-    
+    }  
 }

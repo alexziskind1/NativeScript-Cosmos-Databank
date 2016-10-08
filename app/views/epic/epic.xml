@@ -1,0 +1,44 @@
+<Page xmlns="http://www.nativescript.org/tns.xsd"
+        actionBarHidden="true"
+        xmlns:nativescript-fresco="nativescript-fresco" 
+        loaded="onPageLoaded" 
+        navigatedTo="onPageNavigatedTo">
+
+    <ScrollView swipe="onScrollSwipe">
+        <StackLayout id="pageContainer" class="pageContainer">
+            <Label text="Earth Polychromatic Imaging Camera - Coming Soon!" class="epic=title" textWrap="true" />
+            
+            <android>
+            <nativescript-fresco:FrescoDrawee id="fr-img"
+                                imageUri="{{ dataItem.url }}"
+                                placeholderImageUri="res://logo"
+                                actualImageScaleType="centerCrop"                                                           
+                                verticalAlignment="top"
+                                aspectRatio="1.33"
+                                showProgressBar="true"
+                                tapToRetryEnabled="true"
+                                submit="onSubmit"
+                                finalImageSet="onFinalImageSet" />            
+            <GridLayout rows="*" columns="*, *, *, *, *">
+                <Button col="0" text="&#xf053;" id="btn-prev" tap="previousDate" class="font-awesome nav" />
+                <Button col="1" text="&#xf019;" id="btn-save" tap="onSaveImage" class="font-awesome" /> 
+                <Button col="2" text="&#xf108;" id="btn-desk" tap="onSetWallpaper" class="font-awesome"/> 
+                <Button col="3" text="&#xf1e0;" id="btn-share" tap="onShare" class="font-awesome" />     
+                <Button col="4" text="&#xf054;" id="btn-next" tap="nextDate" class="font-awesome nav" />   
+            </GridLayout>
+            </android>
+
+            <ios>
+            <Image src="{{ dataItem.url }}" id="ios-image" stretch="aspectFill" />
+            <GridLayout rows="*" columns="*, *, *, *, *">
+                <Button col="0" text="&#xf053;" id="btn-prev" tap="previousDate" class="font-awesome" />
+                <Button col="1" text="&#xf019;" id="btn-save" tap="onSaveImage" class="font-awesome" /> 
+                <Button col="2" text="&#xf108;" id="btn-desk" tap="onSetWallpaper" class="font-awesome"/> 
+                <Button col="3" text="&#xf1e0;" id="btn-share" tap="onShare" class="share font-awesome" />    
+                <Button col="4" text="&#xf054;" id="btn-next" tap="nextDate" class="font-awesome" />   
+            </GridLayout>
+            </ios>
+
+        </StackLayout>                  
+    </ScrollView>
+</Page>

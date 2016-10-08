@@ -1,0 +1,47 @@
+.pageContainer {
+    font-family: "Nasalization";    
+    background-color: #343838;   
+    color: #E8EAEB;
+    font-size: 14;
+}
+
+Button {
+    width: 40;
+    height: 40;
+    border-radius: 20;
+    background-color:#008C9E;
+    color: #E8EAEB;
+    margin: 10 0 10 0;
+    opacity: 0.8;
+}
+
+Button:highlighted {
+    color: #008C9E;
+    background-color:#E8EAEB;
+}
+
+.nav {
+    width: 30;
+    height: 30;
+    border-radius: 15;
+    font-size: 12;
+    margin: 15 0 15 0;
+}
+
+.epic-title {
+    font-size: 18;
+    font-weight: bold;
+    horizontal-align: center;
+}
+
+.epic-date {
+    font-size: 10;
+    horizontal-align: center;
+}
+
+.font-awesome {
+    font-family: "FontAwesome";
+    font-size: 14;
+    font-weight: normal;
+    text-align: center;
+}
