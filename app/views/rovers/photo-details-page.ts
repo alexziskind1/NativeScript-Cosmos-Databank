@@ -37,17 +37,14 @@ export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
     
     imageSource.fromUrl(drawee.imageUri)
-        .then(function (res: imageSource.ImageSource) {
-        //console.log("Image successfully loaded");
-
-        viewModel.set("isItemVisible", true);
-        
-        shareButtonAndroid.on("tap", function (args: GestureEventData)  {
-            console.log("Android share tapped!");
-            SocialShare.shareImage(res, "Mars Rovers - Cosmos DataBank mobile App");
-        })
-
-    }, function (error) {
-        //console.log("Error loading image: " + error);
-    });    
+        .then(res => {
+            viewModel.set("isItemVisible", true);
+            
+            shareButtonAndroid.on("tap", function (args: GestureEventData)  {
+                console.log("Android share tapped!");
+                SocialShare.shareImage(res, "Mars Rovers - Cosmos DataBank mobile App");
+            })
+        }).catch(err => { 
+            // console.log(err.stack); 
+        });    
 }

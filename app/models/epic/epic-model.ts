@@ -79,7 +79,7 @@ export class EpicViewModel extends Observable {
                     return;
                 }
 
-                var result = response.content.toJSON(); // this should come as an array of image items
+                var result = response.content.toJSON();
                 
                 console.log(result);
                 console.log(result[0]["image"]);

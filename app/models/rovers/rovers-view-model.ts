@@ -12,8 +12,7 @@ var requestUrl = API_URL_START + sampleDate + API_KEY;
 export class RoversViewModel extends Observable {
 
     private _dataItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
-    private _rovers: Array<string> = ["curiosity", "opportunity", "spirit"];;
-
+    
     private _year: number;
     private _month: number;
     private _day: number;
@@ -39,10 +38,6 @@ export class RoversViewModel extends Observable {
         this._totalCount = -1;
     }    
 
-    public get rovers() {
-        return this._rovers;
-    }
-    
     public get totalCount() {
         return this._totalCount;
     }

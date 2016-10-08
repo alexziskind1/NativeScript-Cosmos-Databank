@@ -57,8 +57,6 @@ export class ApodViewModel extends Observable {
     }
     
     public requestApod(apodDataItem: ApodItem, apiUrl: string, date?: string) {
-        var that = this;
-
         // default: no date === today
         if (date) {
             date = "&date=" + date;
@@ -83,7 +81,7 @@ export class ApodViewModel extends Observable {
                                             result["title"], 
                                             result["url"] );
         }).then(res => {
-            that.dataItem = apodDataItem;
+            this.dataItem = apodDataItem;
         }).catch(err => {
             // console.log(err.stack);
         })
