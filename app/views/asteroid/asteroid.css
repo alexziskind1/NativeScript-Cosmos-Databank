@@ -1,9 +1,25 @@
-.lbl-asteroid-name {
+.lbl {
     font-family: "Nasalization";    
     color: #E8EAEB;
     background-color: #343838; 
-    font-size: 20;
     margin: 8;
+}
+
+.asteroid-title {
+    font-size: 18;
+}
+
+.asteroid-name {
+    font-size: 12;
+}
+
+.asteroid-size {
+    font-size: 12;
+}
+
+.asteroid-hazard {
+    font-size: 12;
+    text-align: right;
 }
 
 .item-container {

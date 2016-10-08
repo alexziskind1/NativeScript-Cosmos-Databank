@@ -13,11 +13,9 @@ export let pickersViewModel = new PickersViewModel();
 
 let page;
 let tabView;
-
 let dtCur;
 let dtOpp;
 let dtSpi;
-
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -48,7 +46,6 @@ function initTabs() {
 }
 
 function initDatePickers() {
-
 	var today = new Date();
 
 	dtCur.minDate = new Date(2012, 6 + 1, 6); // Landing date: 6th August 2012
@@ -61,8 +58,6 @@ function initDatePickers() {
 	dtSpi.maxDate = new Date(2010, 1 + 1 , 21); // last communication March
 
 	if (!pickersViewModel.get("rover")) {
-		console.log("IF");
-
 		dtCur.day = today.getDate() - 2;
 		dtCur.month = today.getMonth() + 1;
 		dtCur.year = today.getFullYear();
@@ -87,9 +82,6 @@ function initDatePickers() {
 		pickersViewModel.set("monthSpi", dtSpi.month);
 		pickersViewModel.set("yearSpi", dtSpi.year);	
 	} else {
-
-		console.log("ELSE'");
-
 		dtCur.day = pickersViewModel.get("day");
 		dtCur.month = pickersViewModel.get("month");
 		dtCur.year = pickersViewModel.get("year");
@@ -105,7 +97,6 @@ function initDatePickers() {
 }
 
 function initSegmentedBars() {
-
 	pickersViewModel.set("selectedIndexCur", 1);
 	pickersViewModel.set("selectedIndexOpp", 1);
 	pickersViewModel.set("selectedIndexSpi", 1);

@@ -2,13 +2,23 @@
         actionBarHidden="true"
         loaded="onPageLoaded">
         
-    <StackLayout>
-        <Label text="{{ asteroidCount == 0 ? 'counting near by asteroids' : asteroidCount + ' asteroids will fly near in the next 5 days'}}" textWrap="true" />
+    <StackLayout class="item-container" >
+        <Label text="{{ asteroidCount == 0 ? 'counting near by asteroids' : asteroidCount + ' asteroids will fly near in the next 7 days'}}"
+                class="lbl asteroid-title" textWrap="true" />
+        <GridLayout rows="50" columns="2*, *, *" borderWidth="1" borderColor="black">
+            <Label col="0" text="asteroid name" class="lbl asteroid-name" textWrap="true"/>
+            <Label col="1" text="size" class="lbl asteroid-size" textWrap="true" />
+            <Label col="2" text="danger" class="lbl asteroid-hazard" textWrap="true" /> 
+        </GridLayout>        
         <ListView items="{{ dataItems }}"  loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
             <ListView.itemTemplate>
-                <StackLayout class="item-container">
-                    <Label text="{{ name }}" textWrap="true" class="lbl-asteroid-name" /> 
-                </StackLayout>
+                <GridLayout rows="*" columns="2*, *, *">
+                    <Label col="0" text="{{ name }}" class="lbl asteroid-name" textWrap="true"/>
+                    <Label col="1" text="{{ estimated_diameter.meters.estimated_diameter_max +'m'}}" class="lbl asteroid-size" textWrap="true" />
+                    <Label col="2" text="{{ is_potentially_hazardous_asteroid ? 'close' : 'fly-by' }}" 
+                            color="{{ is_potentially_hazardous_asteroid ? 'red' : 'green' }}"
+                            class="lbl asteroid-hazard" textWrap="true" /> 
+                </GridLayout>
             </ListView.itemTemplate>
         </ListView>
     </StackLayout>

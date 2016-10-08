@@ -6,9 +6,9 @@ import { topmost } from "ui/frame";
 export function onPageLoaded(args: EventData) {
     var page = <Page>args.object;
 
-    var navContext = page.navigationContext;
+    var navigationContext = page.navigationContext;
     let viewModel = new DrawerOverNavigationModel();
-    viewModel.set("contextItem", navContext["tappedItem"]);
+    viewModel.set("contextItem", navigationContext["tappedItem"]);
 
     page.bindingContext = viewModel;
 }

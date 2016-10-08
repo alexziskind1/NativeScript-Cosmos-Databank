@@ -69,21 +69,19 @@ export class ApodViewModel extends Observable {
             .then(response => {
                 // Argument (response) is HttpResponse!
                 if (response.statusCode === 400) {
-                    console.log("NO Picture of the Dat - err 400");
+                    console.log("NO APOD for that date - err 400");
                     return;
                 }
 
                 var result = response.content.toJSON();
-
                 apodDataItem = new ApodItem(result["copyright"], 
-                                    result["date"], 
-                                    result["explanation"], 
-                                    result["hdurl"], 
-                                    result["media_type"], 
-                                    result["service_version"], 
-                                    result["title"], 
-                                    result["url"] );
-
+                                            result["date"], 
+                                            result["explanation"], 
+                                            result["hdurl"], 
+                                            result["media_type"], 
+                                            result["service_version"], 
+                                            result["title"], 
+                                            result["url"] );
         }).then(res => {
             that.dataItem = apodDataItem;
         }).catch(err => {

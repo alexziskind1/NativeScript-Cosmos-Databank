@@ -177,5 +177,4 @@ export class PickersViewModel extends Observable {
             }
         });
     }
-
 }
