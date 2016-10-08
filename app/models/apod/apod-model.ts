@@ -65,29 +65,29 @@ export class ApodViewModel extends Observable {
             apiUrl = apiUrl + date;
         }
 
-        http.request({ url: apiUrl, method: "GET" }).then(function (response) {
-            // Argument (response) is HttpResponse!
-            if (response.statusCode === 400) {
-                console.log("NO Picture of the Dat - err 400");
-                return;
-            }
+        http.request({ url: apiUrl, method: "GET" })
+            .then(response => {
+                // Argument (response) is HttpResponse!
+                if (response.statusCode === 400) {
+                    console.log("NO Picture of the Dat - err 400");
+                    return;
+                }
 
-            var result = response.content.toJSON();
+                var result = response.content.toJSON();
 
-            apodDataItem = new ApodItem(result["copyright"], 
-                                  result["date"], 
-                                  result["explanation"], 
-                                  result["hdurl"], 
-                                  result["media_type"], 
-                                  result["service_version"], 
-                                  result["title"], 
-                                  result["url"] );
+                apodDataItem = new ApodItem(result["copyright"], 
+                                    result["date"], 
+                                    result["explanation"], 
+                                    result["hdurl"], 
+                                    result["media_type"], 
+                                    result["service_version"], 
+                                    result["title"], 
+                                    result["url"] );
 
-
-        }, function (e) {
-            // console.log(e.stack);
-        }).then(function() {
+        }).then(res => {
             that.dataItem = apodDataItem;
+        }).catch(err => {
+            // console.log(err.stack);
         })
     }
 }

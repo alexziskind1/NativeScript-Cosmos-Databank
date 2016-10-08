@@ -44,6 +44,73 @@ export class AsteroidViewModel extends Observable {
         return this._url = API_URL + sample_date + API_KEY; // change sample_date
     }
 
+    public initDataItems(date?: string) {
+        if (date) {
+            this.dataItems = this.requestAsteroids(this.dataItems, this.getUpdatedUrl());           
+        } else {
+            this.dataItems = this.requestAsteroids(this.dataItems, this.getUpdatedUrl());
+        }
+    }
+    
+    public requestAsteroids(asteroidDataItems: ObservableArray<AsteroidDataItem>, apiUrl: string) {
+
+        http.request({ url: apiUrl, method: "GET" })
+            .then(response => {
+
+                if (response.statusCode === 400) {
+                    console.log("Error 400");
+                    return;
+                }
+
+                var result = response.content.toJSON();
+
+                var dates = new Array();
+                // OK !!!
+                for (var key in result) {
+                    if (result.hasOwnProperty(key)) {
+                        var element = result[key];
+
+                        if (key === "element_count") {
+                            console.log("element_count: " + element);
+                            this.asteroidCount = element;
+                            this.notifyPropertyChange("asteroidCount", element);
+                        }
+
+                        if (key === "near_earth_objects") {
+                            for (var subkey in element) {
+                                if (element.hasOwnProperty(subkey)) {
+                                    var date = element[subkey];
+                                    dates.push(date);
+                                }
+                            }       
+                        }
+                    }
+                }
+
+                console.log("dates.length: " + dates.length);
+                console.log("dates[0]: "  + dates[0])
+
+                //var allAsteroids = new Array();
+                dates.forEach(date => {
+                    date.forEach(asteroid => {
+                        var tmpAste = new AsteroidDataItem(asteroid);
+                        asteroidDataItems.push(tmpAste);
+                    });
+                });
+
+                // console.log("asteroidDataItems.len: " + allAsteroids.length);
+                // console.log(allAsteroids[0].links.self);
+                // OK!!!!!
+
+            }).then(res => {
+                return asteroidDataItems;
+            }).catch(err => {
+
+            })
+
+        return asteroidDataItems;
+    }
+
     private formatDate(date) {
         var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -55,75 +122,6 @@ export class AsteroidViewModel extends Observable {
 
         return [year, month, day].join('-');
     }
-
-
-    public initDataItems(date?: string) {
-        if (date) {
-            this.dataItems = this.requestAsteroids(this.dataItems, this.getUpdatedUrl());           
-        } else {
-            this.dataItems = this.requestAsteroids(this.dataItems, this.getUpdatedUrl());
-        }
-    }
-    
-    public requestAsteroids(asteroidDataItems: ObservableArray<AsteroidDataItem>, apiUrl: string) {
-        var that = this;
-
-        http.request({ url: apiUrl, method: "GET" }).then(function (response) {
-
-            if (response.statusCode === 400) {
-                console.log("Error 400");
-                return;
-            }
-
-            var result = response.content.toJSON();
-
-            var dates = new Array();
-            // OK !!!
-            for (var key in result) {
-                if (result.hasOwnProperty(key)) {
-                    var element = result[key];
-
-                    if (key === "element_count") {
-                        console.log("element_count: " + element);
-                        that.asteroidCount = element;
-                        that.notifyPropertyChange("asteroidCount", element);
-                    }
-
-                    if (key === "near_earth_objects") {
-                        for (var subkey in element) {
-                            if (element.hasOwnProperty(subkey)) {
-                                var date = element[subkey];
-                                dates.push(date);
-                            }
-                        }       
-                    }
-                }
-            }
-
-            console.log("dates.length: " + dates.length);
-            console.log("dates[0]: "  + dates[0])
-
-            //var allAsteroids = new Array();
-            dates.forEach(date => {
-                date.forEach(asteroid => {
-                    var tmpAste = new AsteroidDataItem(asteroid);
-                    asteroidDataItems.push(tmpAste);
-                });
-            });
-
-            // console.log("asteroidDataItems.len: " + allAsteroids.length);
-            // console.log(allAsteroids[0].links.self);
-            // OK!!!!!
-
-        }, function (e) {
-            //// Argument (e) is Error!
-        }).then(function() {
-            return asteroidDataItems;
-        })
-
-        return asteroidDataItems;
-    }
-
 }
 
 export class AsteroidDataItem extends Observable {

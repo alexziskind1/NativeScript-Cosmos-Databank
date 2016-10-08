@@ -65,7 +65,6 @@ export class RoversViewModel extends Observable {
         }
     }
 
-
     public get year() {
         return this._year;
     }
@@ -135,49 +134,42 @@ export class RoversViewModel extends Observable {
     public requestPhotosByPage(arr: ObservableArray<DataItem>, url: string, pageIndex: number) {
         this.totalCount = -1;
 
-        var that = this;
+        http.request({ url: this.getUpdatedUrl() + "&page=" + pageIndex, method: "GET" })
+            .then(response => {
+                // Argument (response) is HttpResponse!
+                if (response.statusCode === 400) {
+                    console.log("NO PHOTOS - err 400");
+                    this.totalCount = 0;
+                    return;
+                }
+                
+                var result = response.content.toJSON();
+                
+                for (var index = 0; index < result["photos"].length; index++) {
+                    var element = result["photos"][index];
 
-        http.request({ url: this.getUpdatedUrl() + "&page=" + pageIndex, method: "GET" }).then(function (response) {
-            // Argument (response) is HttpResponse!
-            if (response.statusCode === 400) {
-                console.log("NO PHOTOS - err 400");
-                that.totalCount = 0;
-                return;
-            }
-
-            // for (var header in response.headers) {
-            //    console.log(header + ":" + response.headers[header]);
-            // }
-
-            var result = response.content.toJSON();
-            
-            for (var index = 0; index < result["photos"].length; index++) {
-                var element = result["photos"][index];
-
-                arr.push(new DataItem(element["id"],
-                                      element["sol"],
-                                      element["camera"]["id"], 
-                                      element["camera"]["name"], 
-                                      element["camera"]["rover_id"], 
-                                      element["camera"]["full_name"], 
-                                      element["img_src"], 
-                                      element["earth_date"]));
-            }
-
-        }, function (e) {
-            //// Argument (e) is Error!
-        }).then(function() {
-            // recusrsive call to go to all the pages for the selected day query of photos
-            // reason: the API is passing 25 photos per page
-            // console.log("arr length: " + arr.length);
-            if (arr.length % 25 === 0 && arr.length / pageIndex === 25 && arr.length !== 0) {
-                pageIndex++;
-                that.requestPhotosByPage(arr, url, pageIndex);
-            } else {
-                that.totalCount = arr.length;
-                return arr;
-            }
-        });
+                    arr.push(new DataItem(element["id"],
+                                        element["sol"],
+                                        element["camera"]["id"], 
+                                        element["camera"]["name"], 
+                                        element["camera"]["rover_id"], 
+                                        element["camera"]["full_name"], 
+                                        element["img_src"], 
+                                        element["earth_date"]));
+                }
+            }).catch(err => { console.log(err.stack); }) 
+            .then(res => {
+                // recusrsive call to go to all the pages for the selected day query of photos
+                // reason: the API is passing 25 photos per page
+                // console.log("arr length: " + arr.length);
+                if (arr.length % 25 === 0 && arr.length / pageIndex === 25 && arr.length !== 0) {
+                    pageIndex++;
+                    this.requestPhotosByPage(arr, url, pageIndex);
+                } else {
+                    this.totalCount = arr.length;
+                    return arr;
+                }
+            });
         return arr;
     }
 
