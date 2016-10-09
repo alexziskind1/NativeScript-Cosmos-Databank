@@ -71,6 +71,7 @@ export function onPageNavigatedTo(args: EventData) {
         apodViewModel.initDataItems();
     }
 
+
     pageContainer.bindingContext = apodViewModel;
 }
 
@@ -257,3 +258,10 @@ function setButtonsOpacity(value: number) {
     desktopButton.opacity = value;
     shareButton.opacity = value;
 }
+
+// var youtube = require("nativescript-youtube-videoplayer");
+
+// export function creatingView(args) {
+//     var player = new youtube.NativeYouTubePlayer(args);
+//     player.play("2zNSgSzhBfM");
+// }

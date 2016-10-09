@@ -5,12 +5,24 @@ This app is using NS to create mobile application for iOS and Android using the 
 APIs.
 
 The application is loading multiple images from online sources and is using
-nativescript-fresco plugin to manage memory recourses.
+nativescript-fresco plugin to manage memory recourses when working with many large images.
 
 List of used plugins:
 
+ * nativescript-permissions
+ * nativescript-background-http
  * nativescript-cardview
  * nativescript-fresco (images managment for Android)
  * nativescript-slides
  * nativescript-social-share
  * nativescript-telerik-ui (side-drawer and list-view)
+ * nativescript-toast
+ * nativescript-youtube-videoplayer (experimental)
+
+List of used APIs:
+
+ * NASA APOD
+ * NASA Asteroids -NeoWs
+ * NASA EPIC
+ * NASA AMars Rover Photos
+

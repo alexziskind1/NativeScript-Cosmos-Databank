@@ -7,6 +7,7 @@
     <ScrollView swipe="onScrollSwipe">
         <StackLayout id="pageContainer" class="pageContainer">
             <android>
+            <!--<Placeholder creatingView="creatingView"/>-->
             <nativescript-fresco:FrescoDrawee id="fr-img"
                                 imageUri="{{ dataItem.url }}"
                                 placeholderImageUri="res://logo"
