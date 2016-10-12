@@ -5,10 +5,10 @@
         navigatedTo="onPageNavigatedTo">
 
     <ScrollView swipe="onScrollSwipe">
-        <StackLayout id="pageContainer" class="pageContainer">
+        <StackLayout id="pageContainer" class="pageContainer" loaded="onStackLoaded">
             <android>
-            <Placeholder creatingView="creatingView"/>
-            <!--<nativescript-fresco:FrescoDrawee id="fr-img"
+            <Placeholder creatingView="creatingView" visibility="{{ isPlayerVisible ? 'visible' : 'collapsed' }}"/>
+            <nativescript-fresco:FrescoDrawee id="fr-img"
                                 imageUri="{{ dataItem.url }}"
                                 placeholderImageUri="res://logo"
                                 actualImageScaleType="centerCrop"                                                           
@@ -17,7 +17,7 @@
                                 showProgressBar="true"
                                 tapToRetryEnabled="true"
                                 submit="onSubmit"
-                                finalImageSet="onFinalImageSet" />            -->
+                                finalImageSet="onFinalImageSet" visibility="{{ !isPlayerVisible ? 'visible' : 'collapsed' }}"/>            
             <GridLayout rows="*" columns="*, *, *, *, *">
                 <Button col="0" text="&#xf053;" id="btn-prev" tap="previousDate" class="font-awesome nav" />
                 <Button col="1" text="&#xf019;" id="btn-save" tap="onSaveImage" class="font-awesome" /> 

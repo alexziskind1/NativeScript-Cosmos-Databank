@@ -13,6 +13,7 @@ let HD_PIC = "&hd=true";
 export class ApodViewModel extends Observable {
 
     private _dataItem: ApodItem;
+    private _previousDataItem: ApodItem;
     private _urlApod: string;
     private _selectedDate: Date;
 
@@ -33,6 +34,17 @@ export class ApodViewModel extends Observable {
         }
     }
 
+    public get previousDataItem() {   
+        return this._previousDataItem;
+    }
+
+    public set previousDataItem(value: ApodItem) {
+        if (this._previousDataItem !== value) {
+            this._previousDataItem = value;
+            this.notifyPropertyChange("previousDataItem", value);
+        }
+    }
+
     public get selectedDate() {   
         return this._selectedDate;
     }
@@ -50,9 +62,11 @@ export class ApodViewModel extends Observable {
 
     public initDataItems(date?: string) {
         if (date) {
-            this.requestApod(this.dataItem, this.getUpdatedUrl(), date);           
+            this.dataItem = this.requestApod(this.dataItem, this.getUpdatedUrl(), date);
+            this.previousDataItem = this.requestApod(this.dataItem, this.getUpdatedUrl(), date); // fix the date and use the meadia_type to predict videos  
         } else {
-            this.requestApod(this.dataItem, this.getUpdatedUrl());
+            this.dataItem = this.requestApod(this.dataItem, this.getUpdatedUrl());
+            this.previousDataItem = this.requestApod(this.dataItem, this.getUpdatedUrl()); // fix date and predict media_type
         }
     }
     
@@ -81,10 +95,12 @@ export class ApodViewModel extends Observable {
                                             result["title"], 
                                             result["url"] );
         }).then(res => {
-            this.dataItem = apodDataItem;
+            return apodDataItem;
         }).catch(err => {
             // console.log(err.stack);
         })
+
+        return apodDataItem;
     }
 }
 

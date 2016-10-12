@@ -10,6 +10,7 @@ if (application.android) {
 }
 var apod_model_1 = require("../../models/apod/apod-model");
 var apodViewModel = new apod_model_1.ApodViewModel();
+apodViewModel.set("isPlayerVisible", false);
 var page;
 var shareButton;
 var saveButton;
@@ -19,8 +20,13 @@ var currentImage;
 var currentSavedPath;
 function onPageLoaded(args) {
     page = args.object;
+    console.log("onPageLoaded");
 }
 exports.onPageLoaded = onPageLoaded;
+function onStackLoaded(args) {
+    console.log("onStackLoaded");
+}
+exports.onStackLoaded = onStackLoaded;
 function onScrollSwipe(args) {
     if (args.direction === 1) {
         previousDate();
@@ -111,6 +117,7 @@ function previousDate() {
     currentDate.setDate(currentDate.getDate() - 1);
     apodViewModel.set("selectedDate", currentDate);
     apodViewModel.initDataItems(formatDate(currentDate));
+    console.log(apodViewModel.get("dataItem").media_type);
 }
 exports.previousDate = previousDate;
 function nextDate() {

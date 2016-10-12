@@ -45,10 +45,10 @@ var ApodViewModel = (function (_super) {
     };
     ApodViewModel.prototype.initDataItems = function (date) {
         if (date) {
-            this.requestApod(this.dataItem, this.getUpdatedUrl(), date);
+            return this.dataItem = this.requestApod(this.dataItem, this.getUpdatedUrl(), date);
         }
         else {
-            this.requestApod(this.dataItem, this.getUpdatedUrl());
+            return this.dataItem = this.requestApod(this.dataItem, this.getUpdatedUrl());
         }
     };
     ApodViewModel.prototype.requestApod = function (apodDataItem, apiUrl, date) {
@@ -68,10 +68,11 @@ var ApodViewModel = (function (_super) {
             var result = response.content.toJSON();
             apodDataItem = new ApodItem(result["copyright"], result["date"], result["explanation"], result["hdurl"], result["media_type"], result["service_version"], result["title"], result["url"]);
         }).then(function (res) {
-            _this.dataItem = apodDataItem;
+            return _this.dataItem = apodDataItem;
         }).catch(function (err) {
             // console.log(err.stack);
         });
+        return this.dataItem;
     };
     return ApodViewModel;
 }(observable_1.Observable));

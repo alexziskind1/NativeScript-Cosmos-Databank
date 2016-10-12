@@ -28,6 +28,8 @@ if (application.android) {
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 let apodViewModel = new ApodViewModel();
+apodViewModel.set("isPlayerVisible", false);
+
 
 let page : Page;
 let shareButton : Button;
@@ -40,6 +42,11 @@ var currentSavedPath : string;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
+    console.log("onPageLoaded");
+}
+
+export function onStackLoaded(args: EventData) {
+    console.log("onStackLoaded");
 }
 
 export function onScrollSwipe(args: SwipeGestureEventData) {
@@ -138,7 +145,7 @@ export function previousDate() {
     var currentDate = apodViewModel.get("selectedDate");
     currentDate.setDate(currentDate.getDate()-1);
     apodViewModel.set("selectedDate", currentDate);
-    apodViewModel.initDataItems(formatDate(currentDate)); 
+    apodViewModel.initDataItems(formatDate(currentDate));
 }
 
 export function nextDate() {

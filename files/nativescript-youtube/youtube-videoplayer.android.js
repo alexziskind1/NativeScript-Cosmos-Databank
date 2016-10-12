@@ -24,19 +24,19 @@ var NativeYouTubePlayer = (function () {
                             console.log("Loaded!");
                         },
                              
-                        onAdStarted: function (params) { },
+                        onAdStarted: function () { },
                         
                             
                         onError: function (params) { },
                         
                         
-                        onLoading: function (params) { },
+                        onLoading: function () { },
                         
                             
-                        onVideoEnded: function (params) { },
+                        onVideoEnded: function () { },
                         
                             
-                        onVideoStarted: function (params) { }
+                        onVideoStarted: function () { }
                     }));
 
                     player.setFullscreen(false);
