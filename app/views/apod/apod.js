@@ -211,9 +211,10 @@ function setButtonsOpacity(value) {
     desktopButton.opacity = value;
     shareButton.opacity = value;
 }
-// var youtube = require("nativescript-youtube-videoplayer");
-// export function creatingView(args) {
-//     var player = new youtube.NativeYouTubePlayer(args);
-//     player.play("2zNSgSzhBfM");
-// } 
+var youtube = require("nativescript-youtube-videoplayer");
+function creatingView(args) {
+    var player = new youtube.NativeYouTubePlayer(args);
+    player.play("2zNSgSzhBfM");
+}
+exports.creatingView = creatingView;
 //# sourceMappingURL=apod.js.map

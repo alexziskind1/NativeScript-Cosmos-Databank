@@ -259,9 +259,9 @@ function setButtonsOpacity(value: number) {
     shareButton.opacity = value;
 }
 
-// var youtube = require("nativescript-youtube-videoplayer");
+var youtube = require("nativescript-youtube-videoplayer");
 
-// export function creatingView(args) {
-//     var player = new youtube.NativeYouTubePlayer(args);
-//     player.play("2zNSgSzhBfM");
-// }
+export function creatingView(args) {
+    var player = new youtube.NativeYouTubePlayer(args);
+    player.play("2zNSgSzhBfM");
+}

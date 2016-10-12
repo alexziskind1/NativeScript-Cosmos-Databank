@@ -8,9 +8,7 @@ var NativeYouTubePlayer = (function () {
         this._apiKey = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
     }
 
-
-    NativeYouTubePlayer.prototype.play = function (videoId) {
-        
+    NativeYouTubePlayer.prototype.play = function (videoId) {   
         try {
             var youTubePlayerFragment = com.google.android.youtube.player.YouTubePlayerFragment.newInstance();
 
@@ -20,6 +18,27 @@ var NativeYouTubePlayer = (function () {
                     console.log(error);
                 },
                 onInitializationSuccess : function (provider, player, wasRestored) {
+
+                    player.setPlayerStateChangeListener(new com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener({
+                        onLoaded: function (params) {
+                            console.log("Loaded!");
+                        },
+                             
+                        onAdStarted: function (params) { },
+                        
+                            
+                        onError: function (params) { },
+                        
+                        
+                        onLoading: function (params) { },
+                        
+                            
+                        onVideoEnded: function (params) { },
+                        
+                            
+                        onVideoStarted: function (params) { }
+                    }));
+
                     player.setFullscreen(false);
                     player.loadVideo(videoId); // videoID
                     player.play();
