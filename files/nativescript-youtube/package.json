@@ -1,0 +1,12 @@
+{
+  "name": "nativescript-youtube-videoplayer",
+  "version": "0.0.1",
+  "main": "youtube-videoplayer.js",
+  "nativescript": {
+    "platforms": {
+      "tns-android": {
+        "version": "2.3.0"
+      }
+    }
+  }
+}
