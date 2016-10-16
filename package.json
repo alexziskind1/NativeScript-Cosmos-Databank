@@ -20,8 +20,7 @@
     "nativescript-social-share": "^1.3.1",
     "nativescript-telerik-ui": "^1.4.1",
     "nativescript-toast": "^1.3.0",
-    "nativescript-videoplayer": "^1.1.1",
-    "nativescript-youtube-videoplayer": "file:../nativescript-youtube-player/src",
+    "nativescript-youtube-videoplayer": "file:./files/nativescript-youtube-player",
     "tns-core-modules": "^2.4.0-2016-09-21-4189",
     "tns-platform-declarations": "next"
   },
