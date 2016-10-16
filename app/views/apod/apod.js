@@ -8,9 +8,10 @@ var SocialShare = require("nativescript-social-share");
 if (application.android) {
     var Toast = require("nativescript-toast");
 }
+var youtube = require("nativescript-youtube-player");
 var apod_model_1 = require("../../models/apod/apod-model");
 var apodViewModel = new apod_model_1.ApodViewModel();
-apodViewModel.set("isPlayerVisible", false);
+// apodViewModel.set("isPlayerVisible", false);
 var page;
 var shareButton;
 var saveButton;
@@ -117,7 +118,6 @@ function previousDate() {
     currentDate.setDate(currentDate.getDate() - 1);
     apodViewModel.set("selectedDate", currentDate);
     apodViewModel.initDataItems(formatDate(currentDate));
-    console.log(apodViewModel.get("dataItem").media_type);
 }
 exports.previousDate = previousDate;
 function nextDate() {
@@ -218,10 +218,4 @@ function setButtonsOpacity(value) {
     desktopButton.opacity = value;
     shareButton.opacity = value;
 }
-var youtube = require("nativescript-youtube-videoplayer");
-function creatingView(args) {
-    var player = new youtube.NativeYouTubePlayer(args);
-    player.play("2zNSgSzhBfM");
-}
-exports.creatingView = creatingView;
 //# sourceMappingURL=apod.js.map

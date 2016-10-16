@@ -4,24 +4,62 @@ import http = require("http");
 
 let API_URL = "https://api.nasa.gov/planetary/apod";
 let API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
+let YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
 let HD_PIC = "&hd=true";
 // Parameter	Type	    Default	    Description
 // date	        YYYY-MM-DD	today	    The date of the APOD image to retrieve
 // hd	        bool	    False	    Retrieve the URL for the high resolution image
 // api_key	    string	    DEMO_KEY	api.nasa.gov key for expanded usage
 
+
+
 export class ApodViewModel extends Observable {
 
     private _dataItem: ApodItem;
-    private _previousDataItem: ApodItem;
     private _urlApod: string;
     private _selectedDate: Date;
+    private _isPlayerVisible: boolean = false;
+    private _youtube_api_Key: string;
+    private _youtube_video_key: string;
 
     constructor() {
         super();
 
         this._selectedDate = new Date();
-    }    
+        this._youtube_api_Key = YOUTUBE_API_KEY;
+    }   
+
+    public get isPlayerVisible() {   
+        return this._isPlayerVisible;
+    }
+
+    public set isPlayerVisible(value: boolean) {
+        if (this._isPlayerVisible !== value) {
+            this._isPlayerVisible = value;
+            this.notifyPropertyChange("isPlayerVisible", value);
+        }
+    }
+    public get youtube_api_Key() {   
+        return this._youtube_api_Key;
+    }
+
+    public set youtube_api_Key(value: string) {
+        if (this._youtube_api_Key !== value) {
+            this._youtube_api_Key = value;
+            this.notifyPropertyChange("youtube_api_Key", value);
+        }
+    }
+
+    public get youtube_video_key() {   
+        return this._youtube_video_key;
+    }
+
+    public set youtube_video_key(value: string) {
+        if (this._youtube_video_key !== value) {
+            this._youtube_video_key = value;
+            this.notifyPropertyChange("youtube_video_key", value);
+        }
+    }
 
     public get dataItem() {   
         return this._dataItem;
@@ -31,17 +69,6 @@ export class ApodViewModel extends Observable {
         if (this._dataItem !== value) {
             this._dataItem = value;
             this.notifyPropertyChange("dataItem", value);
-        }
-    }
-
-    public get previousDataItem() {   
-        return this._previousDataItem;
-    }
-
-    public set previousDataItem(value: ApodItem) {
-        if (this._previousDataItem !== value) {
-            this._previousDataItem = value;
-            this.notifyPropertyChange("previousDataItem", value);
         }
     }
 
@@ -62,15 +89,15 @@ export class ApodViewModel extends Observable {
 
     public initDataItems(date?: string) {
         if (date) {
-            this.dataItem = this.requestApod(this.dataItem, this.getUpdatedUrl(), date);
-            this.previousDataItem = this.requestApod(this.dataItem, this.getUpdatedUrl(), date); // fix the date and use the meadia_type to predict videos  
+            this.requestApod(this.getUpdatedUrl(), date);
         } else {
-            this.dataItem = this.requestApod(this.dataItem, this.getUpdatedUrl());
-            this.previousDataItem = this.requestApod(this.dataItem, this.getUpdatedUrl()); // fix date and predict media_type
+            this.requestApod(this.getUpdatedUrl());
         }
     }
     
-    public requestApod(apodDataItem: ApodItem, apiUrl: string, date?: string) {
+    public requestApod(apiUrl: string, date?: string) {
+        var apodDataItem: ApodItem;
+        
         // default: no date === today
         if (date) {
             date = "&date=" + date;
@@ -95,12 +122,23 @@ export class ApodViewModel extends Observable {
                                             result["title"], 
                                             result["url"] );
         }).then(res => {
-            return apodDataItem;
+            this.dataItem = apodDataItem;
+            
+            console.log("then (media_type )" + apodDataItem.media_type);
+            console.log("then (data media_type )" + this.dataItem.media_type); 
+
+            if (this.dataItem.media_type === "video") {
+
+                this.youtube_api_Key = YOUTUBE_API_KEY;
+                this.youtube_video_key = "2zNSgSzhBfM";
+                this.isPlayerVisible = true;  
+            } else {
+                this.isPlayerVisible = false;
+            }
         }).catch(err => {
-            // console.log(err.stack);
+            console.log(err.stack);
         })
 
-        return apodDataItem;
     }
 }
 

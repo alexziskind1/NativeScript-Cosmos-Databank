@@ -26,10 +26,11 @@ if (application.android) {
     var Toast = require("nativescript-toast");
 }
 
+var youtube = require("nativescript-youtube-player");
+
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 let apodViewModel = new ApodViewModel();
-apodViewModel.set("isPlayerVisible", false);
-
+// apodViewModel.set("isPlayerVisible", false);
 
 let page : Page;
 let shareButton : Button;
@@ -75,9 +76,8 @@ export function onPageNavigatedTo(args: EventData) {
     }
 
     if (!apodViewModel.get("dataItem")) {
-        apodViewModel.initDataItems();
+        apodViewModel.initDataItems()
     }
-
 
     pageContainer.bindingContext = apodViewModel;
 }
@@ -264,11 +264,4 @@ function setButtonsOpacity(value: number) {
     saveButton.opacity = value;
     desktopButton.opacity = value;
     shareButton.opacity = value;
-}
-
-var youtube = require("nativescript-youtube-videoplayer");
-
-export function creatingView(args) {
-    var player = new youtube.NativeYouTubePlayer(args);
-    player.play("2zNSgSzhBfM");
 }

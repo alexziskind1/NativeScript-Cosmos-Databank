@@ -1,23 +1,27 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
         actionBarHidden="true"
         xmlns:nativescript-fresco="nativescript-fresco" 
+        xmlns:nativescript-youtube-player="nativescript-youtube-player" 
         loaded="onPageLoaded" 
         navigatedTo="onPageNavigatedTo">
 
     <ScrollView swipe="onScrollSwipe">
         <StackLayout id="pageContainer" class="pageContainer" loaded="onStackLoaded">
             <android>
-            <Placeholder creatingView="creatingView" visibility="{{ isPlayerVisible ? 'visible' : 'collapsed' }}"/>
+            <nativescript-youtube-player:YouTubePlayerView apiKey="{{ youtube_api_key }}" 
+                                                           videoKey="{{ youtube_video_key }}" 
+                                                           visibility="{{ isPlayerVisible ? 'visible' : 'collapsed' }}"/>
             <nativescript-fresco:FrescoDrawee id="fr-img"
-                                imageUri="{{ dataItem.url }}"
-                                placeholderImageUri="res://logo"
-                                actualImageScaleType="centerCrop"                                                           
-                                verticalAlignment="top"
-                                aspectRatio="1.33"
-                                showProgressBar="true"
-                                tapToRetryEnabled="true"
-                                submit="onSubmit"
-                                finalImageSet="onFinalImageSet" visibility="{{ !isPlayerVisible ? 'visible' : 'collapsed' }}"/>            
+                                              imageUri="{{ dataItem.url }}"
+                                              placeholderImageUri="res://logo"
+                                              actualImageScaleType="centerCrop"                                                           
+                                              verticalAlignment="top"
+                                              aspectRatio="1.33"
+                                              showProgressBar="true"
+                                              tapToRetryEnabled="true"
+                                              submit="onSubmit"
+                                              finalImageSet="onFinalImageSet" 
+                                              visibility="{{ !isPlayerVisible ? 'visible' : 'collapsed' }}"/>            
             <GridLayout rows="*" columns="*, *, *, *, *">
                 <Button col="0" text="&#xf053;" id="btn-prev" tap="previousDate" class="font-awesome nav" />
                 <Button col="1" text="&#xf019;" id="btn-save" tap="onSaveImage" class="font-awesome" /> 
