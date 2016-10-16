@@ -15,7 +15,6 @@ var ApodViewModel = (function (_super) {
         _super.call(this);
         this._isPlayerVisible = false;
         this._selectedDate = new Date();
-        this._youtube_api_Key = YOUTUBE_API_KEY;
     }
     Object.defineProperty(ApodViewModel.prototype, "isPlayerVisible", {
         get: function () {
@@ -25,32 +24,6 @@ var ApodViewModel = (function (_super) {
             if (this._isPlayerVisible !== value) {
                 this._isPlayerVisible = value;
                 this.notifyPropertyChange("isPlayerVisible", value);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ApodViewModel.prototype, "youtube_api_Key", {
-        get: function () {
-            return this._youtube_api_Key;
-        },
-        set: function (value) {
-            if (this._youtube_api_Key !== value) {
-                this._youtube_api_Key = value;
-                this.notifyPropertyChange("youtube_api_Key", value);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ApodViewModel.prototype, "youtube_video_key", {
-        get: function () {
-            return this._youtube_video_key;
-        },
-        set: function (value) {
-            if (this._youtube_video_key !== value) {
-                this._youtube_video_key = value;
-                this.notifyPropertyChange("youtube_video_key", value);
             }
         },
         enumerable: true,
@@ -86,44 +59,41 @@ var ApodViewModel = (function (_super) {
         return this._urlApod = API_URL + API_KEY + HD_PIC;
     };
     ApodViewModel.prototype.initDataItems = function (date) {
-        if (date) {
-            this.requestApod(this.getUpdatedUrl(), date);
-        }
-        else {
-            this.requestApod(this.getUpdatedUrl());
-        }
+        var _this = this;
+        return new Promise(function (resolve) {
+            _this.requestApod(_this.getUpdatedUrl(), date)
+                .then(function (resultApodDataItem) {
+                _this.dataItem = resultApodDataItem;
+                resolve(_this.dataItem);
+            });
+        });
     };
     ApodViewModel.prototype.requestApod = function (apiUrl, date) {
-        var _this = this;
-        var apodDataItem;
         // default: no date === today
         if (date) {
             date = "&date=" + date;
             apiUrl = apiUrl + date;
         }
-        http.request({ url: apiUrl, method: "GET" })
-            .then(function (response) {
-            // Argument (response) is HttpResponse!
-            if (response.statusCode === 400) {
-                console.log("NO APOD for that date - err 400");
-                return;
-            }
-            var result = response.content.toJSON();
-            apodDataItem = new ApodItem(result["copyright"], result["date"], result["explanation"], result["hdurl"], result["media_type"], result["service_version"], result["title"], result["url"]);
-        }).then(function (res) {
-            _this.dataItem = apodDataItem;
-            console.log("then (media_type )" + apodDataItem.media_type);
-            console.log("then (data media_type )" + _this.dataItem.media_type);
-            if (_this.dataItem.media_type === "video") {
-                _this.youtube_api_Key = YOUTUBE_API_KEY;
-                _this.youtube_video_key = "2zNSgSzhBfM";
-                _this.isPlayerVisible = true;
-            }
-            else {
-                _this.isPlayerVisible = false;
-            }
-        }).catch(function (err) {
-            console.log(err.stack);
+        return new Promise(function (resolve, reject) {
+            http.request({ url: apiUrl, method: "GET" })
+                .then(function (response) {
+                // Argument (response) is HttpResponse!
+                if (response.statusCode === 400) {
+                    console.log("NO APOD for that date - err 400");
+                    return;
+                }
+                var result = response.content.toJSON();
+                return new ApodItem(result["copyright"], result["date"], result["explanation"], result["hdurl"], result["media_type"], result["service_version"], result["title"], result["url"]);
+            }).then(function (resultApodDataItem) {
+                try {
+                    resolve(resultApodDataItem);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            }).catch(function (err) {
+                console.log(err.stack);
+            });
         });
     };
     return ApodViewModel;

@@ -8,7 +8,8 @@
     <ScrollView swipe="onScrollSwipe">
         <StackLayout id="pageContainer" class="pageContainer" loaded="onStackLoaded">
             <android>
-            <nativescript-youtube-player:YouTubePlayerView apiKey="{{ youtube_api_key }}" 
+            <nativescript-youtube-player:YouTubePlayerView id="player" 
+                                                           apiKey="{{ youtube_api_key }}" 
                                                            videoKey="{{ youtube_video_key }}" 
                                                            visibility="{{ isPlayerVisible ? 'visible' : 'collapsed' }}"/>
             <nativescript-fresco:FrescoDrawee id="fr-img"
@@ -19,7 +20,6 @@
                                               aspectRatio="1.33"
                                               showProgressBar="true"
                                               tapToRetryEnabled="true"
-                                              submit="onSubmit"
                                               finalImageSet="onFinalImageSet" 
                                               visibility="{{ !isPlayerVisible ? 'visible' : 'collapsed' }}"/>            
             <GridLayout rows="*" columns="*, *, *, *, *">
