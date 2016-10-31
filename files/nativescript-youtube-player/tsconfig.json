@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "declaration": false,
+        "noLib": false,
+        "noEmitHelpers": true,
+        "experimentalDecorators": true
+    },
+    "files": [
+        "../tns-core-modules/tns-core-modules.d.ts",
+        "../../references.d.ts",
+        "./player.android.ts",
+        "./player-common.ts",
+        "./player.d.ts"
+    ]
+}
