@@ -1,5 +1,5 @@
 node_modules/
 platforms/
 
-!.gitignore
-!YouTubeAndroidPlayerApi.jar
+platforms/*
+!platforms/android/YouTubeAndroidPlayerApi.jar
