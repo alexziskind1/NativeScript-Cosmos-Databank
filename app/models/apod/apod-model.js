@@ -3,6 +3,7 @@ var observable_1 = require("data/observable");
 var http = require("http");
 var API_URL = "https://api.nasa.gov/planetary/apod";
 var API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
+var YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
 var HD_PIC = "&hd=true";
 // Parameter	Type	    Default	    Description
 // date	        YYYY-MM-DD	today	    The date of the APOD image to retrieve
@@ -12,8 +13,22 @@ var ApodViewModel = (function (_super) {
     __extends(ApodViewModel, _super);
     function ApodViewModel() {
         _super.call(this);
+        this._isPlayerVisible = false;
         this._selectedDate = new Date();
     }
+    Object.defineProperty(ApodViewModel.prototype, "isPlayerVisible", {
+        get: function () {
+            return this._isPlayerVisible;
+        },
+        set: function (value) {
+            if (this._isPlayerVisible !== value) {
+                this._isPlayerVisible = value;
+                this.notifyPropertyChange("isPlayerVisible", value);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ApodViewModel.prototype, "dataItem", {
         get: function () {
             return this._dataItem;
@@ -44,33 +59,41 @@ var ApodViewModel = (function (_super) {
         return this._urlApod = API_URL + API_KEY + HD_PIC;
     };
     ApodViewModel.prototype.initDataItems = function (date) {
-        if (date) {
-            this.requestApod(this.dataItem, this.getUpdatedUrl(), date);
-        }
-        else {
-            this.requestApod(this.dataItem, this.getUpdatedUrl());
-        }
-    };
-    ApodViewModel.prototype.requestApod = function (apodDataItem, apiUrl, date) {
         var _this = this;
+        return new Promise(function (resolve) {
+            _this.requestApod(_this.getUpdatedUrl(), date)
+                .then(function (resultApodDataItem) {
+                _this.dataItem = resultApodDataItem;
+                resolve(_this.dataItem);
+            });
+        });
+    };
+    ApodViewModel.prototype.requestApod = function (apiUrl, date) {
         // default: no date === today
         if (date) {
             date = "&date=" + date;
             apiUrl = apiUrl + date;
         }
-        http.request({ url: apiUrl, method: "GET" })
-            .then(function (response) {
-            // Argument (response) is HttpResponse!
-            if (response.statusCode === 400) {
-                console.log("NO APOD for that date - err 400");
-                return;
-            }
-            var result = response.content.toJSON();
-            apodDataItem = new ApodItem(result["copyright"], result["date"], result["explanation"], result["hdurl"], result["media_type"], result["service_version"], result["title"], result["url"]);
-        }).then(function (res) {
-            _this.dataItem = apodDataItem;
-        }).catch(function (err) {
-            // console.log(err.stack);
+        return new Promise(function (resolve, reject) {
+            http.request({ url: apiUrl, method: "GET" })
+                .then(function (response) {
+                // Argument (response) is HttpResponse!
+                if (response.statusCode === 400) {
+                    console.log("NO APOD for that date - err 400");
+                    return;
+                }
+                var result = response.content.toJSON();
+                return new ApodItem(result["copyright"], result["date"], result["explanation"], result["hdurl"], result["media_type"], result["service_version"], result["title"], result["url"]);
+            }).then(function (resultApodDataItem) {
+                try {
+                    resolve(resultApodDataItem);
+                }
+                catch (e) {
+                    reject(e);
+                }
+            }).catch(function (err) {
+                console.log(err.stack);
+            });
         });
     };
     return ApodViewModel;

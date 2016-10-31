@@ -10,11 +10,13 @@
       </ActionBar>
     </Page.actionBar>
 
-    <StackLayout id="pageContainer" class="pageContainer">
-        <GridLayout rows="*, *, *" columns="*">
-            <Label row="0" text="Powered by NativeScript" textWrap="true" />
-            <Label row="1" text="NASA Open APIs" textWrap="true" />
-            <Label row="2" text="NativeNick" textWrap="true" />
-        </GridLayout>
-    </StackLayout>
+    <ScrollView>
+        <StackLayout id="pageContainer" class="pageContainer">
+            <GridLayout rows="*, *, *" columns="*">
+                <Label row="0" text="Powered by NativeScript" textWrap="true" />
+                <Label row="1" text="NASA Open APIs" textWrap="true" />
+                <Label row="2" text="NativeNick" textWrap="true" />
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
 </Page>

@@ -4,6 +4,7 @@ import http = require("http");
 
 let API_URL = "https://api.nasa.gov/planetary/apod";
 let API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
+let YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
 let HD_PIC = "&hd=true";
 // Parameter	Type	    Default	    Description
 // date	        YYYY-MM-DD	today	    The date of the APOD image to retrieve
@@ -15,14 +16,25 @@ export class ApodViewModel extends Observable {
     private _dataItem: ApodItem;
     private _urlApod: string;
     private _selectedDate: Date;
+    private _isPlayerVisible: boolean = false;
 
     constructor() {
         super();
-
         this._selectedDate = new Date();
-    }    
+    }
 
-    public get dataItem() {   
+    public get isPlayerVisible() {
+        return this._isPlayerVisible;
+    }
+
+    public set isPlayerVisible(value: boolean) {
+        if (this._isPlayerVisible !== value) {
+            this._isPlayerVisible = value;
+            this.notifyPropertyChange("isPlayerVisible", value);
+        }
+    }
+
+    public get dataItem() {
         return this._dataItem;
     }
 
@@ -33,7 +45,7 @@ export class ApodViewModel extends Observable {
         }
     }
 
-    public get selectedDate() {   
+    public get selectedDate() {
         return this._selectedDate;
     }
 
@@ -48,43 +60,57 @@ export class ApodViewModel extends Observable {
         return this._urlApod = API_URL + API_KEY + HD_PIC;
     }
 
-    public initDataItems(date?: string) {
-        if (date) {
-            this.requestApod(this.dataItem, this.getUpdatedUrl(), date);           
-        } else {
-            this.requestApod(this.dataItem, this.getUpdatedUrl());
-        }
+    public initDataItems(date?: string): Promise<ApodItem> {
+        return new Promise<ApodItem>((resolve) => {
+            this.requestApod(this.getUpdatedUrl(), date)
+                .then(resultApodDataItem => {
+                    this.dataItem = resultApodDataItem;
+                    resolve(this.dataItem);
+                });
+        });
+
     }
-    
-    public requestApod(apodDataItem: ApodItem, apiUrl: string, date?: string) {
+
+    public requestApod(apiUrl: string, date?: string): Promise<ApodItem> {
         // default: no date === today
         if (date) {
             date = "&date=" + date;
             apiUrl = apiUrl + date;
         }
 
-        http.request({ url: apiUrl, method: "GET" })
-            .then(response => {
-                // Argument (response) is HttpResponse!
-                if (response.statusCode === 400) {
-                    console.log("NO APOD for that date - err 400");
-                    return;
-                }
+        return new Promise<ApodItem>((resolve, reject) => {
+            
+            http.request({ url: apiUrl, method: "GET" })
+                .then(response => {
+                    // Argument (response) is HttpResponse!
+                    if (response.statusCode === 400) {
+                        console.log("NO APOD for that date - err 400");
+                        return;
+                    }
 
-                var result = response.content.toJSON();
-                apodDataItem = new ApodItem(result["copyright"], 
-                                            result["date"], 
-                                            result["explanation"], 
-                                            result["hdurl"], 
-                                            result["media_type"], 
-                                            result["service_version"], 
-                                            result["title"], 
-                                            result["url"] );
-        }).then(res => {
-            this.dataItem = apodDataItem;
-        }).catch(err => {
-            // console.log(err.stack);
-        })
+                    var result = response.content.toJSON();
+                    return new ApodItem(result["copyright"],
+                                        result["date"],
+                                        result["explanation"],
+                                        result["hdurl"],
+                                        result["media_type"],
+                                        result["service_version"],
+                                        result["title"],
+                                        result["url"]);
+                                                
+                }).then(resultApodDataItem => {
+                    try {
+                        resolve(resultApodDataItem);
+                    } catch (e) {
+                        reject(e);
+                    }
+                    
+                }).catch(err => {
+                    console.log(err.stack);
+                });
+
+        });
+        
     }
 }
 
