@@ -10,7 +10,7 @@ var YouTubePlayerView = (function (_super) {
             onInitializationFailure: function (provider, error) {
                 that._player = undefined;
                 that._initialized = false;
-                console.log("init failure: " + error.stack);
+                console.log("init failure: " + error);
             },
             onInitializationSuccess: function (provider, player, wasRestored) {
                 player.setPlayerStateChangeListener(that._onPlayerStateChangeListener);
@@ -108,9 +108,10 @@ var YouTubePlayerView = (function (_super) {
         if (!this._fragment) {
             return;
         }
-        console.log("_initialize apiKey" + this.apiKey);
+        console.log("_initialize apiKey: " + this.apiKey);
         var key = this.apiKey;
         if (!key) {
+            console.log("key: " + key);
             return;
         }
         this._fragment.initialize(key, this._onInitializedListener);

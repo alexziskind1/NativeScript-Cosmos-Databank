@@ -15,7 +15,7 @@ export class DrawerOverNavigationModel extends Observable {
     }
 
     get apodDescription() {
-        return "Astronomical \nPhoto \nof the Day.";
+        return "Astronomical \nPhoto \nof the Day";
     }
 
     get roversDescription() {

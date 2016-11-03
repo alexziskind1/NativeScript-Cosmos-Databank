@@ -1,4 +1,6 @@
-﻿/*
+﻿@import '~/css/core.dark.css'; 
+
+/*
 http://www.colourlovers.com/palette/482774/dream_magnet
 #343838
 #005F6B
@@ -11,5 +13,9 @@ ActionBar {
     font-family: "Nasalization";
     background-color: #343838;   
     color: #E8EAEB;
-    font-size: 20;
+}
+
+.main-font {
+    color: #E8EAEB;
+    font-family: "Nasalization";
 }

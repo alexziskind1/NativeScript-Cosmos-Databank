@@ -1,55 +1,20 @@
-.action-title {
-    horizontal-align: center;
-    text-align: cemter;
-    margin-left:30;
-}
 
-
-.dp-all {
+.dp-bg {
     background-color: #BCBCBC;
-    color: #E8EAEB;
+}
+
+.dp-btn {
+    background-color: #008C9E;
     font-family: "Nasalization";
-    font-size:16;
+    margin: 0 4 0 4;
+    height: 48;
 }
 
-.dp-action-button {
-    background-color: #008C9E;
-    border-radius: 10;
-    margin: 10;
-}
-
-.dp-content-button {
-    background-color: #008C9E;
-    border-radius: 10;
-    margin: 10; 
-}
-
-.dp-drawer-content-text {
-    font-size: 12;
-    text-align: center;
-}
-
-.dp-drawer-content {
+.dp-bg-dark {
     background-color: #343838;
 }
 
-.dp-header-content {
-    font-size: 12;
-}
-
-.dp-main-content {
-    font-family: "Nasalization";
-    color: #343838;
-}
-
-.dp-cardview {
-    margin: 6 6 0 6;
-}
-
-.dp-grid {
-    horizontal-alignment: stretch;
+.dp-card {
     background-color: #343838;
     color: #BCBCBC;
-    font-size: 16;
-    padding: 8;
 }

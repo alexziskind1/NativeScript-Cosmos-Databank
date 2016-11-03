@@ -28,7 +28,7 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
                 //TODO: Handle errors
                 that._player = undefined;
                 that._initialized = false;
-                console.log("init failure: " + error.stack);
+                console.log("init failure: " + error);
             },
             onInitializationSuccess: function (provider, player, wasRestored) {
                 player.setPlayerStateChangeListener(that._onPlayerStateChangeListener);
@@ -150,11 +150,11 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
             return;
         }
 
-        console.log("_initialize apiKey" + this.apiKey);
+        console.log("_initialize apiKey: " + this.apiKey);
         var key = this.apiKey;
         if (!key) {
             // No valid API key
-            
+            console.log("key: " + key)
             return;
         }
 

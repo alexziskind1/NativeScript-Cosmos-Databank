@@ -1,16 +1,32 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" 
         actionBarHidden="true"
-        loaded="onPageLoaded">
+        loaded="onPageLoaded"
+        xmlns:lv="nativescript-telerik-ui/listview">
         
-    <StackLayout class="item-container" >
+    <StackLayout class="bg">
         <Label text="{{ asteroidCount == 0 ? 'counting near by asteroids' : asteroidCount + ' asteroids will fly near in the next 7 days'}}"
                 class="lbl asteroid-title" textWrap="true" />
         <GridLayout rows="50" columns="2*, *, *" borderWidth="1" borderColor="black">
             <Label col="0" text="asteroid name" class="lbl asteroid-name" textWrap="true"/>
             <Label col="1" text="size" class="lbl asteroid-size" textWrap="true" />
             <Label col="2" text="danger" class="lbl asteroid-hazard" textWrap="true" /> 
-        </GridLayout>        
-        <ListView items="{{ dataItems }}"  loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
+        </GridLayout>
+
+        <lv:RadListView items="{{ dataItems }}" class="list-group" itemTap="onItemTap">
+            <lv:RadListView.listViewLayout>
+                <lv:ListViewLinearLayout scrollDirection="vertical"/>
+            </lv:RadListView.listViewLayout>
+            <lv:RadListView.itemTemplate>
+                <GridLayout class="list-group-item" rows="*" columns="3*, *">
+                    <Label col="0" text="{{ name }}" class="list-group-item-heading main-font text-left" textWrap="true"/>
+                    <!--<Label col="1" text="{{ estimated_diameter.meters.estimated_diameter_max +'m'}}" class="list-group-item-text text-left main-font" textWrap="true" />-->
+                    <Label col="1" text="{{ is_potentially_hazardous_asteroid ? 'close' : 'fly-by' }}" 
+                            color="{{ is_potentially_hazardous_asteroid ? 'red' : 'green' }}" class="list-group-item-text main-font text-right" textWrap="true" /> 
+                </GridLayout>
+            </lv:RadListView.itemTemplate>
+        </lv:RadListView>  
+
+        <!--<ListView items="{{ dataItems }}" loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
             <ListView.itemTemplate>
                 <GridLayout rows="*" columns="2*, *, *">
                     <Label col="0" text="{{ name }}" class="lbl asteroid-name" textWrap="true"/>
@@ -20,6 +36,6 @@
                             class="lbl asteroid-hazard" textWrap="true" /> 
                 </GridLayout>
             </ListView.itemTemplate>
-        </ListView>
+        </ListView>-->
     </StackLayout>
 </Page>          
