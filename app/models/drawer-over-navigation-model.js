@@ -18,7 +18,7 @@ var DrawerOverNavigationModel = (function (_super) {
     });
     Object.defineProperty(DrawerOverNavigationModel.prototype, "apodDescription", {
         get: function () {
-            return "Astronomical \nPhoto \nof the Day.";
+            return "Astronomical \nPhoto \nof the Day";
         },
         enumerable: true,
         configurable: true

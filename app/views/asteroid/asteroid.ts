@@ -2,7 +2,7 @@ import { topmost } from "ui/frame";
 import * as application from "application";
 import { AsteroidViewModel } from "../../models/asteroid/asteroid-view-model";
 
-import { ItemEventData } from "nativescript-telerik-ui/listvuew";
+import { ListViewEventData } from "nativescript-telerik-ui/listview";
 
 var vm = new AsteroidViewModel();
 vm.initDataItems();
@@ -12,11 +12,11 @@ export function onPageLoaded(args) {
     page.bindingContext = vm;
 }
 
-export function onItemTap(args: ItemEventData) {
+export function onItemTap(args: ListViewEventData) {
 
     console.log("HERE");
-    var tappedItemIndex = args.index;
-    var tappedItemView = args.view;
+    var tappedItemIndex = args.itemIndex;
+    var tappedItemView = args.object;
     console.log("tappedItemIndex: " + tappedItemIndex);
     var tappedAsteroid = vm.get("dataItems").getItem(tappedItemIndex);
     console.log("tappedAsteroid: " + tappedAsteroid);

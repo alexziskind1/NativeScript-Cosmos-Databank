@@ -10,9 +10,12 @@ function onPageLoaded(args) {
 }
 exports.onPageLoaded = onPageLoaded;
 function onItemTap(args) {
-    var tappedItemIndex = args.index;
-    var tappedItemView = args.view;
+    console.log("HERE");
+    var tappedItemIndex = args.itemIndex;
+    var tappedItemView = args.object;
+    console.log("tappedItemIndex: " + tappedItemIndex);
     var tappedAsteroid = vm.get("dataItems").getItem(tappedItemIndex);
+    console.log("tappedAsteroid: " + tappedAsteroid);
     frame_1.topmost().navigate({
         moduleName: "views/asteroid/asteroid-details-page",
         context: { "tappedItem": tappedAsteroid },
