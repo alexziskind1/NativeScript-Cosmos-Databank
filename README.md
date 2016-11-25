@@ -10,14 +10,12 @@ nativescript-fresco plugin to manage memory recourses when working with many lar
 List of used plugins:
 
  * nativescript-permissions
- * nativescript-background-http
  * nativescript-cardview
  * nativescript-fresco (images managment for Android)
- * nativescript-slides
  * nativescript-social-share
- * nativescript-telerik-ui (side-drawer and list-view)
+ * nativescript-telerik-ui (sidedrawer and listview)
  * nativescript-toast
- * nativescript-youtube-videoplayer (experimental)
+ * nativescript-youtube-videoplayer (beta)
 
 List of used APIs:
 
