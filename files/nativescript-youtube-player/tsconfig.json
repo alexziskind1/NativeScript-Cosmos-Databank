@@ -9,7 +9,8 @@
         "declaration": false,
         "noLib": false,
         "noEmitHelpers": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "noEmitOnError": true
     },
     "files": [
         "../tns-core-modules/tns-core-modules.d.ts",
