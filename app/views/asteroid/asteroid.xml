@@ -12,19 +12,28 @@
             <Label col="2" text="danger" class="lbl asteroid-hazard" textWrap="true" /> 
         </GridLayout>
 
-        <lv:RadListView items="{{ dataItems }}" class="list-group" itemTap="onItemTap">
+        <!--<lv:RadListView items="{{ dataItems }}" class="list-group" itemTap="onItemTap">
             <lv:RadListView.listViewLayout>
                 <lv:ListViewLinearLayout scrollDirection="vertical"/>
             </lv:RadListView.listViewLayout>
             <lv:RadListView.itemTemplate>
                 <GridLayout class="list-group-item" rows="*" columns="3*, *">
                     <Label col="0" text="{{ name }}" class="list-group-item-heading main-font text-left" textWrap="true"/>
-                    <!--<Label col="1" text="{{ estimated_diameter.meters.estimated_diameter_max +'m'}}" class="list-group-item-text text-left main-font" textWrap="true" />-->
                     <Label col="1" text="{{ is_potentially_hazardous_asteroid ? 'close' : 'fly-by' }}" 
                             color="{{ is_potentially_hazardous_asteroid ? 'red' : 'green' }}" class="list-group-item-text main-font text-right" textWrap="true" /> 
                 </GridLayout>
+
             </lv:RadListView.itemTemplate>
-        </lv:RadListView>  
+        </lv:RadListView>  -->
+
+        <ListView items="{{ dataItems }}"  loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
+            <ListView.itemTemplate>
+<GridLayout rows="*" columns="100, *" style="background-color: #e5e6da;">
+    <Label row="0" col="0" text="aktiv" visibility="{{ status_on }}" style="text-align: center; vertical-align: center; color: #fff; font-size: 20; background-color: #00853e;" id="activeLabel" />
+    <Label row="0" col="1" text="{{ name }}" textWrap="true" style="text-align: center; vertical-align: stretch; font-size: 20; padding: 20; background-color: #e5e6da;" />
+</GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
 
         <!--<ListView items="{{ dataItems }}" loaded="onLoaded" itemLoading="onItemLoading" itemTap="onItemTap">
             <ListView.itemTemplate>

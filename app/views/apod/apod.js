@@ -12,7 +12,7 @@ var youtube = require("nativescript-youtube-player");
 var YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
 var apod_model_1 = require("../../models/apod/apod-model");
 var apodViewModel = new apod_model_1.ApodViewModel();
-// apodViewModel.set("isPlayerVisible", false);
+apodViewModel.set("isPlayerVisible", false);
 apodViewModel.set("youtube_api_key", YOUTUBE_API_KEY);
 apodViewModel.set("youtube_video_key", "2zNSgSzhBfM");
 var page;
@@ -25,13 +25,8 @@ var currentSavedPath;
 var player;
 function onPageLoaded(args) {
     page = args.object;
-    console.log("onPageLoaded");
 }
 exports.onPageLoaded = onPageLoaded;
-function onStackLoaded(args) {
-    console.log("onStackLoaded");
-}
-exports.onStackLoaded = onStackLoaded;
 function onScrollSwipe(args) {
     if (args.direction === 1) {
         previousDate();
@@ -54,13 +49,9 @@ function getYouTubeID(url) {
 function initPlayer() {
     if (apodViewModel.get("dataItem").media_type === "video") {
         var mediaUrl = apodViewModel.get("dataItem").url;
-        console.log(apodViewModel.get("dataItem").url);
-        console.log(apodViewModel.get("dataItem").url.indexOf("youtube") >= 0);
-        console.log(mediaUrl.indexOf("youtube") >= 0);
         if (mediaUrl.indexOf("youtube") >= 0) {
             apodViewModel.set("isPlayerVisible", true);
             var youtubeID = getYouTubeID(mediaUrl);
-            console.log("youtubeID: " + youtubeID);
             player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
             player.play();
         }
@@ -76,8 +67,7 @@ function initPlayer() {
 }
 function onPageNavigatedTo(args) {
     page = args.object;
-    var pageContainer = page.getViewById("pageContainer");
-    shareButton = page.getViewById("btn-share");
+    shareButton = page.getViewById("btn-shar");
     saveButton = page.getViewById("btn-save");
     desktopButton = page.getViewById("btn-desk");
     player = page.getViewById("player");
@@ -93,7 +83,7 @@ function onPageNavigatedTo(args) {
             initPlayer();
         });
     }
-    pageContainer.bindingContext = apodViewModel;
+    page.bindingContext = apodViewModel;
 }
 exports.onPageNavigatedTo = onPageNavigatedTo;
 function previousDate() {
@@ -108,7 +98,6 @@ function previousDate() {
     apodViewModel.initDataItems(formatDate(currentDate)).then(function (res) {
         initPlayer();
     });
-    console.log("previousDate");
 }
 exports.previousDate = previousDate;
 function nextDate() {
@@ -198,7 +187,7 @@ function onSaveImage(args) {
             .then(function (res) {
             saveFile(res);
         }).catch(function (err) {
-            // console.log(err.stack);
+            // console.log(err);
         });
     }
     else if (application.android) {
@@ -213,7 +202,7 @@ function onSetWallpaper(args) {
             .then(function (res) {
             currentImage = res; // TODO : set wallpaper for iOS
         }).catch(function (err) {
-            // console.log(err.stack);
+            // console.log(err);
         });
         ;
     }
@@ -239,19 +228,17 @@ function onShare(args) {
             .then(function (res) {
             SocialShare.shareImage(res);
         }).catch(function (err) {
-            // console.log(err.stack);
+            // console.log(err);
         });
     }
 }
 exports.onShare = onShare;
 function onIosShare() {
-    console.log("iOS share tapped! 1");
-    console.log(iosImage.src);
     imageSource.fromUrl(iosImage.src)
         .then(function (res) {
         SocialShare.shareImage(res);
     }).catch(function (err) {
-        // console.log(err.sstack);
+        // console.log(err);
     });
 }
 exports.onIosShare = onIosShare;

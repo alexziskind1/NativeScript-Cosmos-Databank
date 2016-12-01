@@ -30,8 +30,9 @@ var youtube = require("nativescript-youtube-player");
 let YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
+
 let apodViewModel = new ApodViewModel();
-// apodViewModel.set("isPlayerVisible", false);
+apodViewModel.set("isPlayerVisible", false);
 apodViewModel.set("youtube_api_key", YOUTUBE_API_KEY);
 apodViewModel.set("youtube_video_key", "2zNSgSzhBfM");
 
@@ -43,16 +44,10 @@ let iosImage: Image;
 let currentImage: imageSource.ImageSource;
 
 var currentSavedPath: string;
-
 let player;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
-    console.log("onPageLoaded");
-}
-
-export function onStackLoaded(args: EventData) {
-    console.log("onStackLoaded");
 }
 
 export function onScrollSwipe(args: SwipeGestureEventData) {
@@ -66,9 +61,9 @@ export function onScrollSwipe(args: SwipeGestureEventData) {
 function getYouTubeID(url) {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
-    if ( match && match[7].length == 11 ){
+    if (match && match[7].length == 11) {
         return match[7];
-    }else{
+    } else {
         console.log("Could not extract video ID.");
     }
 }
@@ -77,14 +72,9 @@ function initPlayer() {
     if (apodViewModel.get("dataItem").media_type === "video") {
         var mediaUrl = apodViewModel.get("dataItem").url;
 
-        console.log(apodViewModel.get("dataItem").url);
-        console.log(apodViewModel.get("dataItem").url.indexOf("youtube") >= 0);
-        console.log(mediaUrl.indexOf("youtube") >= 0);
-
         if (mediaUrl.indexOf("youtube") >= 0) {
             apodViewModel.set("isPlayerVisible", true);
             var youtubeID = getYouTubeID(mediaUrl);
-            console.log("youtubeID: " + youtubeID);
             player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
             player.play();
         } else {
@@ -99,9 +89,8 @@ function initPlayer() {
 
 export function onPageNavigatedTo(args: EventData) {
     page = <Page>args.object;
-    var pageContainer = <StackLayout>page.getViewById("pageContainer");
 
-    shareButton = <Button>page.getViewById("btn-share");
+    shareButton = <Button>page.getViewById("btn-shar");
     saveButton = <Button>page.getViewById("btn-save");
     desktopButton = <Button>page.getViewById("btn-desk");
 
@@ -122,7 +111,7 @@ export function onPageNavigatedTo(args: EventData) {
         });
     }
 
-    pageContainer.bindingContext = apodViewModel;
+    page.bindingContext = apodViewModel;
 }
 
 export function previousDate() {
@@ -138,8 +127,6 @@ export function previousDate() {
     apodViewModel.initDataItems(formatDate(currentDate)).then(res => {
         initPlayer();
     });
-
-    console.log("previousDate")
 }
 
 export function nextDate() {
@@ -245,7 +232,7 @@ export function onSaveImage(args: EventData) {
             .then(res => {
                 saveFile(res);
             }).catch(err => {
-                // console.log(err.stack);
+                // console.log(err);
             });
     } else if (application.android) {
         saveFile(currentImage);
@@ -260,7 +247,7 @@ export function onSetWallpaper(args: EventData) {
             .then(res => {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
-                // console.log(err.stack);
+                // console.log(err);
             });;
     } else if (application.android) {
 
@@ -271,7 +258,7 @@ export function onSetWallpaper(args: EventData) {
             var imageToSet = imageSource.fromFile(currentSavedPath);
             wallpaperManager.setBitmap(imageToSet.android);
         } catch (error) {
-            // console.log(error.stack);
+            // console.log(error);
         }
 
         Toast.makeText("Wallpaper Set!").show();
@@ -286,20 +273,17 @@ export function onShare(args: EventData) {
             .then(res => {
                 SocialShare.shareImage(res);
             }).catch(err => {
-                // console.log(err.stack);
+                // console.log(err);
             });
     }
 }
 
 export function onIosShare() {
-    console.log("iOS share tapped! 1");
-    console.log(iosImage.src);
-
     imageSource.fromUrl(iosImage.src)
         .then(res => {
             SocialShare.shareImage(res);
         }).catch(err => {
-            // console.log(err.sstack);
+            // console.log(err);
         });
 }
 

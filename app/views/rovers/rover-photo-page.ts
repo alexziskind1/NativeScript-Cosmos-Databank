@@ -83,6 +83,10 @@ export function onListLoaded(args: RadListwModule.ListViewEventData) {
     if (list.items) {
         list.scrollToIndex(roversViewModel.get("cachedIndex"));
     }
+
+    //console.log(list.getItemAtIndex(2));
+
+    list.refresh();
 }
 
 export function onItemTap(args:RadListwModule.ListViewEventData) {
