@@ -7,11 +7,10 @@
       loaded="onPageLoaded" 
       navigatedTo="onPageNavigatedTo">
 
-    <GridLayout id="pageContainer" class="page-container" rows="auto, *" columns="*">
+    <GridLayout id="pageContainer" rows="auto, *" columns="*" class="p-r-8">
         
-        <Label row="0"
-               text="{{ totalCount == -1 ? 'Counting photos...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" 
-               textWrap="true" color="{{ totalCount == -1 ? 'whitesmoke' : totalCount == 0 && totalCount != -1 ? 'orange' : '#008C9E' }}" class="lbl-loader" />  
+        <Label row="0" text="{{ totalCount == -1 ? 'Counting photos...' : totalCount == 0 && totalCount != -1 ? 'No photos found' : totalCount + ' photos found!' }}" 
+               color="{{ totalCount == -1 ? 'whitesmoke' : totalCount == 0 && totalCount != -1 ? 'orange' : '#008C9E' }}" class="p-l-16 p-t-8" textWrap="true" />  
 
         <lv:RadListView row="1" id="rad-list"
                         items="{{ dataItems }}" 
@@ -23,18 +22,18 @@
             </lv:RadListView.listViewLayout>
 
             <lv:RadListView.itemTemplate>
-                <Card:CardView class="cardview" elevation="40" radius="50">
+                <Card:CardView class="m-l-8 m-t-8" elevation="40" radius="50">
 
                     <android>
                         <GridLayout rows="auto, *" columns="*, *">
-                            <Label row="0" col="0" text="{{ cameraName }}" class="lbl-item" textWrap="true" />
-                            <Label row="0" col="1" text="{{ earthDate }}" class="lbl-item" textWrap="true" />
+                            <Label row="0" col="0" text="{{ cameraName }}" class="h4 text-left" textWrap="true" />
+                            <Label row="0" col="1" text="{{ earthDate }}" class="h4 text-right" textWrap="true" />
                             <nativescript-fresco:FrescoDrawee row="1" col="0" colSpan="2"
                                                                 imageUri="{{ imageUri }}"
                                                                 placeholderImageUri="res://logo"
                                                                 actualImageScaleType="centerCrop"                                                           
                                                                 verticalAlignment="top"
-                                                                aspectRatio="1.6"
+                                                                aspectRatio="1.7"
                                                                 showProgressBar="true"
                                                                 progressBarColor="#AB5400"
                                                                 roundedCornerRadius="50"
@@ -45,10 +44,11 @@
 
                     <ios>
                         <GridLayout rows="auto, *" columns="*, *">
-                            <Label row="0" col="0" text="{{ cameraName }}" class="lbl-item" textWrap="true" />
-                            <Label row="0" col="1" text="{{ earthDate }}" class="lbl-item" textWrap="true" />
+                            <Label row="0" col="0" text="{{ cameraName }}" class="h4 text-left" textWrap="true" />
+                            <Label row="0" col="1" text="{{ earthDate }}" class="h4 text-left" textWrap="true" />
                             <Image row="1" col="0" colSpan="2" 
                                     width="200"
+                                    height="120"
                                     src="{{ imageUri }}" 
                                     stretch="aspectFill" 
                                     verticalAlignment="top"/>

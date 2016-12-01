@@ -22,3 +22,22 @@ ActionBar {
     background-color: #343838;   
     color: #BCBCBC;
 }
+
+.toolbar {
+    border-color: #282a2a;
+    border-width: 5 0 5 0;
+}
+
+.nav {
+    background-color:#1b1d1d;
+    color: #E8EAEB;
+}
+
+.nav:highlighted {
+    color: #E8EAEB;
+    background-color:#1b1d1d;
+}
+
+.fa {
+    font-family: "FontAwesome";
+}

@@ -5,7 +5,7 @@
         
     <StackLayout>
         <Label text="{{ asteroidCount == 0 ? 'counting near by asteroids' : asteroidCount + ' asteroids will fly near in the next 7 days'}}"
-                class="p-16" color="{{ asteroidCount == 0 ? 'orange' : '#E8EAEB' }}" textWrap="true" />
+                class="p-t-16 text-center" color="{{ asteroidCount == 0 ? 'orange' : '#008C9E' }}" textWrap="true" />
 
         <GridLayout rows="auto" columns="3*, *" class="p-16">
             <Label col="0" text="asteroid name" textWrap="true"/>
@@ -20,7 +20,7 @@
                 <GridLayout class="list-group-item" columns="3*, *">
                     <Label col="0" text="{{ name }}" class="list-group-item-text" textWrap="true"/>
                     <Label col="1" text="{{ is_potentially_hazardous_asteroid ? 'close' : 'fly-by' }}" 
-                           color="{{ is_potentially_hazardous_asteroid ? '#F44336' : '#00897B' }}" class="list-group-item-heading text-right" textWrap="true" /> 
+                           color="{{ is_potentially_hazardous_asteroid ? '#F44336' : '#008C9E' }}" class="list-group-item-heading text-right" textWrap="true" /> 
                 </GridLayout>
             </lv:RadListView.itemTemplate>
         </lv:RadListView>  

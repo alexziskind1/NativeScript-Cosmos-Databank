@@ -1,21 +1,9 @@
-.page-container {
-    background-color: #343838; 
-}
+Label {
+    font-family: "Nasalization";
+} 
 
-.page-container Label {
-    font-family: "Nasalization";    
-    color: whitesmoke;
-    font-size: 12;
-    margin: 8;
-}
-
-.font-awesome {
-    font-family: "FontAwesome";
-    background-color: #343838;
-    font-size: 14;
-    font-weight: normal;
-    color: #E8EAEB;
-    text-align: center;
-    width: 80;
+Button {
+    width: 40;
     height: 40;
+    border-radius: 20;
 }

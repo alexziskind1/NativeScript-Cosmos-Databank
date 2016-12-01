@@ -1,37 +1,8 @@
-.page-container {
-    background-color: #343838; 
-}
-
-.page-container Label {
+Label {
     font-family: "Nasalization";    
-    color: whitesmoke;
     margin: 8;
 }
 
-.lbl-loader {
-    text-align: center;
-    horizontal-align: center;
-    vertical-align: center;
-    font-size: 16;
-}
-
-.cardview {
+CardView {
     background-color: #008C9E;
-    margin: 6;
 }
-
-.lbl-item {
-    font-size:10;
-    text-align: left;
-}
-
-.date-ios {
-    font-size:14;
-    margin: 10;
-}
-
-.camera-ios {
-    font-size: 14;
-    margin: 10;
-}
-

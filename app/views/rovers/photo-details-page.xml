@@ -6,6 +6,7 @@
 
     <ScrollView>
         <StackLayout class="page-container">
+
             <android>
                 <nativescript-fresco:FrescoDrawee imageUri="{{ contextItem.imageUri }}"
                                                 placeholderImageUri="res://logo"
@@ -17,13 +18,20 @@
                                                 roundedCornerRadius="50"
                                                 tapToRetryEnabled="true"
                                                 finalImageSet="onFinalImageSet"/>
-                <Button id="btn-share" text="&#xf1e0;" class="font-awesome" visibility="{{ isItemVisible ? 'visible' : 'collapsed' }}"/>  
+                <GridLayout columns="*, *, *, *, *" class="toolbar">
+                    <Button col="0" text="&#xf053;" id="btn-prev" class="fa btn nav" tap="previousDate"/>
+                    <Button col="1" text="&#xf019;" id="btn-save" class="fa btn nav" tap="onSaveImage"/> 
+                    <Button col="2" text="&#xf108;" id="btn-desk" class="fa btn nav" tap="onSetWallpaper"/> 
+                    <Button col="3" text="&#xf1e0;" id="btn-shar" class="fa btn nav" tap="onShare"/>     
+                    <Button col="4" text="&#xf054;" id="btn-next" class="fa btn nav" tap="nextDate"/>   
+                </GridLayout>
             </android>
+
             <ios>
                 <Image src="{{ contextItem.imageUri }}" stretch ="none" /> 
             </ios>
 
-            <Label text="{{ 'id: ' + contextItem.id }}" textWrap="true" />
+            <Label text="{{ 'id: ' + contextItem.id }}" class="p-l-16" textWrap="true" />
             <Label text="{{ 'sol: ' + contextItem.sol }}" textWrap="true" />
             <Label text="{{ 'camera id: ' + contextItem.cameraId }}" textWrap="true" />
             <Label text="{{ 'camera name: ' + contextItem.cameraName }}" textWrap="true" />

@@ -9,7 +9,7 @@
       "version": "2.4.0"
     },
     "tns-android": {
-      "version": "2.4.1"
+      "version": "2.5.0-next-2016-11-28-1432"
     }
   },
   "dependencies": {
@@ -29,7 +29,7 @@
     "babel-types": "6.13.0",
     "babylon": "6.8.4",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "^0.3.3",
-    "typescript": "^2.0.3"
+    "nativescript-dev-typescript": "^0.3.4",
+    "typescript": "^2.0.10"
   }
 }
