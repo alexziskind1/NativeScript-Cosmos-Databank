@@ -37,7 +37,7 @@
                     <Button col="0" text="&#xf053;" id="btn-prev" tap="previousDate" class="fa" />
                     <Button col="1" text="&#xf019;" id="btn-save" tap="onSaveImage" class="fa" /> 
                     <Button col="2" text="&#xf108;" id="btn-desk" tap="onSetWallpaper" class="fa"/> 
-                    <Button col="3" text="&#xf1e0;" id="btn-share" tap="onShare" class="share fa" />    
+                    <Button col="3" text="&#xf1e0;" id="btn-shar" tap="onShare" class="share fa" />    
                     <Button col="4" text="&#xf054;" id="btn-next" tap="nextDate" class="fa" />   
                 </GridLayout>
             </ios>
