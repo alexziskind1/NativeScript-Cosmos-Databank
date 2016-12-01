@@ -25,14 +25,21 @@ var DrawerOverNavigationModel = (function (_super) {
     });
     Object.defineProperty(DrawerOverNavigationModel.prototype, "roversDescription", {
         get: function () {
-            return "Mars \nRovers \nPhotos";
+            return "Mars Rovers\n Photos\n Databank";
         },
         enumerable: true,
         configurable: true
     });
     Object.defineProperty(DrawerOverNavigationModel.prototype, "asteroidsDescription", {
         get: function () {
-            return "Asteroids \nProximity \nChecker";
+            return "Asteroids\n Proximity\n Checker";
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(DrawerOverNavigationModel.prototype, "epicDescription", {
+        get: function () {
+            return "Earth \nPolychromatic \nImaging Camera";
         },
         enumerable: true,
         configurable: true

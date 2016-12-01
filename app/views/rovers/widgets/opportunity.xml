@@ -1,17 +1,17 @@
 <ScrollView>
-    <StackLayout class="stackStyle" >
-        <SegmentedBar selectedIndex="{{ selectedIndexOpp }}">
+    <GridLayout rows="auto, *" columns="*" class="stackStyle" >
+        <SegmentedBar row="0" selectedIndex="{{ selectedIndexOpp }}">
             <SegmentedBar.items>
                 <SegmentedBarItem title="Info" />
                 <SegmentedBarItem title="Photos" />
             </SegmentedBar.items>
         </SegmentedBar>
-        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isOppInfoVisible ? 'visible' : 'collapsed' }}" >
-            <TextView text="{{ opporunityDescription }}" editable="false" />
-        </GridLayout>
-        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isOppInfoVisible ? 'visible' : 'collapsed' }}" >
-            <DatePicker row="0" id="dt-opp" class="dt"></DatePicker>
-            <Button row="1" text="Explore Opportunity Photos" class="btn-picker" tap="{{ goToOpportunityPage }}" />
-        </GridLayout>
-    </StackLayout>  
+        <StackLayout row="1" visibility="{{ isOppInfoVisible ? 'visible' : 'collapsed' }}" >
+            <Label text="{{ opporunityDescription }}" class="p-16" textWrap="true"  />
+        </StackLayout>
+        <StackLayout row="1" visibility="{{ !isOppInfoVisible ? 'visible' : 'collapsed' }}" >
+            <DatePicker id="dt-opp" class="dt m-t-8 m-l-16 m-r-16"></DatePicker>
+            <Button text="Explore Opportunity Photos" class="btn btn-primary btn-active btn-picker" tap="{{ goToOpportunityPage }}" />
+        </StackLayout>
+    </GridLayout>  
 </ScrollView>

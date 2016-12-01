@@ -1,8 +1,5 @@
-.stackStyle {
-    font-family: "Nasalization";    
-    background-color: #343838;   
-    color: #E8EAEB;
-    font-size: 14; 
+Page {
+    font-family: "Nasalization";   
 }
 
 .dt {
@@ -11,11 +8,6 @@
 }
 
 .btn-picker {
-    font-family: "Nasalization";    
-    background-color: #343838;   
-    color: #E8EAEB;
-    font-size: 14; 
+    font-family: "Nasalization";
+    background-color: #008C9E;
 }
-
-    /* light gray: #BCBCBC;  */
-    /* accent blue: #00B4CC;  */

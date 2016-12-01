@@ -1,20 +1,21 @@
-
-.dp-bg {
+.drawer-page {
+    font-family: "Nasalization";    
     background-color: #BCBCBC;
+}
+
+.drawer-content {
+    background-color: #343838;
+    color: #BCBCBC;
 }
 
 .dp-btn {
     background-color: #008C9E;
     font-family: "Nasalization";
     margin: 0 4 0 4;
-    height: 48;
 }
 
-.dp-bg-dark {
-    background-color: #343838;
-}
-
-.dp-card {
+CardView {
     background-color: #343838;
     color: #BCBCBC;
+    font-size:14;
 }

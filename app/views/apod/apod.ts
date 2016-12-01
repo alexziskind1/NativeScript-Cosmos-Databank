@@ -199,7 +199,7 @@ function setButtonsOpacity(value: number) {
     shareButton.opacity = value;
 }
 
-export function saveFile(res: imageSource.ImageSource) {
+function saveFile(res: imageSource.ImageSource) {
     var url = apodViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
     var n = fileName.indexOf('.');
@@ -277,13 +277,3 @@ export function onShare(args: EventData) {
             });
     }
 }
-
-export function onIosShare() {
-    imageSource.fromUrl(iosImage.src)
-        .then(res => {
-            SocialShare.shareImage(res);
-        }).catch(err => {
-            // console.log(err);
-        });
-}
-

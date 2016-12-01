@@ -5,13 +5,13 @@
     loaded="onPageLoaded" 
     navigatedTo="onPageNavigatedTo">
 
-    <TabView id="tabViewContainer" selectedIndex="{{ tabIndex }}">
+    <TabView id="tabViewContainer" class="tab-view" selectedIndex="{{ tabIndex }}">
         <TabView.items>
             <TabViewItem title="Curiosity">
                 <TabViewItem.view>
 
                     <widgets:curiosity />
-                    
+   
                 </TabViewItem.view>
             </TabViewItem>
             <TabViewItem title="Opportunity">

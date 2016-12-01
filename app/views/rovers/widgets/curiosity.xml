@@ -1,17 +1,17 @@
 <ScrollView>
-    <StackLayout class="stackStyle" >
-        <SegmentedBar selectedIndex="{{ selectedIndexCur }}">
+    <GridLayout rows="auto, *" columns="*" class="stackStyle" >
+        <SegmentedBar row="0" selectedIndex="{{ selectedIndexCur }}">
             <SegmentedBar.items>
                 <SegmentedBarItem title="Info" />
                 <SegmentedBarItem title="Photos" />
             </SegmentedBar.items>
         </SegmentedBar>
-        <GridLayout rows="*" columns="*" margin="10" visibility="{{ isCurInfoVisible ? 'visible' : 'collapsed' }}" >
-            <TextView text="{{ curiosityDescription }}" editable="false" />
-        </GridLayout>
-        <GridLayout rows="auto, auto" columns="*" margin="10" visibility="{{ !isCurInfoVisible ? 'visible' : 'collapsed' }}" >
-            <DatePicker row="0" id="dt-cur" class="dt"></DatePicker>
-            <Button row="1" text="Explore Curiosity Photos" class="btn-picker" tap="{{ goToCuriosityPage }}" />
-        </GridLayout>
-    </StackLayout>
+        <StackLayout row="1" visibility="{{ isCurInfoVisible ? 'visible' : 'collapsed' }}" >
+            <Label text="{{ curiosityDescription }}" class="p-16" textWrap="true" />
+        </StackLayout>
+        <StackLayout row="1" visibility="{{ !isCurInfoVisible ? 'visible' : 'collapsed' }}" >
+            <DatePicker id="dt-cur" class="dt m-t-8 m-l-16 m-r-16"></DatePicker>
+            <Button text="Explore Curiosity Photos" class="btn btn-primary btn-active btn-picker" tap="{{ goToCuriosityPage }}" />
+        </StackLayout>
+    </GridLayout>
 </ScrollView>

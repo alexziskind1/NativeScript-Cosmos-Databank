@@ -3,7 +3,6 @@ var observable_1 = require("data/observable");
 var pickers_view_model_1 = require("../../models/rovers/pickers-view-model");
 exports.pickersViewModel = new pickers_view_model_1.PickersViewModel();
 var page;
-var tabView;
 var dtCur;
 var dtOpp;
 var dtSpi;
@@ -16,7 +15,6 @@ function onPageNavigatedTo(args) {
     dtCur = page.getViewById("dt-cur");
     dtOpp = page.getViewById("dt-opp");
     dtSpi = page.getViewById("dt-spi");
-    tabView = page.getViewById("tabViewContainer");
     initDatePickers();
     initSegmentedBars();
     initTabs();

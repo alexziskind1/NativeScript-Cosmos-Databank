@@ -2,29 +2,30 @@
     xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
     xmlns:drawer="nativescript-telerik-ui/sidedrawer"
     xmlns:Card="nativescript-cardview"
-    loaded="onPageLoaded" navigatedTo="onPageNavigatedTo"
-    class="dp-bg main-font">
+    loaded="onPageLoaded" 
+    navigatedTo="onPageNavigatedTo"
+    class="drawer-page">
 
     <dpg:DrawerPage.actionBar>
-      <ActionBar>
+      <ActionBar class="action-bar">
         <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="h2 text-center"/>
-            </GridLayout>
+            <StackLayout>
+                <Label text="COSMOS Data Bank" class="h3 action-bar-title"/>
+            </StackLayout>
         </ActionBar.titleView>
-        <ActionItem icon="res://ic_menu" ios.position="right" tap="{{ toggleDrawer }}" />
+        <ActionItem icon="res://ic_menu" class="action-item" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>
     </dpg:DrawerPage.actionBar>
 
     <dpg:DrawerPage.sideDrawer>
         <drawer:RadSideDrawer id="sideDrawer" showOverNavigation="true">
             <drawer:RadSideDrawer.drawerContent>
-                <StackLayout class="dp-bg-dark m-r-30">   
+                <StackLayout class="drawer-content m-r-30">   
                     <ScrollView>
                         <StackLayout>
-                             <GridLayout rows="120" columns="3*, 2*" class="m-8">
+                            <GridLayout rows="120" columns="3*, 2*" class="m-8">
                                 <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  
-                                <Label col="1" text="Navigate through the Universe" textAlignment="center" textWrap="true" verticalAlignment="center" />    
+                                <Label col="1" text="Navigate through the Universe" class="text-center" verticalAlignment="center" textWrap="true" />    
                             </GridLayout>
                             <Button text="Home" tap="{{ goToHome }}" class="btn btn-primary btn-active dp-btn" />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" class="btn btn-primary btn-active dp-btn" />
@@ -41,34 +42,44 @@
     
     <ScrollView>
         <StackLayout>
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8 dp-card"> 
-                <GridLayout rows="*" columns="*" tap="hideDesc">
-                    <Label text="{{ exampleText }}" textWrap="true" class="p-8 h4 text-left"/>    
-                </GridLayout>
-            </Card:CardView> 
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8 dp-card"> 
-                <GridLayout rows="160" columns="2*, 3*" tap="{{ goToRoversSelectionPage }}" >
-                    <Label col="0" text="{{ roversDescription }}" textWrap="true" class="h3 text-center" verticalAlignment="center"/>
+            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8"> 
+                <GridLayout rows="160" columns="3*, 4*" tap="{{ goToRoversSelectionPage }}" >
+                    <Label col="0" text="{{ roversDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center"/>
                     <Image col="1" src="~/images/NASA_Mars_Rover.jpg" stretch="aspectFill" />   
                 </GridLayout>
             </Card:CardView>
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8 dp-card">  
-                <GridLayout rows="160" columns="3*, 2*" tap="{{ goToApod }}" >
+            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                <GridLayout rows="160" columns="4*, 3*" tap="{{ goToApod }}" >
                     <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  
-                    <Label col="1" text="{{ apodDescription }}" textWrap="true" class="h3 text-center" verticalAlignment="center"/>
+                    <Label col="1" text="{{ apodDescription }}" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center"/>
                 </GridLayout>
             </Card:CardView>
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8 dp-card">  
-                <GridLayout rows="160" columns="2*, 3*" tap="{{ goToAsteroids }}" >
-                    <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="h3 text-center" verticalAlignment="center" />   
+            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                <GridLayout rows="160" columns="3*, 4*" tap="{{ goToAsteroids }}" >
+                    <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center" />   
                     <Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />    
                 </GridLayout>
             </Card:CardView>
-            <Card:CardView elevation="40" radius="20" class="m-8 dp-card">  
-                <GridLayout rows="40" columns="*" tap="{{ goToAbout }}">
-                    <Label text="Credits" textWrap="true" class="h3 text-center" verticalAlignment="center" />
+
+            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                <GridLayout rows="160" columns="4*, 3*" tap="{{ goToEpic }}" >
+                    <Label col="1" text="{{ epicDescription }}" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center" />
+                    <!-- CHANGE the image to LOCAL one -->
+                    <Image col="0" src="http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/epic_1b_20161006004555_01.jpg" stretch="aspectFill" />
                 </GridLayout>
             </Card:CardView>
+
+            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                <GridLayout rows="auto" columns="*" tap="{{ goToAbout }}">
+                    <Label col="0" text="Credits" textWrap="true" class="p-t-8 p-b-16 text-center" verticalAlignment="center" />
+                </GridLayout>
+            </Card:CardView>
+
+            <Card:CardView elevation="40" radius="20" class="m-8"> 
+                <GridLayout rows="*" columns="*" tap="hideDesc">
+                    <Label text="{{ exampleText }}" textWrap="true" class="p-l-16 p-r-16 p-t-8 p-b-16 text-left" verticalAlignment="center" />    
+                </GridLayout>
+            </Card:CardView>   
         </StackLayout>          
     </ScrollView>
 

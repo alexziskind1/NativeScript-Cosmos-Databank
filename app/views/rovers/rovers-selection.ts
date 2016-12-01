@@ -12,7 +12,6 @@ import { PickersViewModel } from "../../models/rovers/pickers-view-model";
 export let pickersViewModel = new PickersViewModel();
 
 let page;
-let tabView;
 let dtCur;
 let dtOpp;
 let dtSpi;
@@ -27,8 +26,6 @@ export function onPageNavigatedTo(args: EventData) {
 	dtCur = <DatePicker>page.getViewById("dt-cur");
 	dtOpp = <DatePicker>page.getViewById("dt-opp");
 	dtSpi = <DatePicker>page.getViewById("dt-spi");
-
-	tabView = <TabView>page.getViewById("tabViewContainer");
 
 	initDatePickers();
 	initSegmentedBars();

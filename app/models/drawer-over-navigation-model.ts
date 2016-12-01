@@ -19,11 +19,15 @@ export class DrawerOverNavigationModel extends Observable {
     }
 
     get roversDescription() {
-        return "Mars \nRovers \nPhotos";
+        return "Mars Rovers\n Photos\n Databank";
     }
 
     get asteroidsDescription() {
-        return "Asteroids \nProximity \nChecker";
+        return "Asteroids\n Proximity\n Checker";
+    }
+
+    get epicDescription() {
+        return "Earth \nPolychromatic \nImaging Camera"
     }
 
     public toggleDrawer() {

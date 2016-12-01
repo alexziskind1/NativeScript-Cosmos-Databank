@@ -1,9 +1,9 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
-        actionBarHidden="true"
-        xmlns:nativescript-fresco="nativescript-fresco" 
-        xmlns:nativescript-youtube-player="nativescript-youtube-player" 
-        loaded="onPageLoaded" 
-        navigatedTo="onPageNavigatedTo">
+      xmlns:nativescript-fresco="nativescript-fresco" 
+      xmlns:nativescript-youtube-player="nativescript-youtube-player" 
+      actionBarHidden="true"
+      loaded="onPageLoaded" 
+      navigatedTo="onPageNavigatedTo">
 
     <ScrollView swipe="onScrollSwipe">
         <StackLayout>
@@ -23,22 +23,22 @@
                                                 finalImageSet="onFinalImageSet" 
                                                 visibility="{{ !isPlayerVisible ? 'visible' : 'collapsed' }}"/>            
                 <GridLayout columns="*, *, *, *, *" class="toolbar">
-                    <Button col="0" text="&#xf053;" id="btn-prev" tap="previousDate" class="fa btn nav" />
-                    <Button col="1" text="&#xf019;" id="btn-save" tap="onSaveImage" class="fa btn nav" /> 
-                    <Button col="2" text="&#xf108;" id="btn-desk" tap="onSetWallpaper" class="fa btn nav"/> 
-                    <Button col="3" text="&#xf1e0;" id="btn-shar" tap="onShare" class="fa btn nav" />     
-                    <Button col="4" text="&#xf054;" id="btn-next" tap="nextDate" class="fa btn nav" />   
+                    <Button col="0" text="&#xf053;" id="btn-prev" class="fa btn nav" tap="previousDate"/>
+                    <Button col="1" text="&#xf019;" id="btn-save" class="fa btn nav" tap="onSaveImage"/> 
+                    <Button col="2" text="&#xf108;" id="btn-desk" class="fa btn nav" tap="onSetWallpaper"/> 
+                    <Button col="3" text="&#xf1e0;" id="btn-shar" class="fa btn nav" tap="onShare"/>     
+                    <Button col="4" text="&#xf054;" id="btn-next" class="fa btn nav" tap="nextDate"/>   
                 </GridLayout>
             </android>
 
             <ios>
                 <Image src="{{ dataItem.url }}" id="ios-image" stretch="aspectFill" />
                 <GridLayout rows="*" columns="*, *, *, *, *">
-                    <Button col="0" text="&#xf053;" id="btn-prev" tap="previousDate" class="fa" />
-                    <Button col="1" text="&#xf019;" id="btn-save" tap="onSaveImage" class="fa" /> 
-                    <Button col="2" text="&#xf108;" id="btn-desk" tap="onSetWallpaper" class="fa"/> 
-                    <Button col="3" text="&#xf1e0;" id="btn-shar" tap="onShare" class="share fa" />    
-                    <Button col="4" text="&#xf054;" id="btn-next" tap="nextDate" class="fa" />   
+                    <Button col="0" text="&#xf053;" id="btn-prev" class="fa btn nav" tap="previousDate"/>
+                    <Button col="1" text="&#xf019;" id="btn-save" class="fa btn nav" tap="onSaveImage"/> 
+                    <Button col="2" text="&#xf108;" id="btn-desk" class="fa btn nav" tap="onSetWallpaper"/> 
+                    <Button col="3" text="&#xf1e0;" id="btn-shar" class="fa btn nav" tap="onShare"/>    
+                    <Button col="4" text="&#xf054;" id="btn-next" class="fa btn nav" tap="nextDate"/>   
                 </GridLayout>
             </ios>
 

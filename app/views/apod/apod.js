@@ -180,7 +180,6 @@ function saveFile(res) {
     }
     currentSavedPath = path;
 }
-exports.saveFile = saveFile;
 function onSaveImage(args) {
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
@@ -233,13 +232,4 @@ function onShare(args) {
     }
 }
 exports.onShare = onShare;
-function onIosShare() {
-    imageSource.fromUrl(iosImage.src)
-        .then(function (res) {
-        SocialShare.shareImage(res);
-    }).catch(function (err) {
-        // console.log(err);
-    });
-}
-exports.onIosShare = onIosShare;
 //# sourceMappingURL=apod.js.map
