@@ -58,35 +58,6 @@ export function onScrollSwipe(args: SwipeGestureEventData) {
     }
 }
 
-function getYouTubeID(url) {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[7].length == 11) {
-        return match[7];
-    } else {
-        console.log("Could not extract video ID.");
-    }
-}
-
-function initPlayer() {
-    if (apodViewModel.get("dataItem").media_type === "video") {
-        var mediaUrl = apodViewModel.get("dataItem").url;
-
-        if (mediaUrl.indexOf("youtube") >= 0) {
-            apodViewModel.set("isPlayerVisible", true);
-            var youtubeID = getYouTubeID(mediaUrl);
-            player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
-            player.play();
-        } else {
-            player.pause();
-            apodViewModel.set("isPlayerVisible", false);
-        }
-    } else {
-        player.pause();
-        apodViewModel.set("isPlayerVisible", false);
-    }
-}
-
 export function onPageNavigatedTo(args: EventData) {
     page = <Page>args.object;
 
@@ -173,18 +144,6 @@ export function onFinalImageSet(args: FinalEventData) {
         }).catch(err => {
             // console.log(err.stack);
         });
-}
-
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
 }
 
 function setUserInteraction(state: boolean) {
@@ -276,4 +235,45 @@ export function onShare(args: EventData) {
                 // console.log(err);
             });
     }
+}
+
+function getYouTubeID(url) {
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[7].length == 11) {
+        return match[7];
+    } else {
+        console.log("Could not extract video ID.");
+    }
+}
+
+function initPlayer() {
+    if (apodViewModel.get("dataItem").media_type === "video") {
+        var mediaUrl = apodViewModel.get("dataItem").url;
+
+        if (mediaUrl.indexOf("youtube") >= 0) {
+            apodViewModel.set("isPlayerVisible", true);
+            var youtubeID = getYouTubeID(mediaUrl);
+            player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
+            player.play();
+        } else {
+            player.pause();
+            apodViewModel.set("isPlayerVisible", false);
+        }
+    } else {
+        player.pause();
+        apodViewModel.set("isPlayerVisible", false);
+    }
+}
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
 }

@@ -1,17 +1,17 @@
 <ScrollView>
-    <GridLayout rows="auto, *" columns="*" class="stackStyle" >
-        <SegmentedBar row="0" selectedIndex="{{ selectedIndexCur }}">
+    <FlexboxLayout flexDirection="column" class="stackStyle" >
+        <SegmentedBar selectedIndex="{{ selectedIndexCur }}">
             <SegmentedBar.items>
                 <SegmentedBarItem title="Info" />
                 <SegmentedBarItem title="Photos" />
             </SegmentedBar.items>
         </SegmentedBar>
-        <StackLayout row="1" visibility="{{ isCurInfoVisible ? 'visible' : 'collapsed' }}" >
-            <Label text="{{ curiosityDescription }}" class="p-16" textWrap="true" />
-        </StackLayout>
-        <StackLayout row="1" visibility="{{ !isCurInfoVisible ? 'visible' : 'collapsed' }}" >
+        <FlexboxLayout flexDirection="column"  >
+            <Label text="{{ curiosityDescription }}" class="p-16" textWrap="true" visibility="{{ isCurInfoVisible ? 'visible' : 'collapsed' }}"/>
+        </FlexboxLayout>
+        <FlexboxLayout flexDirection="column" visibility="{{ !isCurInfoVisible ? 'visible' : 'collapsed' }}" >
             <DatePicker id="dt-cur" class="dt m-t-8 m-l-16 m-r-16"></DatePicker>
             <Button text="Explore Curiosity Photos" class="btn btn-primary btn-active btn-picker" tap="{{ goToCuriosityPage }}" />
-        </StackLayout>
-    </GridLayout>
+        </FlexboxLayout>
+    </FlexboxLayout>
 </ScrollView>

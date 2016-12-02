@@ -7,3 +7,10 @@ Button {
     height: 40;
     border-radius: 20;
 }
+
+.border {
+    border-width: 1;
+    border-color: lightgray;
+    border-radius: 5;
+    padding: 0 8 0 8;
+}

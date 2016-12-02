@@ -1,43 +1,66 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
-      actionBarHidden="true"
       xmlns:nativescript-fresco="nativescript-fresco"
+      actionBarHidden="true"
       loaded="onPageLoaded">
-
-
     <ScrollView>
-        <StackLayout class="page-container">
-
+        <StackLayout>
             <android>
                 <nativescript-fresco:FrescoDrawee imageUri="{{ contextItem.imageUri }}"
                                                 placeholderImageUri="res://logo"
                                                 actualImageScaleType="centerCrop"                                                           
                                                 verticalAlignment="top"
-                                                aspectRatio="1.2"
+                                                aspectRatio="1.1"
                                                 showProgressBar="true"
                                                 progressBarColor="#AB5400"
                                                 roundedCornerRadius="50"
                                                 tapToRetryEnabled="true"
                                                 finalImageSet="onFinalImageSet"/>
-                <GridLayout columns="*, *, *, *, *" class="toolbar">
-                    <Button col="0" text="&#xf053;" id="btn-prev" class="fa btn nav" tap="previousDate"/>
-                    <Button col="1" text="&#xf019;" id="btn-save" class="fa btn nav" tap="onSaveImage"/> 
-                    <Button col="2" text="&#xf108;" id="btn-desk" class="fa btn nav" tap="onSetWallpaper"/> 
-                    <Button col="3" text="&#xf1e0;" id="btn-shar" class="fa btn nav" tap="onShare"/>     
-                    <Button col="4" text="&#xf054;" id="btn-next" class="fa btn nav" tap="nextDate"/>   
-                </GridLayout>
-            </android>
 
+            </android>
             <ios>
-                <Image src="{{ contextItem.imageUri }}" stretch ="none" /> 
+                <Image src="{{ contextItem.imageUri }}" id="ios-image"  stretch="aspectFill" /> 
             </ios>
 
-            <Label text="{{ 'id: ' + contextItem.id }}" class="p-l-16" textWrap="true" />
-            <Label text="{{ 'sol: ' + contextItem.sol }}" textWrap="true" />
-            <Label text="{{ 'camera id: ' + contextItem.cameraId }}" textWrap="true" />
-            <Label text="{{ 'camera name: ' + contextItem.cameraName }}" textWrap="true" />
-            <Label text="{{ 'rover id: ' + contextItem.cameraRoverId }}" textWrap="true" />
-            <Label text="{{ 'cam full name: ' + contextItem.cameraFullName }}" textWrap="true" />
-            <Label text="{{ 'earth day: ' + contextItem.earthDate }}" textWrap="true" />
+            <GridLayout columns="*, *, *" class="toolbar">
+                <Button col="0" text="&#xf019;" id="btn-save" class="fa btn nav" tap="onSaveImage"/> 
+                <Button col="1" text="&#xf108;" id="btn-desk" class="fa btn nav" tap="onSetWallpaper"/> 
+                <Button col="2" text="&#xf1e0;" id="btn-shar" class="fa btn nav" tap="onShare"/>     
+            </GridLayout>
+
+            <FlexboxLayout flexWrap="wrap" justifyContent="space-around" class="p-8">
+                <StackLayout class="border m-t-8 m-l-8">
+                    <Label text="Photo id" textWrap="true" class="text-center"/>
+                    <Label text="{{ contextItem.id }}" textWrap="true" class="h3 text-center" />
+                </StackLayout>
+
+                <StackLayout class="border m-t-8 m-l-8">
+                    <Label text="Sol (Martian day)" textWrap="true"  class="text-center"/>
+                    <Label text="{{ contextItem.sol }}" textWrap="true" class="h3 text-center"/>
+                </StackLayout>
+
+                <StackLayout class="border m-t-8 m-l-8">
+                    <Label text="'Earth day" textWrap="true" class="text-center"/>
+                    <Label text="{{ contextItem.earthDate }}" textWrap="true" class="h3 text-center"/>
+                </StackLayout>
+
+                <StackLayout class="border m-t-8 m-l-8">
+                    <Label text="Camera id" textWrap="true" class="text-center"/>
+                    <Label text="{{ contextItem.cameraId }}" textWrap="true" class="h3 text-center"/>
+                </StackLayout>
+
+                <StackLayout class="border m-t-8 m-l-8">
+                    <Label text="Camera name" textWrap="true" class="text-center"/>
+                    <Label text="{{ contextItem.cameraName }}" textWrap="true" class="h3 text-center"/>
+                </StackLayout>
+
+                <StackLayout flexWrapBefore="true" class="border m-t-8 m-l-8">
+                    <Label text="Camera full name" textWrap="true" class="text-center"/>
+                    <Label text="{{ contextItem.cameraFullName }}" textWrap="true" class="h3 text-center"/>
+                </StackLayout>
+
+                <!--<Label flexWrapBefore="true" text="Rover id" textWrap="true" />
+                <Label text="{{ contextItem.cameraRoverId }}" textWrap="true" />-->
+            </FlexboxLayout>
         </StackLayout>
     </ScrollView>
 </Page>

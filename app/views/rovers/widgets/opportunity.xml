@@ -1,17 +1,17 @@
 <ScrollView>
-    <GridLayout rows="auto, *" columns="*" class="stackStyle" >
-        <SegmentedBar row="0" selectedIndex="{{ selectedIndexOpp }}">
+    <FlexboxLayout flexDirection="column" class="stackStyle" >
+        <SegmentedBar selectedIndex="{{ selectedIndexOpp }}">
             <SegmentedBar.items>
                 <SegmentedBarItem title="Info" />
                 <SegmentedBarItem title="Photos" />
             </SegmentedBar.items>
         </SegmentedBar>
-        <StackLayout row="1" visibility="{{ isOppInfoVisible ? 'visible' : 'collapsed' }}" >
-            <Label text="{{ opporunityDescription }}" class="p-16" textWrap="true"  />
-        </StackLayout>
-        <StackLayout row="1" visibility="{{ !isOppInfoVisible ? 'visible' : 'collapsed' }}" >
+        <FlexboxLayout flexDirection="column" visibility="{{ isOppInfoVisible ? 'visible' : 'collapsed' }}">
+            <Label text="{{ opporunityDescription }}" class="p-16" textWrap="true" />
+        </FlexboxLayout>
+        <FlexboxLayout flexDirection="column" visibility="{{ !isOppInfoVisible ? 'visible' : 'collapsed' }}" >
             <DatePicker id="dt-opp" class="dt m-t-8 m-l-16 m-r-16"></DatePicker>
             <Button text="Explore Opportunity Photos" class="btn btn-primary btn-active btn-picker" tap="{{ goToOpportunityPage }}" />
-        </StackLayout>
-    </GridLayout>  
+        </FlexboxLayout>
+    </FlexboxLayout>
 </ScrollView>
