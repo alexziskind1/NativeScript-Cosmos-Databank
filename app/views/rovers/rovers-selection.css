@@ -11,3 +11,12 @@ Page {
     font-family: "Nasalization";
     background-color: #008C9E;
 }
+
+.tab {
+    font-size:12;
+    font-weight: bold;
+}
+
+.seg {
+    font-size:18;
+}

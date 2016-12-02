@@ -1,6 +1,6 @@
 <ScrollView>
-    <FlexboxLayout flexDirection="column" class="stackStyle" >
-        <SegmentedBar selectedIndex="{{ selectedIndexCur }}">
+    <FlexboxLayout flexDirection="column"  >
+        <SegmentedBar selectedIndex="{{ selectedIndexCur }}" class="seg">
             <SegmentedBar.items>
                 <SegmentedBarItem title="Info" />
                 <SegmentedBarItem title="Photos" />

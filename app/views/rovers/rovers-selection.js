@@ -1,6 +1,7 @@
 "use strict";
 var observable_1 = require("data/observable");
 var pickers_view_model_1 = require("../../models/rovers/pickers-view-model");
+var app = require("application");
 exports.pickersViewModel = new pickers_view_model_1.PickersViewModel();
 var page;
 var dtCur;
@@ -21,6 +22,15 @@ function onPageNavigatedTo(args) {
     page.bindingContext = exports.pickersViewModel;
 }
 exports.onPageNavigatedTo = onPageNavigatedTo;
+function onTabLoaded(args) {
+    var tabView = args.object;
+    if (app.android) {
+        for (var i = 0; i < tabView.items.length; i++) {
+            tabView._tabLayout.getTextViewForItemAt(i).setHorizontallyScrolling(true);
+        }
+    }
+}
+exports.onTabLoaded = onTabLoaded;
 function initTabs() {
     exports.pickersViewModel.addEventListener(observable_1.Observable.propertyChangeEvent, function (args) {
         if (args.propertyName.toString() === "tabIndex") {
