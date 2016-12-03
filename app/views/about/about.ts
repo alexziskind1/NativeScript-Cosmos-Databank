@@ -6,7 +6,7 @@ var youtube = require("nativescript-youtube-player");
 
 export function onLoaded(args: EventData) {
     let page = <Page>args.object;
-    
+
     var stack = <StackLayout>page.getViewById("pageContainer");
 
     // var playerOne = new youtube.YouTubePlayerView();

@@ -5,14 +5,17 @@ import http = require("http");
 
 // http://epic.gsfc.nasa.gov/api/images.php
 
+let testEpicUrl = "http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/";
+
 var exampleItem = [
     {
         "image": "epic_1b_20161006004555_01",
         "caption": "",
+        // tslint:disable-next-line:max-line-length
         "coords": "{ \"centroid_coordinates\" : {\"lat\": 1.775493, \"lon\": 157.546882},\n\"dscovr_j2000_position\" : { \"x\" : -1491822.000000, \"y\" : -105086.492188, \"z\" : 46597.183594 },\n\"lunar_j2000_position\" : { \"x\" : -157902.703125, \"y\" : -359952.343750, \"z\" : -114914.140625 },\n\"sun_j2000_position\" : { \"x\" : -145740048.000000, \"y\" : -30796530.000000, \"z\" : -13349264.000000 },\n\"attitude_quaternions\" : { \"q0\" : -0.413055, \"q1\" : -0.000370, \"q2\" : 0.038535, \"q3\" : 0.909890 } }",
         "date": "2016-10-06 00:41:06"
     }
-]
+];
 
 var exampleImage = "http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/epic_1b_20161006004555_01.jpg";
 
@@ -37,9 +40,9 @@ export class EpicViewModel extends Observable {
         super();
 
         this._selectedDate = new Date();
-    }    
+    }
 
-    public get dataItem() {   
+    public get dataItem() {
         return this._dataItem;
     }
 
@@ -50,7 +53,7 @@ export class EpicViewModel extends Observable {
         }
     }
 
-    public get selectedDate() {   
+    public get selectedDate() {
         return this._selectedDate;
     }
 
@@ -68,7 +71,7 @@ export class EpicViewModel extends Observable {
     public initDataItems() {
         this.requestApod(this.dataItem, this.getUpdatedUrl());
     }
-    
+
     public requestApod(epicDataItem: EpicItem, apiUrl: string) {
 
         http.request({ url: apiUrl, method: "GET" })
@@ -80,16 +83,16 @@ export class EpicViewModel extends Observable {
                 }
 
                 var result = response.content.toJSON();
-                
+
                 console.log(result);
                 console.log(result[0]["image"]);
-                epicDataItem = new EpicItem("http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/" + result[0]["image"] + ".jpg"); // TODO : temp solution for first item
-        }).then(res => {
-            this.dataItem = epicDataItem;
-            console.log(this.dataItem["url"]); 
-        }).catch(err => {
-            // console.log(err.stack);
-        })
+                epicDataItem = new EpicItem(testEpicUrl + result[0]["image"] + ".jpg");
+            }).then(res => {
+                this.dataItem = epicDataItem;
+                console.log(this.dataItem["url"]);
+            }).catch(err => {
+                // console.log(err.stack);
+            });
     }
 }
 

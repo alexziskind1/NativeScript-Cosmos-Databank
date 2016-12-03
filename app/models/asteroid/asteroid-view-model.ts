@@ -13,9 +13,9 @@ export class AsteroidViewModel extends Observable {
 
     constructor() {
         super();
-    }    
+    }
 
-    public get dataItems() {   
+    public get dataItems() {
         return this._dataItems;
     }
 
@@ -31,15 +31,15 @@ export class AsteroidViewModel extends Observable {
     }
 
     public set asteroidCount(value: number) {
-         if (this._asteroidCount !== value) {
+        if (this._asteroidCount !== value) {
             this._asteroidCount = value;
             this.notifyPropertyChange("asteroidCount", value);
-        }       
+        }
     }
 
     public getUpdatedUrl() {
         var today = new Date();
-        var requiredDate=new Date(today.getFullYear(),today.getMonth(),today.getDate()+7);
+        var requiredDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7);
         var dateRange = "?start_date=" + this.formatDate(today) + "&end_date=" + this.formatDate(requiredDate);
         return this._url = API_URL + dateRange + API_KEY;
     }
@@ -47,7 +47,7 @@ export class AsteroidViewModel extends Observable {
     public initDataItems() {
         this.dataItems = this.requestAsteroids(this.dataItems, this.getUpdatedUrl());
     }
-    
+
     public requestAsteroids(asteroidDataItems: ObservableArray<AsteroidDataItem>, apiUrl: string) {
 
         http.request({ url: apiUrl, method: "GET" })
@@ -77,12 +77,13 @@ export class AsteroidViewModel extends Observable {
                                     var date = element[subkey];
                                     //dates.push(date);
                                     date.forEach(asteroid => {
+                                        // tslint:disable-next-line:max-line-length
                                         asteroid.estimated_diameter.meters.estimated_diameter_max = this.formatNumber(asteroid.estimated_diameter.meters.estimated_diameter_max);
 
                                         asteroidDataItems.push(new AsteroidDataItem(asteroid));
                                     });
                                 }
-                            }       
+                            }
                         }
                     }
                 }
@@ -90,7 +91,7 @@ export class AsteroidViewModel extends Observable {
                 return asteroidDataItems;
             }).catch(err => {
                 console.log("AsteroidDataItems fetch error: " + err.stack);
-            })
+            });
 
         return asteroidDataItems;
     }
@@ -101,14 +102,18 @@ export class AsteroidViewModel extends Observable {
 
     private formatDate(date) {
         var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
+            month = "" + (d.getMonth() + 1),
+            day = "" + d.getDate(),
             year = d.getFullYear();
 
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
+        if (month.length < 2) {
+            month = "0" + month;
+        }
+        if (day.length < 2) {
+            day = "0" + day;
+        }
 
-        return [year, month, day].join('-');
+        return [year, month, day].join("-");
     }
 }
 
@@ -123,7 +128,7 @@ export class AsteroidDataItem extends Observable {
         if (this._source) {
             var property: string;
             for (property in this._source) {
-                this.set(property, this._source[property]);             
+                this.set(property, this._source[property]);
 
                 if (property === "close_approach_data") {
                     // console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property]);
@@ -168,7 +173,7 @@ export interface Link {
 
 export interface EstimatedDiameter {
     kilometers: Kilometers;
-    meters: Meters
+    meters: Meters;
 }
 
 export interface Kilometers {

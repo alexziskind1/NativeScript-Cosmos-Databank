@@ -3,7 +3,7 @@ import { Button } from "ui/button";
 import { DatePicker } from "ui/date-picker";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
-import * as frameModule from "ui/frame"; 
+import * as frameModule from "ui/frame";
 import * as application from "application";
 
 export class PickersViewModel extends Observable {
@@ -24,7 +24,7 @@ export class PickersViewModel extends Observable {
 
     constructor() {
         super();
-    }    
+    }
 
     public get rover() {
         return this._rover;
@@ -55,7 +55,7 @@ export class PickersViewModel extends Observable {
     public set monthOpp(value: number) {
         if (this._monthOpp !== value) {
             this._monthOpp = value;
-            this.notifyPropertyChange("monthOpp", value); 
+            this.notifyPropertyChange("monthOpp", value);
         }
     }
 
@@ -88,7 +88,7 @@ export class PickersViewModel extends Observable {
     public set monthSpi(value: number) {
         if (this._monthSpi !== value) {
             this._monthSpi = value;
-            this.notifyPropertyChange("monthSpi", value); 
+            this.notifyPropertyChange("monthSpi", value);
         }
     }
 
@@ -121,7 +121,7 @@ export class PickersViewModel extends Observable {
     public set month(value: number) {
         if (this._month !== value) {
             this._month = value;
-            this.notifyPropertyChange("month", value); 
+            this.notifyPropertyChange("month", value);
         }
     }
 

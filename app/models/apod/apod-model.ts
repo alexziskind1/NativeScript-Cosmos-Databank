@@ -79,7 +79,7 @@ export class ApodViewModel extends Observable {
         }
 
         return new Promise<ApodItem>((resolve, reject) => {
-            
+
             http.request({ url: apiUrl, method: "GET" })
                 .then(response => {
                     // Argument (response) is HttpResponse!
@@ -90,27 +90,27 @@ export class ApodViewModel extends Observable {
 
                     var result = response.content.toJSON();
                     return new ApodItem(result["copyright"],
-                                        result["date"],
-                                        result["explanation"],
-                                        result["hdurl"],
-                                        result["media_type"],
-                                        result["service_version"],
-                                        result["title"],
-                                        result["url"]);
-                                                
+                        result["date"],
+                        result["explanation"],
+                        result["hdurl"],
+                        result["media_type"],
+                        result["service_version"],
+                        result["title"],
+                        result["url"]);
+
                 }).then(resultApodDataItem => {
                     try {
                         resolve(resultApodDataItem);
                     } catch (e) {
                         reject(e);
                     }
-                    
+
                 }).catch(err => {
                     console.log(err.stack);
                 });
 
         });
-        
+
     }
 }
 
@@ -125,13 +125,20 @@ export class ApodItem {
     public title: string;
     public url: string;
 
-    constructor(copyright: string, date: string, explanation: string, hdurl: string, media_type: string, service_version: string, title: string, url: string) {
+    constructor(copyright: string,
+        date: string,
+        explanation: string,
+        hdurl: string,
+        mediaType: string,
+        serviceVersion: string,
+        title: string,
+        url: string) {
         this.copyright = copyright;
         this.date = date;
         this.explanation = explanation;
         this.hdurl = hdurl;
-        this.media_type = media_type;
-        this.service_version = service_version;
+        this.media_type = mediaType;
+        this.service_version = serviceVersion;
         this.title = title;
         this.url = url;
     }

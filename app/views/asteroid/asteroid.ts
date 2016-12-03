@@ -14,16 +14,13 @@ export function onPageLoaded(args) {
 
 export function onItemTap(args: ListViewEventData) {
 
-    console.log("HERE");
     var tappedItemIndex = args.itemIndex;
     var tappedItemView = args.object;
-    console.log("tappedItemIndex: " + tappedItemIndex);
     var tappedAsteroid = vm.get("dataItems").getItem(tappedItemIndex);
-    console.log("tappedAsteroid: " + tappedAsteroid);
 
     topmost().navigate({
         moduleName: "views/asteroid/asteroid-details-page",
-        context: {"tappedItem": tappedAsteroid },
+        context: { "tappedItem": tappedAsteroid },
         animated: true,
         transition: {
             name: application.android ? "explode" : "curl"

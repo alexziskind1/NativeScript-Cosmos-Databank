@@ -12,7 +12,6 @@ var requestUrl = API_URL_START + sampleDate + API_KEY;
 export class RoversViewModel extends Observable {
 
     private _dataItems: ObservableArray<DataItem> = new ObservableArray<DataItem>();
-    
     private _year: number;
     private _month: number;
     private _day: number;
@@ -36,7 +35,7 @@ export class RoversViewModel extends Observable {
         this._day = day;
 
         this._totalCount = -1;
-    }    
+    }
 
     public get totalCount() {
         return this._totalCount;
@@ -47,7 +46,7 @@ export class RoversViewModel extends Observable {
             this._totalCount = value;
             this.notifyPropertyChange("totalCount", value);
         }
-    }    
+    }
 
     public get rover() {
         return this._rover;
@@ -78,7 +77,7 @@ export class RoversViewModel extends Observable {
     public set month(value: number) {
         if (this._month !== value) {
             this._month = value;
-            this.notifyPropertyChange("month", value); 
+            this.notifyPropertyChange("month", value);
         }
     }
 
@@ -93,7 +92,7 @@ export class RoversViewModel extends Observable {
         }
     }
 
-    public get dataItems() {   
+    public get dataItems() {
         if (!this._dataItems) {
             this.initDataItems();
         }
@@ -102,28 +101,28 @@ export class RoversViewModel extends Observable {
 
     public get cachedIndex() {
         return this._cachedIndex;
-    }      
+    }
 
     public set cachedIndex(value: number) {
         if (this._cachedIndex !== value) {
             this._cachedIndex = value;
             this.notifyPropertyChange("cachedIndex", value);
         }
-    }    
+    }
 
     public getUpdatedUrl() {
 
-        return this._url = API_URL_START 
-                           + this._rover 
-                           + API_URL_END 
-                           + this._year + '-' + this._month + '-' + this._day 
-                           + API_KEY;
+        return this._url = API_URL_START
+            + this._rover
+            + API_URL_END
+            + this._year + "-" + this._month + "-" + this._day
+            + API_KEY;
     }
 
     public initDataItems() {
-        this._dataItems = new ObservableArray<DataItem>(); 
+        this._dataItems = new ObservableArray<DataItem>();
         var pageIndex = 1;
-        this._dataItems = this.requestPhotosByPage(this._dataItems ,this.getUpdatedUrl(), pageIndex);
+        this._dataItems = this.requestPhotosByPage(this._dataItems, this.getUpdatedUrl(), pageIndex);
     }
 
     public requestPhotosByPage(arr: ObservableArray<DataItem>, url: string, pageIndex: number) {
@@ -137,22 +136,22 @@ export class RoversViewModel extends Observable {
                     this.totalCount = 0;
                     return;
                 }
-                
+
                 var result = response.content.toJSON();
-                
+
                 for (var index = 0; index < result["photos"].length; index++) {
                     var element = result["photos"][index];
 
                     arr.push(new DataItem(element["id"],
-                                        element["sol"],
-                                        element["camera"]["id"], 
-                                        element["camera"]["name"], 
-                                        element["camera"]["rover_id"], 
-                                        element["camera"]["full_name"], 
-                                        element["img_src"], 
-                                        element["earth_date"]));
+                        element["sol"],
+                        element["camera"]["id"],
+                        element["camera"]["name"],
+                        element["camera"]["rover_id"],
+                        element["camera"]["full_name"],
+                        element["img_src"],
+                        element["earth_date"]));
                 }
-            }).catch(err => { console.log(err.stack); }) 
+            }).catch(err => { console.log(err.stack); })
             .then(res => {
                 // recusrsive call to go to all the pages for the selected day query of photos
                 // reason: the API is passing 25 photos per page
@@ -182,21 +181,21 @@ export class DataItem {
 
     public imageUri: string;
     public earthDate: string;
-    
-    constructor(id: number, 
-                sol: number, 
-                cameraId: number, 
-                cameraName: string, 
-                cameraRoverId: number, 
-                cameraFullName: string, 
-                imageUri: string, 
-                earthDate: string) {
+
+    constructor(id: number,
+        sol: number,
+        cameraId: number,
+        cameraName: string,
+        cameraRoverId: number,
+        cameraFullName: string,
+        imageUri: string,
+        earthDate: string) {
         this.id = id;
         this.sol = sol;
         this.cameraId = cameraId;
         this.cameraName = cameraName;
         this.cameraRoverId = cameraRoverId;
-        this.cameraFullName = cameraFullName;      
+        this.cameraFullName = cameraFullName;
         this.imageUri = imageUri;
         this.earthDate = earthDate;
     }

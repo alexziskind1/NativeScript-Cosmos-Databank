@@ -3,7 +3,7 @@ var application = require("application");
 var enums = require("ui/enums");
 var fileSystem = require("file-system");
 var imageSource = require("image-source");
-var utils = require('utils/utils');
+var utils = require("utils/utils");
 var SocialShare = require("nativescript-social-share");
 if (application.android) {
     var Toast = require("nativescript-toast");
@@ -97,14 +97,14 @@ function onFinalImageSet(args) {
         .then(function (res) {
         currentImage = res;
         saveButton.animate({ opacity: 0.2, rotate: 360 })
-            .then(function (res) { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-            .then(function (res) { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then(function () { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+            .then(function () { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         desktopButton.animate({ opacity: 0.2, rotate: 360 })
-            .then(function (res) { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-            .then(function (res) { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then(function () { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+            .then(function () { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         shareButton.animate({ opacity: 0.2, rotate: 360 })
-            .then(function (res) { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-            .then(function (res) { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then(function () { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+            .then(function () { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         setUserInteraction(true);
     }).catch(function (err) {
         // console.log(err.stack);
@@ -124,7 +124,7 @@ function setButtonsOpacity(value) {
 function saveFile(res) {
     var url = apodViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
-    var n = fileName.indexOf('.');
+    var n = fileName.indexOf(".");
     fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
     if (application.android) {
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
@@ -225,11 +225,11 @@ function initPlayer() {
     }
 }
 function formatDate(date) {
-    var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
+    var d = new Date(date), month = "" + (d.getMonth() + 1), day = "" + d.getDate(), year = d.getFullYear();
     if (month.length < 2)
-        month = '0' + month;
+        month = "0" + month;
     if (day.length < 2)
-        day = '0' + day;
-    return [year, month, day].join('-');
+        day = "0" + day;
+    return [year, month, day].join("-");
 }
 //# sourceMappingURL=apod.js.map

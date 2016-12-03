@@ -100,13 +100,13 @@ var ApodViewModel = (function (_super) {
 }(observable_1.Observable));
 exports.ApodViewModel = ApodViewModel;
 var ApodItem = (function () {
-    function ApodItem(copyright, date, explanation, hdurl, media_type, service_version, title, url) {
+    function ApodItem(copyright, date, explanation, hdurl, mediaType, serviceVersion, title, url) {
         this.copyright = copyright;
         this.date = date;
         this.explanation = explanation;
         this.hdurl = hdurl;
-        this.media_type = media_type;
-        this.service_version = service_version;
+        this.media_type = mediaType;
+        this.service_version = serviceVersion;
         this.title = title;
         this.url = url;
     }

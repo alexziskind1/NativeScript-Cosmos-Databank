@@ -16,7 +16,7 @@ import enums = require("ui/enums");
 import fileSystem = require("file-system");
 import imageSource = require("image-source");
 import platformModule = require("platform");
-import * as utils from 'utils/utils';
+import * as utils from "utils/utils";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
@@ -29,14 +29,14 @@ if (application.android) {
 import { EpicViewModel, EpicItem } from "../../models/epic/epic-model";
 let epicViewModel = new EpicViewModel();
 
-let page : Page;
-let shareButton : Button;
-let saveButton : Button;
-let desktopButton : Button;
-let iosImage : Image;
+let page: Page;
+let shareButton: Button;
+let saveButton: Button;
+let desktopButton: Button;
+let iosImage: Image;
 let currentImage: imageSource.ImageSource;
 
-var currentSavedPath : string;
+var currentSavedPath: string;
 
 export function onPageLoaded(args: EventData) {
     page = <Page>args.object;
@@ -74,15 +74,15 @@ export function onPageNavigatedTo(args: EventData) {
     pageContainer.bindingContext = epicViewModel;
 }
 
-export function onSaveImage(args: EventData)  {
+export function onSaveImage(args: EventData) {
 
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
-            .then(res => {           
+            .then(res => {
                 saveFile(res);
             }).catch(err => {
                 // console.log(err.stack);
-            }); 
+            });
     } else if (application.android) {
         saveFile(currentImage);
         Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
@@ -90,14 +90,14 @@ export function onSaveImage(args: EventData)  {
 }
 
 export function onSetWallpaper(args: EventData) {
-    
+
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
-            .then(res => {           
+            .then(res => {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
                 // console.log(err.stack);
-            });; 
+            });;
     } else if (application.android) {
 
         saveFile(currentImage);
@@ -119,11 +119,11 @@ export function onShare(args: EventData) {
         SocialShare.shareImage(currentImage, "NASA EPIC");
     } else if (application.ios) {
         imageSource.fromUrl(iosImage.src)
-            .then(res => {       
+            .then(res => {
                 SocialShare.shareImage(res);
             }).catch(err => {
                 // console.log(err.stack);
-            }); 
+            });
     }
 }
 
@@ -167,40 +167,42 @@ export function onFinalImageSet(args: FinalEventData) {
 
     imageSource.fromUrl(drawee.imageUri)
         .then(res => {
-            currentImage = res;         
+            currentImage = res;
 
-            saveButton.animate({opacity: 0.2,rotate: 360})
-            .then( res => { return saveButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( res => { return saveButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            saveButton.animate({ opacity: 0.2, rotate: 360 })
+                .then(res => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(res => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-            desktopButton.animate({opacity: 0.2,rotate: 360})
-            .then( res => { return desktopButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( res => { return desktopButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
+            desktopButton.animate({ opacity: 0.2, rotate: 360 })
+                .then(res => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(res => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-            shareButton.animate({opacity: 0.2,rotate: 360})
-            .then( res => { return shareButton.animate({opacity: 0.5,rotate: 180, duration: 150 }); })
-            .then( res => { return shareButton.animate({opacity: 1.0, rotate: 0, duration: 150 }); });
-            
+            shareButton.animate({ opacity: 0.2, rotate: 360 })
+                .then(res => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(res => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+
             setUserInteraction(true);
 
         }).catch(err => {
             // console.log(err.stack);
-        }); 
+        });
 }
 
 export function saveFile(res: imageSource.ImageSource) {
     var url = epicViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
-    var n = fileName.indexOf('.');
+    var n = fileName.indexOf(".");
     fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
 
     if (application.android) {
-        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();  
+        // tslint:disable-next-line:max-line-length
+        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
         // TODO :  this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
-        var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");  
+        // tslint:disable-next-line:no-shadowed-variable
+        var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
     }
 
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
@@ -219,23 +221,23 @@ export function onIosShare() {
     console.log(iosImage.src);
 
     imageSource.fromUrl(iosImage.src)
-        .then(res => {          
+        .then(res => {
             SocialShare.shareImage(res);
         }).catch(err => {
             // console.log(err.sstack);
-        });    
+        });
 }
 
 function formatDate(date) {
     var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
 
-    return [year, month, day].join('-');
+    return [year, month, day].join("-");
 }
 
 function setUserInteraction(state: boolean) {

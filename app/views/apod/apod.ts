@@ -16,7 +16,7 @@ import enums = require("ui/enums");
 import fileSystem = require("file-system");
 import imageSource = require("image-source");
 import platformModule = require("platform");
-import * as utils from 'utils/utils';
+import * as utils from "utils/utils";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
@@ -128,16 +128,16 @@ export function onFinalImageSet(args: FinalEventData) {
             currentImage = res;
 
             saveButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(res => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(res => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+                .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
             desktopButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(res => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(res => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+                .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
             shareButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(res => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(res => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+                .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
             setUserInteraction(true);
 
@@ -161,11 +161,12 @@ function setButtonsOpacity(value: number) {
 function saveFile(res: imageSource.ImageSource) {
     var url = apodViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
-    var n = fileName.indexOf('.');
+    var n = fileName.indexOf(".");
     fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
 
     if (application.android) {
-        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
+        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
+            android.os.Environment.DIRECTORY_DOWNLOADS).toString();
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
         // TODO :  this works - but where are the images ?
@@ -268,12 +269,17 @@ function initPlayer() {
 
 function formatDate(date) {
     var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
+        month = "" + (d.getMonth() + 1),
+        day = "" + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
+    if (month.length < 2) {
+        month = "0" + month;
+    }
 
-    return [year, month, day].join('-');
+    if (day.length < 2) {
+        day = "0" + day;
+    }
+
+    return [year, month, day].join("-");
 }

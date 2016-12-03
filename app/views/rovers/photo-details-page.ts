@@ -5,7 +5,7 @@ import { Button } from "ui/button";
 import { topmost } from "ui/frame";
 import { Image } from "ui/image";
 import { GestureTypes, GestureEventData } from "ui/gestures";
-import * as utils from 'utils/utils';
+import * as utils from "utils/utils";
 import enums = require("ui/enums");
 import fileSystem = require("file-system");
 import imageSource = require("image-source");
@@ -15,7 +15,7 @@ import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 
 if (application.android) {
-    var Toast = require("nativescript-toast");
+    var toast = require("nativescript-toast");
 }
 
 let viewModel;
@@ -42,7 +42,7 @@ export function onPageLoaded(args: EventData) {
         iosImage = <Image>page.getViewById("ios-image");
     }
 
-    var navContext = page.navigationContext;
+    let navContext = page.navigationContext;
     viewModel = new Observable();
     viewModel.set("contextItem", navContext["tappedItem"]);
     viewModel.set("isItemVisible", false);
@@ -65,7 +65,7 @@ export function onFinalImageSet(args: FinalEventData) {
             shareButton.on("tap", function (args: GestureEventData) {
                 console.log("Android share tapped!");
                 SocialShare.shareImage(res, "Mars Rovers - Cosmos DataBank mobile App");
-            })
+            });
         }).catch(err => {
             // console.log(err.stack); 
         });
@@ -73,15 +73,17 @@ export function onFinalImageSet(args: FinalEventData) {
 
 function saveFile(res: imageSource.ImageSource) {
     var name = viewModel.get("contextItem").id + "" + viewModel.get("contextItem").earthDate;
-    
+
     var fileName = name + ".jpeg";
 
     if (application.android) {
-        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
+        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
+            android.os.Environment.DIRECTORY_DOWNLOADS).toString();
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
         // TODO :  this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
+        // tslint:disable-next-line:no-shadowed-variable
         var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
     }
 
@@ -107,7 +109,7 @@ export function onSaveImage(args: EventData) {
             });
     } else if (application.android) {
         saveFile(currentImage);
-        Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+        toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
 
@@ -132,7 +134,7 @@ export function onSetWallpaper(args: EventData) {
             // console.log(error);
         }
 
-        Toast.makeText("Wallpaper Set!").show();
+        toast.makeText("Wallpaper Set!").show();
     }
 }
 

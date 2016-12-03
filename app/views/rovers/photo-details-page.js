@@ -1,14 +1,14 @@
 "use strict";
 var observable_1 = require("data/observable");
 var frame_1 = require("ui/frame");
-var utils = require('utils/utils');
+var utils = require("utils/utils");
 var enums = require("ui/enums");
 var fileSystem = require("file-system");
 var imageSource = require("image-source");
 var application = require("application");
 var SocialShare = require("nativescript-social-share");
 if (application.android) {
-    var Toast = require("nativescript-toast");
+    var toast = require("nativescript-toast");
 }
 var viewModel;
 var shareButtonAndroid;
@@ -84,7 +84,7 @@ function onSaveImage(args) {
     }
     else if (application.android) {
         saveFile(currentImage);
-        Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+        toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
 exports.onSaveImage = onSaveImage;
@@ -107,7 +107,7 @@ function onSetWallpaper(args) {
         }
         catch (error) {
         }
-        Toast.makeText("Wallpaper Set!").show();
+        toast.makeText("Wallpaper Set!").show();
     }
 }
 exports.onSetWallpaper = onSetWallpaper;

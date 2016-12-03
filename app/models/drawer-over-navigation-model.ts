@@ -1,4 +1,5 @@
-import { EventData, Observable } from "data/observable"
+// tslint:disable:max-line-length
+import { EventData, Observable } from "data/observable";
 import { Button } from "ui/button";
 import { DatePicker } from "ui/date-picker";
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
@@ -10,7 +11,7 @@ export class DrawerOverNavigationModel extends Observable {
 
     get exampleText() {
         return "This app will be your mobile space portal!" +
-            " Over hundreds of thousands of photos from Mars the Deep Space." + 
+            " Over hundreds of thousands of photos from Mars the Deep Space." +
             " + Asteroids to Earth proximity checker";
     }
 
@@ -27,7 +28,7 @@ export class DrawerOverNavigationModel extends Observable {
     }
 
     get epicDescription() {
-        return "Earth \nPolychromatic \nImaging Camera"
+        return "Earth \nPolychromatic \nImaging Camera";
     }
 
     public toggleDrawer() {
@@ -86,7 +87,7 @@ export class DrawerOverNavigationModel extends Observable {
                 name: application.android ? "explode" : "curl"
             }
         });
-    }    
+    }
 
     public goToEpic() {
         var sideDrawer: drawerModule.RadSideDrawer = <drawerModule.RadSideDrawer>(frameModule.topmost().getViewById("sideDrawer"));
@@ -116,5 +117,5 @@ export class DrawerOverNavigationModel extends Observable {
                 name: application.android ? "explode" : "curl"
             }
         });
-    }  
+    }
 }
