@@ -1,5 +1,6 @@
 {
-    "tslint.enable": true,
-    "tslint.autoFixOnSave": true,
+    "typescript.check.tscVersion": false,
+    "typescript.check.workspaceVersion": false,
+    "tslint.autoFixOnSave" : true,
     "files.autoSave": "off"
 }
