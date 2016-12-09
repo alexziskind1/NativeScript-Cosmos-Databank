@@ -63,7 +63,6 @@ function onListLoaded(args) {
     if (list.items) {
         list.scrollToIndex(roversViewModel.get("cachedIndex"));
     }
-    //console.log(list.getItemAtIndex(2));
     list.refresh();
 }
 exports.onListLoaded = onListLoaded;

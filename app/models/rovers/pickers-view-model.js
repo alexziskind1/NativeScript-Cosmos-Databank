@@ -5,7 +5,7 @@ var application = require("application");
 var PickersViewModel = (function (_super) {
     __extends(PickersViewModel, _super);
     function PickersViewModel() {
-        _super.call(this);
+        return _super.call(this) || this;
     }
     Object.defineProperty(PickersViewModel.prototype, "rover", {
         get: function () {

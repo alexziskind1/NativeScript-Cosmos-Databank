@@ -1,11 +1,12 @@
 "use strict";
+// tslint:disable:max-line-length
 var observable_1 = require("data/observable");
 var frameModule = require("ui/frame");
 var application = require("application");
 var DrawerOverNavigationModel = (function (_super) {
     __extends(DrawerOverNavigationModel, _super);
     function DrawerOverNavigationModel() {
-        _super.apply(this, arguments);
+        return _super.apply(this, arguments) || this;
     }
     Object.defineProperty(DrawerOverNavigationModel.prototype, "exampleText", {
         get: function () {

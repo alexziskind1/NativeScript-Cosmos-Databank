@@ -11,17 +11,18 @@ var requestUrl = API_URL_START + sampleDate + API_KEY;
 var RoversViewModel = (function (_super) {
     __extends(RoversViewModel, _super);
     function RoversViewModel(rover, year, month, day) {
-        _super.call(this);
-        this._dataItems = new observable_array_1.ObservableArray();
-        this._showCur = true;
-        this._showOpp = true;
-        this._showSpi = true;
-        this._cachedIndex = 0;
-        this._rover = rover;
-        this._year = year;
-        this._month = month;
-        this._day = day;
-        this._totalCount = -1;
+        var _this = _super.call(this) || this;
+        _this._dataItems = new observable_array_1.ObservableArray();
+        _this._showCur = true;
+        _this._showOpp = true;
+        _this._showSpi = true;
+        _this._cachedIndex = 0;
+        _this._rover = rover;
+        _this._year = year;
+        _this._month = month;
+        _this._day = day;
+        _this._totalCount = -1;
+        return _this;
     }
     Object.defineProperty(RoversViewModel.prototype, "totalCount", {
         get: function () {
@@ -115,7 +116,7 @@ var RoversViewModel = (function (_super) {
         return this._url = API_URL_START
             + this._rover
             + API_URL_END
-            + this._year + '-' + this._month + '-' + this._day
+            + this._year + "-" + this._month + "-" + this._day
             + API_KEY;
     };
     RoversViewModel.prototype.initDataItems = function () {

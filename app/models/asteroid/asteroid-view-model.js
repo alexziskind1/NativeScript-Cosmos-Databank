@@ -7,9 +7,10 @@ var API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
 var AsteroidViewModel = (function (_super) {
     __extends(AsteroidViewModel, _super);
     function AsteroidViewModel() {
-        _super.call(this);
-        this._dataItems = new observable_array_1.ObservableArray();
-        this._asteroidCount = 0;
+        var _this = _super.call(this) || this;
+        _this._dataItems = new observable_array_1.ObservableArray();
+        _this._asteroidCount = 0;
+        return _this;
     }
     Object.defineProperty(AsteroidViewModel.prototype, "dataItems", {
         get: function () {
@@ -72,6 +73,7 @@ var AsteroidViewModel = (function (_super) {
                                 var date = element[subkey];
                                 //dates.push(date);
                                 date.forEach(function (asteroid) {
+                                    // tslint:disable-next-line:max-line-length
                                     asteroid.estimated_diameter.meters.estimated_diameter_max = _this.formatNumber(asteroid.estimated_diameter.meters.estimated_diameter_max);
                                     asteroidDataItems.push(new AsteroidDataItem(asteroid));
                                 });
@@ -106,20 +108,21 @@ exports.AsteroidViewModel = AsteroidViewModel;
 var AsteroidDataItem = (function (_super) {
     __extends(AsteroidDataItem, _super);
     function AsteroidDataItem(source) {
-        _super.call(this);
-        this._source = source;
-        if (this._source) {
+        var _this = _super.call(this) || this;
+        _this._source = source;
+        if (_this._source) {
             var property;
-            for (property in this._source) {
-                this.set(property, this._source[property]);
+            for (property in _this._source) {
+                _this.set(property, _this._source[property]);
                 if (property === "close_approach_data") {
                     // console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property]);
                     // here you should take care of this ARRAY received for close_approach_data ...
                     // working for arr[0] !!!
-                    this.set(property, this._source[property][0]);
+                    _this.set(property, _this._source[property][0]);
                 }
             }
         }
+        return _this;
     }
     Object.defineProperty(AsteroidDataItem.prototype, "source", {
         get: function () {

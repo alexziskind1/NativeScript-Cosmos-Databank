@@ -63,6 +63,7 @@ function saveFile(res) {
     else if (application.ios) {
         // TODO :  this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
+        // tslint:disable-next-line:no-shadowed-variable
         var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
     }
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);

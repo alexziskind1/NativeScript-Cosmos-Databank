@@ -24,9 +24,9 @@ import * as SocialShare from "nativescript-social-share";
 
 if (application.android) {
     var Toast = require("nativescript-toast");
+    var youtube = require("nativescript-youtube-player");
 }
 
-var youtube = require("nativescript-youtube-player");
 let YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
@@ -65,9 +65,8 @@ export function onPageNavigatedTo(args: EventData) {
     saveButton = <Button>page.getViewById("btn-save");
     desktopButton = <Button>page.getViewById("btn-desk");
 
-    player = page.getViewById("player");
-
     if (application.android) {
+        player = page.getViewById("player");
         setButtonsOpacity(0.2);
         setUserInteraction(false);
     }
@@ -78,7 +77,9 @@ export function onPageNavigatedTo(args: EventData) {
 
     if (!apodViewModel.get("dataItem")) {
         apodViewModel.initDataItems().then(res => {
-            initPlayer();
+            if (application.android) {
+                initPlayer();
+            }
         });
     }
 
@@ -96,7 +97,9 @@ export function previousDate() {
     currentDate.setDate(currentDate.getDate() - 1);
     apodViewModel.set("selectedDate", currentDate);
     apodViewModel.initDataItems(formatDate(currentDate)).then(res => {
-        initPlayer();
+        if (application.android) {
+            initPlayer();
+        }
     });
 }
 
@@ -115,7 +118,9 @@ export function nextDate() {
         currentDate.setDate(currentDate.getDate() + 1);
         apodViewModel.set("selectedDate", currentDate);
         apodViewModel.initDataItems(formatDate(currentDate)).then(res => {
-            initPlayer();
+            if (application.android) {
+                initPlayer();
+            }
         });
     }
 }
@@ -162,7 +167,7 @@ function saveFile(res: imageSource.ImageSource) {
     var url = apodViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
     var n = fileName.indexOf(".");
-    fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
+    fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
 
     if (application.android) {
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
@@ -208,7 +213,7 @@ export function onSetWallpaper(args: EventData) {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
                 // console.log(err);
-            });;
+            }); ;
     } else if (application.android) {
 
         saveFile(currentImage);
@@ -241,7 +246,7 @@ export function onShare(args: EventData) {
 function getYouTubeID(url) {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
-    if (match && match[7].length == 11) {
+    if (match && match[7].length === 11) {
         return match[7];
     } else {
         console.log("Could not extract video ID.");

@@ -7,8 +7,8 @@ var utils = require("utils/utils");
 var SocialShare = require("nativescript-social-share");
 if (application.android) {
     var Toast = require("nativescript-toast");
+    var youtube = require("nativescript-youtube-player");
 }
-var youtube = require("nativescript-youtube-player");
 var YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
 var apod_model_1 = require("../../models/apod/apod-model");
 var apodViewModel = new apod_model_1.ApodViewModel();
@@ -41,8 +41,8 @@ function onPageNavigatedTo(args) {
     shareButton = page.getViewById("btn-shar");
     saveButton = page.getViewById("btn-save");
     desktopButton = page.getViewById("btn-desk");
-    player = page.getViewById("player");
     if (application.android) {
+        player = page.getViewById("player");
         setButtonsOpacity(0.2);
         setUserInteraction(false);
     }
@@ -51,7 +51,9 @@ function onPageNavigatedTo(args) {
     }
     if (!apodViewModel.get("dataItem")) {
         apodViewModel.initDataItems().then(function (res) {
-            initPlayer();
+            if (application.android) {
+                initPlayer();
+            }
         });
     }
     page.bindingContext = apodViewModel;
@@ -67,7 +69,9 @@ function previousDate() {
     currentDate.setDate(currentDate.getDate() - 1);
     apodViewModel.set("selectedDate", currentDate);
     apodViewModel.initDataItems(formatDate(currentDate)).then(function (res) {
-        initPlayer();
+        if (application.android) {
+            initPlayer();
+        }
     });
 }
 exports.previousDate = previousDate;
@@ -86,7 +90,9 @@ function nextDate() {
         currentDate.setDate(currentDate.getDate() + 1);
         apodViewModel.set("selectedDate", currentDate);
         apodViewModel.initDataItems(formatDate(currentDate)).then(function (res) {
-            initPlayer();
+            if (application.android) {
+                initPlayer();
+            }
         });
     }
 }
@@ -125,7 +131,7 @@ function saveFile(res) {
     var url = apodViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
     var n = fileName.indexOf(".");
-    fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
+    fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
     if (application.android) {
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
@@ -198,7 +204,7 @@ exports.onShare = onShare;
 function getYouTubeID(url) {
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = url.match(regExp);
-    if (match && match[7].length == 11) {
+    if (match && match[7].length === 11) {
         return match[7];
     }
     else {
@@ -226,10 +232,12 @@ function initPlayer() {
 }
 function formatDate(date) {
     var d = new Date(date), month = "" + (d.getMonth() + 1), day = "" + d.getDate(), year = d.getFullYear();
-    if (month.length < 2)
+    if (month.length < 2) {
         month = "0" + month;
-    if (day.length < 2)
+    }
+    if (day.length < 2) {
         day = "0" + day;
+    }
     return [year, month, day].join("-");
 }
 //# sourceMappingURL=apod.js.map

@@ -3,7 +3,7 @@ var application = require("application");
 var enums = require("ui/enums");
 var fileSystem = require("file-system");
 var imageSource = require("image-source");
-var utils = require('utils/utils');
+var utils = require("utils/utils");
 var SocialShare = require("nativescript-social-share");
 if (application.android) {
     var Toast = require("nativescript-toast");
@@ -156,15 +156,17 @@ exports.onFinalImageSet = onFinalImageSet;
 function saveFile(res) {
     var url = epicViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
-    var n = fileName.indexOf('.');
+    var n = fileName.indexOf(".");
     fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
     if (application.android) {
+        // tslint:disable-next-line:max-line-length
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     }
     else if (application.ios) {
         // TODO :  this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
+        // tslint:disable-next-line:no-shadowed-variable
         var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
     }
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
@@ -188,12 +190,12 @@ function onIosShare() {
 }
 exports.onIosShare = onIosShare;
 function formatDate(date) {
-    var d = new Date(date), month = '' + (d.getMonth() + 1), day = '' + d.getDate(), year = d.getFullYear();
+    var d = new Date(date), month = "" + (d.getMonth() + 1), day = "" + d.getDate(), year = d.getFullYear();
     if (month.length < 2)
-        month = '0' + month;
+        month = "0" + month;
     if (day.length < 2)
-        day = '0' + day;
-    return [year, month, day].join('-');
+        day = "0" + day;
+    return [year, month, day].join("-");
 }
 function setUserInteraction(state) {
     shareButton.isUserInteractionEnabled = state;

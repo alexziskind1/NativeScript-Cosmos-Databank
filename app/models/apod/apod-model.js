@@ -12,9 +12,10 @@ var HD_PIC = "&hd=true";
 var ApodViewModel = (function (_super) {
     __extends(ApodViewModel, _super);
     function ApodViewModel() {
-        _super.call(this);
-        this._isPlayerVisible = false;
-        this._selectedDate = new Date();
+        var _this = _super.call(this) || this;
+        _this._isPlayerVisible = false;
+        _this._selectedDate = new Date();
+        return _this;
     }
     Object.defineProperty(ApodViewModel.prototype, "isPlayerVisible", {
         get: function () {
