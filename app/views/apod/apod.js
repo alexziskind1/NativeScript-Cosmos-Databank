@@ -5,6 +5,7 @@ var fileSystem = require("file-system");
 var imageSource = require("image-source");
 var utils = require("utils/utils");
 var SocialShare = require("nativescript-social-share");
+var firebase = require("nativescript-plugin-firebase");
 if (application.android) {
     var Toast = require("nativescript-toast");
     var youtube = require("nativescript-youtube-player");
@@ -188,6 +189,11 @@ function onSetWallpaper(args) {
 }
 exports.onSetWallpaper = onSetWallpaper;
 function onShare(args) {
+    firebase.push("/favorites", {
+        "dataItem": apodViewModel.get("dataItem")
+    }).then(function (result) {
+        console.log("created key: " + result.key);
+    });
     if (application.android) {
         SocialShare.shareImage(currentImage, "NASA APOD");
     }

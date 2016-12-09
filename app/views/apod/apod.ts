@@ -21,6 +21,7 @@ import * as utils from "utils/utils";
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
+import * as firebase from "nativescript-plugin-firebase";
 
 if (application.android) {
     var Toast = require("nativescript-toast");
@@ -231,6 +232,16 @@ export function onSetWallpaper(args: EventData) {
 }
 
 export function onShare(args: EventData) {
+    firebase.push(
+        "/favorites",
+        {
+            "dataItem": apodViewModel.get("dataItem")
+        }
+    ).then(result => {
+        console.log("created key: " + result.key);
+    });
+
+
     if (application.android) {
         SocialShare.shareImage(currentImage, "NASA APOD");
     } else if (application.ios) {
