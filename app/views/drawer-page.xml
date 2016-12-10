@@ -7,10 +7,10 @@
     class="drawer-page">
 
     <dpg:DrawerPage.actionBar>
-      <ActionBar class="action-bar">
+      <ActionBar>
         <ActionBar.titleView>
             <StackLayout>
-                <Label text="COSMOS Data Bank" class="h3 action-bar-title"/>
+                <Label text="COSMOS Databank" class="h3 action-bar-title"/>
             </StackLayout>
         </ActionBar.titleView>
         <ActionItem icon="res://ic_menu" class="action-item" ios.position="right" tap="{{ toggleDrawer }}" />
@@ -32,7 +32,7 @@
                             <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" class="btn btn-primary btn-active dp-btn" />
                             <Button text="Astreroids Proximity Checker" tap="{{ goToAsteroids }}" class="btn btn-primary btn-active dp-btn" />
                             <Button text="EPIC" tap="{{ goToEpic }}" class="btn btn-primary btn-active dp-btn" />
-                            <Button text="About" tap="{{ goToAbout }}" class="btn btn-primary btn-active dp-btn" />
+                            <Button text="Info" tap="{{ goToAbout }}" class="btn btn-primary btn-active dp-btn" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>
@@ -71,7 +71,7 @@
 
             <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
                 <GridLayout rows="auto" columns="*" tap="{{ goToAbout }}">
-                    <Label col="0" text="Credits" textWrap="true" class="p-t-8 p-b-16 text-center" verticalAlignment="center" />
+                    <Label col="0" text="Info" textWrap="true" class="h3 p-t-8 p-b-16 text-center" verticalAlignment="center" />
                 </GridLayout>
             </Card:CardView>
 

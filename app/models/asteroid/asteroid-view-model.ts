@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");
@@ -75,10 +76,21 @@ export class AsteroidViewModel extends Observable {
                             for (var subkey in element) {
                                 if (element.hasOwnProperty(subkey)) {
                                     var date = element[subkey];
-                                    //dates.push(date);
+                                    // dates.push(date);
                                     date.forEach(asteroid => {
-                                        // tslint:disable-next-line:max-line-length
                                         asteroid.estimated_diameter.meters.estimated_diameter_max = this.formatNumber(asteroid.estimated_diameter.meters.estimated_diameter_max);
+                                        asteroid.estimated_diameter.meters.estimated_diameter_min = this.formatNumber(asteroid.estimated_diameter.meters.estimated_diameter_min);
+                                        asteroid.estimated_diameter.kilometers.estimated_diameter_max = this.formatNumber(asteroid.estimated_diameter.kilometers.estimated_diameter_max);
+                                        asteroid.estimated_diameter.kilometers.estimated_diameter_min = this.formatNumber(asteroid.estimated_diameter.kilometers.estimated_diameter_min);
+
+                                        asteroid.close_approach_data.sort(function (a, b) {
+                                            let distA = a.miss_distance.kilometers;
+                                            let distB = b.miss_distance.kilometers;
+                                            return distA - distB;
+                                        });
+
+                                        asteroid.close_approach_data[0].miss_distance.kilometers = this.formatNumber(asteroid.close_approach_data[0].miss_distance.kilometers);
+                                        asteroid.close_approach_data[0].miss_distance.astronomical = this.formatNumber(asteroid.close_approach_data[0].miss_distance.astronomical);
 
                                         asteroidDataItems.push(new AsteroidDataItem(asteroid));
                                     });
@@ -129,13 +141,6 @@ export class AsteroidDataItem extends Observable {
             var property: string;
             for (property in this._source) {
                 this.set(property, this._source[property]);
-
-                if (property === "close_approach_data") {
-                    // console.log(' PROP: '  + property + '\nVALUE: ' + this._source[property]);
-                    // here you should take care of this ARRAY received for close_approach_data ...
-                    // working for arr[0] !!!
-                    this.set(property, this._source[property][0]);
-                }
             }
         }
     }
@@ -163,7 +168,7 @@ export interface AsteroidItem {
     absolute_magnitude_h: number;
     estimated_diameter: EstimatedDiameter;
     is_potentially_hazardous_asteroid: boolean;
-    close_approach_data: ApproachDate; // working for arr[0]
+    close_approach_data: Array<ApproachDate>;
     orbital_data: OrbitalData;
 }
 
@@ -185,10 +190,6 @@ export interface Meters {
     estimated_diameter_min: number;
     estimated_diameter_max: number;
 }
-
-// export interface CloseApproachData {
-//     data: Array<ApproachDate>
-// }
 
 export interface ApproachDate {
     close_approach_date: string;
