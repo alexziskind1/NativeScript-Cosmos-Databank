@@ -1,3 +1,6 @@
+[Google Play Store (alpha rests)](https://play.google.com/store/apps/details?id=org.nativescript.curiosity&ah=JzMiTK6i7_W0DjmFnEL4ORKdB3w&hl=eng#details-reviews)
+
+
 # NativeScript-Cosmos-DataBank
 
 A proof of concept application using NativeScript cross-platform framework.
