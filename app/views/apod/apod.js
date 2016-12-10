@@ -6,8 +6,10 @@ var imageSource = require("image-source");
 var utils = require("utils/utils");
 var SocialShare = require("nativescript-social-share");
 var firebase = require("nativescript-plugin-firebase");
+var youtubeHelpers = require("../helpers/youtube/youtube-helpers");
+var formatters = require("../helpers/formaters");
 if (application.android) {
-    var Toast = require("nativescript-toast");
+    var toast = require("nativescript-toast");
     var youtube = require("nativescript-youtube-player");
 }
 var YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
@@ -52,8 +54,13 @@ function onPageNavigatedTo(args) {
     }
     if (!apodViewModel.get("dataItem")) {
         apodViewModel.initDataItems().then(function (res) {
-            if (application.android) {
+            console.log(apodViewModel.get("dataItem").media_type === "video");
+            if (application.android && (apodViewModel.get("dataItem").media_type === "video")) {
                 initPlayer();
+            }
+            else {
+                player.pause();
+                apodViewModel.set("isPlayerVisible", false);
             }
         });
     }
@@ -69,9 +76,13 @@ function previousDate() {
     var currentDate = apodViewModel.get("selectedDate");
     currentDate.setDate(currentDate.getDate() - 1);
     apodViewModel.set("selectedDate", currentDate);
-    apodViewModel.initDataItems(formatDate(currentDate)).then(function (res) {
-        if (application.android) {
+    apodViewModel.initDataItems(formatters.formatDate(currentDate)).then(function (res) {
+        if (application.android && (apodViewModel.get("dataItem").media_type === "video")) {
             initPlayer();
+        }
+        else {
+            player.pause();
+            apodViewModel.set("isPlayerVisible", false);
         }
     });
 }
@@ -84,15 +95,19 @@ function nextDate() {
     var currentDate = apodViewModel.get("selectedDate");
     if (currentDate >= new Date()) {
         if (application.android) {
-            Toast.makeText("Can not load photos from future!").show();
+            toast.makeText("Can not load photos from the future!").show();
         }
     }
     else {
         currentDate.setDate(currentDate.getDate() + 1);
         apodViewModel.set("selectedDate", currentDate);
-        apodViewModel.initDataItems(formatDate(currentDate)).then(function (res) {
-            if (application.android) {
+        apodViewModel.initDataItems(formatters.formatDate(currentDate)).then(function (res) {
+            if (application.android && (apodViewModel.get("dataItem").media_type === "video")) {
                 initPlayer();
+            }
+            else {
+                player.pause();
+                apodViewModel.set("isPlayerVisible", false);
             }
         });
     }
@@ -133,14 +148,15 @@ function saveFile(res) {
     var fileName = url.substring(url.lastIndexOf("/") + 1);
     var n = fileName.indexOf(".");
     fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
+    var cosmosFolderPath;
     if (application.android) {
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
-        var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
+        cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     }
     else if (application.ios) {
         // TODO :  this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
-        var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
+        cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
     }
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
     var path = fileSystem.path.join(cosmosFolderPath, fileName);
@@ -161,7 +177,7 @@ function onSaveImage(args) {
     }
     else if (application.android) {
         saveFile(currentImage);
-        Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+        toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
 exports.onSaveImage = onSaveImage;
@@ -184,7 +200,7 @@ function onSetWallpaper(args) {
         }
         catch (error) {
         }
-        Toast.makeText("Wallpaper Set!").show();
+        toast.makeText("Wallpaper Set!").show();
     }
 }
 exports.onSetWallpaper = onSetWallpaper;
@@ -207,43 +223,17 @@ function onShare(args) {
     }
 }
 exports.onShare = onShare;
-function getYouTubeID(url) {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[7].length === 11) {
-        return match[7];
-    }
-    else {
-        console.log("Could not extract video ID.");
-    }
-}
 function initPlayer() {
-    if (apodViewModel.get("dataItem").media_type === "video") {
-        var mediaUrl = apodViewModel.get("dataItem").url;
-        if (mediaUrl.indexOf("youtube") >= 0) {
-            apodViewModel.set("isPlayerVisible", true);
-            var youtubeID = getYouTubeID(mediaUrl);
-            player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
-            player.play();
-        }
-        else {
-            player.pause();
-            apodViewModel.set("isPlayerVisible", false);
-        }
+    var mediaUrl = apodViewModel.get("dataItem").url;
+    if (mediaUrl.indexOf("youtube") >= 0) {
+        apodViewModel.set("isPlayerVisible", true);
+        var youtubeID = youtubeHelpers.getYouTubeID(mediaUrl);
+        player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
+        player.play();
     }
     else {
         player.pause();
         apodViewModel.set("isPlayerVisible", false);
     }
-}
-function formatDate(date) {
-    var d = new Date(date), month = "" + (d.getMonth() + 1), day = "" + d.getDate(), year = d.getFullYear();
-    if (month.length < 2) {
-        month = "0" + month;
-    }
-    if (day.length < 2) {
-        day = "0" + day;
-    }
-    return [year, month, day].join("-");
 }
 //# sourceMappingURL=apod.js.map

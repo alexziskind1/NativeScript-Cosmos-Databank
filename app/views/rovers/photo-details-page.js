@@ -114,7 +114,7 @@ function onSetWallpaper(args) {
 exports.onSetWallpaper = onSetWallpaper;
 function onShare(args) {
     if (application.android) {
-        SocialShare.shareImage(currentImage, "NASA APOD");
+        SocialShare.shareImage(currentImage, "Mars Rovers");
     }
     else if (application.ios) {
         imageSource.fromUrl(iosImage.src)

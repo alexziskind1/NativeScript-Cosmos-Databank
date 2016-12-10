@@ -23,8 +23,11 @@ import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 import * as firebase from "nativescript-plugin-firebase";
 
+import * as youtubeHelpers from "../helpers/youtube/youtube-helpers";
+import * as formatters from "../helpers/formaters";
+
 if (application.android) {
-    var Toast = require("nativescript-toast");
+    var toast = require("nativescript-toast");
     var youtube = require("nativescript-youtube-player");
 }
 
@@ -78,8 +81,12 @@ export function onPageNavigatedTo(args: EventData) {
 
     if (!apodViewModel.get("dataItem")) {
         apodViewModel.initDataItems().then(res => {
-            if (application.android) {
+            console.log(apodViewModel.get("dataItem").media_type === "video");
+            if (application.android && (apodViewModel.get("dataItem").media_type === "video")) {
                 initPlayer();
+            } else {
+                player.pause();
+                apodViewModel.set("isPlayerVisible", false);
             }
         });
     }
@@ -97,9 +104,12 @@ export function previousDate() {
     var currentDate = apodViewModel.get("selectedDate");
     currentDate.setDate(currentDate.getDate() - 1);
     apodViewModel.set("selectedDate", currentDate);
-    apodViewModel.initDataItems(formatDate(currentDate)).then(res => {
-        if (application.android) {
+    apodViewModel.initDataItems(formatters.formatDate(currentDate)).then(res => {
+        if (application.android && (apodViewModel.get("dataItem").media_type === "video")) {
             initPlayer();
+        } else {
+            player.pause();
+            apodViewModel.set("isPlayerVisible", false);
         }
     });
 }
@@ -113,14 +123,17 @@ export function nextDate() {
     var currentDate = apodViewModel.get("selectedDate");
     if (currentDate >= new Date()) {
         if (application.android) {
-            Toast.makeText("Can not load photos from future!").show();
+            toast.makeText("Can not load photos from the future!").show();
         }
     } else {
         currentDate.setDate(currentDate.getDate() + 1);
         apodViewModel.set("selectedDate", currentDate);
-        apodViewModel.initDataItems(formatDate(currentDate)).then(res => {
-            if (application.android) {
+        apodViewModel.initDataItems(formatters.formatDate(currentDate)).then(res => {
+            if (application.android && (apodViewModel.get("dataItem").media_type === "video")) {
                 initPlayer();
+            } else {
+                player.pause();
+                apodViewModel.set("isPlayerVisible", false);
             }
         });
     }
@@ -170,14 +183,15 @@ function saveFile(res: imageSource.ImageSource) {
     var n = fileName.indexOf(".");
     fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
 
+    var cosmosFolderPath;
     if (application.android) {
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
             android.os.Environment.DIRECTORY_DOWNLOADS).toString();
-        var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
+        cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
         // TODO :  this works - but where are the images ?
         var iosDownloadPath = fileSystem.knownFolders.documents();
-        var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
+        cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
     }
 
     var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
@@ -202,7 +216,7 @@ export function onSaveImage(args: EventData) {
             });
     } else if (application.android) {
         saveFile(currentImage);
-        Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+        toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
 
@@ -216,7 +230,6 @@ export function onSetWallpaper(args: EventData) {
                 // console.log(err);
             }); ;
     } else if (application.android) {
-
         saveFile(currentImage);
 
         var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
@@ -227,7 +240,7 @@ export function onSetWallpaper(args: EventData) {
             // console.log(error);
         }
 
-        Toast.makeText("Wallpaper Set!").show();
+        toast.makeText("Wallpaper Set!").show();
     }
 }
 
@@ -241,7 +254,6 @@ export function onShare(args: EventData) {
         console.log("created key: " + result.key);
     });
 
-
     if (application.android) {
         SocialShare.shareImage(currentImage, "NASA APOD");
     } else if (application.ios) {
@@ -254,48 +266,16 @@ export function onShare(args: EventData) {
     }
 }
 
-function getYouTubeID(url) {
-    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[7].length === 11) {
-        return match[7];
-    } else {
-        console.log("Could not extract video ID.");
-    }
-}
-
 function initPlayer() {
-    if (apodViewModel.get("dataItem").media_type === "video") {
-        var mediaUrl = apodViewModel.get("dataItem").url;
+    var mediaUrl = apodViewModel.get("dataItem").url;
 
-        if (mediaUrl.indexOf("youtube") >= 0) {
-            apodViewModel.set("isPlayerVisible", true);
-            var youtubeID = getYouTubeID(mediaUrl);
-            player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
-            player.play();
-        } else {
-            player.pause();
-            apodViewModel.set("isPlayerVisible", false);
-        }
+    if (mediaUrl.indexOf("youtube") >= 0) {
+        apodViewModel.set("isPlayerVisible", true);
+        var youtubeID = youtubeHelpers.getYouTubeID(mediaUrl);
+        player.loadVideo(youtubeID, 10); // pass the actual video here or load web-view
+        player.play();
     } else {
         player.pause();
         apodViewModel.set("isPlayerVisible", false);
     }
-}
-
-function formatDate(date) {
-    var d = new Date(date),
-        month = "" + (d.getMonth() + 1),
-        day = "" + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) {
-        month = "0" + month;
-    }
-
-    if (day.length < 2) {
-        day = "0" + day;
-    }
-
-    return [year, month, day].join("-");
 }

@@ -121,7 +121,7 @@ export function onSetWallpaper(args: EventData) {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
                 // console.log(err);
-            });;
+            }); ;
     } else if (application.android) {
 
         saveFile(currentImage);
@@ -140,7 +140,7 @@ export function onSetWallpaper(args: EventData) {
 
 export function onShare(args: EventData) {
     if (application.android) {
-        SocialShare.shareImage(currentImage, "NASA APOD");
+        SocialShare.shareImage(currentImage, "Mars Rovers");
     } else if (application.ios) {
         imageSource.fromUrl(iosImage.src)
             .then(res => {
