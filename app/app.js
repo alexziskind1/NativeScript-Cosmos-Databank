@@ -24,5 +24,4 @@ if (application.android) {
     };
 }
 application.start({ moduleName: "views/drawer-page" });
-// application.start({ moduleName: "views/rover-photo-page" });
 //# sourceMappingURL=app.js.map

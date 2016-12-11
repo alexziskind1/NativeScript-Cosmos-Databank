@@ -1,6 +1,5 @@
 {
-    "typescript.check.tscVersion": false,
-    "typescript.check.workspaceVersion": false,
-    "tslint.autoFixOnSave" : true,
-    "files.autoSave": "off"
+    // Run the linter on save (onSave) or on type (onType)
+    "tslint.run": "onSave",
+    "tslint.autoFixOnSave" : true
 }

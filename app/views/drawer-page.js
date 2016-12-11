@@ -10,8 +10,10 @@ function onPageNavigatedTo(args) {
     var page = args.object;
     permissions.requestPermission([
         "android.permission.INTERNET",
+        "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.SET_WALLPAPER"
+        "android.permission.SET_WALLPAPER",
+        "android.permission.ACCESS_NETWORK_STATE"
     ], "I need these permissions")
         .then(function (res) {
         console.log("Permissions granted!");
