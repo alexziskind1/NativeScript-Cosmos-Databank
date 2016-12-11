@@ -1,4 +1,5 @@
 import * as common from "./player-common";
+// tslint:disable-next-line:no-use-before-declare
 import { Page as Page } from "ui/page";
 import { AndroidFragmentCallbacks } from "ui/frame";
 
@@ -25,7 +26,7 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
         var that = this;
         this._onInitializedListener = new com.google.android.youtube.player.YouTubePlayer.OnInitializedListener({
             onInitializationFailure: function (provider, error) {
-                //TODO: Handle errors
+                // TODO: Handle errors
                 that._player = undefined;
                 that._initialized = false;
                 console.log("init failure: " + error);
@@ -59,8 +60,9 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
             onStopped: function () {
                 console.log("onStopped");
             }
-        })
+        });
 
+        // tslint:disable-next-line:max-line-length
         this._onPlayerStateChangeListener = new com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener({
             onAdStarted: function () {
                 console.log("add started");
@@ -154,7 +156,6 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
         var key = this.apiKey;
         if (!key) {
             // No valid API key
-            console.log("key: " + key)
             return;
         }
 
@@ -168,7 +169,6 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
 
         console.log("_play videoKey" + this.videoKey);
         if (!this.videoKey) {
-            console.log(this.videoKey);
             return;
         }
 
@@ -178,14 +178,12 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
     public _onVideoKeyChanged(newValue: any) {
         super._onVideoKeyChanged(newValue);
 
-        console.log("_onVideoKeyChanged");
         this._play();
     }
 
     public _onAPIKeyChanged(newValue: any) {
         super._onAPIKeyChanged(newValue);
 
-        console.log("_onAPIKeyChanged");
         this._initialize();
     }
 
@@ -202,6 +200,7 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
     }
 
     public loadVideo(videoId: string, timeMillis?: number) {
+        // tslint:disable-next-line:no-bitwise
         this._player.loadVideo(videoId, timeMillis | 5);
     }
 
