@@ -1,3 +1,4 @@
+// tslint:disable:variable-name
 import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");

@@ -170,16 +170,16 @@ export function onFinalImageSet(args: FinalEventData) {
             currentImage = res;
 
             saveButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(res => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(res => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+                .then(resu => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(resul => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
             desktopButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(res => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(res => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+                .then(resu => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(resul => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
             shareButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(res => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(res => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+                .then(resu => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+                .then(resul => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
             setUserInteraction(true);
 
@@ -234,8 +234,13 @@ function formatDate(date) {
         day = "" + d.getDate(),
         year = d.getFullYear();
 
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
+    if (month.length < 2) {
+        month = "0" + month;
+    }
+
+    if (day.length < 2) {
+        day = "0" + day;
+    }
 
     return [year, month, day].join("-");
 }

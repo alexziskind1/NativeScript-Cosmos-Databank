@@ -61,12 +61,11 @@ export function onFinalImageSet(args: FinalEventData) {
             currentImage = res;
             viewModel.set("isItemVisible", true);
 
-            shareButton.on("tap", function (args: GestureEventData) {
-                console.log("Android share tapped!");
+            shareButton.on("tap", function (params: GestureEventData) {
                 SocialShare.shareImage(res, "Mars Rovers - Cosmos DataBank mobile App");
             });
         }).catch(err => {
-            // console.log(err.stack); 
+            // console.log(err); 
         });
 }
 

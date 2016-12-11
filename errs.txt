@@ -1,26 +1,4 @@
 
-app/files/credentials.ts[2, 72]: file should end with a newline
-app/models/apod/apod-model.ts[146, 2]: file should end with a newline
-app/models/apod/apod-model.ts[124, 12]: variable name must be in camelcase or uppercase
-app/models/apod/apod-model.ts[125, 12]: variable name must be in camelcase or uppercase
-app/models/asteroid/asteroid-view-model.ts[226, 2]: file should end with a newline
-app/models/drawer-over-navigation-model.ts[121, 2]: file should end with a newline
-app/models/epic/epic-model.ts[105, 2]: file should end with a newline
-app/models/rovers/rovers-view-model.ts[204, 2]: file should end with a newline
-D:/WORK/NativeScript-Cosmos-Databank/app/views/helpers/formaters.ts[16, 2]: file should end with a newline
-app/views/epic/epic.ts[237, 5]: if statements must be braced
-app/views/epic/epic.ts[238, 5]: if statements must be braced
-app/views/epic/epic.ts[173, 23]: Shadowed variable: 'res'
-app/views/epic/epic.ts[174, 23]: Shadowed variable: 'res'
-app/views/epic/epic.ts[177, 23]: Shadowed variable: 'res'
-app/views/epic/epic.ts[178, 23]: Shadowed variable: 'res'
-app/views/epic/epic.ts[181, 23]: Shadowed variable: 'res'
-app/views/epic/epic.ts[182, 23]: Shadowed variable: 'res'
-app/views/epic/epic.ts[253, 2]: file should end with a newline
-app/views/rovers/photo-details-page.ts[64, 45]: Shadowed variable: 'args'
-app/views/rovers/photo-details-page.ts[151, 2]: file should end with a newline
-D:/WORK/NativeScript-Cosmos-Databank/app/views/rovers/rovers-selection.ts[164, 2]: file should end with a newline
-app/views/rovers/rover-photo-page.ts[106, 2]: file should end with a newline
 files/nativescript-youtube-player/player-common.ts[41, 13]: expected an assignment or function call
 files/nativescript-youtube-player/player-common.ts[4, 9]: variable 'StackLayout' used before declaration
 files/nativescript-youtube-player/player-common.ts[53, 2]: file should end with a newline
