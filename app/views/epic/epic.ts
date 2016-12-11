@@ -23,7 +23,7 @@ import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 
 if (application.android) {
-    var Toast = require("nativescript-toast");
+    var toast = require("nativescript-toast");
 }
 
 import { EpicViewModel, EpicItem } from "../../models/epic/epic-model";
@@ -85,7 +85,7 @@ export function onSaveImage(args: EventData) {
             });
     } else if (application.android) {
         saveFile(currentImage);
-        Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+        toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
 
@@ -97,7 +97,7 @@ export function onSetWallpaper(args: EventData) {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
                 // console.log(err.stack);
-            });;
+            }); ;
     } else if (application.android) {
 
         saveFile(currentImage);
@@ -110,7 +110,7 @@ export function onSetWallpaper(args: EventData) {
             // console.log(error.stack);
         }
 
-        Toast.makeText("Wallpaper Set!").show();
+        toast.makeText("Wallpaper Set!").show();
     }
 }
 
@@ -149,7 +149,7 @@ export function nextDate() {
     // var currentDate = epicViewModel.get("selectedDate");
     // if (currentDate >= new Date()) {
     //     if (application.android) {
-    //         Toast.makeText("Can not load photos from future!").show();
+    //         toast.makeText("Can not load photos from future!").show();
     //     }
     // } else {
     //     currentDate.setDate(currentDate.getDate()+1);
@@ -192,7 +192,7 @@ export function saveFile(res: imageSource.ImageSource) {
     var url = epicViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
     var n = fileName.indexOf(".");
-    fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
+    fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
 
     if (application.android) {
         // tslint:disable-next-line:max-line-length

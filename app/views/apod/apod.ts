@@ -31,7 +31,7 @@ if (application.android) {
     var youtube = require("nativescript-youtube-player");
 }
 
-let YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
+import { YOUTUBE_API_KEY } from "../../files/credentials";
 
 import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
 

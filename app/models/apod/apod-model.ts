@@ -1,10 +1,11 @@
 import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");
+import { NASA_API_KEY, YOUTUBE_API_KEY } from "../../files/credentials";
 
 let API_URL = "https://api.nasa.gov/planetary/apod";
-let API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
-let YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
+let API_KEY = "?" + NASA_API_KEY;
+
 let HD_PIC = "&hd=true";
 // Parameter	Type	    Default	    Description
 // date	        YYYY-MM-DD	today	    The date of the APOD image to retrieve

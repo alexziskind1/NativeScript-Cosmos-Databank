@@ -1,6 +1,7 @@
 "use strict";
 var observable_1 = require("data/observable");
 var http = require("http");
+var credentials_1 = require("../../files/credentials");
 // http://epic.gsfc.nasa.gov/api/images.php
 var testEpicUrl = "http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/";
 var exampleItem = [
@@ -16,7 +17,7 @@ var exampleImage = "http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/epic_1b_2
 var allLatest = "http://epic.gsfc.nasa.gov/api/images.php";
 // all latest with API_KEY from api.nasa.gov
 var API_URL = "https://api.nasa.gov/EPIC/api/v1.0/images.php";
-var API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
+var API_KEY = "?" + credentials_1.NASA_API_KEY;
 // Parameter	    Type	        Default	                Description
 // date	            YYYY-MM-DD  	Most Recent Available	Retrieve matadata for all imagery available for a given date.
 // available_dates	string	        All Available Dates	    Retrieve a listing of all dates with available imagery.

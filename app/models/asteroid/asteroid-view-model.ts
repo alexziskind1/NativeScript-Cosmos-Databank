@@ -3,8 +3,10 @@ import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");
 
+import { NASA_API_KEY } from "../../files/credentials";
+
 let API_URL = "https://api.nasa.gov/neo/rest/v1/feed";
-let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
+let API_KEY = "&" + NASA_API_KEY;
 
 export class AsteroidViewModel extends Observable {
 

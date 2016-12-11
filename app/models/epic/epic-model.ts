@@ -1,7 +1,7 @@
 import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");
-
+import { NASA_API_KEY } from "../../files/credentials";
 
 // http://epic.gsfc.nasa.gov/api/images.php
 
@@ -23,8 +23,7 @@ var allLatest = "http://epic.gsfc.nasa.gov/api/images.php";
 
 // all latest with API_KEY from api.nasa.gov
 let API_URL = "https://api.nasa.gov/EPIC/api/v1.0/images.php";
-let API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
-
+let API_KEY = "?" + NASA_API_KEY;
 // Parameter	    Type	        Default	                Description
 // date	            YYYY-MM-DD  	Most Recent Available	Retrieve matadata for all imagery available for a given date.
 // available_dates	string	        All Available Dates	    Retrieve a listing of all dates with available imagery.

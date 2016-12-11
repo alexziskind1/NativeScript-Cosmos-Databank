@@ -3,8 +3,9 @@
 var observable_1 = require("data/observable");
 var observable_array_1 = require("data/observable-array");
 var http = require("http");
+var credentials_1 = require("../../files/credentials");
 var API_URL = "https://api.nasa.gov/neo/rest/v1/feed";
-var API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
+var API_KEY = "&" + credentials_1.NASA_API_KEY;
 var AsteroidViewModel = (function (_super) {
     __extends(AsteroidViewModel, _super);
     function AsteroidViewModel() {

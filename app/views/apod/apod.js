@@ -12,11 +12,11 @@ if (application.android) {
     var toast = require("nativescript-toast");
     var youtube = require("nativescript-youtube-player");
 }
-var YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
+var credentials_1 = require("../../files/credentials");
 var apod_model_1 = require("../../models/apod/apod-model");
 var apodViewModel = new apod_model_1.ApodViewModel();
 apodViewModel.set("isPlayerVisible", false);
-apodViewModel.set("youtube_api_key", YOUTUBE_API_KEY);
+apodViewModel.set("youtube_api_key", credentials_1.YOUTUBE_API_KEY);
 apodViewModel.set("youtube_video_key", "2zNSgSzhBfM");
 var page;
 var shareButton;

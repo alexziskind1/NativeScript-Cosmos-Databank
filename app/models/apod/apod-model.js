@@ -1,9 +1,9 @@
 "use strict";
 var observable_1 = require("data/observable");
 var http = require("http");
+var credentials_1 = require("../../files/credentials");
 var API_URL = "https://api.nasa.gov/planetary/apod";
-var API_KEY = "?api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
-var YOUTUBE_API_KEY = "AIzaSyApfrMXAC3SckEBQ_LOrNDA5qUcDAZAevQ";
+var API_KEY = "?" + credentials_1.NASA_API_KEY;
 var HD_PIC = "&hd=true";
 // Parameter	Type	    Default	    Description
 // date	        YYYY-MM-DD	today	    The date of the APOD image to retrieve

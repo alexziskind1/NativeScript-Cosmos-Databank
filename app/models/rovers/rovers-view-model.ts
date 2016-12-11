@@ -2,12 +2,14 @@ import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
 import http = require("http");
 
+import { NASA_API_KEY } from "../../files/credentials";
+
 let API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
 let API_URL_END = "/photos?earth_date=";
-var sampleDate = "2015-4-3";
-let API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
-let DEMO_KEY = "&api_key=DEMO_KEY";
-var requestUrl = API_URL_START + sampleDate + API_KEY;
+let API_KEY = "&" + NASA_API_KEY;
+
+// use instead API_KEY for testing purposes
+let DEMO_API_KEY = "&api_key=DEMO_KEY";
 
 export class RoversViewModel extends Observable {
 

@@ -6,7 +6,7 @@ var imageSource = require("image-source");
 var utils = require("utils/utils");
 var SocialShare = require("nativescript-social-share");
 if (application.android) {
-    var Toast = require("nativescript-toast");
+    var toast = require("nativescript-toast");
 }
 var epic_model_1 = require("../../models/epic/epic-model");
 var epicViewModel = new epic_model_1.EpicViewModel();
@@ -59,7 +59,7 @@ function onSaveImage(args) {
     }
     else if (application.android) {
         saveFile(currentImage);
-        Toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
+        toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
 exports.onSaveImage = onSaveImage;
@@ -82,7 +82,7 @@ function onSetWallpaper(args) {
         }
         catch (error) {
         }
-        Toast.makeText("Wallpaper Set!").show();
+        toast.makeText("Wallpaper Set!").show();
     }
 }
 exports.onSetWallpaper = onSetWallpaper;
@@ -120,7 +120,7 @@ function nextDate() {
     // var currentDate = epicViewModel.get("selectedDate");
     // if (currentDate >= new Date()) {
     //     if (application.android) {
-    //         Toast.makeText("Can not load photos from future!").show();
+    //         toast.makeText("Can not load photos from future!").show();
     //     }
     // } else {
     //     currentDate.setDate(currentDate.getDate()+1);
@@ -157,7 +157,7 @@ function saveFile(res) {
     var url = epicViewModel.get("dataItem").url;
     var fileName = url.substring(url.lastIndexOf("/") + 1);
     var n = fileName.indexOf(".");
-    fileName = fileName.substring(0, n != -1 ? n : fileName.length) + ".jpeg";
+    fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
     if (application.android) {
         // tslint:disable-next-line:max-line-length
         var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();

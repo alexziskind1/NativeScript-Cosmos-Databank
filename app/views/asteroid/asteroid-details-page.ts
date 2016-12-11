@@ -12,16 +12,6 @@ export function onPageLoaded(args: EventData) {
     viewModel = new DrawerOverNavigationModel();
     viewModel.set("contextItem", navigationContext["tappedItem"]);
 
-    // var dataItems = [];
-    // for (var key in navigationContext["tappedItem"]) {
-    //     if (navigationContext["tappedItem"].hasOwnProperty(key)) {
-    //         var element = navigationContext["tappedItem"][key];
-    //         dataItems.push({ key: key, value: element});
-    //     }
-    // }
-
-    // viewModel.set("dataItems", dataItems);
-
     page.bindingContext = viewModel;
 }
 
@@ -30,6 +20,5 @@ export function goBack(args: EventData) {
 }
 
 export function onLinkTap() {
-    console.log("onLinkTap");
     openUrl(viewModel.get("contextItem").nasa_jpl_url);
 }

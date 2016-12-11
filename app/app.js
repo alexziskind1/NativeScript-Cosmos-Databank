@@ -11,7 +11,7 @@ firebase.init({
         console.log("Body: " + message.body);
         console.log(JSON.stringify(message));
         // if your server passed a custom property called 'foo', then do this:
-        //   console.log("Value of 'foo': " + message.favorites);
+        // console.log("Value of 'foo': " + message.favorites);
     }
 }).then(function (instance) {
     console.log("firebase.init done");

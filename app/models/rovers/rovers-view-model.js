@@ -2,12 +2,12 @@
 var observable_1 = require("data/observable");
 var observable_array_1 = require("data/observable-array");
 var http = require("http");
+var credentials_1 = require("../../files/credentials");
 var API_URL_START = "https://api.nasa.gov/mars-photos/api/v1/rovers/";
 var API_URL_END = "/photos?earth_date=";
-var sampleDate = "2015-4-3";
-var API_KEY = "&api_key=jXRI5DynwdFVqt950uq6XMwZtlf6w8mSgpTJTcbX";
-var DEMO_KEY = "&api_key=DEMO_KEY";
-var requestUrl = API_URL_START + sampleDate + API_KEY;
+var API_KEY = "&" + credentials_1.NASA_API_KEY;
+// use instead API_KEY for testing purposes
+var DEMO_API_KEY = "&api_key=DEMO_KEY";
 var RoversViewModel = (function (_super) {
     __extends(RoversViewModel, _super);
     function RoversViewModel(rover, year, month, day) {

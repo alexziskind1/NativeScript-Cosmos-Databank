@@ -10,7 +10,6 @@ import enums = require("ui/enums");
 import fileSystem = require("file-system");
 import imageSource = require("image-source");
 import application = require("application");
-
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 
