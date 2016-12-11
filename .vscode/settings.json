@@ -1,5 +1,4 @@
 {
-    // Run the linter on save (onSave) or on type (onType)
     "tslint.run": "onSave",
     "tslint.autoFixOnSave" : true
 }
