@@ -11,7 +11,24 @@ The application is loading multiple images from online sources and is using
 nativescript-fresco plugin to manage memory recourses when working with lists of large images.
 Firebase implementation for FCM and Realtime Firebase DB.
 
-List of used plugins:
+## API KEYS setup
+To test the application you will need created [NASA API key](https://api.nasa.gov/) and [Youtube API key](https://developers.google.com/youtube/v3/getting-started).
+Once obtained cretea the following file `app/files/credentials.ts` and place your keys as follows:
+
+```
+export var NASA_API_KEY = "api_key=" + NASA_API_KEY;
+export let YOUTUBE_API_KEY = YOUTUBE_API_KEY;
+```
+
+## Firebase google-services.json setup
+This application demonstrates how to use Firebase services.
+In order to build the application you will need to 
+ - generate your own google-services.json (with different package id). More [here](https://firebase.google.com/docs/android/setup)
+ - run `tns platform add android`
+ - place `google-services.json` in **platforms/android** folder
+>Node: After each removal of platforms folder you should place the file again. 
+
+## List of used plugins
 
  * nativescript-permissions
  * nativescript-cardview (material design cards)
@@ -23,7 +40,7 @@ List of used plugins:
  * nativescript-theme-core (css)
  * nativescript-youtube-videoplayer (beta)
 
-List of used APIs:
+## List of used API
 
  * NASA Mars Rover Photos (500 000+ photos from Mars)
  * NASA APOD (Astronomical photo of the day)
