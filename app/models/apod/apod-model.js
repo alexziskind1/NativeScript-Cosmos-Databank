@@ -1,4 +1,5 @@
 "use strict";
+// tslint:disable:variable-name
 var observable_1 = require("data/observable");
 var http = require("http");
 var credentials_1 = require("../../files/credentials");

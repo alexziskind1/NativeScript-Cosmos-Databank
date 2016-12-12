@@ -139,14 +139,14 @@ function onFinalImageSet(args) {
         .then(function (res) {
         currentImage = res;
         saveButton.animate({ opacity: 0.2, rotate: 360 })
-            .then(function (res) { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-            .then(function (res) { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then(function (resu) { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+            .then(function (resul) { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         desktopButton.animate({ opacity: 0.2, rotate: 360 })
-            .then(function (res) { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-            .then(function (res) { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then(function (resu) { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+            .then(function (resul) { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         shareButton.animate({ opacity: 0.2, rotate: 360 })
-            .then(function (res) { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-            .then(function (res) { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+            .then(function (resu) { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+            .then(function (resul) { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         setUserInteraction(true);
     }).catch(function (err) {
         // console.log(err.stack);
@@ -191,10 +191,12 @@ function onIosShare() {
 exports.onIosShare = onIosShare;
 function formatDate(date) {
     var d = new Date(date), month = "" + (d.getMonth() + 1), day = "" + d.getDate(), year = d.getFullYear();
-    if (month.length < 2)
+    if (month.length < 2) {
         month = "0" + month;
-    if (day.length < 2)
+    }
+    if (day.length < 2) {
         day = "0" + day;
+    }
     return [year, month, day].join("-");
 }
 function setUserInteraction(state) {

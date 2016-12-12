@@ -29,7 +29,6 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
                 // TODO: Handle errors
                 that._player = undefined;
                 that._initialized = false;
-                console.log("init failure: " + error);
             },
             onInitializationSuccess: function (provider, player, wasRestored) {
                 player.setPlayerStateChangeListener(that._onPlayerStateChangeListener);
@@ -45,43 +44,42 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
 
         this._onPlaybackEventListener = new com.google.android.youtube.player.YouTubePlayer.PlaybackEventListener({
             onBuffering: function(isBuffering) {
-                console.log("onBuffering");
+                // console.log("onBuffering");
             },
             onPaused: function () {
-                console.log("onPaused");
+                // console.log("onPaused");
             },
             onPlaying: function () {
-                console.log("onPlaying");
+                // console.log("onPlaying");
             },
             onSeekTo: function (newPositionMillis) {
-                console.log("onSeekTo");
-                console.log("newPositionMillis: " + newPositionMillis);
+                // console.log("onSeekTo");
             },
             onStopped: function () {
-                console.log("onStopped");
+                // console.log("onStopped");
             }
         });
 
         // tslint:disable-next-line:max-line-length
         this._onPlayerStateChangeListener = new com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener({
             onAdStarted: function () {
-                console.log("add started");
+                // console.log("add started");
             },
             onError: function (reason) {
                 console.log("error reason: " + reason);
             },
             onLoaded: function (videoId) {
-                console.log("onLoaded:");
-                console.log("videoId: " + videoId);
+                // console.log("onLoaded:");
+                // console.log("videoId: " + videoId);
             },
             onLoading: function () {
-                console.log("onLoading");
+                // console.log("onLoading");
             },
             onVideoEnded: function () {
-                console.log("onVideoEnded");
+                // console.log("onVideoEnded");
             },
             onVideoStarted: function () {
-                console.log("onVideoStarted");
+                // console.log("onVideoStarted");
             }
         });
     }
@@ -152,7 +150,6 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
             return;
         }
 
-        console.log("_initialize apiKey: " + this.apiKey);
         var key = this.apiKey;
         if (!key) {
             // No valid API key
@@ -167,7 +164,6 @@ export class YouTubePlayerView extends common.YouTubePlayerView {
             return;
         }
 
-        console.log("_play videoKey" + this.videoKey);
         if (!this.videoKey) {
             return;
         }

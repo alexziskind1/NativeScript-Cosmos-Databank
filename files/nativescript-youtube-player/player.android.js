@@ -24,41 +24,28 @@ var YouTubePlayerView = (function (_super) {
         });
         this._onPlaybackEventListener = new com.google.android.youtube.player.YouTubePlayer.PlaybackEventListener({
             onBuffering: function (isBuffering) {
-                console.log("onBuffering");
             },
             onPaused: function () {
-                console.log("onPaused");
             },
             onPlaying: function () {
-                console.log("onPlaying");
             },
             onSeekTo: function (newPositionMillis) {
-                console.log("onSeekTo");
-                console.log("newPositionMillis: " + newPositionMillis);
             },
             onStopped: function () {
-                console.log("onStopped");
             }
         });
         this._onPlayerStateChangeListener = new com.google.android.youtube.player.YouTubePlayer.PlayerStateChangeListener({
             onAdStarted: function () {
-                console.log("add started");
             },
             onError: function (reason) {
-                console.log("error reason: " + reason);
             },
             onLoaded: function (videoId) {
-                console.log("onLoaded:");
-                console.log("videoId: " + videoId);
             },
             onLoading: function () {
-                console.log("onLoading");
             },
             onVideoEnded: function () {
-                console.log("onVideoEnded");
             },
             onVideoStarted: function () {
-                console.log("onVideoStarted");
             }
         });
     }
@@ -91,7 +78,6 @@ var YouTubePlayerView = (function (_super) {
     };
     YouTubePlayerView.prototype._onDetached = function (force) {
         _super.prototype._onDetached.call(this, force);
-        console.log("_onDetached");
         if (!this._fragment) {
             return;
         }
@@ -108,10 +94,8 @@ var YouTubePlayerView = (function (_super) {
         if (!this._fragment) {
             return;
         }
-        console.log("_initialize apiKey: " + this.apiKey);
         var key = this.apiKey;
         if (!key) {
-            console.log("key: " + key);
             return;
         }
         this._fragment.initialize(key, this._onInitializedListener);
@@ -120,7 +104,6 @@ var YouTubePlayerView = (function (_super) {
         if (!this._initialized) {
             return;
         }
-        console.log("_play videoKey" + this.videoKey);
         if (!this.videoKey) {
             console.log(this.videoKey);
             return;
@@ -129,12 +112,10 @@ var YouTubePlayerView = (function (_super) {
     };
     YouTubePlayerView.prototype._onVideoKeyChanged = function (newValue) {
         _super.prototype._onVideoKeyChanged.call(this, newValue);
-        console.log("_onVideoKeyChanged");
         this._play();
     };
     YouTubePlayerView.prototype._onAPIKeyChanged = function (newValue) {
         _super.prototype._onAPIKeyChanged.call(this, newValue);
-        console.log("_onAPIKeyChanged");
         this._initialize();
     };
     YouTubePlayerView.prototype.loadPlaylist = function (playlistId) {
