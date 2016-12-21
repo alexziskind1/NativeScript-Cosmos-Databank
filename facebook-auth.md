@@ -69,3 +69,7 @@ Add it as a child of application on the activity level.
       }
   );
 ```
+
+11. Remember those **Key Hashes** we need to set in Facebook console!? Well after your first attempt to login in,
+open `adb logcat` and look for something like Key hash <......> does not match any stored key hashes.
+Copy the hash key and paste it to the faceboook developer console. Voila!

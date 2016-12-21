@@ -22,3 +22,7 @@ export function onLogin() {
       }
   );
 }
+
+export function onLogout() {
+    firebase.logout();
+}

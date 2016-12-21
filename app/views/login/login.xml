@@ -1,6 +1,6 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatedTo="onNavigatedTo">
     <StackLayout>
-        <Button text="LOGIN with Facebook" tap="onLogin" />
-        
+        <Button text="LOGIN with Facebook" color="gray" tap="onLogin" />
+        <Button text="LOGOUT" color="gray" tap="onLogout" />
     </StackLayout>
 </Page>
