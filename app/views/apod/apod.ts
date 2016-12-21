@@ -249,7 +249,7 @@ export function onShare(args: EventData) {
         "/favorites",
         {
             "dataItem": apodViewModel.get("dataItem"),
-            "updateTs": firebase.ServerValue.TIMESTAMP
+            "updateTs": firebase["ServerValue"].TIMESTAMP
         }
     ).then(result => {
         console.log("created key: " + result.key);

@@ -4,6 +4,6 @@
     "remote_config": false,
     "messaging": true,
     "storage": false,
-    "facebook_auth": false,
+    "facebook_auth": true,
     "google_auth": false
 }

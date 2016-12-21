@@ -207,7 +207,7 @@ exports.onSetWallpaper = onSetWallpaper;
 function onShare(args) {
     firebase.push("/favorites", {
         "dataItem": apodViewModel.get("dataItem"),
-        "updateTs": firebase.ServerValue.TIMESTAMP
+        "updateTs": firebase["ServerValue"].TIMESTAMP
     }).then(function (result) {
         console.log("created key: " + result.key);
     });
