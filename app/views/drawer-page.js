@@ -1,9 +1,13 @@
 "use strict";
 var drawer_over_navigation_model_1 = require("../view-models/drawer-over-navigation-model");
 var permissions = require("nativescript-permissions");
+var vm = new drawer_over_navigation_model_1.DrawerOverNavigationModel();
 function onPageLoaded(args) {
     var page = args.object;
-    page.bindingContext = new drawer_over_navigation_model_1.DrawerOverNavigationModel();
+    var currentUser = page.navigationContext;
+    console.log(JSON.stringify(currentUser));
+    vm.set("currentUser", currentUser);
+    page.bindingContext = vm;
 }
 exports.onPageLoaded = onPageLoaded;
 function onPageNavigatedTo(args) {

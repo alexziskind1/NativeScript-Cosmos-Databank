@@ -30,8 +30,8 @@
                 
                 <GridLayout columns="*, 10, *" rows="auto, auto"  class="m-b-16">
                     <Label text="or login with" row="0" col="0" colSpan="3" class="text-center m-8" fontSize="10" textWrap="true" />
-                    <Image row="1" col="0" src="~/images/login-facebook.png" width="80%" height="80%" stretch="aspectFit" tap="onFacebookLogin"/>
-                    <Image row="1" col="2" src="~/images/google-sign-in.png" width="80%" height="80%" stretch="aspectFit" tap="onGoogleLogin" />
+                    <Image row="1" col="0" src="~/images/login-facebook.png" width="80%" height="80%" stretch="aspectFit" tap="{{ onFacebookLogin }}"/>
+                    <Image row="1" col="2" src="~/images/google-sign-in.png" width="80%" height="80%" stretch="aspectFit" tap="{{ onGoogleLogin }}" />
                 </GridLayout>
 
             </StackLayout> 

@@ -10,6 +10,9 @@ import * as dialogs from "ui/dialogs";
 import * as enums from "ui/enums";
 
 import { User } from "../../models/login/user";
+import { AuthViewModel } from "../../view-models/login/login-view-model";
+
+let authViewModel = new AuthViewModel();
 
 let currentUser: User;
 let page: Page;
@@ -45,6 +48,8 @@ export function onLoaded(args: EventData) {
         duration: 2000,
         curve: enums.AnimationCurve.spring
     });
+
+    page.bindingContext = authViewModel;
 }
 
 export function onLogin() {
@@ -59,23 +64,6 @@ export function onLogin() {
           moduleName: "views/drawer-page", 
           context: { currentUser: currentUser },
           // clearHistory: true // TODO: uncomment later 
-        });
-    }).catch(err => {
-        dialogs.alert(err);
-    })
-}
-
-export function onFacebookLogin() {
-    firebase.login({
-        type: firebase.LoginType.FACEBOOK,
-        scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
-    }).then(user => {
-        console.log(JSON.stringify(user));
-        currentUser = new User(user.anonymous, user.email, user.emailVerified, user.name, user.profileImageURL, user.refreshToken, user.uid);
-        frame.topmost().navigate({ 
-          moduleName: "views/drawer-page", 
-          context: { currentUser: currentUser },
-          // clearHistory: true // TODO: uncomment later
         });
     }).catch(err => {
         dialogs.alert(err);

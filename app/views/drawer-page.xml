@@ -23,9 +23,9 @@
                 <StackLayout class="drawer-content m-r-30">   
                     <ScrollView>
                         <StackLayout>
-                            <GridLayout rows="120" columns="3*, 2*" class="m-16">
-                                <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  
-                                <Label col="1" text="Navigate through the Universe" class="text-center" verticalAlignment="center" textWrap="true" />    
+                            <GridLayout columns="*, 2*" class="m-16">
+                                <Image col="0" src="{{ currentUser.currentUser.profileImageURL }}" width="100" height="100" borderRadius="50" stretch="aspectFill" />  
+                                <Label col="1" text="{{ 'Welcome back\n ' + currentUser.currentUser.name + '\nSelect your adventure'}}" class="text-center" verticalAlignment="center" textWrap="true" />    
                             </GridLayout>
                             <Button text="Home" tap="{{ goToHome }}" class="btn btn-primary btn-active dp-btn" />
                             <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" class="btn btn-primary btn-active dp-btn" />

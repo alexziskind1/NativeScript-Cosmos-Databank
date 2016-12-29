@@ -5,5 +5,5 @@
     "messaging": true,
     "storage": false,
     "facebook_auth": true,
-    "google_auth": false
+    "google_auth": true
 }
