@@ -115,6 +115,8 @@ function nextDate() {
 exports.nextDate = nextDate;
 function onFinalImageSet(args) {
     var drawee = args.object;
+    console.log("drawee.imageUri:" + drawee.imageUri);
+    console.log("apodViewModel: " + apodViewModel.get("dataItem").url);
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res) {
         currentImage = res;
@@ -129,7 +131,7 @@ function onFinalImageSet(args) {
             .then(function () { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         setUserInteraction(true);
     }).catch(function (err) {
-        // console.log(err.stack);
+        console.log(err);
     });
 }
 exports.onFinalImageSet = onFinalImageSet;

@@ -141,7 +141,9 @@ export function nextDate() {
 
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
-
+    console.log("drawee.imageUri:" + drawee.imageUri);
+    console.log("apodViewModel: " + apodViewModel.get("dataItem").url);
+    
     imageSource.fromUrl(drawee.imageUri)
         .then(res => {
             currentImage = res;
@@ -161,7 +163,7 @@ export function onFinalImageSet(args: FinalEventData) {
             setUserInteraction(true);
 
         }).catch(err => {
-            // console.log(err.stack);
+            console.log(err);
         });
 }
 
