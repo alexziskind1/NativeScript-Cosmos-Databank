@@ -33,7 +33,7 @@ if (application.android) {
 
 import { YOUTUBE_API_KEY } from "../../files/credentials";
 
-import { ApodViewModel, ApodItem } from "../../models/apod/apod-model";
+import { ApodViewModel, ApodItem } from "../../view-models/apod/apod-model";
 
 let apodViewModel = new ApodViewModel();
 apodViewModel.set("isPlayerVisible", false);

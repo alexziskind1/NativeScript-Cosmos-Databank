@@ -1,4 +1,4 @@
-import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-model";
+import { DrawerOverNavigationModel } from "../../view-models/drawer-over-navigation-model";
 import { EventData, Observable } from "data/observable";
 import { Page } from "ui/page";
 import { Button } from "ui/button";

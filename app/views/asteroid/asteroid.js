@@ -1,7 +1,7 @@
 "use strict";
 var frame_1 = require("ui/frame");
 var application = require("application");
-var asteroid_view_model_1 = require("../../models/asteroid/asteroid-view-model");
+var asteroid_view_model_1 = require("../../view-models/asteroid/asteroid-view-model");
 var vm = new asteroid_view_model_1.AsteroidViewModel();
 vm.initDataItems();
 function onPageLoaded(args) {

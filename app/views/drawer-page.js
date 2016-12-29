@@ -1,5 +1,5 @@
 "use strict";
-var drawer_over_navigation_model_1 = require("../models/drawer-over-navigation-model");
+var drawer_over_navigation_model_1 = require("../view-models/drawer-over-navigation-model");
 var permissions = require("nativescript-permissions");
 function onPageLoaded(args) {
     var page = args.object;

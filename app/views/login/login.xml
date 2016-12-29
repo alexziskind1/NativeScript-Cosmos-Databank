@@ -12,17 +12,17 @@
       </ActionBar>
     </Page.actionBar>  
     <ScrollView>
-        <Card:CardView verticalAlignment="center" elevation="40" radius="20" class="m-8"> 
+        <Card:CardView id="form-card" verticalAlignment="center" elevation="40" radius="20" class="m-8"> 
             <StackLayout class="form">
 
                 <StackLayout class="input-field">
                     <Label class="label" color="#BCBCBC" text="Email:"></Label>
-                    <TextField class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    <TextField id="tf-email" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
                 </StackLayout>
 
                 <StackLayout class="input-field">
                     <Label class="label" color="#BCBCBC" text="Password:"></Label>
-                    <TextField class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    <TextField id="tf-pass" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
                 </StackLayout>
 
                 <Button text="Login" class="btn btn-primary btn-active lg-btn" tap="onLogin" />

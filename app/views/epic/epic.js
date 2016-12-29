@@ -8,7 +8,7 @@ var SocialShare = require("nativescript-social-share");
 if (application.android) {
     var toast = require("nativescript-toast");
 }
-var epic_model_1 = require("../../models/epic/epic-model");
+var epic_model_1 = require("../../view-models/epic/epic-model");
 var epicViewModel = new epic_model_1.EpicViewModel();
 var page;
 var shareButton;

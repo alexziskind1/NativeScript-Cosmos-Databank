@@ -26,7 +26,7 @@ if (application.android) {
     var toast = require("nativescript-toast");
 }
 
-import { EpicViewModel, EpicItem } from "../../models/epic/epic-model";
+import { EpicViewModel, EpicItem } from "../../view-models/epic/epic-model";
 let epicViewModel = new EpicViewModel();
 
 let page: Page;

@@ -8,7 +8,7 @@ import { TabView, SelectedIndexChangedEventData } from "ui/tab-view";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 
-import { PickersViewModel } from "../../models/rovers/pickers-view-model";
+import { PickersViewModel } from "../../view-models/rovers/pickers-view-model";
 
 import * as app from "application";
 

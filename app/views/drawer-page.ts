@@ -1,4 +1,4 @@
-import { DrawerOverNavigationModel } from "../models/drawer-over-navigation-model";
+import { DrawerOverNavigationModel } from "../view-models/drawer-over-navigation-model";
 var permissions = require("nativescript-permissions");
 
 export function onPageLoaded(args) {

@@ -1,19 +1,50 @@
+import { CardView } from "nativescript-cardview";
 import { Page } from "ui/page";
+import { TextField } from "ui/text-field";
 import { EventData } from "data/observable";
 import * as frame from "ui/frame";
 import * as firebase from "nativescript-plugin-firebase";
+import * as app from "application";
 import * as appSettings from "application-settings";
 import * as dialogs from "ui/dialogs";
+import * as enums from "ui/enums";
+
+import { User } from "../../models/login/user";
 
 let currentUser: User;
+let page: Page;
+let card: CardView;
+let tfEmail: TextField;
+let tfPass: TextField;
 
 export function onLoaded(args: EventData) {
-    let page = <Page>args.object;
+    page = <Page>args.object;
 
     // TODO: uncomment later 
     // if (appSettings.getBoolean("isLogged")) {
     //     frame.topmost().navigate("./views/drawer-page");
     // }
+
+    /* intial HIDING of the keyboard for android */
+    if (app.android) {
+        tfEmail = <TextField>page.getViewById("tf-email");
+        tfEmail.android.setFocusable(false);
+        tfPass = <TextField>page.getViewById("tf-pass");
+        tfPass.android.setFocusable(false);
+
+        setTimeout(function () {
+            tfEmail.android.setFocusableInTouchMode(true);
+            tfPass.android.setFocusableInTouchMode(true);
+        }, 300);
+    }
+
+    card = <CardView>page.getViewById("form-card");
+    card.translateY = -300;
+    card.animate({
+        translate: { x: 0, y: 0},    
+        duration: 2000,
+        curve: enums.AnimationCurve.spring
+    });
 }
 
 export function onLogin() {
@@ -53,30 +84,4 @@ export function onFacebookLogin() {
 
 export function onLogout() {
     firebase.logout();
-}
-
-export class User {
-    public anonymous: boolean;
-    public email: string;
-    public emailVerified: boolean;
-    public name: string;
-    public profileImageURL: string;
-    public refreshToken: string;
-    public uid: string;
-
-    constructor(anonymous: boolean,
-        email: string,
-        emailVerified: boolean,
-        name: string,
-        profileImageURL: string,
-        refreshToken: string,
-        uid: string) {
-        this.anonymous = anonymous;
-        this.email = email;
-        this.emailVerified = emailVerified;
-        this.name = name;
-        this.profileImageURL = profileImageURL;
-        this.refreshToken = refreshToken;
-        this.uid = uid;
-    }
 }

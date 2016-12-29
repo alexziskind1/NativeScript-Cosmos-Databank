@@ -1,5 +1,5 @@
 "use strict";
-var drawer_over_navigation_model_1 = require("../../models/drawer-over-navigation-model");
+var drawer_over_navigation_model_1 = require("../../view-models/drawer-over-navigation-model");
 var frame_1 = require("ui/frame");
 var utils_1 = require("utils/utils");
 var viewModel;

@@ -13,7 +13,7 @@ if (application.android) {
     var youtube = require("nativescript-youtube-player");
 }
 var credentials_1 = require("../../files/credentials");
-var apod_model_1 = require("../../models/apod/apod-model");
+var apod_model_1 = require("../../view-models/apod/apod-model");
 var apodViewModel = new apod_model_1.ApodViewModel();
 apodViewModel.set("isPlayerVisible", false);
 apodViewModel.set("youtube_api_key", credentials_1.YOUTUBE_API_KEY);

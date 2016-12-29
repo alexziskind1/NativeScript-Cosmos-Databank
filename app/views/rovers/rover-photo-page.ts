@@ -6,7 +6,7 @@ import * as application from "application";
 import * as http from "http";
 import * as frame from "ui/frame";
 
-import { RoversViewModel, DataItem } from "../../models/rovers/rovers-view-model";
+import { RoversViewModel, DataItem } from "../../view-models/rovers/rovers-view-model";
 import { pickersViewModel } from "./rovers-selection";
 
 import * as RadListwModule from "nativescript-telerik-ui/listview";
