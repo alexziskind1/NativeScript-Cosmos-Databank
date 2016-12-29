@@ -2,6 +2,7 @@
 var application = require("application");
 var fresco = require("nativescript-fresco");
 var firebase = require("nativescript-plugin-firebase");
+var appSettings = require("application-settings");
 firebase.init({
     persist: true,
     // Optionally pass in properties for database, authentication and cloud messaging,
@@ -10,6 +11,7 @@ firebase.init({
         console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
         if (data.loggedIn) {
             console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+            appSettings.setBoolean("isLogged", true);
         }
     },
     onMessageReceivedCallback: function (message) {

@@ -1,6 +1,41 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatedTo="onNavigatedTo">
-    <StackLayout>
-        <Button text="LOGIN with Facebook" color="gray" tap="onLogin" />
-        <Button text="LOGOUT" color="gray" tap="onLogout" />
-    </StackLayout>
+<Page xmlns="http://www.nativescript.org/tns.xsd" 
+      xmlns:Card="nativescript-cardview" 
+      loaded="onLoaded" 
+      navigatedTo="onNavigatedTo">
+    <Page.actionBar>
+      <ActionBar>
+        <ActionBar.titleView>
+            <StackLayout>
+                <Label text="COSMOS Databank" class="h3 action-bar-title"/>
+            </StackLayout>
+        </ActionBar.titleView>
+      </ActionBar>
+    </Page.actionBar>  
+    <ScrollView>
+        <Card:CardView verticalAlignment="center" elevation="40" radius="20" class="m-8"> 
+            <StackLayout class="form">
+
+                <StackLayout class="input-field">
+                    <Label class="label" color="#BCBCBC" text="Email:"></Label>
+                    <TextField class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                </StackLayout>
+
+                <StackLayout class="input-field">
+                    <Label class="label" color="#BCBCBC" text="Password:"></Label>
+                    <TextField class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                </StackLayout>
+
+                <Button text="Login" class="btn btn-primary btn-active lg-btn" tap="onLogin" />
+                <Label text="No account!? Create one here" class="text-center m-16" textWrap="true" />
+                
+                <GridLayout columns="*, 10, *" rows="auto, auto"  class="m-b-16">
+                    <Label text="or login with" row="0" col="0" colSpan="3" class="text-center m-8" fontSize="10" textWrap="true" />
+                    <Image row="1" col="0" src="~/images/login-facebook.png" width="80%" height="80%" stretch="aspectFit" tap="onFacebookLogin"/>
+                    <Image row="1" col="2" src="~/images/google-sign-in.png" width="80%" height="80%" stretch="aspectFit" tap="onGoogleLogin" />
+                </GridLayout>
+
+            </StackLayout> 
+            <!--<Button text="Logout" class="btn btn-primary btn-active lg-btn" tap="onLogout" />-->
+        </Card:CardView>
+    </ScrollView>
 </Page>

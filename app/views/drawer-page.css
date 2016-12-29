@@ -11,7 +11,8 @@
 .dp-btn {
     background-color: #008C9E;
     font-family: "Nasalization";
-    margin: 0 4 0 4;
+    margin: 0 16 0 16;
+    padding: 16;
 }
 
 CardView {
