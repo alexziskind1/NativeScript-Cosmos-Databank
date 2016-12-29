@@ -5,7 +5,6 @@ var vm = new drawer_over_navigation_model_1.DrawerOverNavigationModel();
 function onPageLoaded(args) {
     var page = args.object;
     var currentUser = page.navigationContext;
-    console.log(JSON.stringify(currentUser));
     vm.set("currentUser", currentUser);
     page.bindingContext = vm;
 }

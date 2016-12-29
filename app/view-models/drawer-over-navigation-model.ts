@@ -5,6 +5,7 @@ import { DatePicker } from "ui/date-picker";
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import frameModule = require("ui/frame");
 
+import * as firebase from "nativescript-plugin-firebase";
 import * as application from "application";
 
 export class DrawerOverNavigationModel extends Observable {
@@ -117,5 +118,13 @@ export class DrawerOverNavigationModel extends Observable {
                 name: application.android ? "explode" : "curl"
             }
         });
+    }
+
+    public onLogout() {
+        firebase.logout().then(() => {
+            frameModule.topmost().navigate({
+                moduleName: "./views/login/login",
+            }) 
+        })
     }
 }

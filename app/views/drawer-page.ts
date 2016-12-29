@@ -8,9 +8,7 @@ export function onPageLoaded(args) {
     var page = <Page>args.object;
 
     var currentUser = page.navigationContext;
-
-    console.log(JSON.stringify(currentUser));
-    vm.set("currentUser", currentUser);
+    vm.set("currentUser", currentUser);    
 
     page.bindingContext = vm;
 }

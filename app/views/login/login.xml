@@ -13,19 +13,19 @@
     </Page.actionBar>  
     <ScrollView>
         <Card:CardView id="form-card" verticalAlignment="center" elevation="40" radius="20" class="m-8"> 
-            <StackLayout class="form">
+            <StackLayout class="form" visibility="{{ isFormVisible, isFormVisible ? 'visible' : 'collapsed' }}">
 
                 <StackLayout class="input-field">
                     <Label class="label" color="#BCBCBC" text="Email:"></Label>
-                    <TextField id="tf-email" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    <TextField text="{{ email }}" id="tf-email" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
                 </StackLayout>
 
                 <StackLayout class="input-field">
                     <Label class="label" color="#BCBCBC" text="Password:"></Label>
-                    <TextField id="tf-pass" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    <TextField text="{{ pass }}" id="tf-pass" secure="true" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
                 </StackLayout>
 
-                <Button text="Login" class="btn btn-primary btn-active lg-btn" tap="onLogin" />
+                <Button text="Login" class="btn btn-primary btn-active lg-btn" tap="{{ onPasswordLogin }}" />
                 <Label text="No account!? Create one here" class="text-center m-16" textWrap="true" />
                 
                 <GridLayout columns="*, 10, *" rows="auto, auto"  class="m-b-16">

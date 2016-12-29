@@ -3,21 +3,23 @@ import * as firebase from "nativescript-plugin-firebase";
 import * as frame from "ui/frame";
 import * as dialogs from "ui/dialogs";
 import { User } from "../../models/login/user";
+import * as appSettings from "application-settings";
 
 export class AuthViewModel extends Observable {
 
-    private _email: string = "test@test.com";
-    private _pass: string = "test1234";
-    private _newEmail: string = "test@test.com";
-    private _newPass: string = "test1234";
+    private _email: string = "cosmos@databank.org";
+    private _pass: string = "123456";
+    private _newEmail: string = "new-account@test.com";
+    private _newPass: string = "123456";
     private _isFormVisible: boolean;
 
-    public currentUser: User;
+    private  _currentUser: User;
 
     constructor() {
         super();
 
         this.isFormVisible = true;
+        this.getCurrentUser();
     }
 
     public get isFormVisible() {
@@ -75,81 +77,123 @@ export class AuthViewModel extends Observable {
         }
     }
 
+    public get currentUser() {
+        return this._currentUser;
+    }
+
+    public set currentUser(value: User) {
+        if (this._currentUser !== value) {
+            this._currentUser = value;
+            this.notifyPropertyChange("currentUser", value);
+        }
+    }
+
     // for all login methods
     public getCurrentUser() {
         firebase.getCurrentUser().then(user => {
             console.log("User uid: " + user.uid);
             this.currentUser = new User(user.anonymous, user.email, user.emailVerified, user.name, user.profileImageURL, user.refreshToken, user.uid);
         }).catch(err => {
-            console.log("Trouble in paradise: " + err);
             dialogs.alert(err);
         })
     }
 
     // FACEBOOK login
     public onFacebookLogin() {
-        firebase.login({
-            type: firebase.LoginType.FACEBOOK,
-            scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
-        }).then(user => {
-            console.log(JSON.stringify(user));
-            this.currentUser = new User(user.anonymous, user.email, user.emailVerified, user.name, user.profileImageURL, user.refreshToken, user.uid);
-            frame.topmost().navigate({
-                moduleName: "views/drawer-page",
-                context: { currentUser: this.currentUser },
-                clearHistory: true
-            });
-        }).catch(err => {
-            dialogs.alert(err);
-        });
+        if (appSettings.getBoolean("isLogged")) {
+            firebase.logout().then(() => {
+                firebase.login({
+                    type: firebase.LoginType.FACEBOOK,
+                    scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
+                }).then(user => {
+                    this.navigateWithContext(user, "views/drawer-page");
+                }).catch(err => {
+                    dialogs.alert(err);
+                });
+            })
+        } else {
+            firebase.login({
+                type: firebase.LoginType.FACEBOOK,
+                scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
+            }).then(user => {
+                this.navigateWithContext(user, "views/drawer-page");
+            }).catch(err => {
+                dialogs.alert(err);
+            })          
+        }
     }
 
     // GOOGLE login
     public onGoogleLogin() {
-        firebase.login({
-            type: firebase.LoginType.GOOGLE,
-        }).then(user => {
-            console.log(JSON.stringify(user));
-            this.currentUser = new User(user.anonymous, user.email, user.emailVerified, user.name, user.profileImageURL, user.refreshToken, user.uid);
-            frame.topmost().navigate({
-                moduleName: "views/drawer-page",
-                context: { currentUser: this.currentUser },
-                clearHistory: true
-            });
-        }).catch(err => {
-            console.log(err);
-            dialogs.alert(err);
-        })
+        if (appSettings.getBoolean("isLogged")) {
+            firebase.logout().then(() => {
+                firebase.login({
+                    type: firebase.LoginType.GOOGLE,
+                }).then(user => {
+                    this.navigateWithContext(user, "views/drawer-page");
+                }).catch(err => {
+                    dialogs.alert(err);
+                })
+            })
+        } else {
+            firebase.login({
+                type: firebase.LoginType.GOOGLE,
+            }).then(user => {
+                this.navigateWithContext(user, "views/drawer-page");
+            }).catch(err => {
+                dialogs.alert(err);
+            })          
+        }
     }
 
     // ANONYMOUS login
     public onAnonymousLogin() {
-        firebase.login({
-            type: firebase.LoginType.ANONYMOUS
-        }).then(user => {
-            console.log(JSON.stringify(user));
-            this.currentUser = new User(user.anonymous, user.email, user.emailVerified, user.name, user.profileImageURL, user.refreshToken, user.uid);
-            frame.topmost().navigate({ moduleName: "welcome-page", context: { currentUser: this.currentUser } });
-        }).catch(err => {
-            console.log("Trouble in paradise: " + err);
-            dialogs.alert(err);
-        })
+        if (appSettings.getBoolean("isLogged")) {
+            firebase.logout().then(() => {
+                firebase.login({
+                    type: firebase.LoginType.ANONYMOUS
+                }).then(user => {
+                    this.navigateWithContext(user, "views/drawer-page");
+                }).catch(err => {
+                    dialogs.alert(err);
+                })
+            })
+        } else {
+            firebase.login({
+                type: firebase.LoginType.ANONYMOUS
+            }).then(user => {
+                this.navigateWithContext(user, "views/drawer-page");
+            }).catch(err => {
+                dialogs.alert(err);
+            })
+        }
     }
 
     // PASSWORD login
     public onPasswordLogin() {
-        firebase.login({
-            type: firebase.LoginType.PASSWORD,
-            email: this.email,
-            password: this.pass
-        }).then(user => {
-            console.log(JSON.stringify(user));
-            this.currentUser = new User(user.anonymous, user.email, user.emailVerified, user.name, user.profileImageURL, user.refreshToken, user.uid);
-            frame.topmost().navigate({ moduleName: "welcome-page", context: { currentUser: this.currentUser } });
-        }).catch(err => {
-            console.log(err);
-            dialogs.alert(err);
-        })
+        if (appSettings.getBoolean("isLogged")) {
+            firebase.logout().then(() => {
+                firebase.login({
+                    type: firebase.LoginType.PASSWORD,
+                    email: this.email,
+                    password: this.pass
+                }).then(user => {
+                    this.navigateWithContext(user, "views/drawer-page");
+                }).catch(err => {
+                    dialogs.alert(err);
+                })
+            })
+        } else {
+            firebase.login({
+                type: firebase.LoginType.PASSWORD,
+                email: this.email,
+                password: this.pass
+            }).then(user => {
+                this.navigateWithContext(user, "views/drawer-page");
+            }).catch(err => {
+                dialogs.alert(err);
+            })
+        }
     }
 
     public onCreateUser() {
@@ -172,7 +216,6 @@ export class AuthViewModel extends Observable {
             // you could now prompt the user to check his email
             dialogs.alert("Password Rest instructions send to " + this.email);
         }).catch(err => {
-            console.log(err);
             dialogs.alert(err);
         })
     }
@@ -185,7 +228,6 @@ export class AuthViewModel extends Observable {
         }).then(() => {
             // called when password change was successful
         }).catch(err => {
-            console.log(err);
             dialogs.alert(err);
         })
     }
@@ -221,8 +263,19 @@ export class AuthViewModel extends Observable {
             dialogs.alert(err);
         })
     }
+
     // UI specific
     public onFormToggle() {
         this.isFormVisible = !this.isFormVisible;
+    }
+
+    private navigateWithContext(user: any, moduleName: string) {
+        console.log(JSON.stringify(user));
+        this.currentUser = new User(user.anonymous, user.email, user.emailVerified, user.name, user.profileImageURL, user.refreshToken, user.uid);
+        frame.topmost().navigate({
+            moduleName: moduleName,
+            context: { currentUser: this.currentUser },
+            clearHistory: true
+        });
     }
 }

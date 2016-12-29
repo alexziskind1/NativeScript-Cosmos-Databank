@@ -13,6 +13,9 @@ firebase.init({
             console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
             appSettings.setBoolean("isLogged", true);
         }
+        else {
+            appSettings.setBoolean("isLogged", false);
+        }
     },
     onMessageReceivedCallback: function (message) {
         console.log("Title: " + message.title);

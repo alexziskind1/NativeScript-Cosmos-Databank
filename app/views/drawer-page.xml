@@ -33,6 +33,7 @@
                             <Button text="Astreroids Proximity Checker" tap="{{ goToAsteroids }}" class="btn btn-primary btn-active dp-btn" />
                             <Button text="EPIC (Coming soon)" tap="{{ goToEpic }}" class="btn btn-primary btn-active dp-btn" />
                             <Button text="Info" tap="{{ goToAbout }}" class="btn btn-primary btn-active dp-btn" />
+                            <Button text="Logout" tap="{{ onLogout }}" class="btn btn-primary btn-active dp-btn" />
                         </StackLayout>
                     </ScrollView>
                 </StackLayout>

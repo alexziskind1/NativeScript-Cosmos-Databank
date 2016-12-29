@@ -12,6 +12,8 @@ firebase.init({
         if (data.loggedIn) {
             console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
             appSettings.setBoolean("isLogged", true);
+        } else {
+            appSettings.setBoolean("isLogged", false);
         }
     },
 
