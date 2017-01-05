@@ -7,7 +7,6 @@ platforms/*
 
 /app/**/*.js
 /app/**/*.map
-/app/files/
 
 /keystore/
 *.apk
@@ -15,4 +14,3 @@ platforms/*
 
 native-nick-release-key.jks
 google-services.json
-credentials.ts

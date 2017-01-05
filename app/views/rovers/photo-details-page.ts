@@ -1,4 +1,4 @@
-import { DrawerOverNavigationModel } from "../../models/drawer-over-navigation-model";
+import { DrawerOverNavigationModel } from "../../view-models/drawer-over-navigation-model";
 import { EventData, Observable } from "data/observable";
 import { Page } from "ui/page";
 import { Button } from "ui/button";
@@ -53,8 +53,28 @@ export function goBack(args: EventData) {
     topmost().goBack();
 }
 
+import * as http from "http";
+
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
+
+    console.log("drawee.imageUri:" + drawee.imageUri);
+
+    http.getFile(drawee.imageUri).then(res => {
+        //currentImage = res
+
+        console.log("res.path: " + res.path);
+        try {
+            currentImage = imageSource.fromFile(res.path);
+            console.log(currentImage)
+        } catch (error) {
+            console.log(error);
+        }
+
+    }).catch(err => {
+        console.log("http.getImage error" + err);
+    });
+
 
     imageSource.fromUrl(drawee.imageUri)
         .then(res => {
@@ -65,7 +85,7 @@ export function onFinalImageSet(args: FinalEventData) {
                 SocialShare.shareImage(res, "Mars Rovers - Cosmos DataBank mobile App");
             });
         }).catch(err => {
-            // console.log(err); 
+            console.log(err); 
         });
 }
 

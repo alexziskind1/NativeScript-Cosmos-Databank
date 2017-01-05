@@ -23,6 +23,12 @@ ActionBar {
     color: #BCBCBC;
 }
 
+CardView {
+    background-color: #343838;
+    color: #BCBCBC;
+    font-size:14;
+}
+
 .toolbar {
     border-color: #303030;
     border-width: 5 0 5 0;

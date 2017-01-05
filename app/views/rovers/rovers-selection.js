@@ -1,7 +1,7 @@
 "use strict";
 // tslint:disable:max-line-length
 var observable_1 = require("data/observable");
-var pickers_view_model_1 = require("../../models/rovers/pickers-view-model");
+var pickers_view_model_1 = require("../../view-models/rovers/pickers-view-model");
 var app = require("application");
 exports.pickersViewModel = new pickers_view_model_1.PickersViewModel();
 var page;

@@ -1,0 +1,22 @@
+Page {
+    font-family: "Nasalization";    
+    background-color: #BCBCBC;
+    background-image: url("~/images/lmcapodgleason960.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.lg-btn {
+    background-color: #008C9E;
+    font-family: "Nasalization";
+}
+
+Label {
+    font-family: "Nasalization";
+}
+
+CardView {
+    background-color: #343838;
+    color: #BCBCBC;
+    font-size:14;
+}

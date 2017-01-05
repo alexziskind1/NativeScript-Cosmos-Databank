@@ -1,11 +1,11 @@
-.pageContainer {
+Page {
     font-family: "Nasalization";    
-    background-color: #343838;   
-    color: #E8EAEB;
-    font-size: 14;
+    background-color: #BCBCBC;
+    background-image: url("~/images/lmcapodgleason960.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.pageContainer Label {
-    font-size: 18;
-    text-align: center;
+TextView {
+   font-size: 14; 
 }

@@ -1,6 +1,6 @@
 import { topmost } from "ui/frame";
 import * as application from "application";
-import { AsteroidViewModel } from "../../models/asteroid/asteroid-view-model";
+import { AsteroidViewModel } from "../../view-models/asteroid/asteroid-view-model";
 
 import { ListViewEventData } from "nativescript-telerik-ui/listview";
 

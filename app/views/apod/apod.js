@@ -13,7 +13,7 @@ if (application.android) {
     var youtube = require("nativescript-youtube-player");
 }
 var credentials_1 = require("../../files/credentials");
-var apod_model_1 = require("../../models/apod/apod-model");
+var apod_model_1 = require("../../view-models/apod/apod-model");
 var apodViewModel = new apod_model_1.ApodViewModel();
 apodViewModel.set("isPlayerVisible", false);
 apodViewModel.set("youtube_api_key", credentials_1.YOUTUBE_API_KEY);
@@ -115,6 +115,30 @@ function nextDate() {
 exports.nextDate = nextDate;
 function onFinalImageSet(args) {
     var drawee = args.object;
+    console.log("drawee.imageUri:" + drawee.imageUri);
+    console.log("apodViewModel: " + apodViewModel.get("dataItem").url);
+    // http.getFile(drawee.imageUri).then(res => {
+    //     //currentImage = res
+    //     console.log("res.path: " + res.path);
+    //     try {
+    //         currentImage = imageSource.fromFile(res.path);
+    //         console.log(currentImage)
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    //     saveButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //     desktopButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //     shareButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //     setUserInteraction(true);
+    // }).catch(err => {
+    //     console.log("http.getImage error" + err);
+    // });
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res) {
         currentImage = res;
@@ -129,7 +153,7 @@ function onFinalImageSet(args) {
             .then(function () { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
         setUserInteraction(true);
     }).catch(function (err) {
-        // console.log(err.stack);
+        console.log(err);
     });
 }
 exports.onFinalImageSet = onFinalImageSet;
@@ -207,7 +231,7 @@ exports.onSetWallpaper = onSetWallpaper;
 function onShare(args) {
     firebase.push("/favorites", {
         "dataItem": apodViewModel.get("dataItem"),
-        "updateTs": firebase.ServerValue.TIMESTAMP
+        "updateTs": firebase["ServerValue"].TIMESTAMP
     }).then(function (result) {
         console.log("created key: " + result.key);
     });

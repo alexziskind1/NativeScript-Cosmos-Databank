@@ -1,22 +1,53 @@
-<Page xmlns="http://www.nativescript.org/tns.xsd" loaded="onLoaded" navigatedTo="onNavigatedTo">
+<Page xmlns="http://www.nativescript.org/tns.xsd" 
+      xmlns:Card="nativescript-cardview" 
+      loaded="onLoaded" 
+      navigatedTo="onNavigatedTo">
 
     <Page.actionBar>
       <ActionBar>
         <ActionBar.titleView>
-            <GridLayout >
-                <Label text="COSMOS Data Bank" class="action-title"/>
-            </GridLayout>
+            <StackLayout>
+                <Label text="COSMOS Databank" class="h3 action-bar-title"/>
+            </StackLayout>
         </ActionBar.titleView>
       </ActionBar>
     </Page.actionBar>
 
     <ScrollView>
-        <StackLayout id="pageContainer" class="pageContainer">
-            <GridLayout rows="*, *, *" columns="*">
-                <Label row="0" text="Powered by NativeScript" textWrap="true" />
-                <Label row="1" text="NASA Open APIs" textWrap="true" />
-                <Label row="2" text="NativeNick" textWrap="true" />
+        <StackLayout class="m-8">
+            <GridLayout rows="*, *, *" columns="*" class="p-8">
+                <Label row="0" text="Powered by" textWrap="true"/>
+                <Label row="1" text="NativeScript" textWrap="true" />
+                <Label row="2" text="NASA Open APIs" textWrap="true"/>
             </GridLayout>
+            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8"> 
+                <GridLayout rows="auto, auto, auto, auto, auto, auto, auto" columns="auto, *">
+                    <Label row="0" col="0" colSpan="2" editable="false" text="Astronomical Photo of the Day" textWrap="true" class="p-l-16 p-t-8 text-left"/>
+                    <Label row="1" col="0" colSpan="2" text="Icons legend" fontSize="10" color="gray" class="p-l-16  text-left" textWrap="true" />
+
+                    <Button row="2" col="0" text="&#xf053;" width="50" height="50" class="fa btn nav text-center"/>
+                    <TextView row="2" col="1" editable="false" text="go to previous data (or swipe right)" />
+
+                    <Button row="3" col="0" text="&#xf019;" width="50" height="50" class="fa btn nav text-center"/>
+                    <TextView row="3" col="1" editable="false" text="downolad and save HD image"/>
+
+                    <Button row="4" col="0" text="&#xf108;" width="50" height="50" class="fa btn nav text-center"/> 
+                    <TextView row="4" col="1" editable="false" text="set HD photo as wallpaper"/>
+
+                    <Button row="5" col="0" text="&#xf1e0;" width="50" height="50" class="fa btn nav text-center"/>     
+                    <TextView row="5" col="1" editable="false" text="share HD photo"/>
+
+                    <Button row="6" col="0" text="&#xf054;" width="50" height="50" class="fa btn nav text-center"/> 
+                    <TextView row="6" col="1" editable="false" text="go to next date (or swipe left)"/>
+                </GridLayout>
+            </Card:CardView>
+             <Label text="Created by NickIliev" textWrap="true" class="p-8"/>
         </StackLayout>
     </ScrollView>
 </Page>
+
+                    
+                     
+
+                    
+                    

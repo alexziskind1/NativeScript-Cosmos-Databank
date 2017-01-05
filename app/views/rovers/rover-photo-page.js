@@ -1,7 +1,7 @@
 "use strict";
 var application = require("application");
 var frame = require("ui/frame");
-var rovers_view_model_1 = require("../../models/rovers/rovers-view-model");
+var rovers_view_model_1 = require("../../view-models/rovers/rovers-view-model");
 var rovers_selection_1 = require("./rovers-selection");
 var page;
 var list;
