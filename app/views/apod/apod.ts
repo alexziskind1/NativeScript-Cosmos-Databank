@@ -17,6 +17,7 @@ import fileSystem = require("file-system");
 import imageSource = require("image-source");
 import platformModule = require("platform");
 import * as utils from "utils/utils";
+import * as http from "http";
 
 import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
@@ -141,9 +142,38 @@ export function nextDate() {
 
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
+
     console.log("drawee.imageUri:" + drawee.imageUri);
-    console.log("apodViewModel: " + apodViewModel.get("dataItem").url);
-    
+    console.log("apodViewModel: " + apodViewModel.get("dataItem").url)
+
+
+    // http.getFile(drawee.imageUri).then(res => {
+    //     //currentImage = res
+
+    //     console.log("res.path: " + res.path);
+    //     try {
+    //         currentImage = imageSource.fromFile(res.path);
+    //         console.log(currentImage)
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    //     saveButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+
+    //     desktopButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+
+    //     shareButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+
+    //     setUserInteraction(true);
+    // }).catch(err => {
+    //     console.log("http.getImage error" + err);
+    // });
+
     imageSource.fromUrl(drawee.imageUri)
         .then(res => {
             currentImage = res;
@@ -165,6 +195,7 @@ export function onFinalImageSet(args: FinalEventData) {
         }).catch(err => {
             console.log(err);
         });
+
 }
 
 function setUserInteraction(state: boolean) {
@@ -230,7 +261,7 @@ export function onSetWallpaper(args: EventData) {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
                 // console.log(err);
-            }); ;
+            });;
     } else if (application.android) {
         saveFile(currentImage);
 

@@ -38,8 +38,23 @@ function goBack(args) {
     frame_1.topmost().goBack();
 }
 exports.goBack = goBack;
+var http = require("http");
 function onFinalImageSet(args) {
     var drawee = args.object;
+    console.log("drawee.imageUri:" + drawee.imageUri);
+    http.getFile(drawee.imageUri).then(function (res) {
+        //currentImage = res
+        console.log("res.path: " + res.path);
+        try {
+            currentImage = imageSource.fromFile(res.path);
+            console.log(currentImage);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }).catch(function (err) {
+        console.log("http.getImage error" + err);
+    });
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res) {
         currentImage = res;
@@ -48,7 +63,7 @@ function onFinalImageSet(args) {
             SocialShare.shareImage(res, "Mars Rovers - Cosmos DataBank mobile App");
         });
     }).catch(function (err) {
-        // console.log(err); 
+        console.log(err);
     });
 }
 exports.onFinalImageSet = onFinalImageSet;

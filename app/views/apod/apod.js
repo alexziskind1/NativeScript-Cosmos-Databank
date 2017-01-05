@@ -117,6 +117,28 @@ function onFinalImageSet(args) {
     var drawee = args.object;
     console.log("drawee.imageUri:" + drawee.imageUri);
     console.log("apodViewModel: " + apodViewModel.get("dataItem").url);
+    // http.getFile(drawee.imageUri).then(res => {
+    //     //currentImage = res
+    //     console.log("res.path: " + res.path);
+    //     try {
+    //         currentImage = imageSource.fromFile(res.path);
+    //         console.log(currentImage)
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    //     saveButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //     desktopButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //     shareButton.animate({ opacity: 0.2, rotate: 360 })
+    //         .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //         .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //     setUserInteraction(true);
+    // }).catch(err => {
+    //     console.log("http.getImage error" + err);
+    // });
     imageSource.fromUrl(drawee.imageUri)
         .then(function (res) {
         currentImage = res;
