@@ -34,5 +34,6 @@ if (application.android) {
         fresco.initialize();
     };
 }
+// application.start({ moduleName: "views/drawer-page" });
 application.start({ moduleName: "views/login/login" });
 //# sourceMappingURL=app.js.map

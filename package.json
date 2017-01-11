@@ -6,7 +6,7 @@
   "nativescript": {
     "id": "org.nativescript.curiosity",
     "tns-android": {
-      "version": "2.5.0-next-2016-12-19-1539"
+      "version": "2.4.1"
     }
   },
   "dependencies": {
@@ -19,8 +19,8 @@
     "nativescript-theme-core": "^1.0.2",
     "nativescript-toast": "^1.4.3",
     "nativescript-youtube-player": "file:./files/nativescript-youtube-player",
-    "tns-core-modules": "2.4.4",
-    "tns-platform-declarations": "2.4.4"
+    "tns-core-modules": "^2.4.4",
+    "tns-platform-declarations": "^2.4.4"
   },
   "devDependencies": {
     "babel-traverse": "6.13.0",
