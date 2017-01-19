@@ -1,15 +1,13 @@
-import { DrawerOverNavigationModel } from "../../view-models/drawer-over-navigation-model";
 import { EventData, Observable } from "data/observable";
 import { Page } from "ui/page";
 import { Button } from "ui/button";
 import { topmost } from "ui/frame";
 import { Image } from "ui/image";
-import { GestureTypes, GestureEventData } from "ui/gestures";
+import { GestureEventData } from "ui/gestures";
+import * as application from "application";
+import * as imageSource from "image-source";
 import * as utils from "utils/utils";
-import enums = require("ui/enums");
-import fileSystem = require("file-system");
-import imageSource = require("image-source");
-import application = require("application");
+
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 
@@ -17,25 +15,28 @@ if (application.android) {
     var toast = require("nativescript-toast");
 }
 
-let viewModel;
-var shareButtonAndroid;
+import { saveFile, setButtonsOpacity, setUserInteraction, setCurrentImage } from "../helpers/files/file-helpers";
 
+let viewModel: Observable;
 let page: Page;
 let shareButton: Button;
 let saveButton: Button;
 let desktopButton: Button;
-
 let iosImage: Image;
-let currentImage: imageSource.ImageSource;
 
+let currentImage: imageSource.ImageSource;
 var currentSavedPath: string;
 
-export function onPageLoaded(args: EventData) {
+export function onPageNavigatedTo(args: EventData) {
     page = <Page>args.object;
 
     shareButton = <Button>page.getViewById("btn-shar");
     saveButton = <Button>page.getViewById("btn-save");
     desktopButton = <Button>page.getViewById("btn-desk");
+
+    if (application.android) {
+        setButtonsOpacity(shareButton, saveButton, desktopButton, 0.2);
+    }
 
     if (application.ios) {
         iosImage = <Image>page.getViewById("ios-image");
@@ -44,7 +45,6 @@ export function onPageLoaded(args: EventData) {
     let navContext = page.navigationContext;
     viewModel = new Observable();
     viewModel.set("contextItem", navContext["tappedItem"]);
-    viewModel.set("isItemVisible", false);
 
     page.bindingContext = viewModel;
 }
@@ -53,66 +53,25 @@ export function goBack(args: EventData) {
     topmost().goBack();
 }
 
-import * as http from "http";
-
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
 
     console.log("drawee.imageUri:" + drawee.imageUri);
 
-    http.getFile(drawee.imageUri).then(res => {
-        //currentImage = res
+    currentImage = setCurrentImage(drawee.imageUri);
 
-        console.log("res.path: " + res.path);
-        try {
-            currentImage = imageSource.fromFile(res.path);
-            console.log(currentImage)
-        } catch (error) {
-            console.log(error);
-        }
+    saveButton.animate({ opacity: 0.2, rotate: 360 })
+        .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+        .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-    }).catch(err => {
-        console.log("http.getImage error" + err);
-    });
+    desktopButton.animate({ opacity: 0.2, rotate: 360 })
+        .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+        .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-
-    imageSource.fromUrl(drawee.imageUri)
-        .then(res => {
-            currentImage = res;
-            viewModel.set("isItemVisible", true);
-
-            shareButton.on("tap", function (params: GestureEventData) {
-                SocialShare.shareImage(res, "Mars Rovers - Cosmos DataBank mobile App");
-            });
-        }).catch(err => {
-            console.log(err); 
-        });
-}
-
-function saveFile(res: imageSource.ImageSource) {
-    var name = viewModel.get("contextItem").id + "" + viewModel.get("contextItem").earthDate;
-
-    var fileName = name + ".jpeg";
-
-    if (application.android) {
-        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
-            android.os.Environment.DIRECTORY_DOWNLOADS).toString();
-        var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
-    } else if (application.ios) {
-        var iosDownloadPath = fileSystem.knownFolders.documents();
-        // tslint:disable-next-line:no-shadowed-variable
-        var cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
-    }
-
-    var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
-    var path = fileSystem.path.join(cosmosFolderPath, fileName);
-    var exists = fileSystem.File.exists(path);
-
-    if (!exists) {
-        var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
-    }
-
-    currentSavedPath = path;
+    shareButton.animate({ opacity: 0.2, rotate: 360 })
+        .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+        .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); })
+        .then(() => { setUserInteraction(shareButton, saveButton, desktopButton, true) });
 }
 
 export function onSaveImage(args: EventData) {
@@ -120,12 +79,12 @@ export function onSaveImage(args: EventData) {
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
             .then(res => {
-                saveFile(res);
+                saveFile(res, viewModel.get("contextItem").imageUri, currentSavedPath);
             }).catch(err => {
-                // console.log(err);
+                console.log(err);
             });
     } else if (application.android) {
-        saveFile(currentImage);
+        saveFile(currentImage, viewModel.get("contextItem").imageUri, currentSavedPath);
         toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
@@ -137,18 +96,17 @@ export function onSetWallpaper(args: EventData) {
             .then(res => {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
-                // console.log(err);
-            }); ;
+                console.log(err);
+            });;
     } else if (application.android) {
 
-        saveFile(currentImage);
+        saveFile(currentImage, viewModel.get("contextItem").imageUri, currentSavedPath);
 
         var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
         try {
-            var imageToSet = imageSource.fromFile(currentSavedPath);
-            wallpaperManager.setBitmap(imageToSet.android);
+            wallpaperManager.setBitmap(currentImage.android);
         } catch (error) {
-            // console.log(error);
+            console.log(error);
         }
 
         toast.makeText("Wallpaper Set!").show();
@@ -163,7 +121,7 @@ export function onShare(args: EventData) {
             .then(res => {
                 SocialShare.shareImage(res);
             }).catch(err => {
-                // console.log(err);
+                console.log(err);
             });
     }
 }

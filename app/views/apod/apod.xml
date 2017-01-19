@@ -42,7 +42,7 @@
                 </GridLayout>
             </ios>
 
-            <Label text="{{ dataItem.title }}" class="h3 p-t-16 p-l-16" textWrap="true" />
+            <Label text="{{ dataItem.title }}" class="h3 p-t-16 p-l-16 p-r-16" textWrap="true" />
             <Label text="{{ dataItem.explanation }}" class="p-16" textWrap="true" />
             <Label text="{{ 'Astronomical photo of ' + dataItem.date }}" class="p-b-16 p-l-16" textWrap="true" />     
         </StackLayout>                  

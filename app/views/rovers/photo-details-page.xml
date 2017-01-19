@@ -1,7 +1,16 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd"
       xmlns:nativescript-fresco="nativescript-fresco"
-      actionBarHidden="true"
-      loaded="onPageLoaded">
+      navigatedTo="onPageNavigatedTo">
+    <Page.actionBar>
+        <ActionBar>
+            <NavigationButton text="Back" android.systemIcon="ic_menu_back" tap="goBack" />
+            <ActionBar.titleView>
+                <StackLayout>
+                    <Label text="{{ 'photo taken on ' + contextItem.earthDate }}" class="h3 action-bar-title"/>
+                </StackLayout>
+            </ActionBar.titleView>
+        </ActionBar>
+    </Page.actionBar>  
     <ScrollView>
         <StackLayout>
             <android>

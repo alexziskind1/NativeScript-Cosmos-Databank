@@ -1,34 +1,19 @@
-import { EventData, PropertyChangeData } from "data/observable";
+import { EventData } from "data/observable";
 import { Button } from "ui/button";
 import { Image } from "ui/image";
-import { ImageSource } from "image-source";
-import { GestureTypes, GestureEventData, SwipeGestureEventData } from "ui/gestures";
-import { GridLayout } from "ui/layouts/grid-layout";
-import { ListView } from "ui/list-view";
+import { GestureTypes, SwipeGestureEventData } from "ui/gestures";
 import { Page } from "ui/page";
-import { ScrollView } from "ui/scroll-view";
-import { StackLayout } from "ui/layouts/stack-layout";
-import { topmost } from "ui/frame";
-
 import application = require("application");
-import color = require("color");
-import dialogs = require("ui/dialogs");
-import enums = require("ui/enums");
-import fileSystem = require("file-system");
 import imageSource = require("image-source");
-import platformModule = require("platform");
 import * as utils from "utils/utils";
-import * as http from "http";
 
-import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 import * as firebase from "nativescript-plugin-firebase";
 
-var okHttp = require("nativescript-okhttp");
-
 import * as youtubeHelpers from "../helpers/youtube/youtube-helpers";
 import * as formatters from "../helpers/formaters";
+import { saveFile, setButtonsOpacity, setUserInteraction, setCurrentImage } from "../helpers/files/file-helpers";
 
 if (application.android) {
     var toast = require("nativescript-toast");
@@ -36,8 +21,7 @@ if (application.android) {
 }
 
 import { YOUTUBE_API_KEY } from "../../files/credentials";
-
-import { ApodViewModel, ApodItem } from "../../view-models/apod/apod-model";
+import { ApodViewModel } from "../../view-models/apod/apod-model";
 
 let apodViewModel = new ApodViewModel();
 apodViewModel.set("isPlayerVisible", false);
@@ -75,8 +59,8 @@ export function onPageNavigatedTo(args: EventData) {
 
     if (application.android) {
         player = page.getViewById("player");
-        setButtonsOpacity(0.2);
-        setUserInteraction(false);
+        setButtonsOpacity(shareButton, saveButton, desktopButton, 0.2);
+        setUserInteraction(shareButton, saveButton, desktopButton, false);
     }
 
     if (application.ios) {
@@ -100,8 +84,8 @@ export function onPageNavigatedTo(args: EventData) {
 
 export function previousDate() {
     if (application.android) {
-        setButtonsOpacity(0.2);
-        setUserInteraction(false);
+        setButtonsOpacity(shareButton, saveButton, desktopButton, 0.2);
+        setUserInteraction(shareButton, saveButton, desktopButton, false);
     }
 
     // TODO: add check if the date is not too far in the past (check first APOD date)
@@ -120,8 +104,8 @@ export function previousDate() {
 
 export function nextDate() {
     if (application.android) {
-        setButtonsOpacity(0.2);
-        setUserInteraction(false);
+        setButtonsOpacity(shareButton, saveButton, desktopButton, 0.2);
+        setUserInteraction(shareButton, saveButton, desktopButton, false);
     }
 
     var currentDate = apodViewModel.get("selectedDate");
@@ -143,19 +127,8 @@ export function nextDate() {
     }
 }
 
-function setCurrentImage(imageUri:string): ImageSource {
-    // okhttp is blocking so no need to return Promise!
-    var inputStream = okHttp.getImage(imageUri); 
-    var image = imageSource.fromData(inputStream);
-
-    return image;
-}
-
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
-
-    console.log("drawee.imageUri:" + drawee.imageUri);
-    console.log("apodViewModel: " + apodViewModel.get("dataItem").url)
 
     currentImage = setCurrentImage(drawee.imageUri);
 
@@ -170,72 +143,7 @@ export function onFinalImageSet(args: FinalEventData) {
     shareButton.animate({ opacity: 0.2, rotate: 360 })
         .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
         .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); })
-        .then(() => { setUserInteraction(true) })
-
-
-    // this one is returnint Response cannot be resolved as image in {N} 2.4.2
-    // imageSource.fromUrl(drawee.imageUri)
-    //     .then(res => {
-    //         currentImage = res;
-
-    //         saveButton.animate({ opacity: 0.2, rotate: 360 })
-    //             .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-    //             .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
-
-    //         desktopButton.animate({ opacity: 0.2, rotate: 360 })
-    //             .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-    //             .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
-
-    //         shareButton.animate({ opacity: 0.2, rotate: 360 })
-    //             .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-    //             .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
-
-    //         setUserInteraction(true);
-
-    //     }).catch(err => {
-    //         console.log(err);
-    //     });
-
-}
-
-function setUserInteraction(state: boolean) {
-    shareButton.isUserInteractionEnabled = state;
-    saveButton.isUserInteractionEnabled = state;
-    desktopButton.isUserInteractionEnabled = state;
-}
-
-function setButtonsOpacity(value: number) {
-    saveButton.opacity = value;
-    desktopButton.opacity = value;
-    shareButton.opacity = value;
-}
-
-function saveFile(res: imageSource.ImageSource) {
-    var url = apodViewModel.get("dataItem").url;
-    var fileName = url.substring(url.lastIndexOf("/") + 1);
-    var n = fileName.indexOf(".");
-    fileName = fileName.substring(0, n !== -1 ? n : fileName.length) + ".jpeg";
-
-    var cosmosFolderPath;
-    if (application.android) {
-        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
-            android.os.Environment.DIRECTORY_DOWNLOADS).toString();
-        cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
-    } else if (application.ios) {
-        // TODO :  this works - but where are the images ?
-        var iosDownloadPath = fileSystem.knownFolders.documents();
-        cosmosFolderPath = fileSystem.path.join(iosDownloadPath.path, "CosmosDataBank");
-    }
-
-    var folder = fileSystem.Folder.fromPath(cosmosFolderPath);
-    var path = fileSystem.path.join(cosmosFolderPath, fileName);
-    var exists = fileSystem.File.exists(path);
-
-    if (!exists) {
-        var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
-    }
-
-    currentSavedPath = path;
+        .then(() => { setUserInteraction(shareButton, saveButton, desktopButton, true) });
 }
 
 export function onSaveImage(args: EventData) {
@@ -243,12 +151,12 @@ export function onSaveImage(args: EventData) {
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
             .then(res => {
-                saveFile(res);
+                saveFile(res, apodViewModel.get("dataItem").url, currentSavedPath);
             }).catch(err => {
-                // console.log(err);
+                console.log(err);
             });
     } else if (application.android) {
-        saveFile(currentImage);
+        saveFile(currentImage, apodViewModel.get("dataItem").url, currentSavedPath);
         toast.makeText("Photo saved in /Downloads/CosmosDataBank/").show();
     }
 }
@@ -260,17 +168,17 @@ export function onSetWallpaper(args: EventData) {
             .then(res => {
                 currentImage = res; // TODO : set wallpaper for iOS
             }).catch(err => {
-                // console.log(err);
+                console.log(err);
             });;
     } else if (application.android) {
-        saveFile(currentImage);
+        saveFile(currentImage, apodViewModel.get("dataItem").url, currentSavedPath);
 
         var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
         try {
             var imageToSet = imageSource.fromFile(currentSavedPath);
             wallpaperManager.setBitmap(imageToSet.android);
         } catch (error) {
-            // console.log(error);
+            console.log(error);
         }
 
         toast.makeText("Wallpaper Set!").show();
@@ -295,7 +203,7 @@ export function onShare(args: EventData) {
             .then(res => {
                 SocialShare.shareImage(res);
             }).catch(err => {
-                // console.log(err);
+                console.log(err);
             });
     }
 }
