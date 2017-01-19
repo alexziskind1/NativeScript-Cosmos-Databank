@@ -175,8 +175,7 @@ export function onSetWallpaper(args: EventData) {
 
         var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
         try {
-            var imageToSet = imageSource.fromFile(currentSavedPath);
-            wallpaperManager.setBitmap(imageToSet.android);
+            wallpaperManager.setBitmap(currentImage.android);
         } catch (error) {
             console.log(error);
         }
