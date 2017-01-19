@@ -56,8 +56,6 @@ export function goBack(args: EventData) {
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
 
-    console.log("drawee.imageUri:" + drawee.imageUri);
-
     currentImage = setCurrentImage(drawee.imageUri);
 
     saveButton.animate({ opacity: 0.2, rotate: 360 })

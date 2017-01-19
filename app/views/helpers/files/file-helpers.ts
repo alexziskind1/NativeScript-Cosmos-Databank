@@ -1,7 +1,7 @@
 import * as application from "application";
 import * as fileSystem from "file-system";
 import * as enums from "ui/enums";
-import { Button} from "ui/button";
+import { Button } from "ui/button";
 import { ImageSource, fromData } from "image-source";
 var okHttp = require("nativescript-okhttp");
 
