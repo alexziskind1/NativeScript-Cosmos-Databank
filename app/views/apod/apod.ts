@@ -9,11 +9,11 @@ import * as utils from "utils/utils";
 
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
-import * as firebase from "nativescript-plugin-firebase";
 
 import * as youtubeHelpers from "../helpers/youtube/youtube-helpers";
 import * as formatters from "../helpers/formaters";
 import { saveFile, setButtonsOpacity, setUserInteraction, setCurrentImage } from "../helpers/files/file-helpers";
+import { firebasePush } from "../helpers/firebase/firebase";
 
 if (application.android) {
     var toast = require("nativescript-toast");
@@ -186,15 +186,8 @@ export function onSetWallpaper(args: EventData) {
 }
 
 export function onShare(args: EventData) {
-    firebase.push(
-        "/favorites",
-        {
-            "dataItem": apodViewModel.get("dataItem"),
-            "updateTs": firebase["ServerValue"].TIMESTAMP
-        }
-    ).then(result => {
-        console.log("created key: " + result.key);
-    });
+
+    firebasePush(apodViewModel.get("dataItem"));
 
     if (application.android) {
         SocialShare.shareImage(currentImage, "NASA APOD");
