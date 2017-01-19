@@ -1,6 +1,7 @@
 import { EventData, PropertyChangeData } from "data/observable";
 import { Button } from "ui/button";
 import { Image } from "ui/image";
+import { ImageSource } from "image-source";
 import { GestureTypes, GestureEventData, SwipeGestureEventData } from "ui/gestures";
 import { GridLayout } from "ui/layouts/grid-layout";
 import { ListView } from "ui/list-view";
@@ -23,6 +24,8 @@ import drawerModule = require("nativescript-telerik-ui/sidedrawer");
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 import * as firebase from "nativescript-plugin-firebase";
+
+var okHttp = require("nativescript-okhttp");
 
 import * as youtubeHelpers from "../helpers/youtube/youtube-helpers";
 import * as formatters from "../helpers/formaters";
@@ -140,61 +143,58 @@ export function nextDate() {
     }
 }
 
+function setCurrentImage(imageUri:string): ImageSource {
+    // okhttp is blocking so no need to return Promise!
+    var inputStream = okHttp.getImage(imageUri); 
+    var image = imageSource.fromData(inputStream);
+
+    return image;
+}
+
 export function onFinalImageSet(args: FinalEventData) {
     var drawee = args.object as FrescoDrawee;
 
     console.log("drawee.imageUri:" + drawee.imageUri);
     console.log("apodViewModel: " + apodViewModel.get("dataItem").url)
 
+    currentImage = setCurrentImage(drawee.imageUri);
 
-    // http.getFile(drawee.imageUri).then(res => {
-    //     //currentImage = res
+    saveButton.animate({ opacity: 0.2, rotate: 360 })
+        .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+        .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-    //     console.log("res.path: " + res.path);
-    //     try {
-    //         currentImage = imageSource.fromFile(res.path);
-    //         console.log(currentImage)
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    //     saveButton.animate({ opacity: 0.2, rotate: 360 })
-    //         .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-    //         .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    desktopButton.animate({ opacity: 0.2, rotate: 360 })
+        .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+        .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-    //     desktopButton.animate({ opacity: 0.2, rotate: 360 })
-    //         .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-    //         .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    shareButton.animate({ opacity: 0.2, rotate: 360 })
+        .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+        .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); })
+        .then(() => { setUserInteraction(true) })
 
-    //     shareButton.animate({ opacity: 0.2, rotate: 360 })
-    //         .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-    //         .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-    //     setUserInteraction(true);
-    // }).catch(err => {
-    //     console.log("http.getImage error" + err);
-    // });
+    // this one is returnint Response cannot be resolved as image in {N} 2.4.2
+    // imageSource.fromUrl(drawee.imageUri)
+    //     .then(res => {
+    //         currentImage = res;
 
-    imageSource.fromUrl(drawee.imageUri)
-        .then(res => {
-            currentImage = res;
+    //         saveButton.animate({ opacity: 0.2, rotate: 360 })
+    //             .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //             .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-            saveButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(() => { return saveButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(() => { return saveButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //         desktopButton.animate({ opacity: 0.2, rotate: 360 })
+    //             .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //             .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-            desktopButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(() => { return desktopButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(() => { return desktopButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //         shareButton.animate({ opacity: 0.2, rotate: 360 })
+    //             .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
+    //             .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
 
-            shareButton.animate({ opacity: 0.2, rotate: 360 })
-                .then(() => { return shareButton.animate({ opacity: 0.5, rotate: 180, duration: 150 }); })
-                .then(() => { return shareButton.animate({ opacity: 1.0, rotate: 0, duration: 150 }); });
+    //         setUserInteraction(true);
 
-            setUserInteraction(true);
-
-        }).catch(err => {
-            console.log(err);
-        });
+    //     }).catch(err => {
+    //         console.log(err);
+    //     });
 
 }
 
