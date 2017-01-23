@@ -128,6 +128,7 @@ export function nextDate() {
 }
 
 export function onFinalImageSet(args: FinalEventData) {
+    console.log("onFinalImageSet")
     var drawee = args.object as FrescoDrawee;
 
     currentImage = setCurrentImage(drawee.imageUri);
