@@ -35,7 +35,7 @@
                 </GridLayout>
 
             </StackLayout> 
-            <!--<Button text="Logout" class="btn btn-primary btn-active lg-btn" tap="onLogout" />-->
+
         </Card:CardView>
     </ScrollView>
 </Page>
