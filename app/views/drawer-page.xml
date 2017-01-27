@@ -2,6 +2,7 @@
     xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
     xmlns:drawer="nativescript-telerik-ui/sidedrawer"
     xmlns:Card="nativescript-cardview"
+    xmlns:nativescript-fresco="nativescript-fresco"
     loaded="onPageLoaded" 
     navigatedTo="onPageNavigatedTo"
     class="drawer-page">
@@ -46,19 +47,43 @@
             <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8"> 
                 <GridLayout rows="160" columns="3*, 4*" tap="{{ goToRoversSelectionPage }}" >
                     <Label col="0" text="{{ roversDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center"/>
-                    <Image col="1" src="~/images/NASA_Mars_Rover.jpg" stretch="aspectFill" />   
+                    
+                    <!--<Image col="1" src="~/images/rover.jpg" stretch="aspectFill" />   -->
+                    <nativescript-fresco:FrescoDrawee col="1" imageUri="~/images/rover.jpg"
+                                                    actualImageScaleType="centerCrop"                                                           
+                                                    verticalAlignment="top"
+                                                    aspectRatio="1"
+                                                    showProgressBar="false"
+                                                    tapToRetryEnabled="false"/>
+
                 </GridLayout>
             </Card:CardView>
             <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
                 <GridLayout rows="160" columns="4*, 3*" tap="{{ goToApod }}" >
-                    <Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  
+                    
+                    <!--<Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  -->
+                    <nativescript-fresco:FrescoDrawee col="0" imageUri="~/images/cosmos.jpg"
+                                actualImageScaleType="centerCrop"                                                           
+                                verticalAlignment="top"
+                                aspectRatio="1.2"
+                                showProgressBar="false"
+                                tapToRetryEnabled="false"/>
+
+
                     <Label col="1" text="{{ apodDescription }}" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center"/>
                 </GridLayout>
             </Card:CardView>
             <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
                 <GridLayout rows="160" columns="3*, 4*" tap="{{ goToAsteroids }}" >
                     <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center" />   
-                    <Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />    
+                    
+                    <!--<Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />    -->
+                    <nativescript-fresco:FrescoDrawee col="1" imageUri="~/images/aste.jpg"
+                                actualImageScaleType="centerCrop"                                                           
+                                verticalAlignment="top"
+                                aspectRatio="1"
+                                showProgressBar="false"
+                                tapToRetryEnabled="false"/>
                 </GridLayout>
             </Card:CardView>
 

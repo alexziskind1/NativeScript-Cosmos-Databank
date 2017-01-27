@@ -2,6 +2,7 @@
 import fresco = require("nativescript-fresco");
 import firebase = require("nativescript-plugin-firebase");
 import * as appSettings from "application-settings";
+import "./bundle-config";
 
 firebase.init({
     persist: true,

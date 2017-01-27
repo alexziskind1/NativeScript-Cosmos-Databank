@@ -1,7 +1,7 @@
 {
   "name": "nativescript-youtube-player",
   "version": "0.0.1",
-  "main": "player.js",
+  "main": "player",
   "nativescript": {
     "platforms": {
       "android": "2.4.0"
