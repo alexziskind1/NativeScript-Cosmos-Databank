@@ -1,4 +1,4 @@
-﻿import * as application from "application";
+﻿import application = require("application");
 import * as fresco from "nativescript-fresco";
 import * as firebase from "nativescript-plugin-firebase";
 import * as appSettings from "application-settings";

@@ -1,4 +1,0 @@
-{
-    "tslint.run": "onSave",
-    "tslint.autoFixOnSave" : true
-}
