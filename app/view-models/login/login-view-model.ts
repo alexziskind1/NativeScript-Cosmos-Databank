@@ -7,10 +7,10 @@ import * as appSettings from "application-settings";
 
 export class AuthViewModel extends Observable {
 
-    private _email: string = "cosmos@databank.org";
-    private _pass: string = "123456";
-    private _newEmail: string = "new-account@test.com";
-    private _newPass: string = "123456";
+    private _email: string = "";
+    private _pass: string = "";
+    private _newEmail: string = "";
+    private _newPass: string = "";
     private _isFormVisible: boolean;
 
     private  _currentUser: User;
@@ -25,6 +25,7 @@ export class AuthViewModel extends Observable {
     public get isFormVisible() {
         return this._isFormVisible;
     }
+
 
     public set isFormVisible(value: boolean) {
         if (this._isFormVisible !== value) {
@@ -202,6 +203,19 @@ export class AuthViewModel extends Observable {
             password: this.newPass
         }).then(result => {
             console.log("userid: " + result.key);
+
+            this.email = this.newEmail;
+            this.pass = this.newPass;
+
+            firebase.login({
+                type: firebase.LoginType.PASSWORD,
+                email: this.newEmail,
+                password: this.newPass
+            }).then(user => {
+                this.navigateWithContext(user, "views/drawer-page");
+            }).catch(err => {
+                dialogs.alert(err);
+            })
         }).catch(err => {
             console.log("createUser error: " + err);
             dialogs.alert(err);

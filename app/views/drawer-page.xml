@@ -23,6 +23,7 @@
             <drawer:RadSideDrawer.drawerContent>
                 <StackLayout class="drawer-content m-r-30">   
                     <ScrollView>
+                    
                         <StackLayout>
                             <GridLayout columns="*, 2*" class="m-16">
                                 <Image col="0" src="{{ currentUser.currentUser.profileImageURL }}" width="100" height="100" borderRadius="50" stretch="aspectFill" />  

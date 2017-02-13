@@ -12,30 +12,50 @@
       </ActionBar>
     </Page.actionBar>  
     <ScrollView>
-        <Card:CardView id="form-card" verticalAlignment="center" elevation="40" radius="20" class="m-8"> 
-            <StackLayout class="form" visibility="{{ isFormVisible, isFormVisible ? 'visible' : 'collapsed' }}">
+        <StackLayout>
+            <Card:CardView loaded="onCardLoaded" visibility="{{ isFormVisible, isFormVisible ? 'visible' : 'collapsed' }}" verticalAlignment="center" elevation="40" radius="20" class="m-8"> 
+                <StackLayout class="form" >
 
-                <StackLayout class="input-field">
-                    <Label class="label" color="#BCBCBC" text="Email:"></Label>
-                    <TextField text="{{ email }}" id="tf-email" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
-                </StackLayout>
+                    <StackLayout class="input-field">
+                        <Label class="label" color="#BCBCBC" text="Email:"></Label>
+                        <TextField text="{{ email }}" id="tf-email" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    </StackLayout>
 
-                <StackLayout class="input-field">
-                    <Label class="label" color="#BCBCBC" text="Password:"></Label>
-                    <TextField text="{{ pass }}" id="tf-pass" secure="true" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
-                </StackLayout>
+                    <StackLayout class="input-field">
+                        <Label class="label" color="#BCBCBC" text="Password:"></Label>
+                        <TextField text="{{ pass }}" id="tf-pass" secure="true" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    </StackLayout>
 
-                <Button text="Login" class="btn btn-primary btn-active lg-btn" tap="{{ onPasswordLogin }}" />
-                <Label text="No account!? Create one here" class="text-center m-16" textWrap="true" />
-                
-                <GridLayout columns="*, 10, *" rows="auto, auto"  class="m-b-16">
-                    <Label text="or login with" row="0" col="0" colSpan="3" class="text-center m-8" fontSize="10" textWrap="true" />
-                    <Image row="1" col="0" src="~/images/login-facebook.png" width="80%" height="80%" stretch="aspectFit" tap="{{ onFacebookLogin }}"/>
-                    <Image row="1" col="2" src="~/images/google-sign-in.png" width="80%" height="80%" stretch="aspectFit" tap="{{ onGoogleLogin }}" />
-                </GridLayout>
+                    <Button text="Login" class="btn btn-primary btn-active lg-btn" tap="{{ onPasswordLogin }}" />
+                    <Label text="No account!? Create one here" tap="{{ onFormToggle }}" class="text-center m-16" textWrap="true" />
+                    
+                    <GridLayout columns="*, 10, *" rows="auto, auto"  class="m-b-16">
+                        <Label text="or login with" row="0" col="0" colSpan="3" class="text-center m-8" fontSize="10" textWrap="true" />
+                        <Image row="1" col="0" src="~/images/login-facebook.png" width="80%" height="80%" stretch="aspectFit" tap="{{ onFacebookLogin }}"/>
+                        <Image row="1" col="2" src="~/images/google-sign-in.png" width="80%" height="80%" stretch="aspectFit" tap="{{ onGoogleLogin }}" />
+                    </GridLayout>
 
-            </StackLayout> 
+                </StackLayout> 
+            </Card:CardView>
 
-        </Card:CardView>
+            <Card:CardView loaded="onCardLoaded" visibility="{{ isFormVisible, !isFormVisible ? 'visible' : 'collapsed' }}" verticalAlignment="center" elevation="40" radius="20" class="m-8">
+                <StackLayout class="form" >
+
+                    <StackLayout class="input-field">
+                        <Label class="label" color="#BCBCBC" text="Email:"></Label>
+                        <TextField text="{{ newEmail }}" id="tf-email" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    </StackLayout>
+
+                    <StackLayout class="input-field">
+                        <Label class="label" color="#BCBCBC" text="Password:"></Label>
+                        <TextField text="{{ newPass }}" id="tf-pass" secure="true" class="input" borderWidth="0 0 1 0" fontSize="24" marginTop="8" borderColor="#BCBCBC"></TextField>
+                    </StackLayout>
+
+                    <Button text="Create account" class="btn btn-primary btn-active lg-btn" tap="{{ onCreateUser }}" />
+                    <Label text="Back to Login" tap="{{ onFormToggle }}" class="text-center m-16" textWrap="true" />
+                    
+                </StackLayout> 
+            </Card:CardView>
+        </StackLayout>
     </ScrollView>
 </Page>

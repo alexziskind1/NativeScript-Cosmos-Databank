@@ -1,6 +1,6 @@
-﻿import application = require("application");
-import fresco = require("nativescript-fresco");
-import firebase = require("nativescript-plugin-firebase");
+﻿import * as application from "application";
+import * as fresco from "nativescript-fresco";
+import * as firebase from "nativescript-plugin-firebase";
 import * as appSettings from "application-settings";
 import "./bundle-config";
 

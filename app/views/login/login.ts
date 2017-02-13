@@ -2,12 +2,12 @@ import { CardView } from "nativescript-cardview";
 import { Page } from "ui/page";
 import { TextField } from "ui/text-field";
 import { EventData } from "data/observable";
-import * as frame from "ui/frame";
-import * as firebase from "nativescript-plugin-firebase";
 import * as app from "application";
 import * as appSettings from "application-settings";
 import * as dialogs from "ui/dialogs";
 import * as enums from "ui/enums";
+import * as frame from "ui/frame";
+import * as firebase from "nativescript-plugin-firebase";
 
 import { User } from "../../models/login/user";
 import { AuthViewModel } from "../../view-models/login/login-view-model";
@@ -22,6 +22,7 @@ let tfPass: TextField;
 
 export function onLoaded(args: EventData) {
     page = <Page>args.object;
+    page.bindingContext = authViewModel;
 
     if (appSettings.getBoolean("isLogged")) {
         frame.topmost().navigate({
@@ -41,15 +42,15 @@ export function onLoaded(args: EventData) {
                 tfPass.android.setFocusableInTouchMode(true);
             }, 300);
         }
-
-        card = <CardView>page.getViewById("form-card");
-        card.translateY = -300;
-        card.animate({
-            translate: { x: 0, y: 0 },
-            duration: 2000,
-            curve: enums.AnimationCurve.spring
-        });
     }
+}
 
-    page.bindingContext = authViewModel;
+export function onCardLoaded(args) {
+    card = <CardView>args.object;
+    card.translateY = -300;
+    card.animate({
+        translate: { x: 0, y: 100 },
+        duration: 1200,
+        curve: enums.AnimationCurve.spring
+    });
 }

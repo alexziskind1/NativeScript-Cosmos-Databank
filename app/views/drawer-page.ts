@@ -1,5 +1,6 @@
 import { DrawerOverNavigationModel } from "../view-models/drawer-over-navigation-model";
 import { Page } from "ui/page";
+import { User } from "../models/login/user"
 var permissions = require("nativescript-permissions");
 
 let vm = new DrawerOverNavigationModel();
@@ -8,8 +9,8 @@ export function onPageLoaded(args) {
     var page = <Page>args.object;
 
     var currentUser = page.navigationContext;
-    vm.set("currentUser", currentUser);    
-
+    vm.set("currentUser", currentUser); 
+      
     page.bindingContext = vm;
 }
 
