@@ -4,9 +4,15 @@ if ((<any>global).TNS_WEBPACK) {
 
     //register application modules
     global.registerModule("nativescript-cardview", () => require("nativescript-cardview"));
+    global.registerModule("nativescript-fresco", () => require("nativescript-fresco"));
+    global.registerModule("nativescript-youtube-player", () => require("nativescript-youtube-player"));
+    global.registerModule("nativescript-toast", () => require("nativescript-toast"));
+    
+    global.registerModule("nativescript-telerik-ui/sidedrawer", () => require("nativescript-telerik-ui/sidedrawer"));
+    global.registerModule("nativescript-telerik-ui/sidedrawer/drawerpage", () => require("nativescript-telerik-ui/sidedrawer/drawerpage"));
+    global.registerModule("nativescript-telerik-ui/listview", () => require("nativescript-telerik-ui/listview"));
+
     global.registerModule("views/login/login", () => require("./views/login/login"));
-
-
     global.registerModule("files/credentials", () => require("./files/credentials"));
     global.registerModule("models/login/user", () => require("./models/login/user"));
     global.registerModule("view-models/apod/apod-model", () => require("./view-models/apod/apod-model"));

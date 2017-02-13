@@ -1,7 +1,7 @@
 // tslint:disable:max-line-length
 import { Observable } from "data/observable";
 import { ObservableArray } from "data/observable-array";
-import http = require("http");
+import * as http from "http";
 
 import { NASA_API_KEY } from "../../files/credentials";
 

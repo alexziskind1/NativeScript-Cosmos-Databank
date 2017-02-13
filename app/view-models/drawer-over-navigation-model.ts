@@ -2,8 +2,8 @@
 import { EventData, Observable } from "data/observable";
 import { Button } from "ui/button";
 import { DatePicker } from "ui/date-picker";
-import drawerModule = require("nativescript-telerik-ui/sidedrawer");
-import frameModule = require("ui/frame");
+import * as drawerModule from "nativescript-telerik-ui/sidedrawer";
+import * as frameModule from "ui/frame";
 
 import * as firebase from "nativescript-plugin-firebase";
 import * as application from "application";

@@ -13,4 +13,5 @@ platforms/*
 *.ipa
 
 native-nick-release-key.jks
+my-release-key.jks
 google-services.json

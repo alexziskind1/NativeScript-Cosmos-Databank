@@ -15,11 +15,11 @@ import * as formatters from "../helpers/formaters";
 import { saveFile, setButtonsOpacity, setUserInteraction, setCurrentImage } from "../helpers/files/file-helpers";
 import { firebasePush } from "../helpers/firebase/firebase";
 
-if (application.android) {
-    var toast = require("nativescript-toast");
-    var youtube = require("nativescript-youtube-player");
-}
+// Android app only 
+import * as toast from "nativescript-toast";
+import * as youtube from "nativescript-youtube-player";
 
+// models, view-models, credentials
 import { YOUTUBE_API_KEY } from "../../files/credentials";
 import { ApodViewModel } from "../../view-models/apod/apod-model";
 
