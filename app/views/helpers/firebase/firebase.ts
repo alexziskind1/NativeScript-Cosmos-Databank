@@ -1,6 +1,6 @@
 import * as firebase from "nativescript-plugin-firebase";
 
-export function firebasePush(itemToPush) {
+export function firebasePush(itemToPush: any, action: string) {
     var currentUid = "temp";
     firebase.getCurrentUser().then(user => {
         currentUid = user.uid;
@@ -9,7 +9,8 @@ export function firebasePush(itemToPush) {
             currentUid,
             {
                 "dataItem": itemToPush,
-                "updateTs": firebase["ServerValue"].TIMESTAMP
+                "updateTs": firebase["ServerValue"].TIMESTAMP,
+                "action": action
             }
         ).then(result => {
             console.log("created key: " + result.key);

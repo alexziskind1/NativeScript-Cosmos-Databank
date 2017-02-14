@@ -9,10 +9,10 @@ if (application.android) {
 }
 
 export function setCurrentImage(imageUri:string): ImageSource {
-    // okhttp is blocking so no need to return Promise!
+    // USING okhttp as redirects are not working for HTTP module (with or withouut dontFollowRedirects option)
     var inputStream = okhttp.getImage(imageUri); 
     var image = fromData(inputStream);
-
+    
     return image;
 }
 

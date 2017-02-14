@@ -149,6 +149,8 @@ export function onFinalImageSet(args: FinalEventData) {
 
 export function onSaveImage(args: EventData) {
 
+    firebasePush(apodViewModel.get("dataItem"), "save");
+
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
             .then(res => {
@@ -163,6 +165,8 @@ export function onSaveImage(args: EventData) {
 }
 
 export function onSetWallpaper(args: EventData) {
+
+    firebasePush(apodViewModel.get("dataItem"), "wallpaper");
 
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
@@ -187,7 +191,7 @@ export function onSetWallpaper(args: EventData) {
 
 export function onShare(args: EventData) {
 
-    firebasePush(apodViewModel.get("dataItem"));
+    firebasePush(apodViewModel.get("dataItem"), "share");
 
     if (application.android) {
         SocialShare.shareImage(currentImage, "NASA APOD");

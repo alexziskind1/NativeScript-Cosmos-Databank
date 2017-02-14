@@ -7,7 +7,7 @@ import { GestureEventData } from "ui/gestures";
 import * as application from "application";
 import * as imageSource from "image-source";
 import * as utils from "utils/utils";
-
+import { firebasePush } from "../helpers/firebase/firebase";
 import { FrescoDrawee, FinalEventData } from "nativescript-fresco";
 import * as SocialShare from "nativescript-social-share";
 
@@ -74,6 +74,8 @@ export function onFinalImageSet(args: FinalEventData) {
 
 export function onSaveImage(args: EventData) {
 
+    firebasePush(viewModel.get("contextItem"), "save");
+
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
             .then(res => {
@@ -88,6 +90,8 @@ export function onSaveImage(args: EventData) {
 }
 
 export function onSetWallpaper(args: EventData) {
+
+    firebasePush(viewModel.get("contextItem"), "wallpaper");
 
     if (application.ios) {
         imageSource.fromUrl(iosImage.src)
@@ -112,6 +116,9 @@ export function onSetWallpaper(args: EventData) {
 }
 
 export function onShare(args: EventData) {
+
+    firebasePush(viewModel.get("contextItem"), "share");
+
     if (application.android) {
         SocialShare.shareImage(currentImage, "Mars Rovers");
     } else if (application.ios) {
