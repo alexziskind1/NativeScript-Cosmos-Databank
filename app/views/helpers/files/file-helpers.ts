@@ -3,17 +3,19 @@ import * as fileSystem from "file-system";
 import * as enums from "ui/enums";
 import { Button } from "ui/button";
 import { ImageSource, fromData } from "image-source";
-import * as http from "http";
 
-export function setCurrentImage(imageUri: string): ImageSource {
-    var image;
+if (application.android) {
+    var okhttp = require("nativescript-okhttp");
+}
 
-    http.getImage(imageUri).then(res => {
-        var image = fromData(res);
-    });
+export function setCurrentImage(imageUri:string): ImageSource {
+    // okhttp is blocking so no need to return Promise!
+    var inputStream = okhttp.getImage(imageUri); 
+    var image = fromData(inputStream);
 
     return image;
 }
+
 
 export function setUserInteraction(shareButton: Button, saveButton: Button, desktopButton: Button, state: boolean) {
     shareButton.isUserInteractionEnabled = state;
