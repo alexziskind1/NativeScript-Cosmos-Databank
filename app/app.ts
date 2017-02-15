@@ -1,4 +1,4 @@
-﻿import application = require("application");
+﻿import * as application from "application";
 import * as fresco from "nativescript-fresco";
 import * as firebase from "nativescript-plugin-firebase";
 import * as appSettings from "application-settings";
@@ -32,9 +32,9 @@ firebase.init({
 });
 
 if (application.android) {
-    application.onLaunch = function (intent) {
+    application.on(application.launchEvent, (args: application.LaunchEventData) => {
         fresco.initialize();
-    };
+    })
 }
 
 // application.start({ moduleName: "views/drawer-page" });
