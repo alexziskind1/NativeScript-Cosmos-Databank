@@ -1,6 +1,8 @@
 if ((<any>global).TNS_WEBPACK) {
     //registers tns-core-modules UI framework modules
     require("bundle-entry-points");
+    global.registerModule("ui/layouts/flexbox-layout", function () { return require("ui/layouts/flexbox-layout"); });
+    console.log("REGISTERED FLEXBOXLAYOUT");
 
     //register application modules
     global.registerModule("nativescript-cardview", () => require("nativescript-cardview"));
@@ -11,6 +13,10 @@ if ((<any>global).TNS_WEBPACK) {
     global.registerModule("nativescript-telerik-ui/sidedrawer", () => require("nativescript-telerik-ui/sidedrawer"));
     global.registerModule("nativescript-telerik-ui/sidedrawer/drawerpage", () => require("nativescript-telerik-ui/sidedrawer/drawerpage"));
     global.registerModule("nativescript-telerik-ui/listview", () => require("nativescript-telerik-ui/listview"));
+
+    global.registerModule("views/rovers/widgets/spirit", () => require("./views/rovers/widgets/spirit"));
+    global.registerModule("views/rovers/widgets/curiosity", () => require("./views/rovers/widgets/curiosity"));
+    global.registerModule("views/rovers/widgets/opportunity", () => require("./views/rovers/widgets/opportunity"));
 
     global.registerModule("views/login/login", () => require("./views/login/login"));
     global.registerModule("files/credentials", () => require("./files/credentials"));

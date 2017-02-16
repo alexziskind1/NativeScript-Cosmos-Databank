@@ -52,7 +52,7 @@ export class DrawerOverNavigationModel extends Observable {
         }
 
         frameModule.topmost().navigate({
-            moduleName: "./views/rovers/rovers-selection",
+            moduleName: "views/rovers/rovers-selection",
             animated: true,
             transition: {
                 name: application.android ? "explode" : "curl"
@@ -67,7 +67,7 @@ export class DrawerOverNavigationModel extends Observable {
         }
 
         frameModule.topmost().navigate({
-            moduleName: "./views/apod/apod",
+            moduleName: "views/apod/apod",
             animated: true,
             transition: {
                 name: application.android ? "explode" : "curl"
@@ -82,7 +82,7 @@ export class DrawerOverNavigationModel extends Observable {
         }
 
         frameModule.topmost().navigate({
-            moduleName: "./views/asteroid/asteroid",
+            moduleName: "views/asteroid/asteroid",
             animated: true,
             transition: {
                 name: application.android ? "explode" : "curl"
@@ -97,7 +97,7 @@ export class DrawerOverNavigationModel extends Observable {
         }
 
         frameModule.topmost().navigate({
-            moduleName: "./views/epic/epic",
+            moduleName: "views/epic/epic",
             animated: true,
             transition: {
                 name: application.android ? "explode" : "curl"
@@ -112,7 +112,7 @@ export class DrawerOverNavigationModel extends Observable {
         }
 
         frameModule.topmost().navigate({
-            moduleName: "./views/about/about",
+            moduleName: "views/about/about",
             animated: true,
             transition: {
                 name: application.android ? "explode" : "curl"
@@ -123,7 +123,7 @@ export class DrawerOverNavigationModel extends Observable {
     public onLogout() {
         firebase.logout().then(() => {
             frameModule.topmost().navigate({
-                moduleName: "./views/login/login",
+                moduleName: "views/login/login",
             }) 
         })
     }
