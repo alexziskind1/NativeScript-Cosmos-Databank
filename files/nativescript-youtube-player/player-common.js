@@ -1,6 +1,6 @@
 "use strict";
 var DO = require("ui/core/dependency-observable");
-var proxy = require("ui/core/proxy");
+
 var stack_layout_1 = require("ui/layouts/stack-layout");
 var videoKeyProperty = new DO.Property("videoKey", "YouTubePlayerView", new proxy.PropertyMetadata("", DO.PropertyMetadataSettings.None));
 var apiKeyProperty = new DO.Property("apiKey", "YouTubePlayerView", new proxy.PropertyMetadata("", DO.PropertyMetadataSettings.None));

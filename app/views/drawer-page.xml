@@ -11,7 +11,7 @@
       <ActionBar>
         <ActionBar.titleView>
             <StackLayout>
-                <Label text="COSMOS Databank" class="h3 action-bar-title"/>
+                <Label text="COSMOS Databank" />
             </StackLayout>
         </ActionBar.titleView>
         <ActionItem icon="res://ic_menu" class="action-item" ios.position="right" tap="{{ toggleDrawer }}" />

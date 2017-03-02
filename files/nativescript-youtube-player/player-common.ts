@@ -1,21 +1,39 @@
 // tslint:disable:no-unused-expression
 import * as definition from "nativescript-youtube-player";
-import * as DO from "ui/core/dependency-observable";
-import * as proxy from "ui/core/proxy";
+
+// import * as DO from "ui/core/dependency-observable";
+
+import * as newDO from "ui/core/properties";
+
+import * as proxy from "ui/core/properties";
+
 // tslint:disable-next-line:no-use-before-declare
 import { StackLayout as StackLayout } from "ui/layouts/stack-layout";
 
-const videoKeyProperty = new DO.Property(
+import * as DO from "ui/core/dependency-observable";
+
+const videoKeyPropertyOld = new DO.Property(
     "videoKey",
     "YouTubePlayerView",
-    new proxy.PropertyMetadata("", DO.PropertyMetadataSettings.None)
+    new DO.PropertyMetadata("",  DO.PropertyMetadataSettings.None)
 );
 
-const apiKeyProperty = new DO.Property(
+const apiKeyPropertyOld = new DO.Property(
     "apiKey",
     "YouTubePlayerView",
-    new proxy.PropertyMetadata("", DO.PropertyMetadataSettings.None)
+    new DO.PropertyMetadata("",  DO.PropertyMetadataSettings.None)
 );
+
+import * as props from "ui/core/properties";
+
+export const apiKeyProperty = new props.Property<YouTubePlayerView, string>({
+    name: "apiKey", defaultValue: ""
+});
+
+export const videoKeyProperty = new props.Property<YouTubePlayerView, string>({
+    name: "videoKey", defaultValue: ""
+});
+
 
 export class YouTubePlayerView extends StackLayout implements definition.YouTubePlayerView {
     // expose the properties as static members on the Player class
@@ -36,8 +54,7 @@ export class YouTubePlayerView extends StackLayout implements definition.YouTube
         this._setValue(apiKeyProperty, value);
     }
 
-    public _onPropertyChanged(property: DO.Property, oldValue: any, newValue: any) {
-        super._onPropertyChanged(property, oldValue, newValue);
+    public _onPropertyChanged(property: props.Property<YouTubePlayerView, string>, oldValue: any, newValue: any) {
 
         if (property === videoKeyProperty) {
             this._onVideoKeyChanged;

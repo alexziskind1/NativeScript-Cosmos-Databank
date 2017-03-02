@@ -34,13 +34,13 @@ export function onLoaded(args: EventData) {
         if (app.android) {
             tfEmail = <TextField>page.getViewById("tf-email");
             tfPass = <TextField>page.getViewById("tf-pass");
-            tfEmail.android.setFocusable(false);
-            tfPass.android.setFocusable(false);
+            // tfEmail.android.setFocusable(false);
+            // tfPass.android.setFocusable(false);
 
-            setTimeout(function () {
-                tfEmail.android.setFocusableInTouchMode(true);
-                tfPass.android.setFocusableInTouchMode(true);
-            }, 300);
+            // setTimeout(function () {
+            //     tfEmail.android.setFocusableInTouchMode(true);
+            //     tfPass.android.setFocusableInTouchMode(true);
+            // }, 300);
         }
     }
 }

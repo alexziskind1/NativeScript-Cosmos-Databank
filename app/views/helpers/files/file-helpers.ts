@@ -50,7 +50,7 @@ export function saveFile(res: ImageSource, url: string, currentSavedPath: string
     var exists = fileSystem.File.exists(path);
 
     if (!exists) {
-        var saved = res.saveToFile(path, enums.ImageFormat.jpeg);
+        var saved = res.saveToFile(path, "jpeg");
     }
 
     currentSavedPath = path;

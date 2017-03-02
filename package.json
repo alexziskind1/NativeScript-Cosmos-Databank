@@ -20,8 +20,8 @@
     "nativescript-theme-core": "^1.0.2",
     "nativescript-toast": "^1.4.5",
     "nativescript-youtube-player": "file:./files/nativescript-youtube-player",
-    "tns-core-modules": "^2.5.1",
-    "tns-platform-declarations": "^2.5.0"
+    "tns-core-modules": "file:./tns-core-modules-3.0.0-2017.2.21.2.tgz",
+    "tns-platform-declarations": "file:./tns-platform-declarations-3.0.0-2017.2.21.3.tgz"
   },
   "devDependencies": {
     "awesome-typescript-loader": "~3.0.0-beta.9",
@@ -32,7 +32,7 @@
     "extract-text-webpack-plugin": "~2.0.0-beta.4",
     "lazy": "1.0.11",
     "nativescript-css-loader": "~0.26.0",
-    "nativescript-dev-typescript": "^0.3.4",
+    "nativescript-dev-typescript": "file:./nativescript-dev-typescript-0.4.1.tgz",
     "nativescript-dev-webpack": "^0.3.3",
     "raw-loader": "~0.5.1",
     "resolve-url-loader": "~1.6.0",
