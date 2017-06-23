@@ -1,5 +1,4 @@
-<dpg:DrawerPage xmlns="http://www.nativescript.org/tns.xsd" 
-    xmlns:dpg="nativescript-telerik-ui/sidedrawer/drawerpage"
+<Page xmlns="http://www.nativescript.org/tns.xsd" 
     xmlns:drawer="nativescript-telerik-ui/sidedrawer"
     xmlns:Card="nativescript-cardview"
     xmlns:nativescript-fresco="nativescript-fresco"
@@ -7,7 +6,7 @@
     navigatedTo="onPageNavigatedTo"
     class="drawer-page">
 
-    <dpg:DrawerPage.actionBar>
+    <Page.actionBar>
       <ActionBar>
         <ActionBar.titleView>
             <StackLayout>
@@ -16,97 +15,96 @@
         </ActionBar.titleView>
         <ActionItem icon="res://ic_menu" class="action-item" ios.position="right" tap="{{ toggleDrawer }}" />
       </ActionBar>
-    </dpg:DrawerPage.actionBar>
+    </Page.actionBar>
 
-    <dpg:DrawerPage.sideDrawer>
-        <drawer:RadSideDrawer id="sideDrawer" showOverNavigation="true">
-            <drawer:RadSideDrawer.drawerContent>
-                <StackLayout class="drawer-content m-r-30">   
-                    <ScrollView>
-                    
-                        <StackLayout>
-                            <GridLayout columns="*, 2*" class="m-16">
-                                <Image col="0" src="{{ currentUser.currentUser.profileImageURL }}" width="100" height="100" borderRadius="50" stretch="aspectFill" />  
-                                <Label col="1" text="{{ 'Welcome back\n ' + currentUser.currentUser.name + '\nSelect your adventure'}}" class="text-center" verticalAlignment="center" textWrap="true" />    
-                            </GridLayout>
-                            <Button text="Home" tap="{{ goToHome }}" class="btn btn-primary btn-active dp-btn" />
-                            <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" class="btn btn-primary btn-active dp-btn" />
-                            <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" class="btn btn-primary btn-active dp-btn" />
-                            <Button text="Astreroids Proximity Checker" tap="{{ goToAsteroids }}" class="btn btn-primary btn-active dp-btn" />
-                            <Button text="EPIC (Coming soon)" tap="{{ goToEpic }}" class="btn btn-primary btn-active dp-btn" />
-                            <Button text="Info" tap="{{ goToAbout }}" class="btn btn-primary btn-active dp-btn" />
-                            <Button text="Logout" tap="{{ onLogout }}" class="btn btn-primary btn-active dp-btn" />
-                        </StackLayout>
-                    </ScrollView>
-                </StackLayout>
-            </drawer:RadSideDrawer.drawerContent>
-        </drawer:RadSideDrawer> 
-    </dpg:DrawerPage.sideDrawer>
-    
-    <ScrollView>
-        <StackLayout>
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8"> 
-                <GridLayout rows="160" columns="3*, 4*" tap="{{ goToRoversSelectionPage }}" >
-                    <Label col="0" text="{{ roversDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center"/>
-                    
-                    <!--<Image col="1" src="~/images/rover.jpg" stretch="aspectFill" />   -->
-                    <nativescript-fresco:FrescoDrawee col="1" imageUri="~/images/rover.jpg"
-                                                    actualImageScaleType="centerCrop"                                                           
-                                                    verticalAlignment="top"
-                                                    aspectRatio="1"
-                                                    showProgressBar="false"
-                                                    tapToRetryEnabled="false"/>
+    <drawer:RadSideDrawer id="sideDrawer" showOverNavigation="true" drawerSize="260" loaded="sideDrawerLoaded">
+        <drawer:RadSideDrawer.drawerContent>
+            <StackLayout class="drawer-content m-r-30">   
+                <ScrollView>
+                
+                    <StackLayout>
+                        <GridLayout columns="*, 2*" class="m-16">
+                            <Image col="0" src="{{ currentUser.currentUser.profileImageURL }}" width="100" height="100" borderRadius="50" stretch="aspectFill" />  
+                            <Label col="1" text="{{ 'Welcome back\n ' + currentUser.currentUser.name + '\nSelect your adventure'}}" class="text-center" verticalAlignment="center" textWrap="true" />    
+                        </GridLayout>
+                        <Button text="Home" tap="{{ goToHome }}" class="btn btn-primary btn-active dp-btn" />
+                        <Button text="Mars Rovers Photos" tap="{{ goToRoversSelectionPage }}" class="btn btn-primary btn-active dp-btn" />
+                        <Button text="Astronomy Pic of the Day" tap="{{ goToApod }}" class="btn btn-primary btn-active dp-btn" />
+                        <Button text="Astreroids Proximity Checker" tap="{{ goToAsteroids }}" class="btn btn-primary btn-active dp-btn" />
+                        <Button text="EPIC (Coming soon)" tap="{{ goToEpic }}" class="btn btn-primary btn-active dp-btn" />
+                        <Button text="Info" tap="{{ goToAbout }}" class="btn btn-primary btn-active dp-btn" />
+                        <Button text="Logout" tap="{{ onLogout }}" class="btn btn-primary btn-active dp-btn" />
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </drawer:RadSideDrawer.drawerContent>
+        <drawer:RadSideDrawer.mainContent>
+            
+            <ScrollView>
+                <StackLayout>
+                    <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8"> 
+                        <GridLayout rows="160" columns="3*, 4*" tap="{{ goToRoversSelectionPage }}" >
+                            <Label col="0" text="{{ roversDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center"/>
+                            
+                            <!-- <Image col="1" src="~/images/rover.jpg" stretch="aspectFill" /> -->
+                            <nativescript-fresco:FrescoDrawee col="1" imageUri="~/images/rover.jpg"
+                                                            actualImageScaleType="centerCrop"
+                                                            verticalAlignment="top"
+                                                            aspectRatio="1"
+                                                            showProgressBar="false"
+                                                            tapToRetryEnabled="false"/>
 
-                </GridLayout>
-            </Card:CardView>
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
-                <GridLayout rows="160" columns="4*, 3*" tap="{{ goToApod }}" >
-                    
-                    <!--<Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  -->
-                    <nativescript-fresco:FrescoDrawee col="0" imageUri="~/images/cosmos.jpg"
-                                actualImageScaleType="centerCrop"                                                           
-                                verticalAlignment="top"
-                                aspectRatio="1.2"
-                                showProgressBar="false"
-                                tapToRetryEnabled="false"/>
+                        </GridLayout>
+                    </Card:CardView>
+                    <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                        <GridLayout rows="160" columns="4*, 3*" tap="{{ goToApod }}" >
+                            
+                            <!--<Image col="0" src="~/images/cosmos.jpg" stretch="aspectFill" />  -->
+                            <nativescript-fresco:FrescoDrawee col="0" imageUri="~/images/cosmos.jpg"
+                                        actualImageScaleType="centerCrop"                                                           
+                                        verticalAlignment="top"
+                                        aspectRatio="1.2"
+                                        showProgressBar="false"
+                                        tapToRetryEnabled="false"/>
 
 
-                    <Label col="1" text="{{ apodDescription }}" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center"/>
-                </GridLayout>
-            </Card:CardView>
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
-                <GridLayout rows="160" columns="3*, 4*" tap="{{ goToAsteroids }}" >
-                    <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center" />   
-                    
-                    <!--<Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />    -->
-                    <nativescript-fresco:FrescoDrawee col="1" imageUri="~/images/aste.jpg"
-                                actualImageScaleType="centerCrop"                                                           
-                                verticalAlignment="top"
-                                aspectRatio="1"
-                                showProgressBar="false"
-                                tapToRetryEnabled="false"/>
-                </GridLayout>
-            </Card:CardView>
+                            <Label col="1" text="{{ apodDescription }}" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center"/>
+                        </GridLayout>
+                    </Card:CardView>
+                    <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                        <GridLayout rows="160" columns="3*, 4*" tap="{{ goToAsteroids }}" >
+                            <Label col="0" text="{{ asteroidsDescription }}" textWrap="true" class="h3 text-right p-r-16" verticalAlignment="center" />   
+                            
+                            <!--<Image col="1" src="~/images/aste.jpg" stretch="aspectFill" />    -->
+                            <nativescript-fresco:FrescoDrawee col="1" imageUri="~/images/aste.jpg"
+                                        actualImageScaleType="centerCrop"                                                           
+                                        verticalAlignment="top"
+                                        aspectRatio="1"
+                                        showProgressBar="false"
+                                        tapToRetryEnabled="false"/>
+                        </GridLayout>
+                    </Card:CardView>
 
-            <!--<Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
-                <GridLayout rows="160" columns="4*, 3*" tap="{{ goToEpic }}" >
-                    <Label col="1" text="{{ epicDescription }}" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center" />
-                    <Image col="0" src="http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/epic_1b_20161006004555_01.jpg" stretch="aspectFill" />
-                </GridLayout>
-            </Card:CardView>-->
+                    <!--<Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                        <GridLayout rows="160" columns="4*, 3*" tap="{{ goToEpic }}" >
+                            <Label col="1" text="{{ epicDescription }}" textWrap="true" class="h3 text-left p-l-16" verticalAlignment="center" />
+                            <Image col="0" src="http://epic.gsfc.nasa.gov/epic-archive/natural/jpg/epic_1b_20161006004555_01.jpg" stretch="aspectFill" />
+                        </GridLayout>
+                    </Card:CardView>-->
 
-            <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
-                <GridLayout rows="auto" columns="*" tap="{{ goToAbout }}">
-                    <Label col="0" text="Info" textWrap="true" class="h3 p-t-8 p-b-16 text-center" verticalAlignment="center" />
-                </GridLayout>
-            </Card:CardView>
+                    <Card:CardView elevation="40" radius="20" class="m-t-8 m-l-8 m-r-8">  
+                        <GridLayout rows="auto" columns="*" tap="{{ goToAbout }}">
+                            <Label col="0" text="Info" textWrap="true" class="h3 p-t-8 p-b-16 text-center" verticalAlignment="center" />
+                        </GridLayout>
+                    </Card:CardView>
 
-            <Card:CardView elevation="40" radius="20" class="m-8"> 
-                <GridLayout rows="*" columns="*" tap="hideDesc">
-                    <Label text="{{ exampleText }}" textWrap="true" class="p-l-16 p-r-16 p-t-8 p-b-16 text-left" verticalAlignment="center" />    
-                </GridLayout>
-            </Card:CardView>   
-        </StackLayout>          
-    </ScrollView>
-
-</dpg:DrawerPage>
+                    <Card:CardView elevation="40" radius="20" class="m-8"> 
+                        <GridLayout rows="*" columns="*" tap="hideDesc">
+                            <Label text="{{ exampleText }}" textWrap="true" class="p-l-16 p-r-16 p-t-8 p-b-16 text-left" verticalAlignment="center" />    
+                        </GridLayout>
+                    </Card:CardView>   
+                </StackLayout>          
+            </ScrollView>
+        </drawer:RadSideDrawer.mainContent>
+    </drawer:RadSideDrawer>
+</Page>

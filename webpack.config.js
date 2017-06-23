@@ -151,12 +151,12 @@ function getPlugins(platform, env) {
         // Copy assets to out dir. Add your own globs as needed.
         new CopyWebpackPlugin([
             { from: mainSheet },
-            { from: "css/**" },
+            { from: "**/*.css" },
             { from: "fonts/**" },
             { from: "**/*.jpg" },
             { from: "**/*.png" },
             { from: "**/*.xml" },
-        ], { ignore: ["App_Resources/**"] }),
+        ], { ignore: ["App_Resources/**", "app.css", "app.ios.css", "app.android.css"] }),
 
         // Generate a bundle starter script and activate it in package.json
         new nsWebpack.GenerateBundleStarterPlugin([

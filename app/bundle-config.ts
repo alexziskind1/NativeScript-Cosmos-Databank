@@ -10,6 +10,7 @@ if ((<any>global).TNS_WEBPACK) {
     global.registerModule("nativescript-toast", () => require("nativescript-toast"));
     
     global.registerModule("nativescript-telerik-ui/listview", () => require("../node_modules/nativescript-telerik-ui/listview"));
+    global.registerModule("nativescript-telerik-ui/sidedrawer", () => require("../node_modules/nativescript-telerik-ui/sidedrawer"));
 
     global.registerModule("views/rovers/widgets/spirit", () => require("./views/rovers/widgets/spirit"));
     global.registerModule("views/rovers/widgets/curiosity", () => require("./views/rovers/widgets/curiosity"));
