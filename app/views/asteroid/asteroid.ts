@@ -14,7 +14,7 @@ export function onPageLoaded(args) {
 
 export function onItemTap(args: ListViewEventData) {
 
-    var tappedItemIndex = args.itemIndex;
+    var tappedItemIndex = args.index;
     var tappedItemView = args.object;
     var tappedAsteroid = vm.get("dataItems").getItem(tappedItemIndex);
 

@@ -88,7 +88,7 @@ export function onListLoaded(args: RadListwModule.ListViewEventData) {
 }
 
 export function onItemTap(args: RadListwModule.ListViewEventData) {
-    var tappedItemIndex = args.itemIndex;
+    var tappedItemIndex = args.index;
     roversViewModel.set("cachedIndex", tappedItemIndex);
 
     var tappedItem = roversViewModel.get("dataItems").getItem(tappedItemIndex);

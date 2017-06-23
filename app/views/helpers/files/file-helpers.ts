@@ -3,17 +3,19 @@ import * as fileSystem from "file-system";
 import * as enums from "ui/enums";
 import { Button } from "ui/button";
 import { ImageSource, fromData } from "image-source";
+import { isAndroid } from "platform";
 
-if (application.android) {
-    var okhttp = require("nativescript-okhttp");
-}
+
+// if (isAndroid) {
+//     var okhttp = require("nativescript-okhttp");
+// }
 
 export function setCurrentImage(imageUri:string): ImageSource {
     // USING okhttp as redirects are not working for HTTP module (with or withouut dontFollowRedirects option)
-    var inputStream = okhttp.getImage(imageUri); 
-    var image = fromData(inputStream);
+    //var inputStream = okhttp.getImage(imageUri); 
+    //var image = fromData(inputStream);
     
-    return image;
+    return null;
 }
 
 
@@ -36,8 +38,8 @@ export function saveFile(res: ImageSource, url: string, currentSavedPath: string
 
     var cosmosFolderPath;
     if (application.android) {
-        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(
-            android.os.Environment.DIRECTORY_DOWNLOADS).toString();
+        var androidDownloadsPath = application.android.nativeApp.os.Environment.getExternalStoragePublicDirectory(
+            application.android.nativeApp.os.Environment.DIRECTORY_DOWNLOADS).toString();
         cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
         // TODO :  this works - but where are the images ?

@@ -17,7 +17,7 @@ import { firebasePush } from "../helpers/firebase/firebase";
 
 // Android app only 
 import * as toast from "nativescript-toast";
-import * as youtube from "nativescript-youtube-player";
+
 
 // models, view-models, credentials
 import { YOUTUBE_API_KEY } from "../../files/credentials";
@@ -178,7 +178,7 @@ export function onSetWallpaper(args: EventData) {
     } else if (application.android) {
         saveFile(currentImage, apodViewModel.get("dataItem").url, currentSavedPath);
 
-        var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
+        var wallpaperManager = application.android.nativeApp.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
         try {
             wallpaperManager.setBitmap(currentImage.android);
         } catch (error) {

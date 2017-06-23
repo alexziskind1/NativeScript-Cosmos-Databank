@@ -102,7 +102,7 @@ export function onSetWallpaper(args: EventData) {
 
         saveFile(currentImage);
 
-        var wallpaperManager = android.app.WallpaperManager.getInstance(utils.ad.getApplicationContext());
+        var wallpaperManager = application.android.nativeApp.WallpaperManager.getInstance(utils.ad.getApplicationContext());
         try {
             var imageToSet = imageSource.fromFile(currentSavedPath);
             wallpaperManager.setBitmap(imageToSet.android);
@@ -196,7 +196,7 @@ export function saveFile(res: imageSource.ImageSource) {
 
     if (application.android) {
         // tslint:disable-next-line:max-line-length
-        var androidDownloadsPath = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS).toString();
+        var androidDownloadsPath = application.android.nativeApp.os.Environment.getExternalStoragePublicDirectory(application.android.nativeApp.os.Environment.DIRECTORY_DOWNLOADS).toString();
         var cosmosFolderPath = fileSystem.path.join(androidDownloadsPath, "CosmosDataBank");
     } else if (application.ios) {
         // TODO :  this works - but where are the images ?

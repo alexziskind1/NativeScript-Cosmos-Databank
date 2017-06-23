@@ -7,12 +7,9 @@ if ((<any>global).TNS_WEBPACK) {
     //register application modules
     global.registerModule("nativescript-cardview", () => require("nativescript-cardview"));
     global.registerModule("nativescript-fresco", () => require("nativescript-fresco"));
-    global.registerModule("nativescript-youtube-player", () => require("nativescript-youtube-player"));
     global.registerModule("nativescript-toast", () => require("nativescript-toast"));
     
-    global.registerModule("nativescript-telerik-ui/sidedrawer", () => require("nativescript-telerik-ui/sidedrawer"));
-    global.registerModule("nativescript-telerik-ui/sidedrawer/drawerpage", () => require("nativescript-telerik-ui/sidedrawer/drawerpage"));
-    global.registerModule("nativescript-telerik-ui/listview", () => require("nativescript-telerik-ui/listview"));
+    global.registerModule("nativescript-telerik-ui/listview", () => require("../node_modules/nativescript-telerik-ui/listview"));
 
     global.registerModule("views/rovers/widgets/spirit", () => require("./views/rovers/widgets/spirit"));
     global.registerModule("views/rovers/widgets/curiosity", () => require("./views/rovers/widgets/curiosity"));

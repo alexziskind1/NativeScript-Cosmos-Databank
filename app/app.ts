@@ -3,6 +3,7 @@ import * as fresco from "nativescript-fresco";
 // import * as firebase from "nativescript-plugin-firebase";
 import * as appSettings from "application-settings";
 import "./bundle-config";
+import { isAndroid } from "platform";
 
 // firebase.init({
 //     persist: true,
@@ -31,13 +32,13 @@ import "./bundle-config";
 //     console.log("Firebase init error: " + err);
 // });
 
-if (application.android) {
+if (isAndroid) {
     application.on(application.launchEvent, (args: application.LaunchEventData) => {
         fresco.initialize();
     })
 }
 
 console.log("app.ts");
-application.start({ moduleName: "views/drawer-page" });
+//application.start({ moduleName: "views/drawer-page" });
 
-// application.start({ moduleName: "views/login/login" });
+ application.start({ moduleName: "views/login/login" });

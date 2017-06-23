@@ -1,5 +1,5 @@
 <Page xmlns="http://www.nativescript.org/tns.xsd" 
-
+xmlns:Card="nativescript-cardview"
       loaded="onLoaded" 
       navigatedTo="onNavigatedTo">
     <Page.actionBar>
@@ -12,7 +12,7 @@
       </ActionBar>
     </Page.actionBar>  
     <ScrollView>
-        <!--<StackLayout>
+        <StackLayout>
             <Card:CardView loaded="onCardLoaded" visibility="{{ isFormVisible, isFormVisible ? 'visible' : 'collapsed' }}" verticalAlignment="center" elevation="40" radius="20" class="m-8"> 
                 <StackLayout class="form" >
 
@@ -56,6 +56,6 @@
                     
                 </StackLayout> 
             </Card:CardView>
-        </StackLayout>-->
+        </StackLayout>
     </ScrollView>
 </Page>
