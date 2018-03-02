@@ -2,7 +2,7 @@
 
 **DEPRECATED Project - migrated to NativeScript+Angular at **
 
-[https://github.com/NickIliev/nativescript-ng-cosmos[(https://github.com/NickIliev/nativescript-ng-cosmos)
+[https://github.com/NickIliev/nativescript-ng-cosmos](https://github.com/NickIliev/nativescript-ng-cosmos)
 
 
 #
