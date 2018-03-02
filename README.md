@@ -1,4 +1,33 @@
-[Google Play Store (alpha rests)](https://play.google.com/store/apps/details?id=org.nativescript.curiosity&ah=JzMiTK6i7_W0DjmFnEL4ORKdB3w&hl=eng#details-reviews)
+
+
+**DEPRECATED Project - migrated to NativeScript+Angular at **
+
+[https://github.com/NickIliev/nativescript-ng-cosmos[(https://github.com/NickIliev/nativescript-ng-cosmos)
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
+
+
+
+
+
+
+
 
 
 # NativeScript-Cosmos-DataBank
